@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transcribe Bot — AI транскрибация в Telegram</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+           background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 4rem 0 2rem; }
+    h1 { font-size: 3rem; color: #60a5fa; margin-bottom: 1rem; }
+    h1 span { color: #f59e0b; }
+    .subtitle { font-size: 1.3rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem;
+           font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
+    .btn-primary { background: #60a5fa; color: #0f172a; }
+    .btn-primary:hover { background: #3b82f6; }
+    .btn-outline { background: transparent; color: #60a5fa; border: 2px solid #60a5fa; margin-left: 1rem; }
+    .btn-outline:hover { background: #1e293b; }
+    .hero-buttons { margin-top: 2rem; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 4rem 0; }
+    .feature { background: #1e293b; border-radius: 12px; padding: 1.5rem; }
+    .feature .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .feature h3 { color: #60a5fa; margin-bottom: 0.5rem; }
+    .feature p { color: #94a3b8; font-size: 0.95rem; }
+    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 4rem 0; }
+    .plan { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; }
+    .plan.featured { border: 2px solid #60a5fa; position: relative; }
+    .plan.featured::before { content: '🔥 Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+           background: #60a5fa; color: #0f172a; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .plan h3 { color: #e2e8f0; font-size: 1.3rem; }
+    .plan .price { font-size: 2.5rem; color: #60a5fa; font-weight: 700; margin: 1rem 0; }
+    .plan .price small { font-size: 1rem; color: #94a3b8; }
+    .plan ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+    .plan li { padding: 0.5rem 0; color: #94a3b8; }
+    .plan li::before { content: '✅ '; }
+    .plan .btn { width: 100%; }
+    .steps { margin: 4rem 0; }
+    .step { display: flex; gap: 1.5rem; margin-bottom: 2rem; align-items: flex-start; }
+    .step-num { background: #60a5fa; color: #0f172a; width: 40px; height: 40px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+    .step-content h3 { color: #e2e8f0; margin-bottom: 0.3rem; }
+    .step-content p { color: #94a3b8; }
+    .demo { background: #1e293b; border-radius: 12px; padding: 3rem; text-align: center; margin: 4rem 0; }
+    .demo .demo-placeholder { background: #0f172a; border-radius: 8px; padding: 3rem; margin: 1.5rem 0;
+           border: 2px dashed #334155; color: #64748b; }
+    footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.85rem; }
+    .cta-section { text-align: center; padding: 3rem 0; }
+    .cta-section h2 { color: #60a5fa; margin-bottom: 1rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .hero-buttons { display: flex; flex-direction: column; gap: 1rem; }
+      .btn-outline { margin-left: 0; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎙️ Transcribe <span>Bot</span></h1>
+      <p class="subtitle">Отправь голосовое в Telegram — получи текст, саммари и задачи за секунды. AI-транскрибация без лишних движений.</p>
+      <div class="hero-buttons">
+        <a href="https://t.me/transcribe_bot" class="btn btn-primary">🚀 Попробовать в Telegram</a>
+        <a href="#demo" class="btn btn-outline">▶️ Смотреть демо</a>
+      </div>
+    </header>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">🎤</div>
+        <h3>Голос → Текст</h3>
+        <p>Распознаёт русский, английский и 50+ языков. Поддерживает аудиофайлы и голосовые сообщения.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>AI-саммари</h3>
+        <p>Автоматически выделяет главные мысли, решения и задачи из любой встречи или звонка.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⚡</div>
+        <h3>Мгновенно</h3>
+        <p>Результат за секунды. Не нужно ждать — бот работает в фоне 24/7.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔒</div>
+        <h3>Приватно</h3>
+        <p>Все данные на твоём сервере. Никаких утечек в облака.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📱</div>
+        <h3>В Telegram</h3>
+        <p>Никаких приложений. Просто отправь голосовое и получи результат.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>Экспорт</h3>
+        <p>Сохраняй в TXT, DOCX, PDF. Отправляй коллегам одним кликом.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <h2 style="color:#60a5fa;margin-bottom:2rem;text-align:center">Как это работает</h2>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Отправляешь голосовое</h3>
+          <p>Запиши встречу, звонок или просто голосовую заметку. Отправь боту в Telegram.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>AI распознаёт и анализирует</h3>
+          <p>Бот расшифровывает речь, выделяет ключевые моменты, составляет список задач.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Получаешь готовый результат</h3>
+          <p>Текст, саммари, задачи — всё в одном сообщении. Можно сразу отправить коллегам.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="demo" class="demo">
+      <h2>🎥 Демо</h2>
+      <p style="color:#94a3b8;margin-bottom:1rem">Посмотри как работает Transcribe Bot за 60 секунд</p>
+      <div class="demo-placeholder">
+        <p style="font-size:3rem;margin-bottom:1rem">▶️</p>
+        <p>Видео-демо скоро будет</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem">А пока — отправь голосовое @transcribe_bot</p>
+      </div>
+    </div>
+
+    <div class="pricing">
+      <div class="plan">
+        <h3>🚀 Старт</h3>
+        <div class="price">$29<small>/мес</small></div>
+        <ul>
+          <li>100 минут транскрибации</li>
+          <li>AI-саммари</li>
+          <li>Экспорт в TXT</li>
+          <li>Поддержка в Telegram</li>
+        </ul>
+        <a href="https://t.me/transcribe_bot" class="btn btn-outline">Начать</a>
+      </div>
+      <div class="plan featured">
+        <h3>👥 Команда</h3>
+        <div class="price">$99<small>/мес</small></div>
+        <ul>
+          <li>500 минут транскрибации</li>
+          <li>AI-саммари + задачи</li>
+          <li>Экспорт в TXT, DOCX, PDF</li>
+          <li>До 5 пользователей</li>
+          <li>Приоритетная поддержка</li>
+        </ul>
+        <a href="https://t.me/transcribe_bot" class="btn btn-primary">Начать</a>
+      </div>
+      <div class="plan">
+        <h3>🏢 Корпоративный</h3>
+        <div class="price">$299<small>/мес</small></div>
+        <ul>
+          <li>Неограниченно минут</li>
+          <li>Всё из Team + API доступ</li>
+          <li>Свой сервер / облако</li>
+          <li>Неограниченно пользователей</li>
+          <li>SLA 99.9%</li>
+        </ul>
+        <a href="https://t.me/transcribe_bot" class="btn btn-outline">Связаться</a>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Готов попробовать?</h2>
+      <p style="color:#94a3b8;margin-bottom:1.5rem">Отправь голосовое @transcribe_bot и получи результат за секунды</p>
+      <a href="https://t.me/transcribe_bot" class="btn btn-primary">🚀 Начать бесплатно</a>
+    </div>
+
+    <footer>
+      <p>Transcribe Bot © 2026 | Работает на собственной инфраструктуре</p>
+      <p style="margin-top:0.5rem">По вопросам: @username</p>
+    </footer>
+  </div>
+</body>
+</html>
