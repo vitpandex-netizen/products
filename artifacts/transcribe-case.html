@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @page { size: A4; margin: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+           background: #0f172a; color: #e2e8f0; width: 210mm; height: 297mm; padding: 10mm; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8mm; }
+    .logo { font-size: 24px; color: #60a5fa; font-weight: 700; }
+    .badge { background: #166534; color: #22c55e; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+    h1 { font-size: 28px; color: #f59e0b; margin: 6mm 0 3mm; }
+    .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 6mm; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+    .card { background: #1e293b; border-radius: 8px; padding: 4mm; }
+    .card h3 { color: #60a5fa; font-size: 14px; margin-bottom: 2mm; }
+    .card p { color: #94a3b8; font-size: 11px; line-height: 1.5; }
+    .metric { text-align: center; padding: 3mm; }
+    .metric .num { font-size: 32px; color: #22c55e; font-weight: 700; }
+    .metric .label { color: #64748b; font-size: 11px; }
+    .result { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155;
+              border-radius: 8px; padding: 4mm; margin: 4mm 0; }
+    .result h3 { color: #60a5fa; margin-bottom: 2mm; }
+    .result li { color: #94a3b8; font-size: 11px; margin: 1mm 0; }
+    .pricing-box { background: #1e293b; border: 2px solid #60a5fa; border-radius: 8px; padding: 4mm; text-align: center; }
+    .pricing-box .price { font-size: 36px; color: #60a5fa; font-weight: 700; }
+    .pricing-box .price small { font-size: 14px; color: #64748b; }
+    .footer { margin-top: 6mm; color: #64748b; font-size: 10px; text-align: center; }
+    .mockup { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 3mm; text-align: center; }
+    .mockup .phone { font-size: 48px; }
+    hr { border: none; border-top: 1px solid #334155; margin: 4mm 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🎙️ Transcribe Bot</div>
+    <div class="badge">AI — Telegram — 24/7</div>
+  </div>
+
+  <h1>Голос → Текст за секунды</h1>
+  <p class="subtitle">AI-транскрибация встреч, звонков и заметок прямо в Telegram</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🎯 Проблема</h3>
+      <p>Расшифровка встреч вручную занимает 10-15 часов в неделю. Сотрудники тратят время на транскрибацию вместо работы с клиентами.</p>
+    </div>
+    <div class="card">
+      <h3>💡 Решение</h3>
+      <p>Telegram бот: отправил голосовое → получил текст + саммари + задачи. Никаких приложений, ничего лишнего.</p>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:4mm">
+    <div class="mockup">
+      <div class="phone">🎤</div>
+      <p style="color:#94a3b8;font-size:11px">Голосовое →</p>
+    </div>
+    <div class="mockup">
+      <div class="phone">📝</div>
+      <p style="color:#94a3b8;font-size:11px">→ Текст + саммари</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div style="text-align:center;margin:3mm 0">
+    <h2 style="color:#60a5fa;font-size:18px">Ключевые результаты</h2>
+  </div>
+
+  <div class="grid">
+    <div class="metric">
+      <div class="num">15 ч</div>
+      <div class="label">экономии в неделю</div>
+    </div>
+    <div class="metric">
+      <div class="num">50+</div>
+      <div class="label">поддерживаемых языков</div>
+    </div>
+    <div class="metric">
+      <div class="num">3 сек</div>
+      <div class="label">среднее время обработки</div>
+    </div>
+    <div class="metric">
+      <div class="num">99%</div>
+      <div class="label">точность распознавания</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="result">
+    <h3>📋 Что получает клиент</h3>
+    <ul>
+      <li>✅ Полный текст расшифровки встречи</li>
+      <li>✅ AI-саммари с главными мыслями</li>
+      <li>✅ Список задач и решений</li>
+      <li>✅ Экспорт в TXT / DOCX / PDF</li>
+      <li>✅ Работает 24/7 без выходных</li>
+    </ul>
+  </div>
+
+  <div class="grid">
+    <div class="pricing-box">
+      <div style="color:#94a3b8;font-size:12px;margin-bottom:1mm">Старт</div>
+      <div class="price">$29<small>/мес</small></div>
+      <div style="color:#64748b;font-size:10px;margin-top:1mm">100 мин/мес</div>
+    </div>
+    <div class="pricing-box" style="border-color:#f59e0b">
+      <div style="color:#94a3b8;font-size:12px;margin-bottom:1mm">🔥 Команда</div>
+      <div class="price" style="color:#f59e0b">$99<small>/мес</small></div>
+      <div style="color:#64748b;font-size:10px;margin-top:1mm">500 мин, до 5 чел</div>
+    </div>
+  </div>
+
+  <hr>
+  
+  <div style="text-align:center">
+    <p style="color:#60a5fa;font-size:16px;font-weight:600">Попробуйте бесплатно → @transcribe_bot</p>
+    <p style="color:#64748b;font-size:10px;margin-top:2mm">Transcribe Bot © 2026 | Работает на собственной инфраструктуре</p>
+  </div>
+</body>
+</html>
