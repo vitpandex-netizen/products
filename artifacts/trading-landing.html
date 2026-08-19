@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trading Monitor — AI-мониторинг криптопортфеля</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+           background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; padding: 4rem 0 2rem; }
+    h1 { font-size: 3rem; color: #22c55e; margin-bottom: 1rem; }
+    h1 span { color: #f59e0b; }
+    .subtitle { font-size: 1.3rem; color: #94a3b8; max-width: 600px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem;
+           font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
+    .btn-primary { background: #22c55e; color: #0f172a; }
+    .btn-primary:hover { background: #16a34a; }
+    .btn-outline { background: transparent; color: #22c55e; border: 2px solid #22c55e; margin-left: 1rem; }
+    .btn-outline:hover { background: #1e293b; }
+    .hero-buttons { margin-top: 2rem; }
+    .live-demo { background: #1e293b; border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .live-demo .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .live-demo .stat { background: #0f172a; border-radius: 8px; padding: 1rem; }
+    .live-demo .stat .num { font-size: 1.8rem; font-weight: 700; color: #22c55e; }
+    .live-demo .stat .label { color: #64748b; font-size: 0.8rem; margin-top: 0.3rem; }
+    .live-demo .badge { display: inline-block; background: #166534; color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 4rem 0; }
+    .feature { background: #1e293b; border-radius: 12px; padding: 1.5rem; }
+    .feature .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .feature h3 { color: #22c55e; margin-bottom: 0.5rem; }
+    .feature p { color: #94a3b8; font-size: 0.95rem; }
+    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 4rem 0; }
+    .plan { background: #1e293b; border-radius: 12px; padding: 2rem; text-align: center; }
+    .plan.featured { border: 2px solid #22c55e; position: relative; }
+    .plan.featured::before { content: '🔥 Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+           background: #22c55e; color: #0f172a; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .plan h3 { color: #e2e8f0; font-size: 1.3rem; }
+    .plan .price { font-size: 2.5rem; color: #22c55e; font-weight: 700; margin: 1rem 0; }
+    .plan .price small { font-size: 1rem; color: #94a3b8; }
+    .plan ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+    .plan li { padding: 0.5rem 0; color: #94a3b8; }
+    .plan li::before { content: '✅ '; }
+    .plan .btn { width: 100%; }
+    .metrics { margin: 4rem 0; }
+    .metrics h2 { color: #22c55e; margin-bottom: 1.5rem; text-align: center; }
+    .metric-row { display: flex; justify-content: space-between; padding: 1rem; border-bottom: 1px solid #334155; }
+    .metric-row .label { color: #94a3b8; }
+    .metric-row .value { color: #22c55e; font-weight: 600; }
+    .steps { margin: 4rem 0; }
+    .steps h2 { color: #22c55e; margin-bottom: 2rem; text-align: center; }
+    .step { display: flex; gap: 1.5rem; margin-bottom: 2rem; align-items: flex-start; }
+    .step-num { background: #22c55e; color: #0f172a; width: 40px; height: 40px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+    .step-content h3 { color: #e2e8f0; margin-bottom: 0.3rem; }
+    .step-content p { color: #94a3b8; }
+    .cta-section { text-align: center; padding: 3rem 0; }
+    .cta-section h2 { color: #22c55e; margin-bottom: 1rem; }
+    footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.85rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .hero-buttons { display: flex; flex-direction: column; gap: 1rem; }
+      .btn-outline { margin-left: 0; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Trading <span>Monitor</span></h1>
+      <p class="subtitle">Единый дашборд для Bitget + Hyperliquid. Портфель, позиции, P&L, Telegram алерты — 24/7 на твоём сервере.</p>
+      <div class="hero-buttons">
+        <a href="http://100.84.223.96:3002/" class="btn btn-primary">🚀 Открыть дашборд</a>
+        <a href="#pricing" class="btn btn-outline">💰 Цены</a>
+      </div>
+    </header>
+
+    <!-- Live Demo -->
+    <div class="live-demo" id="live">
+      <h2>🟢 LIVE — работает прямо сейчас</h2>
+      <p style="color:#94a3b8;margin-bottom:1rem">Наш портфель в реальном времени</p>
+      <div class="status-grid" id="live-stats">
+        <div class="stat"><div class="num" id="total">$88</div><div class="label">Портфель</div></div>
+        <div class="stat"><div class="num" id="positions">1</div><div class="label">Позиции</div></div>
+        <div class="stat"><div class="num" id="change">+$0</div><div class="label">24h Change</div></div>
+        <div class="stat"><div class="num" id="prices">947</div><div class="label">Цены</div></div>
+      </div>
+      <a href="http://100.84.223.96:3002/" class="btn btn-outline">📊 Полный дашборд →</a>
+      <div style="margin-top:1rem"><span class="badge">✅ Работает 24/7</span></div>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">🏦</div>
+        <h3>Несколько бирж</h3>
+        <p>Bitget + Hyperliquid в одном окне. Единый портфель, единый P&L.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📈</div>
+        <h3>P&L в реальном времени</h3>
+        <p>Прибыль/убыток по каждой позиции. Изменение за 24ч.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>История и графики</h3>
+        <p>P&L chart за 24 точки. Видишь динамику портфеля.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔔</div>
+        <h3>Telegram алерты</h3>
+        <p>Уведомления о сделках, изменениях баланса. Всё в Telegram.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🤖</div>
+        <h3>AI-аналитика</h3>
+        <p>Тренды, рекомендации, риск-менеджмент. Не просто цифры — выводы.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">☁️</div>
+        <h3>24/7 на сервере</h3>
+        <p>Не нужен твой комп. Дашборд работает на удалённом сервере круглосуточно.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <h2>Как подключиться</h2>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Создаёшь API ключи на бирже</h3>
+          <p>Bitget: API Management → Create API Key (только чтение). Hyperliquid: кошелёк.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Передаёшь мне ключи</h3>
+          <p>Через защищённый чат. Я добавляю их в дашборд — ключи хранятся в vault.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Получаешь готовый дашборд</h3>
+          <p>Ссылка на твой персональный дашборд + Telegram бот с ежедневными отчётами.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="pricing" class="pricing">
+      <div class="plan">
+        <h3>🚀 Старт</h3>
+        <div class="price">$29<small>/мес</small></div>
+        <ul>
+          <li>1 портфель (Bitget или HL)</li>
+          <li>Дашборд 24/7</li>
+          <li>P&L история</li>
+          <li>Telegram отчёты</li>
+        </ul>
+        <a href="https://t.me/trading_monitor_bot" class="btn btn-outline">Начать</a>
+      </div>
+      <div class="plan featured">
+        <h3>🔥 Профи</h3>
+        <div class="price">$49<small>/мес</small></div>
+        <ul>
+          <li>До 3 портфелей</li>
+          <li>Bitget + Hyperliquid</li>
+          <li>Telegram алерты в реальном времени</li>
+          <li>AI-аналитика и рекомендации</li>
+          <li>Приоритетная поддержка</li>
+        </ul>
+        <a href="https://t.me/trading_monitor_bot" class="btn btn-primary">Начать</a>
+      </div>
+      <div class="plan">
+        <h3>🏢 Enterprise</h3>
+        <div class="price">$149<small>/мес</small></div>
+        <ul>
+          <li>Неограниченно портфелей</li>
+          <li>Любые биржи (интеграция под заказ)</li>
+          <li>Свой домен</li>
+          <li>API доступ</li>
+          <li>SLA 99.9%</li>
+        </ul>
+        <a href="https://t.me/trading_monitor_bot" class="btn btn-outline">Связаться</a>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Готов начать?</h2>
+      <p style="color:#94a3b8;margin-bottom:1.5rem">Получи полный контроль над своим портфелем уже сегодня</p>
+      <a href="http://100.84.223.96:3002/" class="btn btn-primary">🚀 Открыть дашборд</a>
+    </div>
+
+    <footer>
+      <p>Trading Monitor © 2026 | Работает на собственной инфраструктуре US Server</p>
+      <p style="margin-top:0.5rem">Bitget + Hyperliquid | Telegram: @trading_monitor_bot</p>
+    </footer>
+  </div>
+
+  <script>
+    async function loadLiveStats() {
+      try {
+        const r = await fetch('http://100.84.223.96:3002/api/portfolio');
+        const d = await r.json();
+        document.getElementById('total').textContent = '$' + (d.total_usd || 0).toFixed(2);
+        const ex = d.exchanges || {};
+        const pos = (ex.bitget?.positions?.length || 0) + (ex.hyperliquid?.positions?.length || 0);
+        document.getElementById('positions').textContent = pos;
+        const ch = d.change_24h || 0;
+        document.getElementById('change').textContent = (ch >= 0 ? '+' : '') + '$' + ch.toFixed(2);
+        document.getElementById('change').style.color = ch >= 0 ? '#22c55e' : '#ef4444';
+        document.getElementById('prices').textContent = Object.keys(d.prices || {}).length || '—';
+      } catch(e) { setTimeout(loadLiveStats, 5000); }
+    }
+    loadLiveStats();
+    setInterval(loadLiveStats, 30000);
+  </script>
+</body>
+</html>
