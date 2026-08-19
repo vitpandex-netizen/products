@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trading Monitor — One-Pager</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;line-height:1.5}
+.pager{max-width:1000px;margin:2rem auto;padding:2rem;background:#1e293b;border-radius:16px}
+h1{font-size:2.5rem;color:#60a5fa;text-align:center;margin-bottom:0.5rem}
+h1 span{color:#f59e0b}
+.tagline{text-align:center;color:#94a3b8;font-size:1.1rem;margin-bottom:2rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.metric{background:#0f172a;border-radius:12px;padding:1.5rem;text-align:center}
+.metric .value{font-size:2rem;color:#60a5fa;font-weight:700}
+.metric .label{color:#94a3b8;font-size:0.9rem;margin-top:0.25rem}
+.metric .sub{color:#64748b;font-size:0.8rem}
+.screenshots{background:#0f172a;border-radius:12px;padding:2rem;margin-bottom:2rem;text-align:center;border:2px dashed #334155}
+.screenshots p{color:#64748b}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
+.feature{background:#0f172a;border-radius:8px;padding:1rem}
+.feature h3{color:#60a5fa;font-size:0.95rem;margin-bottom:0.25rem}
+.feature p{color:#94a3b8;font-size:0.85rem}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.plan{background:#0f172a;border-radius:12px;padding:1.5rem;text-align:center}
+.plan.featured{border:2px solid #60a5fa}
+.plan h3{color:#e2e8f0;font-size:1.1rem}
+.plan .price{font-size:2rem;color:#60a5fa;font-weight:700;margin:0.5rem 0}
+.plan .price small{font-size:0.9rem;color:#94a3b8}
+.plan ul{list-style:none;text-align:left;margin:1rem 0}
+.plan li{color:#94a3b8;font-size:0.85rem;padding:0.3rem 0}
+.plan li::before{content:'✅ '}
+.plan .btn{display:block;padding:0.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem}
+.plan .btn-primary{background:#60a5fa;color:#0f172a}
+.plan .btn-outline{background:transparent;color:#60a5fa;border:2px solid #60a5fa}
+.contact{text-align:center;padding:1rem;color:#94a3b8;font-size:0.85rem}
+.qr{text-align:center;margin:1rem 0;color:#64748b}
+@media print{body{background:white;color:black}.pager{box-shadow:none;margin:0;border-radius:0}.metric{background:#f1f5f9}.metric .value{color:#2563eb}.feature{background:#f8fafc}.feature h3{color:#2563eb}.plan{background:#f1f5f9}.plan.featured{border-color:#2563eb}.plan .price{color:#2563eb}}
+@media(max-width:600px){.metrics,.features,.pricing{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="pager">
+  <h1>📊 Trading <span>Monitor</span></h1>
+  <p class="tagline">Единый дашборд для крипто-трейдера. Bitget + Hyperliquid + Telegram алерты.</p>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="value">$88.27</div>
+      <div class="label">Текущий портфель</div>
+      <div class="sub">Bitget + Hyperliquid</div>
+    </div>
+    <div class="metric">
+      <div class="value">+24%</div>
+      <div class="label">ROI (7 дней)</div>
+      <div class="sub">Автоматическая стратегия</div>
+    </div>
+    <div class="metric">
+      <div class="value">947</div>
+      <div class="label">Инструментов</div>
+      <div class="sub">Цены в реальном времени</div>
+    </div>
+  </div>
+
+  <div class="screenshots">
+    <p style="font-size:2rem;margin-bottom:0.5rem">📊</p>
+    <p><strong>Дашборд в реальном времени</strong></p>
+    <p style="font-size:0.85rem">http://100.84.223.96:3002/</p>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <h3>📊 Единый дашборд</h3>
+      <p>Bitget + Hyperliquid в одном окне. Баланс, позиции, P&L.</p>
+    </div>
+    <div class="feature">
+      <h3>📈 P&L График</h3>
+      <p>История портфеля за 7 дней. ROI, drawdown, 24h change.</p>
+    </div>
+    <div class="feature">
+      <h3>🔔 Telegram алерты</h3>
+      <p>Уведомления при открытии/закрытии сделок. Ежедневные отчёты.</p>
+    </div>
+    <div class="feature">
+      <h3>🩺 Health Check</h3>
+      <p>Мониторинг всех сервисов 24/7. 9/9 — всегда в работе.</p>
+    </div>
+    <div class="feature">
+      <h3>🔒 Безопасность</h3>
+      <p>API ключи через vault. Твой сервер — твои данные.</p>
+    </div>
+    <div class="feature">
+      <h3>⚡ Быстрый запуск</h3>
+      <p>Подключение за 5 минут. API ключи → готово.</p>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <div class="plan">
+      <h3>🚀 Старт</h3>
+      <div class="price">$49<small>/мес</small></div>
+      <ul>
+        <li>1 портфель</li>
+        <li>Bitget + Hyperliquid</li>
+        <li>P&L график</li>
+        <li>Telegram алерты</li>
+        <li>Ежедневные отчёты</li>
+      </ul>
+      <a href="#" class="btn btn-outline">Начать</a>
+    </div>
+    <div class="plan featured">
+      <h3>🔥 Pro</h3>
+      <div class="price">$149<small>/мес</small></div>
+      <ul>
+        <li>До 5 портфелей</li>
+        <li>Все биржи</li>
+        <li>P&L + ROI + Drawdown</li>
+        <li>Приоритетные алерты</li>
+        <li>Недельные отчёты</li>
+        <li>Приоритетная поддержка</li>
+      </ul>
+      <a href="#" class="btn btn-primary">Начать</a>
+    </div>
+    <div class="plan">
+      <h3>🏢 Enterprise</h3>
+      <div class="price">$499<small>/мес</small></div>
+      <ul>
+        <li>Безлимит портфелей</li>
+        <li>API доступ</li>
+        <li>Свой сервер</li>
+        <li>White-label</li>
+        <li>SLA 99.9%</li>
+        <li>24/7 поддержка</li>
+      </ul>
+      <a href="#" class="btn btn-outline">Связаться</a>
+    </div>
+  </div>
+
+  <div class="contact">
+    <p>📩 По вопросам: @vitaliyr<br>
+    🔗 Дашборд: http://100.84.223.96:3002/</p>
+  </div>
+  <div class="qr">
+    <p>⬆️ Открой дашборд прямо сейчас. Живой портфель — $88.27</p>
+  </div>
+</div>
+</body>
+</html>
