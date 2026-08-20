@@ -1,0 +1,10 @@
+# .interpreter-rules for uz-market-bot
+## Project type
+bot, automation
+## Key files
+# src/bot/market_bot.py, data/error.log
+## Tech stack
+Python, Telegram, pm2
+## Rules
+# pm2-managed Telegram bot
+# Check error.log for issues

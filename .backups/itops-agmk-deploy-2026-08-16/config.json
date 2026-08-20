@@ -1,0 +1,188 @@
+{
+  "_meta": {
+    "version": "0.1.0",
+    "org": "ЕПОКИ АО Алмалыкский ГМК",
+    "comment": "Секреты — только через переменные окружения или .env (не коммитить в Git)"
+  },
+  "tenant": {
+    "tenantId": "${AGMK_TENANT_ID}",
+    "clientId": "${AGMK_CLIENT_ID}",
+    "certPath": "${AGMK_CERT_PATH}",
+    "domain": "upmoagmk.uz",
+    "tenantName": "${AGMK_TENANT_NAME}",
+    "_note": "tenantId: GUID for Graph API. tenantName: prefix for SharePoint URLs (e.g., upmoagmk)",
+    "managerUpn": "${AGMK_MANAGER_UPN}"
+  },
+  "planner": {
+    "planName": "ИТ-инфраструктура ЕПОКИ",
+    "groupName": "IT-Infrastructure-AGMK",
+    "observerGroupName": "IT-Infrastructure-Observers",
+    "managerUpn": "${AGMK_MANAGER_UPN}",
+    "buckets": [
+      {
+        "name": "🔴 Требует решения руководителя",
+        "orderHint": 1
+      },
+      {
+        "name": "🟡 В работе",
+        "orderHint": 2
+      },
+      {
+        "name": "🟢 Закрыто за неделю",
+        "orderHint": 3
+      },
+      {
+        "name": "📋 На контроле",
+        "orderHint": 4
+      }
+    ]
+  },
+  "sharepoint": {
+    "publicSite": "/sites/IT-KB",
+    "internalSite": "/sites/IT-Internal",
+    "reportsLib": "/sites/IT-Internal/Reports",
+    "publicGroupName": "IT-Knowledge-Base",
+    "internalGroupName": "IT-Internal-Ops",
+    "publicSiteUrl": "https://${AGMK_TENANT_ID}.sharepoint.com/sites/IT-KB",
+    "internalSiteUrl": "https://${AGMK_TENANT_ID}.sharepoint.com/sites/IT-Internal",
+    "lists": {
+      "tickets": "Tickets",
+      "serviceRequests": "ServiceRequests",
+      "policies": "Policies",
+      "kbAttachments": "KB-Attachments",
+      "serviceAlerts": "ServiceAlerts",
+      "itContacts": "ITContacts",
+      "feedback": "Feedback",
+      "approvers": "Approvers"
+    },
+    "internalLists": {
+      "accessRegistry": "AccessRegistry",
+      "changeLog": "ChangeLog",
+      "vendors": "Vendors",
+      "assets": "Assets",
+      "maintenanceLog": "MaintenanceLog",
+      "softwareLicenses": "SoftwareLicenses",
+      "pdnSystems": "PDnSystems",
+      "serverRoomVisits": "ServerRoomVisits",
+      "awarenessLog": "AwarenessLog"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": false,
+      "_reason": "Запрещено политикой ИБ АГМК п.2.3",
+      "chatId": null,
+      "botTokenEnvVar": "AGMK_TELEGRAM_BOT_TOKEN",
+      "_note": "Структура готова для других деплойментов. Токен — только через env var, никогда в этот файл."
+    },
+    "telegramSelfService": {
+      "enabled": false,
+      "_reason": "Входящий self-service бот. Выключен: п.2.3 ИБ АГМК запрещает Telegram как платформу, а не конкретного бота — включение требует отдельного согласования, не решается техническим путём.",
+      "botTokenEnvVar": "AGMK_TELEGRAM_SELFSERVICE_BOT_TOKEN",
+      "_note": "Отдельный бот и отдельный токен от исходящего бота выше — два процесса не могут читать getUpdates одного токена."
+    },
+    "teams": {
+      "enabled": true,
+      "supportChannel": "ИТ-Поддержка"
+    },
+    "email": {
+      "enabled": true
+    },
+    "forms": {
+      "enabled": true
+    }
+  },
+  "users": {
+    "targetCount": 440,
+    "currentCount": 330,
+    "inactiveDaysThreshold": 30,
+    "mfaRequired": true,
+    "tapDelivery": true,
+    "usageLocation": "UZ",
+    "tapLifetimeMinutes": 60
+  },
+  "offices": [
+    {
+      "name": "ДСОМК Hub",
+      "userCount": 100,
+      "isHub": true
+    },
+    {
+      "name": "ЕПОКИ Управление",
+      "userCount": 10,
+      "isHub": false
+    },
+    {
+      "name": "ДГТК",
+      "userCount": 50,
+      "isHub": false
+    },
+    {
+      "name": "ДЦПТ",
+      "userCount": 120,
+      "isHub": false
+    },
+    {
+      "name": "Tashkent",
+      "userCount": 50,
+      "isHub": false
+    }
+  ],
+  "network": {
+    "baseSubnet": "172.20.0.0/16",
+    "proxmoxHost": "172.20.10.10",
+    "adDnsHost": "172.20.10.20",
+    "vpnType": "wireguard",
+    "vpnHub": "ДСОМК"
+  },
+  "reporting": {
+    "weeklyDay": "Monday",
+    "weeklyTime": "08:00",
+    "autoSend": false,
+    "_reason": "Отчёт всегда проверяется вручную перед отправкой"
+  },
+  "audit": {
+    "logRetentionDays": 365,
+    "requireDocumentRef": true,
+    "_policy": "АО Алмалыкский ГМК — Политика информационной безопасности"
+  },
+  "officeNames": [
+    "ДСОМК Hub",
+    "ЕПОКИ Управление",
+    "ДГТК",
+    "ДЦПТ",
+    "Tashkent"
+  ],
+  "groups": {
+    "allStaff": "EPOKI-All-Staff",
+    "itTeam": "EPOKI-IT-Team",
+    "itOwners": "EPOKI-IT-Owners"
+  },
+  "sla": {
+    "critical": {
+      "hours": 1,
+      "label": "Critical"
+    },
+    "high": {
+      "hours": 4,
+      "label": "High"
+    },
+    "normal": {
+      "hours": 24,
+      "label": "Normal"
+    },
+    "serviceRequest": {
+      "days": 3,
+      "label": "Service Request"
+    },
+    "workingHours": "Mon-Fri 09:00-18:00",
+    "timezone": "Asia/Tashkent"
+  },
+  "forms": {
+    "ticketForm": "Создать тикет в ИТ-поддержку",
+    "serviceRequestForm": "Запрос на обслуживание",
+    "incidentForm": "Сообщить об инциденте ИБ",
+    "npsForm": "Оцените работу ИТ-поддержки",
+    "alertForm": "Оповещение о работах"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    {
+      "type": "text",
+      "id": "title",
+      "x": 200,
+      "y": 20,
+      "text": "Hermes Projects — Roadmap 2026",
+      "fontSize": 28,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "Hermes Projects — Roadmap 2026",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "phase1-title",
+      "x": 100,
+      "y": 90,
+      "text": "Фаза 1: Стабильность (сейчас)",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "Фаза 1: Стабильность (сейчас)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "phase1-box",
+      "x": 80,
+      "y": 120,
+      "width": 750,
+      "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "solid"
+    },
+    {
+      "type": "text",
+      "id": "phase1-items",
+      "x": 100,
+      "y": 135,
+      "text": "✅ Bitget-bot 24/7 на US Server\n✅ HH Jobs + HH Remote — RSS поиск, Telegram уведомления\n✅ Единый вход через Caddy (100.84.223.96)\n✅ Admin Panel с авторизацией и 2FA\n✅ Мониторинг: Uptime Kuma + Node Exporter",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "✅ Bitget-bot 24/7 на US Server\n✅ HH Jobs + HH Remote — RSS поиск, Telegram уведомления\n✅ Единый вход через Caddy (100.84.223.96)\n✅ Admin Panel с авторизацией и 2FA\n✅ Мониторинг: Uptime Kuma + Node Exporter",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "phase2-title",
+      "x": 100,
+      "y": 240,
+      "text": "Фаза 2: Функциональность (следующая неделя)",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "Фаза 2: Функциональность (следующая неделя)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "phase2-box",
+      "x": 80,
+      "y": 270,
+      "width": 750,
+      "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid"
+    },
+    {
+      "type": "text",
+      "id": "phase2-items",
+      "x": 100,
+      "y": 285,
+      "text": "🔄 FinAnalytics — запуск Telegram бота, импорт кредитов\n🔄 Stocks-UZ — мониторинг UZSE в реальном времени\n🔄 Stocks-US — 56 тикеров, Yahoo Finance, Telegram алерты\n🔄 HH Jobs — улучшение матчинга, снижение порога до 0.30\n🔄 IT Ops Framework — развёртывание на US Server",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "🔄 FinAnalytics — запуск Telegram бота, импорт кредитов\n🔄 Stocks-UZ — мониторинг UZSE в реальном времени\n🔄 Stocks-US — 56 тикеров, Yahoo Finance, Telegram алерты\n🔄 HH Jobs — улучшение матчинга, снижение порога до 0.30\n🔄 IT Ops Framework — развёртывание на US Server",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "phase3-title",
+      "x": 100,
+      "y": 390,
+      "text": "Фаза 3: Развитие (среднесрочно)",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "Фаза 3: Развитие (среднесрочно)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "phase3-box",
+      "x": 80,
+      "y": 420,
+      "width": 750,
+      "height": 100,
+      "roundness": { "type": 3 },
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid"
+    },
+    {
+      "type": "text",
+      "id": "phase3-items",
+      "x": 100,
+      "y": 435,
+      "text": "📱 Mobile app — React Native / Telegram Mini App\n🤖 AI-аналитика — автоматические рекомендации по инвестициям\n📊 Trading Dashboard — P&L графики, статистика сделок\n🔐 Security — 2FA на всех сервисах, audit log\n🌐 UZ Markets — jett.uz + goinvest.uz интеграция",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "📱 Mobile app — React Native / Telegram Mini App\n🤖 AI-аналитика — автоматические рекомендации по инвестициям\n📊 Trading Dashboard — P&L графики, статистика сделок\n🔐 Security — 2FA на всех сервисах, audit log\n🌐 UZ Markets — jett.uz + goinvest.uz интеграция",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow1",
+      "x": 455,
+      "y": 220,
+      "width": 0,
+      "height": 20,
+      "points": [[0,0],[0,20]],
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "id": "arrow2",
+      "x": 455,
+      "y": 370,
+      "width": 0,
+      "height": 20,
+      "points": [[0,0],[0,20]],
+      "endArrowhead": "arrow"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  }
+}

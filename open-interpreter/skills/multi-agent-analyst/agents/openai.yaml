@@ -1,0 +1,4 @@
+interface:
+  display_name: "Multi-Agent Analyst"
+  short_description: "Parallel analysis with JSON output and confidence gating"
+  default_prompt: "Use the multi-agent-analyst skill when you need to run multiple independent analysis tasks in parallel. Decompose the request into tasks, spawn sub-agents with fork_context=true and strict JSON output format, collect results, filter by confidence (skip < 0.7), and merge into a structured final answer."

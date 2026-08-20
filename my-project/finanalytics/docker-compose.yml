@@ -1,0 +1,66 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8010:8000"
+    environment:
+      - DATABASE_URL=postgresql://finanalytics:finanalytics_pass@postgres:5432/finanalytics
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - finanalytics-net
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    environment:
+      - API_URL=http://api:8000
+      - BOT_TOKEN=${FINANALYTICS_BOT_TOKEN}
+      - CHAT_ID=-1004297012607
+      - THREAD_ID=239
+    depends_on:
+      - api
+    networks:
+      - finanalytics-net
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: finanalytics
+      POSTGRES_USER: finanalytics
+      POSTGRES_PASSWORD: finanalytics_pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finanalytics"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - finanalytics-net
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redisdata:/data
+    networks:
+      - finanalytics-net
+    restart: unless-stopped
+
+networks:
+  finanalytics-net:
+    external: true
+
+volumes:
+  pgdata:
+  redisdata:

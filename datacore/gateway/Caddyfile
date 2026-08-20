@@ -1,0 +1,48 @@
+{
+  # DataCore API Gateway
+  # Единая точка входа для всех сервисов
+  
+  admin off
+  log {
+    output file /data/access.log
+    level info
+  }
+}
+
+# Health endpoint — aggregate status
+:80 {
+  @health {
+    path /health
+  }
+  handle @health {
+    header Content-Type application/json
+    respond `{"status":"ok","services":["core-api","admin","redis","postgres","collector-pm","collector-yh","collector-bg","collector-news","analytics","trader-pm","bot"]}` 200
+  }
+
+  # Core API — прямой прокси
+  handle /api/* {
+    reverse_proxy core-api:8000
+  }
+
+  # GH Scout — мониторинг GitHub проектов и трендов
+  handle_path /ghscout/* {
+    reverse_proxy ghscout-core:8005
+  }
+
+  # Admin UI
+  handle /admin/* {
+    reverse_proxy admin:8080
+  }
+
+  # Admin root
+  handle {
+    reverse_proxy admin:8080
+  }
+}
+
+# Internal metrics
+:9090 {
+  handle /metrics {
+    reverse_proxy node-exporter:9100
+  }
+}

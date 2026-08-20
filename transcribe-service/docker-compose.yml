@@ -1,0 +1,18 @@
+services:
+  transcribe-service:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - WHISPER_MODEL_SIZE=${WHISPER_MODEL_SIZE:-medium}
+      - WHISPER_COMPUTE_TYPE=${WHISPER_COMPUTE_TYPE:-int8}
+    volumes:
+      # Persist downloaded faster-whisper model weights across restarts/rebuilds.
+      - /Volumes/External/docker-volumes/transcribe-service/hf-cache:/root/.cache/huggingface
+    networks:
+      - transcribe-net
+    restart: unless-stopped
+
+networks:
+  transcribe-net:
+    name: transcribe-net

@@ -1,0 +1,44 @@
+08-10 16:40:50 [INFO] nofx/main.go:38 ╔════════════════════════════════════════════════════════════╗
+08-10 16:40:50 [INFO] nofx/main.go:39 ║           🚀 NOFX - AI-Powered Trading System              ║
+08-10 16:40:50 [INFO] nofx/main.go:40 ╚════════════════════════════════════════════════════════════╝
+08-10 16:40:50 [INFO] nofx/main.go:46 ✅ Configuration loaded
+08-10 16:40:50 [INFO] nofx/main.go:49 🔐 Initializing encryption service...
+08-10 16:40:50 [INFO] nofx/main.go:55 ✅ Encryption service initialized successfully
+08-10 16:40:50 [INFO] nofx/main.go:71 📋 Initializing database (sqlite)...
+08-10 16:40:50 [INFO] store/store.go:99 ✅ Database initialized (GORM, SQLite)
+08-10 16:40:50 [INFO] nofx/main.go:96 🔑 JWT secret configured
+08-10 16:40:50 [INFO] nofx/main.go:104 📊 Using CoinAnk API for all market data (WebSocket cache disabled)
+08-10 16:40:50 [INFO] manager/trader_manager.go:549 📋 Found 1 users, loading all trader configurations...
+08-10 16:40:50 [INFO] manager/trader_manager.go:559 📋 User e1d70469-e363-4f19-ba20-df4a637bfcd1: 0 traders
+08-10 16:40:50 [INFO] manager/trader_manager.go:563 📋 Total loaded trader configurations: 0
+08-10 16:40:50 [INFO] manager/trader_manager.go:636 ✓ Successfully loaded 0 traders to memory
+08-10 16:40:50 [INFO] nofx/main.go:120 🤖 AI Trader Configurations in Database:
+08-10 16:40:50 [INFO] nofx/main.go:122   (No trader configurations, please create via Web interface)
+08-10 16:40:50 [WARN] api/server.go:92 [CORS] CORS_ALLOWED_ORIGINS not set; defaulting to localhost dev origins only. Set this env var for production.
+08-10 16:40:50 [INFO] api/server.go:691 🌐 API server starting at http://localhost:8080
+08-10 16:40:50 [INFO] api/server.go:692 📊 API Documentation:
+08-10 16:40:50 [INFO] api/server.go:693   • GET  /api/health           - Health check
+08-10 16:40:50 [INFO] api/server.go:694   • GET  /api/traders          - Public AI trader leaderboard top 50 (no auth required)
+08-10 16:40:50 [INFO] api/server.go:695   • GET  /api/competition      - Public competition data (no auth required)
+08-10 16:40:50 [INFO] api/server.go:696   • GET  /api/top-traders      - Top 5 trader data (no auth required, for performance comparison)
+08-10 16:40:50 [INFO] api/server.go:697   • GET  /api/equity-history?trader_id=xxx - Public return rate historical data (no auth required, for competition)
+08-10 16:40:50 [INFO] api/server.go:698   • GET  /api/equity-history-batch?trader_ids=a,b,c - Batch get historical data (no auth required, performance comparison optimization)
+08-10 16:40:50 [INFO] api/server.go:699   • GET  /api/traders/:id/public-config - Public trader config (no auth required, no sensitive info)
+08-10 16:40:50 [INFO] api/server.go:700   • POST /api/traders          - Create new AI trader
+08-10 16:40:50 [INFO] api/server.go:701   • DELETE /api/traders/:id    - Delete AI trader
+08-10 16:40:50 [INFO] api/server.go:702   • POST /api/traders/:id/start - Start AI trader
+08-10 16:40:50 [INFO] api/server.go:703   • POST /api/traders/:id/stop  - Stop AI trader
+08-10 16:40:50 [INFO] api/server.go:704   • GET  /api/models           - Get AI model config
+08-10 16:40:50 [INFO] api/server.go:705   • PUT  /api/models           - Update AI model config
+08-10 16:40:50 [INFO] api/server.go:706   • GET  /api/exchanges        - Get exchange config
+08-10 16:40:50 [INFO] api/server.go:707   • PUT  /api/exchanges        - Update exchange config
+08-10 16:40:50 [INFO] api/server.go:708   • GET  /api/status?trader_id=xxx     - Specified trader's system status
+08-10 16:40:50 [INFO] api/server.go:709   • GET  /api/account?trader_id=xxx    - Specified trader's account info
+08-10 16:40:50 [INFO] api/server.go:710   • GET  /api/positions?trader_id=xxx  - Specified trader's position list
+08-10 16:40:50 [INFO] api/server.go:711   • GET  /api/decisions?trader_id=xxx  - Specified trader's decision log
+08-10 16:40:50 [INFO] api/server.go:712   • GET  /api/decisions/latest?trader_id=xxx - Specified trader's latest decisions
+08-10 16:40:50 [INFO] api/server.go:713   • GET  /api/statistics?trader_id=xxx - Specified trader's statistics
+08-10 16:40:50 [INFO] api/server.go:714   • GET  /api/performance?trader_id=xxx - Specified trader's AI learning performance analysis
+08-10 16:40:50 [INFO] api/server.go:715 
+08-10 16:40:50 [INFO] nofx/main.go:151 ✅ System started successfully, waiting for trading commands...
+08-10 16:40:50 [INFO] nofx/main.go:152 📌 Tip: Use Ctrl+C to stop the system

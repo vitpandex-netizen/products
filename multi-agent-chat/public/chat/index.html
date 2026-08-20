@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Multi-Agent Chat</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen hidden">
+      <div class="auth-container">
+        <div class="auth-header">
+          <div class="auth-logo">🤖</div>
+          <h1>Multi-Agent Chat</h1>
+          <p class="auth-subtitle">Защищённый чат с AI-агентами</p>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Вход</button>
+          <button class="auth-tab" data-tab="register">Регистрация</button>
+        </div>
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label>Имя пользователя</label>
+            <input type="text" id="login-username" placeholder="username" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label>Пароль</label>
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <div id="totp-group" class="form-group hidden">
+            <label>2FA код</label>
+            <input type="text" id="login-totp" placeholder="000000" inputmode="numeric" maxlength="6">
+          </div>
+          <div id="login-error" class="form-error hidden"></div>
+          <button type="submit" class="btn btn-primary btn-full">Войти</button>
+        </form>
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label>Имя пользователя</label>
+            <input type="text" id="reg-username" placeholder="username" required>
+          </div>
+          <div class="form-group">
+            <label>Отображаемое имя</label>
+            <input type="text" id="reg-displayname" placeholder="Иван Иванов">
+          </div>
+          <div class="form-group">
+            <label>Пароль</label>
+            <input type="password" id="reg-password" placeholder="••••••••" required>
+          </div>
+          <div id="reg-error" class="form-error hidden"></div>
+          <button type="submit" class="btn btn-primary btn-full">Создать аккаунт</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-screen" class="screen hidden">
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <h2>💬 Чаты</h2>
+          <button id="new-chat-btn" class="btn btn-icon" title="Новый чат">➕</button>
+        </div>
+        <div class="sidebar-search">
+          <input type="text" id="search-chats" placeholder="Поиск чатов...">
+        </div>
+        <div id="chat-list" class="chat-list"></div>
+        <div class="sidebar-footer">
+          <div class="user-info" id="user-info">
+            <span class="user-avatar" id="user-avatar">👤</span>
+            <span class="user-name" id="user-name">User</span>
+          </div>
+          <div class="sidebar-footer-actions">
+            <button id="settings-btn" class="btn btn-icon-small" title="Настройки">⚙️</button>
+            <button id="logout-btn" class="btn btn-icon-small" title="Выйти">🚪</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Chat Area -->
+      <main id="chat-area">
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon">🤖</div>
+          <h2>Multi-Agent Chat</h2>
+          <p>Выберите чат из списка или создайте новый</p>
+          <p class="empty-agents">
+            <span>🧠 Interpreter</span>
+            <span>🔍 Тестировщик</span>
+            <span>🤖 Claude</span>
+            <span>⚡ Hermes</span>
+            <span>🖱️ Cursor</span>
+            <span>🦞 OpenClaw</span>
+          </p>
+          <button id="empty-new-chat" class="btn btn-primary">+ Создать чат</button>
+        </div>
+
+        <div id="chat-view" class="hidden">
+          <div class="chat-header" id="chat-header">
+            <div class="chat-header-info">
+              <h3 id="chat-title">Чат</h3>
+              <span class="chat-topic" id="chat-topic"></span>
+            </div>
+            <div class="chat-header-actions">
+              <button id="chat-encrypt-btn" class="btn btn-icon-small" title="Шифрование">🔒</button>
+              <button id="chat-invite-btn" class="btn btn-icon-small" title="Пригласить">👤+</button>
+              <button id="chat-delete-btn" class="btn btn-icon-small" title="Удалить">🗑️</button>
+            </div>
+          </div>
+          <div id="messages" class="messages"></div>
+          <div class="chat-input-area">
+            <div class="typing-indicators" id="typing-indicators"></div>
+            <div class="input-row">
+              <input type="text" id="message-input" placeholder="Напишите сообщение..." autofocus>
+              <button id="send-btn" class="btn btn-primary">➤</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Invite Modal -->
+    <div id="invite-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content" style="width: 400px;">
+        <div class="modal-header">
+          <h3>👤 Пригласить участника</h3>
+          <button class="modal-close btn btn-icon">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Выберите пользователя</label>
+            <select id="invite-user-select" class="form-select">
+              <option value="">Загрузка...</option>
+            </select>
+          </div>
+          <div id="invite-error" class="form-error hidden"></div>
+          <button id="invite-submit-btn" class="btn btn-primary btn-full">Пригласить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>⚙️ Настройки</h3>
+          <button class="modal-close btn btn-icon">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="settings-section">
+            <h4>Профиль</h4>
+            <div class="form-group">
+              <label>Отображаемое имя</label>
+              <input type="text" id="settings-displayname" placeholder="Имя">
+            </div>
+          </div>
+          <div class="settings-section">
+            <h4>Безопасность</h4>
+            <div class="form-group">
+              <label>2FA (двухфакторная аутентификация)</label>
+              <button id="enable-2fa-btn" class="btn btn-secondary">Включить 2FA</button>
+              <div id="2fa-setup" class="hidden">
+                <p>Отсканируйте QR-код в приложении (Google Authenticator, Authy):</p>
+                <div id="2fa-qr"></div>
+                <p class="text-muted">Или введите код вручную: <code id="2fa-secret"></code></p>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h4>Шифрование</h4>
+            <div class="form-group">
+              <label>E2E ключ</label>
+              <button id="gen-keys-btn" class="btn btn-secondary">Сгенерировать ключи</button>
+              <div id="keys-status" class="text-muted mt-1"></div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h4>API ключ OpenRouter</h4>
+            <div class="form-group">
+              <input type="password" id="settings-api-key" placeholder="sk-or-v1-...">
+              <p class="text-muted">Без ключа агенты отвечают контекстными заглушками</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/crypto.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

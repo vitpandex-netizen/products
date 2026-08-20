@@ -1,0 +1,2993 @@
+{
+  "nodes": [
+    {
+      "id": "batch_processor",
+      "label": "batch_processor.py",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor",
+      "label": "BatchProcessor",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L95",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L96",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor_create_batch_request",
+      "label": ".create_batch_request()",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L103",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor_queue_batch",
+      "label": ".queue_batch()",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L119",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor_get_scheduled_batches",
+      "label": ".get_scheduled_batches()",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L141",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_batchprocessor_print_strategy",
+      "label": ".print_strategy()",
+      "file_type": "code",
+      "source_file": "batch_processor.py",
+      "source_location": "L165",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_rationale_1",
+      "label": "BATCH API ПРОЦЕССОР - для асинхронных задач (50% экономия) Запускать ночью…",
+      "file_type": "rationale",
+      "source_file": "batch_processor.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_rationale_104",
+      "label": "Создать один запрос для батча",
+      "file_type": "rationale",
+      "source_file": "batch_processor.py",
+      "source_location": "L104",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_rationale_120",
+      "label": "Добавить задачи в очередь на ночь",
+      "file_type": "rationale",
+      "source_file": "batch_processor.py",
+      "source_location": "L120",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_rationale_142",
+      "label": "Получить расписание батчей",
+      "file_type": "rationale",
+      "source_file": "batch_processor.py",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "batch_processor_rationale_166",
+      "label": "Показать стратегию оптимизации",
+      "file_type": "rationale",
+      "source_file": "batch_processor.py",
+      "source_location": "L166",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker",
+      "label": "cost_tracker.py",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_costtracker",
+      "label": "CostTracker",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_costtracker_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_costtracker_log_call",
+      "label": ".log_call()",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_costtracker_daily_report",
+      "label": ".daily_report()",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L46",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_costtracker_monthly_summary",
+      "label": ".monthly_summary()",
+      "file_type": "code",
+      "source_file": "cost_tracker.py",
+      "source_location": "L95",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_rationale_1",
+      "label": "Мониторинг расходов - отслеживание затрат по задачам",
+      "file_type": "rationale",
+      "source_file": "cost_tracker.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_rationale_13",
+      "label": "Логировать каждый вызов API",
+      "file_type": "rationale",
+      "source_file": "cost_tracker.py",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_rationale_47",
+      "label": "Вывести дневной отчёт по затратам",
+      "file_type": "rationale",
+      "source_file": "cost_tracker.py",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "cost_tracker_rationale_96",
+      "label": "Вывести месячный суммарный отчёт",
+      "file_type": "rationale",
+      "source_file": "cost_tracker.py",
+      "source_location": "L96",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced",
+      "label": "optimization_advanced.py",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager",
+      "label": "CachingManager",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L208",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L209",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_load_cache",
+      "label": "._load_cache()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L213",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_save_cache",
+      "label": "._save_cache()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L221",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_get_cached_context",
+      "label": ".get_cached_context()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L226",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_should_refresh",
+      "label": ".should_refresh()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L238",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_get_optimal_model",
+      "label": ".get_optimal_model()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L249",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_log_cache_hit",
+      "label": ".log_cache_hit()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L262",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_cachingmanager_print_summary",
+      "label": ".print_summary()",
+      "file_type": "code",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L270",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_1",
+      "label": "ПРОДВИНУТАЯ ОПТИМИЗАЦИЯ - Фаза 1 Экономия: -60% через кэширование + smart…",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_214",
+      "label": "Загрузить кэш из файла",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L214",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_227",
+      "label": "Получить кэшированный контекст для задачи",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L227",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_239",
+      "label": "Проверить нужно ли обновить кэш",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L239",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_250",
+      "label": "Выбрать оптимальную модель (smart routing)",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L250",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_263",
+      "label": "Залогировать что использован кэш",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L263",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimization_advanced_rationale_271",
+      "label": "Показать сводку кэширования",
+      "file_type": "rationale",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L271",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config",
+      "label": "optimizer_config.py",
+      "file_type": "code",
+      "source_file": "optimizer_config.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config_get_model_for_task",
+      "label": "get_model_for_task()",
+      "file_type": "code",
+      "source_file": "optimizer_config.py",
+      "source_location": "L139",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config_print_summary",
+      "label": "print_summary()",
+      "file_type": "code",
+      "source_file": "optimizer_config.py",
+      "source_location": "L144",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config_rationale_1",
+      "label": "Конфигурация оптимизации - какая модель для какой задачи",
+      "file_type": "rationale",
+      "source_file": "optimizer_config.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config_rationale_140",
+      "label": "Получить конфиг модели для задачи",
+      "file_type": "rationale",
+      "source_file": "optimizer_config.py",
+      "source_location": "L140",
+      "_origin": "ast"
+    },
+    {
+      "id": "optimizer_config_rationale_145",
+      "label": "Вывести сводку по оптимизации",
+      "file_type": "rationale",
+      "source_file": "optimizer_config.py",
+      "source_location": "L145",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer",
+      "label": "prompt_optimizer.py",
+      "file_type": "code",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_promptoptimizer",
+      "label": "PromptOptimizer",
+      "file_type": "code",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L92",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_promptoptimizer_get_system_prompt",
+      "label": ".get_system_prompt()",
+      "file_type": "code",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L96",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_promptoptimizer_get_output_format",
+      "label": ".get_output_format()",
+      "file_type": "code",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L104",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_promptoptimizer_build_user_prompt",
+      "label": ".build_user_prompt()",
+      "file_type": "code",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L111",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_rationale_1",
+      "label": "ОПТИМИЗИРОВАННЫЕ СИСТЕМНЫЕ ПРОМПТЫ для всех 8 задач Версия 2.0 - минимум…",
+      "file_type": "rationale",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_rationale_93",
+      "label": "Интеграция оптимизированных промптов",
+      "file_type": "rationale",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L93",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_rationale_97",
+      "label": "Получить оптимизированный системный промпт",
+      "file_type": "rationale",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_rationale_105",
+      "label": "Получить ожидаемый формат вывода",
+      "file_type": "rationale",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L105",
+      "_origin": "ast"
+    },
+    {
+      "id": "prompt_optimizer_rationale_112",
+      "label": "Построить пользовательский промпт",
+      "file_type": "rationale",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L112",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all",
+      "label": "run_all.py",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_show_welcome",
+      "label": "show_welcome()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_5",
+      "label": "run_task_5()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L39",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_4",
+      "label": "run_task_4()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L52",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_7",
+      "label": "run_task_7()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L63",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_8",
+      "label": "run_task_8()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L74",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_2",
+      "label": "run_task_2()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L85",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_3",
+      "label": "run_task_3()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L96",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_1",
+      "label": "run_task_1()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L107",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_task_6",
+      "label": "run_task_6()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L124",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_run_all_tasks",
+      "label": "run_all_tasks()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L140",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_show_help",
+      "label": "show_help()",
+      "file_type": "code",
+      "source_file": "run_all.py",
+      "source_location": "L175",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_40",
+      "label": "Запустить Task 5 (обучение)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L40",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_53",
+      "label": "Запустить Task 4 (события)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L53",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_64",
+      "label": "Запустить Task 7 (пассивный доход)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L64",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_75",
+      "label": "Запустить Task 8 (финансы)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L75",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_86",
+      "label": "Запустить Task 2 (локальные акции)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_97",
+      "label": "Запустить Task 3 (US акции)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_108",
+      "label": "Запустить Task 1 (HH Jobs)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L108",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_125",
+      "label": "Запустить Task 6 (конфиденциальный анализ)",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L125",
+      "_origin": "ast"
+    },
+    {
+      "id": "run_all_rationale_141",
+      "label": "Запустить все 8 задач",
+      "file_type": "rationale",
+      "source_file": "run_all.py",
+      "source_location": "L141",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_1_hh_jobs",
+      "label": "task_1_hh_jobs.py",
+      "file_type": "code",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_1_hh_jobs_match_job_and_create_application",
+      "label": "match_job_and_create_application()",
+      "file_type": "code",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L44",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_1_hh_jobs_rationale_1",
+      "label": "ЗАДАЧА 1: Поиск вакансий на HH (HH Jobs) 🎯 ОПТИМИЗАЦИЯ: ✅ Модель: Claude Sonnet…",
+      "file_type": "rationale",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_1_hh_jobs_rationale_45",
+      "label": "Анализировать вакансию и создать приложение (с опциональным кэшированием для…",
+      "file_type": "rationale",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L45",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_2_stocks_local",
+      "label": "task_2_stocks_local.py",
+      "file_type": "code",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_2_stocks_local_analyze_local_stock",
+      "label": "analyze_local_stock()",
+      "file_type": "code",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_2_stocks_local_rationale_1",
+      "label": "ЗАДАЧА 2: Анализ локальных акций (Stocks Local) 🎯 ОПТИМИЗАЦИЯ: Claude Haiku,…",
+      "file_type": "rationale",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_2_stocks_local_rationale_18",
+      "label": "Анализировать локальную акцию (узбекские компании)",
+      "file_type": "rationale",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_3_stocks_usa",
+      "label": "task_3_stocks_usa.py",
+      "file_type": "code",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_3_stocks_usa_analyze_usa_stock",
+      "label": "analyze_usa_stock()",
+      "file_type": "code",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_3_stocks_usa_rationale_1",
+      "label": "ЗАДАЧА 3: Анализ американских акций (Stocks USA) 🎯 ОПТИМИЗАЦИЯ: Claude Haiku,…",
+      "file_type": "rationale",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_3_stocks_usa_rationale_18",
+      "label": "Анализировать американскую акцию (Tech/Growth)",
+      "file_type": "rationale",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_4_world_events",
+      "label": "task_4_world_events.py",
+      "file_type": "code",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_4_world_events_get_world_events",
+      "label": "get_world_events()",
+      "file_type": "code",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_4_world_events_rationale_1",
+      "label": "ЗАДАЧА 4: Мировые события и новости (World Events) 🎯 ОПТИМИЗАЦИЯ: ✅ Модель:…",
+      "file_type": "rationale",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_4_world_events_rationale_22",
+      "label": "Получить мировые события которые влияют на инвестиции",
+      "file_type": "rationale",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education",
+      "label": "task_5_education.py",
+      "file_type": "code",
+      "source_file": "task_5_education.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_get_education_client",
+      "label": "get_education_client()",
+      "file_type": "code",
+      "source_file": "task_5_education.py",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_generate_course_optimized",
+      "label": "generate_course_optimized()",
+      "file_type": "code",
+      "source_file": "task_5_education.py",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_batch_generate_courses",
+      "label": "batch_generate_courses()",
+      "file_type": "code",
+      "source_file": "task_5_education.py",
+      "source_location": "L122",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_rationale_1",
+      "label": "ЗАДАЧА 5: Создание учебных материалов (Education) 🎯 ОПТИМИЗАЦИЯ: ✅ Модель:…",
+      "file_type": "rationale",
+      "source_file": "task_5_education.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_rationale_25",
+      "label": "Клиент с правильной конфигурацией для OpenRouter",
+      "file_type": "rationale",
+      "source_file": "task_5_education.py",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_rationale_36",
+      "label": "✅ ОПТИМИЗИРОВАННАЯ версия задачи 5 (Обучение) Экономия: 10x (используем Haiku…",
+      "file_type": "rationale",
+      "source_file": "task_5_education.py",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_5_education_rationale_123",
+      "label": "Генерировать несколько курсов и вывести отчёт",
+      "file_type": "rationale",
+      "source_file": "task_5_education.py",
+      "source_location": "L123",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_6_confidential",
+      "label": "task_6_confidential.py",
+      "file_type": "code",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_6_confidential_analyze_confidential_data",
+      "label": "analyze_confidential_data()",
+      "file_type": "code",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L45",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_6_confidential_rationale_1",
+      "label": "ЗАДАЧА 6: Конфиденциальный анализ (Confidential Analysis) 🎯 ОПТИМИЗАЦИЯ: ✅…",
+      "file_type": "rationale",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_6_confidential_rationale_50",
+      "label": "Анализировать конфиденциальные финансовые данные (с высокой степенью защиты)",
+      "file_type": "rationale",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L50",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_7_passive_income",
+      "label": "task_7_passive_income.py",
+      "file_type": "code",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_7_passive_income_generate_passive_income_ideas",
+      "label": "generate_passive_income_ideas()",
+      "file_type": "code",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_7_passive_income_rationale_1",
+      "label": "ЗАДАЧА 7: Идеи пассивного дохода (Passive Income) 🎯 ОПТИМИЗАЦИЯ: Claude Haiku,…",
+      "file_type": "rationale",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_7_passive_income_rationale_17",
+      "label": "Генерировать идеи пассивного дохода",
+      "file_type": "rationale",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_8_finances",
+      "label": "task_8_finances.py",
+      "file_type": "code",
+      "source_file": "task_8_finances.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_8_finances_analyze_finances",
+      "label": "analyze_finances()",
+      "file_type": "code",
+      "source_file": "task_8_finances.py",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_8_finances_rationale_1",
+      "label": "ЗАДАЧА 8: Финансовый анализ (Finances) 🎯 ОПТИМИЗАЦИЯ: Claude Haiku, JSON, 600…",
+      "file_type": "rationale",
+      "source_file": "task_8_finances.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "task_8_finances_rationale_17",
+      "label": "Анализировать личные финансы и давать рекомендации",
+      "file_type": "rationale",
+      "source_file": "task_8_finances.py",
+      "source_location": "L17",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "batch_processor",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "optimization_advanced",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "batch_processor_batchprocessor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "batch_processor_batchprocessor_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "batch_processor_batchprocessor_create_batch_request",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "batch_processor_batchprocessor_queue_batch",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "batch_processor_batchprocessor_get_scheduled_batches",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L141",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "batch_processor_batchprocessor_print_strategy",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L165",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor_queue_batch",
+      "target": "batch_processor_batchprocessor_create_batch_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_rationale_1",
+      "target": "batch_processor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_rationale_104",
+      "target": "batch_processor_batchprocessor_create_batch_request",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_rationale_120",
+      "target": "batch_processor_batchprocessor_queue_batch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_rationale_142",
+      "target": "batch_processor_batchprocessor_get_scheduled_batches",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_rationale_166",
+      "target": "batch_processor_batchprocessor_print_strategy",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker",
+      "target": "cost_tracker_costtracker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_costtracker",
+      "target": "cost_tracker_costtracker_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_costtracker",
+      "target": "cost_tracker_costtracker_log_call",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_costtracker",
+      "target": "cost_tracker_costtracker_daily_report",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_costtracker",
+      "target": "cost_tracker_costtracker_monthly_summary",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_rationale_1",
+      "target": "cost_tracker",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_rationale_13",
+      "target": "cost_tracker_costtracker_log_call",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_rationale_47",
+      "target": "cost_tracker_costtracker_daily_report",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "cost_tracker_rationale_96",
+      "target": "cost_tracker_costtracker_monthly_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "cost_tracker.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced",
+      "target": "optimization_advanced_cachingmanager",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L209",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_load_cache",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L213",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_save_cache",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_get_cached_context",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_should_refresh",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L238",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_get_optimal_model",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L249",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_log_cache_hit",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L262",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager",
+      "target": "optimization_advanced_cachingmanager_print_summary",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L270",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager_init",
+      "target": "optimization_advanced_cachingmanager_load_cache",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_cachingmanager_log_cache_hit",
+      "target": "optimization_advanced_cachingmanager_save_cache",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L268",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_1",
+      "target": "optimization_advanced",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_214",
+      "target": "optimization_advanced_cachingmanager_load_cache",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L214",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_227",
+      "target": "optimization_advanced_cachingmanager_get_cached_context",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L227",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_239",
+      "target": "optimization_advanced_cachingmanager_should_refresh",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L239",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_250",
+      "target": "optimization_advanced_cachingmanager_get_optimal_model",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L250",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_263",
+      "target": "optimization_advanced_cachingmanager_log_cache_hit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L263",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimization_advanced_rationale_271",
+      "target": "optimization_advanced_cachingmanager_print_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimization_advanced.py",
+      "source_location": "L271",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimizer_config",
+      "target": "optimizer_config_get_model_for_task",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "optimizer_config.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimizer_config",
+      "target": "optimizer_config_print_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "optimizer_config.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimizer_config_rationale_1",
+      "target": "optimizer_config",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimizer_config.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimizer_config_rationale_140",
+      "target": "optimizer_config_get_model_for_task",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimizer_config.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "optimizer_config_rationale_145",
+      "target": "optimizer_config_print_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "optimizer_config.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer",
+      "target": "prompt_optimizer_promptoptimizer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_promptoptimizer",
+      "target": "prompt_optimizer_promptoptimizer_get_system_prompt",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_promptoptimizer",
+      "target": "prompt_optimizer_promptoptimizer_get_output_format",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_promptoptimizer",
+      "target": "prompt_optimizer_promptoptimizer_build_user_prompt",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_rationale_1",
+      "target": "prompt_optimizer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_rationale_93",
+      "target": "prompt_optimizer_promptoptimizer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_rationale_97",
+      "target": "prompt_optimizer_promptoptimizer_get_system_prompt",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_rationale_105",
+      "target": "prompt_optimizer_promptoptimizer_get_output_format",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "prompt_optimizer_rationale_112",
+      "target": "prompt_optimizer_promptoptimizer_build_user_prompt",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "prompt_optimizer.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_1_hh_jobs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_2_stocks_local",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_3_stocks_usa",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_4_world_events",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_5_education",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_6_confidential",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_7_passive_income",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_8_finances",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_show_welcome",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_5",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_4",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_7",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_8",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_3",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_task_6",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_run_all_tasks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "run_all_show_help",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L175",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_show_welcome",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_1",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_2",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_3",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_4",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_5",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_6",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_7",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_all_tasks",
+      "target": "run_all_run_task_8",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "run_all.py",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_40",
+      "target": "run_all_run_task_5",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_53",
+      "target": "run_all_run_task_4",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_64",
+      "target": "run_all_run_task_7",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_75",
+      "target": "run_all_run_task_8",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_86",
+      "target": "run_all_run_task_2",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_97",
+      "target": "run_all_run_task_3",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_108",
+      "target": "run_all_run_task_1",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_125",
+      "target": "run_all_run_task_6",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_rationale_141",
+      "target": "run_all_run_all_tasks",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L141",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "task_1_hh_jobs_match_job_and_create_application",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs_rationale_1",
+      "target": "task_1_hh_jobs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs_rationale_45",
+      "target": "task_1_hh_jobs_match_job_and_create_application",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "task_2_stocks_local_analyze_local_stock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local_rationale_1",
+      "target": "task_2_stocks_local",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local_rationale_18",
+      "target": "task_2_stocks_local_analyze_local_stock",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "task_3_stocks_usa_analyze_usa_stock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa_rationale_1",
+      "target": "task_3_stocks_usa",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa_rationale_18",
+      "target": "task_3_stocks_usa_analyze_usa_stock",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "task_4_world_events_get_world_events",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events_rationale_1",
+      "target": "task_4_world_events",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events_rationale_22",
+      "target": "task_4_world_events_get_world_events",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "optimization_advanced",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "task_5_education_get_education_client",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "task_5_education_generate_course_optimized",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "task_5_education_batch_generate_courses",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_generate_course_optimized",
+      "target": "task_5_education_get_education_client",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_batch_generate_courses",
+      "target": "task_5_education_generate_course_optimized",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_rationale_1",
+      "target": "task_5_education",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_rationale_25",
+      "target": "task_5_education_get_education_client",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_rationale_36",
+      "target": "task_5_education_generate_course_optimized",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education_rationale_123",
+      "target": "task_5_education_batch_generate_courses",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "task_6_confidential_analyze_confidential_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential_rationale_1",
+      "target": "task_6_confidential",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential_rationale_50",
+      "target": "task_6_confidential_analyze_confidential_data",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "task_7_passive_income_generate_passive_income_ideas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income_rationale_1",
+      "target": "task_7_passive_income",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income_rationale_17",
+      "target": "task_7_passive_income_generate_passive_income_ideas",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "anthropic",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "cost_tracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "task_8_finances_analyze_finances",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances_rationale_1",
+      "target": "task_8_finances",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances_rationale_17",
+      "target": "task_8_finances_analyze_finances",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor",
+      "target": "optimization_advanced_cachingmanager",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "batch_processor.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_1_hh_jobs_match_job_and_create_application",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_2_stocks_local_analyze_local_stock",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_3_stocks_usa_analyze_usa_stock",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_4_world_events_get_world_events",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_5_education_generate_course_optimized",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_6_confidential_analyze_confidential_data",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_7_passive_income_generate_passive_income_ideas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all",
+      "target": "task_8_finances_analyze_finances",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_1_hh_jobs",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_1_hh_jobs.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_2_stocks_local",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_2_stocks_local.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_3_stocks_usa",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_3_stocks_usa.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_4_world_events",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_4_world_events.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_5_education",
+      "target": "optimization_advanced_cachingmanager",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_5_education.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_6_confidential",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_6_confidential.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_7_passive_income",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_7_passive_income.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "task_8_finances",
+      "target": "cost_tracker_costtracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "task_8_finances.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_5",
+      "target": "task_5_education_generate_course_optimized",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_4",
+      "target": "task_4_world_events_get_world_events",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_7",
+      "target": "task_7_passive_income_generate_passive_income_ideas",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_8",
+      "target": "task_8_finances_analyze_finances",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_2",
+      "target": "task_2_stocks_local_analyze_local_stock",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_3",
+      "target": "task_3_stocks_usa_analyze_usa_stock",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_1",
+      "target": "task_1_hh_jobs_match_job_and_create_application",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "run_all_run_task_6",
+      "target": "task_6_confidential_analyze_confidential_data",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "run_all.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "cost_tracker_costtracker",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "batch_processor.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "batch_processor_batchprocessor",
+      "target": "optimization_advanced_cachingmanager",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "batch_processor.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

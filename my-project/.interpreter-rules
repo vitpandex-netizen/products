@@ -1,0 +1,30 @@
+# .interpreter-rules for my-project
+# Project: my-project
+# Path: /Volumes/External/dev/my-project
+
+## Project type
+code, automation, bot
+
+## Key files
+# src/config.py — configuration
+# src/db.py — SQLite database
+# src/researcher.py — autonomous research
+# shared/llm.py — model routing (Ling -> DeepSeek -> Ollama)
+# shared/vault.py — encrypted secrets vault
+
+## Tech stack
+Python, SQLite, Telegram bot, launchd, Oracle Cloud
+
+## Rules
+# Secrets are in vault.enc, NOT in .env or hardcoded
+# Git workflow: commit, push to GitHub
+# Oracle mirror at /home/ubuntu/dev/my-project
+# Sync to Oracle: ssh + rsync
+
+## Preferred workflow
+# 1. Read the task
+# 2. Check PROJECT_MEMORY.md for project memory
+# 3. Edit files in /Volumes/External/dev/my-project/
+# 4. Test locally
+# 5. Commit and push
+# 6. Sync to Oracle if needed

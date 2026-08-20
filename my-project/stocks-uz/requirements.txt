@@ -1,0 +1,11 @@
+# Stocks UZ Requirements
+
+requests==2.31.0
+python-dotenv==1.0.0
+beautifulsoup4==4.12.3
+openpyxl==3.1.2
+
+pytest==7.4.0
+pytest-cov==4.1.0
+black==23.7.0
+flake8==6.0.0

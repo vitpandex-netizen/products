@@ -1,0 +1,28 @@
+services:
+
+
+  # telegram-bot-api service removed (requires API_ID/API_HASH)
+
+  transcribe-bot:
+    build: .
+    env_file:
+      - .env
+    # environment:
+      # TELEGRAM_API_ROOT=http://telegram-bot-api:8081  # requires API_ID/API_HASH
+    volumes:
+      - /Volumes/External/docker-volumes/transcribe-bot/data:/data
+    networks:
+      - transcribe-net
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    # depends_on:
+      # - telegram-bot-api
+
+networks:
+  transcribe-net:
+    external: true
+    name: transcribe-net

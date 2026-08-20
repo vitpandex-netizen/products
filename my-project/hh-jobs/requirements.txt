@@ -1,0 +1,29 @@
+# HH Jobs Automation Requirements
+
+# API & HTTP
+requests==2.31.0
+python-dotenv==1.0.0
+
+# Database
+sqlite3  # встроенный в Python
+
+# Data processing
+pandas==2.0.3
+
+# Logging
+python-json-logger==2.0.7
+
+# Testing
+pytest==7.4.0
+pytest-cov==4.1.0
+
+# Code quality
+black==23.7.0
+flake8==6.0.0
+mypy==1.4.1
+
+# Optional: для генерации писем через AI
+openai==0.27.8  # Если используешь ChatGPT
+
+# Optional: для работы с email
+secure-smtplib==0.1.1

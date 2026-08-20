@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hermes Admin Panel</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; }
+.header { background: #161b22; border-bottom: 1px solid #30363d; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+.header h1 { font-size: 18px; color: #58a6ff; }
+.header .user { font-size: 13px; color: #8b949e; }
+.header a { color: #8b949e; text-decoration: none; margin-left: 16px; }
+.header a:hover { color: #58a6ff; }
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #30363d; }
+.tab { padding: 10px 20px; cursor: pointer; font-size: 14px; color: #8b949e; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab:hover { color: #c9d1d9; }
+.tab.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; }
+.card h3 { font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.card .value { font-size: 28px; font-weight: 600; color: #f0f6fc; }
+.card .value.green { color: #3fb950; }
+.card .value.red { color: #da3633; }
+.card .value.yellow { color: #d29922; }
+.card .label { font-size: 12px; color: #8b949e; margin-top: 4px; }
+.card .btn { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; border: 1px solid #30363d; background: #21262d; color: #c9d1d9; cursor: pointer; margin-top: 8px; text-decoration: none; }
+.card .btn:hover { background: #30363d; }
+.card .btn.green { background: #238636; border-color: #238636; color: #fff; }
+.card .btn.red { background: #da3633; border-color: #da3633; color: #fff; }
+table { width: 100%; border-collapse: collapse; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+th { background: #21262d; padding: 10px 12px; text-align: left; font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #30363d; }
+td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #21262d; }
+tr:hover td { background: #1c2128; }
+.status { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+.status.online { background: #1b3a1d; color: #3fb950; }
+.status.waiting { background: #3b2e1a; color: #d29922; }
+.status.errored { background: #3b1e1e; color: #da3633; }
+.settings-form { max-width: 600px; }
+.settings-form label { display: block; font-size: 13px; color: #8b949e; margin-bottom: 4px; margin-top: 12px; }
+.settings-form input { width: 100%; padding: 8px 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; font-size: 13px; }
+.settings-form input:focus { outline: none; border-color: #58a6ff; }
+.settings-form button { margin-top: 16px; padding: 8px 24px; background: #238636; border: none; border-radius: 6px; color: #fff; font-size: 14px; cursor: pointer; }
+.settings-form button:hover { background: #2ea043; }
+.logs { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px; max-height: 400px; overflow-y: auto; }
+.logs .line { padding: 2px 0; color: #8b949e; }
+.logs .line.info { color: #58a6ff; }
+.logs .line.warn { color: #d29922; }
+.logs .line.error { color: #da3633; }
+.loading { text-align: center; padding: 40px; color: #8b949e; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🛠️ Hermes Admin Panel</h1>
+  <div class="user">
+    <a href="http://100.84.223.96/" style="color:#8b949e;text-decoration:none;margin-right:12px;font-size:13px;">← На Hub</a>
+    <span>{{ current_user.username }}</span>
+    <a href="{{ url_for('setup_2fa') }}">2FA</a>
+    <a href="{{ url_for('logout') }}">Выйти</a>
+  </div>
+</div>
+
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div style="background: #1b3a1d; border: 1px solid #3fb950; border-radius: 6px; padding: 10px; margin-bottom: 16px; font-size: 13px;">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('dashboard')">📊 Дашборд</div>
+    <div class="tab" onclick="switchTab('services')">⚙️ Сервисы</div>
+    <div class="tab" onclick="switchTab('settings')">🔧 Настройки</div>
+    <div class="tab" onclick="switchTab('logs')">📋 Аудит</div>
+  </div>
+
+  <!-- Dashboard Tab -->
+  <div id="tab-dashboard" class="tab-content active">
+    <div class="cards" id="status-cards">
+      <div class="loading">Загрузка...</div>
+    </div>
+  </div>
+
+  <!-- Services Tab -->
+  <div id="tab-services" class="tab-content">
+    <table id="services-table">
+      <thead>
+        <tr><th>Статус</th><th>Сервис</th><th>Uptime</th><th>CPU</th><th>RAM</th><th>Действия</th></tr>
+      </thead>
+      <tbody id="services-body">
+        <tr><td colspan="6" class="loading">Загрузка...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="tab-settings" class="tab-content">
+    <h2 style="font-size: 16px; margin-bottom: 16px; color: #f0f6fc;">⚙️ Настройки проектов</h2>
+    <div class="settings-form" id="settings-form">
+      <div class="loading">Загрузка...</div>
+    </div>
+  </div>
+
+  <!-- Audit Log Tab -->
+  <div id="tab-logs" class="tab-content">
+    <h2 style="font-size: 16px; margin-bottom: 16px; color: #f0f6fc;">📋 Журнал аудита</h2>
+    <div class="logs" id="audit-log">
+      <div class="loading">Загрузка...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[onclick*="${name}"]`).classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'services') loadServices();
+  if (name === 'settings') loadSettings();
+  if (name === 'logs') loadAudit();
+}
+
+async function loadDashboard() {
+  try {
+    const r = await fetch('/api/status');
+    const data = await r.json();
+    const pm2 = data.pm2 || {};
+    const bitget = data.bitget || {};
+    const hh = data.hh_jobs || {};
+    
+    const online = Object.values(pm2).filter(s => s.status === 'online').length;
+    const total = Object.keys(pm2).length;
+    const entries = bitget.entry_prices || [];
+    const avg = entries.length ? entries.reduce((a,b) => a+b, 0) / entries.length : 0;
+    
+    document.getElementById('status-cards').innerHTML = `
+      <div class="card"><h3>PM2 Сервисы</h3><div class="value">${online}/${total}</div><div class="label">в работе</div></div>
+      <div class="card"><h3>Bitget Позиция</h3><div class="value">${bitget.total_quantity || 0} ETH</div><div class="label">@ $${avg.toFixed(2)} | Инвестировано $${(bitget.total_invested || 0).toFixed(2)}</div></div>
+      <div class="card"><h3>Bitget P&L</h3><div class="value ${(bitget.total_profit || 0) >= 0 ? 'green' : 'red'}">$${(bitget.total_profit || 0).toFixed(2)}</div><div class="label">${bitget.total_trades || 0} сделок</div></div>
+      <div class="card"><h3>HH Jobs</h3><div class="value">${hh.total || 0}</div><div class="label">вакансий (${hh.matched || 0} обработано)</div></div>
+      <div class="card"><h3>Система</h3><div class="value">${data.system?.time || '--'}</div><div class="label">${data.system?.date || ''}</div></div>
+      <div class="card"><h3>US Server</h3><div class="value green">🟢</div><div class="label">4 контейнера</div></div>
+    `;
+  } catch(e) {
+    document.getElementById('status-cards').innerHTML = `<div class="card"><h3>Ошибка</h3><div class="value red">!</div><div class="label">${e.message}</div></div>`;
+  }
+}
+
+async function loadServices() {
+  try {
+    const r = await fetch('/api/status');
+    const data = await r.json();
+    const pm2 = data.pm2 || {};
+    
+    let html = '';
+    for (const [name, info] of Object.entries(pm2)) {
+      const statusClass = info.status === 'online' ? 'online' : info.status === 'waiting' ? 'waiting' : 'errored';
+      html += `<tr>
+        <td><span class="status ${statusClass}">${info.status}</span></td>
+        <td>${name}</td>
+        <td>${info.uptime || '--'}</td>
+        <td>${info.cpu || '--'}</td>
+        <td>${info.mem || '--'}</td>
+        <td>
+          <button class="card btn" onclick="serviceAction('${name}', 'restart')">🔄 Restart</button>
+          <button class="card btn red" onclick="serviceAction('${name}', 'stop')">⏹ Stop</button>
+        </td>
+      </tr>`;
+    }
+    document.getElementById('services-body').innerHTML = html;
+  } catch(e) {
+    document.getElementById('services-body').innerHTML = `<tr><td colspan="6" style="color:#da3633;">Ошибка: ${e.message}</td></tr>`;
+  }
+}
+
+async function serviceAction(name, action) {
+  try {
+    const r = await fetch(`/api/services/${name}/${action}`, { method: 'POST' });
+    const data = await r.json();
+    if (data.success) {
+      setTimeout(loadServices, 2000);
+    }
+  } catch(e) {
+    alert('Error: ' + e.message);
+  }
+}
+
+async function loadSettings() {
+  try {
+    const r = await fetch('/api/settings');
+    const data = await r.json();
+    let html = '';
+    for (const [key, value] of Object.entries(data)) {
+      const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      html += `<label for="${key}">${label}</label><input type="text" id="${key}" value="${value}">`;
+    }
+    html += '<button onclick="saveSettings()">💾 Сохранить</button>';
+    document.getElementById('settings-form').innerHTML = html;
+  } catch(e) {
+    document.getElementById('settings-form').innerHTML = `<div style="color:#da3633;">Ошибка: ${e.message}</div>`;
+  }
+}
+
+async function saveSettings() {
+  const inputs = document.querySelectorAll('#settings-form input');
+  const data = {};
+  inputs.forEach(inp => { data[inp.id] = inp.value; });
+  try {
+    const r = await fetch('/api/settings', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+    const result = await r.json();
+    if (result.success) {
+      alert('✅ Настройки сохранены');
+    }
+  } catch(e) {
+    alert('❌ Ошибка: ' + e.message);
+  }
+}
+
+async function loadAudit() {
+  try {
+    const r = await fetch('/api/audit');
+    const entries = await r.json();
+    let html = entries.map(e => 
+      `<div class="line info">[${e.time}] ${e.user} — ${e.action} ${e.details ? '| ' + e.details : ''} ${e.ip ? '(' + e.ip + ')' : ''}</div>`
+    ).join('');
+    if (!html) html = '<div class="line">Нет записей</div>';
+    document.getElementById('audit-log').innerHTML = html;
+  } catch(e) {
+    document.getElementById('audit-log').innerHTML = `<div class="line error">Ошибка: ${e.message}</div>`;
+  }
+}
+
+// Auto-refresh dashboard every 30s
+setInterval(loadDashboard, 30000);
+
+// Load dashboard on page load
+document.addEventListener('DOMContentLoaded', loadDashboard);
+</script>
+</body>
+</html>

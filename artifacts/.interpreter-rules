@@ -1,0 +1,9 @@
+# .interpreter-rules for artifacts
+## Project type
+docs, archive
+## Key files
+# Generated files, exports, results
+## Tech stack
+Markdown, misc
+## Rules
+# Archive only — don't modify production files here

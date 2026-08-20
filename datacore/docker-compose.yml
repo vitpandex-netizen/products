@@ -1,0 +1,240 @@
+# DataCore — единая шина данных и ядро аналитики
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: datacore-pg
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    environment:
+      POSTGRES_DB: datacore
+      POSTGRES_USER: ${PG_USER:-datacore}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-datacore_secret}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-datacore} -d datacore"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - datacore-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: datacore-redis
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - datacore-net
+
+  core-api:
+    build:
+      context: ./core
+      dockerfile: Dockerfile
+    container_name: datacore-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${API_SECRET_KEY:-change_me_in_prod}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "8001:8000"
+    networks:
+      - datacore-net
+
+  collector-polymarket:
+    build:
+      context: ./collectors
+      dockerfile: Dockerfile
+    container_name: datacore-collector-pm
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: python3 -m collectors.collector_polymarket --db postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore --interval 300
+    volumes:
+      - ./:/app
+    networks:
+      - datacore-net
+
+  collector-yahoo:
+    build:
+      context: ./collectors
+      dockerfile: Dockerfile
+    container_name: datacore-collector-yh
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: python3 -m collectors.collector_yahoo --db postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore --interval 120
+    volumes:
+      - ./:/app
+    networks:
+      - datacore-net
+
+  analytics-engine:
+    build:
+      context: ./analytics
+      dockerfile: Dockerfile
+    container_name: datacore-analytics
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: python3 /app/engine.py --db postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore --redis redis://redis:6379/0 --interval 60
+    volumes:
+      - ./analytics:/app
+    networks:
+      - datacore-net
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: datacore-admin
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${API_SECRET_KEY:-change_me_in_prod}
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    networks:
+      - datacore-net
+
+  telegram-bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: datacore-bot
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      TELEGRAM_TOKEN: 8670969484:AAEqfYFXqtPRkuUaZ_G10eNfoM3v5uYbEU0
+      TELEGRAM_CHAT_ID: -1004297012607
+      DATABASE_URL: postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - ./bot:/app
+    networks:
+      - datacore-net
+
+  collector-bitget:
+    build:
+      context: ./collectors
+      dockerfile: Dockerfile
+    container_name: datacore-collector-bg
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - BITGET_API_KEY=bg_b9e97eb2caa9f7f38fb4946e7dce15de
+      - BITGET_SECRET_KEY=81d7ccc1a9be3434d3250c7431a80a808e3da690315f0d6db7a05aaf181395a3
+      - BITGET_PASSPHRASE=interpreter
+      - PYTHONUNBUFFERED=1
+    command: python3 -m collectors.collector_bitget --db postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore --interval 120
+    volumes:
+      - ./:/app
+    networks:
+      - datacore-net
+
+  collector-news:
+    build:
+      context: ./collectors
+      dockerfile: Dockerfile
+    container_name: datacore-collector-news
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: python3 -m collectors.collector_news --db postgresql://${PG_USER:-datacore}:${PG_PASSWORD:-datacore_secret}@postgres:5432/datacore --interval 300
+    volumes:
+      - ./:/app
+    networks:
+      - datacore-net
+
+  polymarket-trader:
+    build:
+      context: ./trader
+      dockerfile: Dockerfile
+    container_name: datacore-trader-pm
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PYTHONUNBUFFERED: 1
+      POLY_PRIVATE_KEY: ${POLY_PRIVATE_KEY:-}
+    command: /app/entrypoint.sh
+    volumes:
+      - ./trader:/app
+    networks:
+      - datacore-net
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: datacore-gateway
+    restart: unless-stopped
+    ports:
+      - "8083:80"
+      - "9091:9090"
+    depends_on:
+      - core-api
+      - admin
+    volumes:
+      - ./gateway/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - datacore-net
+
+volumes:
+  pgdata:
+    name: datacore-pgdata
+  redisdata:
+    name: datacore-redisdata
+
+networks:
+  datacore-net:
+    name: datacore-net

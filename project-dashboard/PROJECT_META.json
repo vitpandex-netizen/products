@@ -1,0 +1,50 @@
+{
+  "my-project": {
+    "name": "🚀 Основной хаб",
+    "description": "Пассивный доход, Telegram боты, Oracle Cloud, мониторинг акций — всё в одном"
+  },
+  "uz-market-bot": {
+    "name": "🤖 UZ Market Bot",
+    "description": "Telegram бот для поиска товаров на рынке Узбекистана (OLX, Uzum)"
+  },
+  "meeting-pipeline": {
+    "name": "🎙 Встречи → Конспекты",
+    "description": "Автоматическая расшифровка и саммари записей встреч"
+  },
+  "transcribe-bot": {
+    "name": "🎧 Transcriber Bot",
+    "description": "Telegram бот для транскрибации голосовых сообщений и аудио"
+  },
+  "transcribe-service": {
+    "name": "🎧 Transcriber API",
+    "description": "Сервис транскрибации (без Telegram интерфейса)"
+  },
+  "agents-toolkit": {
+    "name": "🧰 Agents Toolkit",
+    "description": "Набор готовых инструментов и утилит для AI-агентов"
+  },
+  "it-operations-framework": {
+    "name": "🏢 IT Operations Framework",
+    "description": "Документация и регламенты IT-процессов"
+  },
+  "hermes-webui": {
+    "name": "🌐 Hermes Web UI",
+    "description": "Веб-интерфейс для AI-чата — как Claude, только свой"
+  },
+  "scheduled-skills": {
+    "name": "⏰ Планировщик задач",
+    "description": "Запуск скриптов и навыков по расписанию"
+  },
+  "open-interpreter": {
+    "name": "⚙️ Interpreter Core",
+    "description": "Код и настройки Open Interpreter"
+  },
+  "project-notes": {
+    "name": "📝 Заметки и идеи",
+    "description": "Общие мысли, документация, черновики по проектам"
+  },
+  "artifacts": {
+    "name": "📦 Артефакты",
+    "description": "Сгенерированные файлы, экспорты, отчёты, результаты"
+  }
+}

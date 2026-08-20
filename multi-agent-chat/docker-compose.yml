@@ -1,0 +1,36 @@
+services:
+  multi-agent-chat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multi-agent-chat
+    restart: unless-stopped
+    stop_grace_period: 10s
+    ports:
+      - "5555:5555"
+      - "5556:5556"
+    volumes:
+      - ./data:/app/data
+      - ./certs:/app/certs:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Tashkent
+      - NODE_ENV=production
+      - BEHIND_PROXY=true
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - chat-network
+      - infra-net
+
+networks:
+  chat-network:
+    driver: bridge
+  infra-net:
+    external: true
