@@ -1,0 +1,131 @@
+08-09 23:12:34 [INFO] nofx/main.go:38 ╔════════════════════════════════════════════════════════════╗
+08-09 23:12:34 [INFO] nofx/main.go:39 ║           🚀 NOFX - AI-Powered Trading System              ║
+08-09 23:12:34 [INFO] nofx/main.go:40 ╚════════════════════════════════════════════════════════════╝
+08-09 23:12:34 [INFO] nofx/main.go:46 ✅ Configuration loaded
+08-09 23:12:34 [INFO] nofx/main.go:49 🔐 Initializing encryption service...
+08-09 23:12:34 [INFO] nofx/main.go:55 ✅ Encryption service initialized successfully
+08-09 23:12:34 [INFO] nofx/main.go:71 📋 Initializing database (sqlite)...
+08-09 23:12:35 [INFO] store/store.go:99 ✅ Database initialized (GORM, SQLite)
+08-09 23:12:35 [INFO] nofx/main.go:186 📊 Generated new installation ID: 13da1587...
+08-09 23:12:35 [INFO] nofx/main.go:96 🔑 JWT secret configured
+08-09 23:12:35 [INFO] nofx/main.go:104 📊 Using CoinAnk API for all market data (WebSocket cache disabled)
+08-09 23:12:35 [INFO] manager/trader_manager.go:549 📋 Found 0 users, loading all trader configurations...
+08-09 23:12:35 [INFO] manager/trader_manager.go:563 📋 Total loaded trader configurations: 0
+08-09 23:12:35 [INFO] manager/trader_manager.go:636 ✓ Successfully loaded 0 traders to memory
+08-09 23:12:35 [INFO] nofx/main.go:120 🤖 AI Trader Configurations in Database:
+08-09 23:12:35 [INFO] nofx/main.go:122   (No trader configurations, please create via Web interface)
+08-09 23:12:35 [WARN] api/server.go:92 [CORS] CORS_ALLOWED_ORIGINS not set; defaulting to localhost dev origins only. Set this env var for production.
+08-09 23:12:35 [INFO] api/server.go:691 🌐 API server starting at http://localhost:8080
+08-09 23:12:35 [INFO] api/server.go:692 📊 API Documentation:
+08-09 23:12:35 [INFO] api/server.go:693   • GET  /api/health           - Health check
+08-09 23:12:35 [INFO] api/server.go:694   • GET  /api/traders          - Public AI trader leaderboard top 50 (no auth required)
+08-09 23:12:35 [INFO] api/server.go:695   • GET  /api/competition      - Public competition data (no auth required)
+08-09 23:12:35 [INFO] nofx/main.go:151 ✅ System started successfully, waiting for trading commands...
+08-09 23:12:35 [INFO] nofx/main.go:152 📌 Tip: Use Ctrl+C to stop the system
+08-09 23:12:35 [INFO] api/server.go:696   • GET  /api/top-traders      - Top 5 trader data (no auth required, for performance comparison)
+08-09 23:12:35 [INFO] api/server.go:697   • GET  /api/equity-history?trader_id=xxx - Public return rate historical data (no auth required, for competition)
+08-09 23:12:35 [INFO] api/server.go:698   • GET  /api/equity-history-batch?trader_ids=a,b,c - Batch get historical data (no auth required, performance comparison optimization)
+08-09 23:12:35 [INFO] api/server.go:699   • GET  /api/traders/:id/public-config - Public trader config (no auth required, no sensitive info)
+08-09 23:12:35 [INFO] api/server.go:700   • POST /api/traders          - Create new AI trader
+08-09 23:12:35 [INFO] api/server.go:701   • DELETE /api/traders/:id    - Delete AI trader
+08-09 23:12:35 [INFO] api/server.go:702   • POST /api/traders/:id/start - Start AI trader
+08-09 23:12:35 [INFO] api/server.go:703   • POST /api/traders/:id/stop  - Stop AI trader
+08-09 23:12:35 [INFO] api/server.go:704   • GET  /api/models           - Get AI model config
+08-09 23:12:35 [INFO] api/server.go:705   • PUT  /api/models           - Update AI model config
+08-09 23:12:35 [INFO] api/server.go:706   • GET  /api/exchanges        - Get exchange config
+08-09 23:12:35 [INFO] api/server.go:707   • PUT  /api/exchanges        - Update exchange config
+08-09 23:12:35 [INFO] api/server.go:708   • GET  /api/status?trader_id=xxx     - Specified trader's system status
+08-09 23:12:35 [INFO] api/server.go:709   • GET  /api/account?trader_id=xxx    - Specified trader's account info
+08-09 23:12:35 [INFO] api/server.go:710   • GET  /api/positions?trader_id=xxx  - Specified trader's position list
+08-09 23:12:35 [INFO] api/server.go:711   • GET  /api/decisions?trader_id=xxx  - Specified trader's decision log
+08-09 23:12:35 [INFO] api/server.go:712   • GET  /api/decisions/latest?trader_id=xxx - Specified trader's latest decisions
+08-09 23:12:35 [INFO] api/server.go:713   • GET  /api/statistics?trader_id=xxx - Specified trader's statistics
+08-09 23:12:35 [INFO] api/server.go:714   • GET  /api/performance?trader_id=xxx - Specified trader's AI learning performance analysis
+08-09 23:12:35 [INFO] api/server.go:715 
+08-09 23:36:56 [INFO] api/handler_user.go:366   ✓ Created default strategy: NOFX Claw402 Auto Strategy (active=true)
+08-09 23:36:56 [INFO] api/handler_user.go:219 ✓ User e1d70469-e363-4f19-ba20-df4a637bfcd1 registration completed with default strategies
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_ai_model.go:69 ⚠️ No AI models in database, returning defaults
+08-09 23:37:04 [INFO] store/ai_model.go:284 ✓ Creating new AI model configuration: ID=e1d70469-e363-4f19-ba20-df4a637bfcd1_claw402, Provider=claw402, Name=claw402 AI
+08-09 23:37:04 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:04 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:04 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:09 [ERRO] api/errors.go:51 [Internal Error] Get klines from CoinAnk: coinank API error: http client error
+08-09 23:37:29 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:29 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:29 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:37:29 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:29 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:37:29 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:27 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:27 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:28 [WARN] payment/x402.go:332 ⚠️  [claw402-vergex] Payment expired (402), re-signed and retrying in 3s (2/5)...
+08-09 23:38:30 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:38:30 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:30 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:38:32 [WARN] payment/x402.go:332 ⚠️  [claw402-vergex] Payment expired (402), re-signed and retrying in 6s (3/5)...
+08-09 23:38:39 [WARN] payment/x402.go:332 ⚠️  [claw402-vergex] Payment expired (402), re-signed and retrying in 9s (4/5)...
+08-09 23:38:48 [WARN] api/handler_vergex.go:69 Vergex cost-liquidation-heatmap failed: vergex request failed (/api/v1/vergex/cost-liquidation-heatmap): claw402-vergex payment retry failed (status 429): {"detail":"This wallet submitted repeated invalid payments. Wait, fetch a fresh 402 challenge, and sign new requirements before retrying.","error":"payment_retry_suppressed","help":"https://claw402.ai/llms.txt#payment-troubleshooting","retry_after":51,"retryable":true}
+08-09 23:39:32 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:32 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:33 [WARN] api/handler_vergex.go:69 Vergex cost-liquidation-heatmap failed: vergex request failed (/api/v1/vergex/cost-liquidation-heatmap): claw402-vergex payment retry failed (status 429): {"detail":"This wallet submitted repeated invalid payments. Wait, fetch a fresh 402 challenge, and sign new requirements before retrying.","error":"payment_retry_suppressed","help":"https://claw402.ai/llms.txt#payment-troubleshooting","retry_after":6,"retryable":true}
+08-09 23:39:38 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:38 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:39 [WARN] payment/x402.go:332 ⚠️  [claw402-vergex] Payment expired (402), re-signed and retrying in 3s (2/5)...
+08-09 23:39:39 [INFO] hyperliquid/coins.go:241 ✅ Hyperliquid coin list updated: 232 total coins, top 20 by volume cached
+08-09 23:39:42 [WARN] api/handler_vergex.go:24 Vergex signal-ranking failed: vergex request failed (/api/v1/vergex/signal-ranking): claw402-vergex payment retry failed (status 429): {"detail":"This wallet submitted repeated invalid payments. Wait, fetch a fresh 402 challenge, and sign new requirements before retrying.","error":"payment_retry_suppressed","help":"https://claw402.ai/llms.txt#payment-troubleshooting","retry_after":57,"retryable":true}
+08-09 23:39:46 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:46 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:46 [WARN] api/handler_vergex.go:24 Vergex signal-ranking failed: vergex request failed (/api/v1/vergex/signal-ranking): claw402-vergex payment retry failed (status 429): {"detail":"This wallet submitted repeated invalid payments. Wait, fetch a fresh 402 challenge, and sign new requirements before retrying.","error":"payment_retry_suppressed","help":"https://claw402.ai/llms.txt#payment-troubleshooting","retry_after":53,"retryable":true}
+08-09 23:39:54 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:39:54 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:01 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:01 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:08 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:08 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:09 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:09 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:22 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:22 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:40:22 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:22 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:24 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:24 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:25 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:25 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:40:55 [INFO] api/handler_ai_model.go:143 📝 Received plain text model config (UserID: e1d70469-e363-4f19-ba20-df4a637bfcd1)
+08-09 23:40:55 [WARN] store/ai_model.go:232 ⚠️ Using legacy provider matching to update model: claw402 -> e1d70469-e363-4f19-ba20-df4a637bfcd1_claw402
+08-09 23:40:55 [INFO] manager/trader_manager.go:453 📋 Loading trader configurations for user e1d70469-e363-4f19-ba20-df4a637bfcd1: 0 traders
+08-09 23:40:55 [INFO] api/handler_ai_model.go:239 ✓ AI model config updated: map[claw402:map[api_key: custom_api_url: custom_model_name: enabled:false]]
+08-09 23:40:55 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:40:55 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:41:22 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:22 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:27 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:27 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:41:52 [INFO] api/handler_ai_model.go:59 🔍 Querying AI model configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_ai_model.go:77 ✅ Found 1 AI model configs
+08-09 23:41:52 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:41:52 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:42:08 [INFO] api/handler_exchange.go:124 🔍 Querying exchange configs for user e1d70469-e363-4f19-ba20-df4a637bfcd1
+08-09 23:42:08 [INFO] api/handler_exchange.go:133 ⚠️ No exchanges in database for user e1d70469-e363-4f19-ba20-df4a637bfcd1

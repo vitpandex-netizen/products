@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Project data (databases, logs, cache)
+**/data/*.db
+**/data/*.sqlite
+**/data/*.sqlite3
+logs/
+*.log
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Misc
+.tmp/
+temp/
+
+# extra security
+*.pem
+*.pfx
+*.p12
+credentials*
+secrets/
+graphify-out/cache/
+finanalytics/data/
+buzz-keys.json
+buzz-agents.config.js

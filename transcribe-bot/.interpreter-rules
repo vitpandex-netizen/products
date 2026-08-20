@@ -1,0 +1,10 @@
+# .interpreter-rules for transcribe-bot
+## Project type
+bot, automation
+## Key files
+# bot_api.py, main.py, docker-compose.yml
+## Tech stack
+Python, Docker, Telegram, pm2
+## Rules
+# Telegram bot for transcription
+# pm2-managed

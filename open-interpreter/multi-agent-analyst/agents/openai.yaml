@@ -1,0 +1,10 @@
+# UI metadata for skill list
+display_name: "Multi-Agent Analyst"
+short_description: >
+  Run parallel sub-agents with shared context, structured JSON output,
+  confidence filtering, and cost tracking for multi-source analysis.
+default_prompt: >
+  Use the multi-agent-analyst skill to decompose this analysis into
+  parallel research tasks. Each agent should use the shared context
+  with JSON output format, confidence threshold >= 0.7, and appropriate
+  model routing (cheap model for classification, quality model for decisions).

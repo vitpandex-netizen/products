@@ -1,0 +1,8 @@
+# Stocks-UZ specific ignores
+data/*.db
+logs/
+*.log
+
+.env
+*.key
+vault.enc

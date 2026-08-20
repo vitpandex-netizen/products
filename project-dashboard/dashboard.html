@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Project Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:12px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #21262d;margin-bottom:12px}
+.header h1{font-size:16px;font-weight:600;color:#f0f6fc}.header h1 span{color:#58a6ff}
+.header-stats{display:flex;gap:8px;font-size:11px;color:#8b949e}.stat{display:flex;align-items:center;gap:3px}
+.search-bar{width:100%;padding:6px 10px;margin-bottom:8px;background:#161b22;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;font-size:13px;outline:none}
+.search-bar:focus{border-color:#58a6ff}
+.btn{padding:4px 10px;border-radius:6px;border:1px solid #30363d;background:#21262d;color:#c9d1d9;font-size:10px;cursor:pointer;transition:all .15s;display:inline-block;text-decoration:none}
+.btn:hover{background:#30363d;border-color:#58a6ff}.btn.primary{background:#1f6feb;border-color:#1f6feb;color:#fff}
+.btn.success{border-color:#238636;color:#3fb950}.btn-sm{padding:2px 6px;font-size:9px}
+.actions{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.dashboard-grid{display:grid;grid-template-columns:1fr 320px;gap:12px}@media(max-width:1000px){.dashboard-grid{grid-template-columns:1fr}}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:8px}
+.project-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px;cursor:pointer;transition:all .15s}
+.project-card{cursor:pointer}.project-card:hover{border-color:#58a6ff;background:#1c2128;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.project-card.dirty{border-left:3px solid #d29922}.project-card.clean{border-left:3px solid #238636}.project-card.no-git{border-left:3px solid #8b949e}
+.project-header{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.project-name{font-size:14px;font-weight:600;color:#f0f6fc;cursor:help;flex-shrink:0}
+.project-desc{font-size:10px;color:#8b949e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.project-badge{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.project-badge.green{background:#3fb950}.project-badge.yellow{background:#d29922}.project-badge.red{background:#8b949e}
+.project-meta{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px}
+.tag{font-size:9px;padding:1px 5px;border-radius:8px;background:#1f6feb33;color:#58a6ff;border:1px solid #1f6feb44}
+.tag.rule-tag{background:#23863633;color:#3fb950;border-color:#23863644}
+.project-details{font-size:10px;color:#8b949e;display:flex;flex-direction:column;gap:1px}
+.branch{color:#d2a8ff}.commit{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px;display:inline-block}.time{color:#484f58}
+.dirty-files{margin:4px 0;display:flex;flex-wrap:wrap;gap:2px}
+.dirty-file{font-size:9px;padding:1px 5px;border-radius:4px}
+.dirty-file.modified{background:#d2992222;color:#d29922}.dirty-file.untracked{background:#1f6feb22;color:#58a6ff}
+.project-actions{display:flex;gap:4px;margin-top:6px;padding-top:6px;border-top:1px solid #21262d;opacity:0.7;transition:opacity .15s}
+.project-card:hover .project-actions{opacity:1}
+.panel{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px;margin-bottom:10px}
+.panel h3{font-size:11px;color:#8b949e;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.sys-item{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:11px;border-bottom:1px solid #21262d}
+.sys-item:last-child{border-bottom:none}.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dot.on{background:#3fb950}.dot.off{background:#484f58}
+.sys-name{color:#c9d1d9;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sys-meta{color:#484f58;font-size:10px;white-space:nowrap}
+.stat-row{display:flex;justify-content:space-between;padding:3px 0;font-size:11px;border-bottom:1px solid #21262d}
+.stat-row:last-child{border-bottom:none}.stat-label{color:#8b949e}.stat-value{color:#c9d1d9}
+.chart-section{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px;margin-bottom:12px}
+.chart-section h3{font-size:11px;color:#8b949e;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:800px){.chart-grid{grid-template-columns:1fr}}
+.session-log pre{color:#8b949e;font-family:monospace;white-space:pre-wrap;font-size:9px}
+.toast{position:fixed;bottom:16px;right:16px;padding:8px 16px;border-radius:8px;font-size:12px;background:#238636;color:#fff;display:none;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.toast.error{background:#da3633}.toast.show{display:block;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:100}
+.modal-overlay.show{display:flex;align-items:center;justify-content:center}
+.modal{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:20px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto}
+.modal h2{font-size:15px;margin-bottom:10px}.modal pre{font-size:11px;color:#8b949e;margin:6px 0;white-space:pre-wrap}
+.modal-actions{display:flex;gap:6px;margin-top:12px;justify-content:flex-end}
+.hidden{display:none!important}.last-updated{text-align:right;font-size:10px;color:#484f58;margin-top:4px}
+.metrics-info{font-size:10px;color:#484f58;margin-top:4px}
+</style></head><body>
+<div class="container">
+  <div class="header">
+    <h1>Project Dashboard <span style="font-size:10px;color:#484f58;font-weight:400">v4.0</span></h1>
+    <div class="header-stats">
+      <span class="stat">12 projects</span>
+      <span class="stat"><span class="dot on" style="display:inline-block;vertical-align:middle"></span> 10</span>
+      <span class="stat"><span class="dot" style="display:inline-block;vertical-align:middle;background:#d29922"></span> 1</span>
+      <span class="stat"><span class="dot off" style="display:inline-block;vertical-align:middle"></span> 1</span>
+      <span class="stat">38 points</span>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <h3>Metrics (last 24h)</h3>
+    <div class="chart-grid">
+      <div><svg width="600" height="160" viewBox="0 0 600 160" style="max-width:100%;height:auto;">
+    <rect x="0" y="0" width="600" height="160" fill="transparent"/>
+    <text x="30" y="143" text-anchor="end" fill="#484f58" font-size="9">0</text><line x1="35" y1="140" x2="590" y2="140" stroke="#21262d" stroke-width="0.5"/>
+<text x="30" y="131.63636363636363" text-anchor="end" fill="#484f58" font-size="9">1</text><line x1="35" y1="128.63636363636363" x2="590" y2="128.63636363636363" stroke="#21262d" stroke-width="0.5"/>
+<text x="30" y="120.27272727272728" text-anchor="end" fill="#484f58" font-size="9">2</text><line x1="35" y1="117.27272727272728" x2="590" y2="117.27272727272728" stroke="#21262d" stroke-width="0.5"/>
+<text x="30" y="108.9090909090909" text-anchor="end" fill="#484f58" font-size="9">3</text><line x1="35" y1="105.9090909090909" x2="590" y2="105.9090909090909" stroke="#21262d" stroke-width="0.5"/>
+<text x="30" y="97.54545454545455" text-anchor="end" fill="#484f58" font-size="9">4</text><line x1="35" y1="94.54545454545455" x2="590" y2="94.54545454545455" stroke="#21262d" stroke-width="0.5"/>
+<text x="30" y="86.18181818181819" text-anchor="end" fill="#484f58" font-size="9">5</text><line x1="35" y1="83.18181818181819" x2="590" y2="83.18181818181819" stroke="#21262d" stroke-width="0.5"/><path d="M35,128.63636363636363 L50,140 L65,128.63636363636363 L80,140 L95,128.63636363636363 L110,128.63636363636363 L125,128.63636363636363 L140,128.63636363636363 L155,128.63636363636363 L170,128.63636363636363 L185,128.63636363636363 L200,128.63636363636363 L215,128.63636363636363 L230,128.63636363636363 L245,128.63636363636363 L260,128.63636363636363 L275,128.63636363636363 L290,128.63636363636363 L305,128.63636363636363 L320,128.63636363636363 L335,128.63636363636363 L350,128.63636363636363 L365,128.63636363636363 L380,128.63636363636363 L395,128.63636363636363 L410,128.63636363636363 L425,128.63636363636363 L440,128.63636363636363 L455,128.63636363636363 L470,128.63636363636363 L485,128.63636363636363 L500,128.63636363636363 L515,128.63636363636363 L530,128.63636363636363 L545,128.63636363636363 L560,128.63636363636363 L575,128.63636363636363 L590,128.63636363636363 L590,140 L35,140 Z" fill="#d2992222" stroke="none"/><path d="M35,26.363636363636374 L50,140 L65,26.363636363636374 L80,140 L95,26.363636363636374 L110,26.363636363636374 L125,26.363636363636374 L140,26.363636363636374 L155,26.363636363636374 L170,26.363636363636374 L185,26.363636363636374 L200,26.363636363636374 L215,26.363636363636374 L230,26.363636363636374 L245,26.363636363636374 L260,26.363636363636374 L275,26.363636363636374 L290,26.363636363636374 L305,26.363636363636374 L320,26.363636363636374 L335,26.363636363636374 L350,26.363636363636374 L365,26.363636363636374 L380,26.363636363636374 L395,26.363636363636374 L410,26.363636363636374 L425,26.363636363636374 L440,26.363636363636374 L455,26.363636363636374 L470,26.363636363636374 L485,26.363636363636374 L500,26.363636363636374 L515,26.363636363636374 L530,26.363636363636374 L545,26.363636363636374 L560,26.363636363636374 L575,26.363636363636374 L590,26.363636363636374 L590,140 L35,140 Z" fill="#23863622" stroke="none"/>
+    <path d="M35,128.63636363636363 L50,140 L65,128.63636363636363 L80,140 L95,128.63636363636363 L110,128.63636363636363 L125,128.63636363636363 L140,128.63636363636363 L155,128.63636363636363 L170,128.63636363636363 L185,128.63636363636363 L200,128.63636363636363 L215,128.63636363636363 L230,128.63636363636363 L245,128.63636363636363 L260,128.63636363636363 L275,128.63636363636363 L290,128.63636363636363 L305,128.63636363636363 L320,128.63636363636363 L335,128.63636363636363 L350,128.63636363636363 L365,128.63636363636363 L380,128.63636363636363 L395,128.63636363636363 L410,128.63636363636363 L425,128.63636363636363 L440,128.63636363636363 L455,128.63636363636363 L470,128.63636363636363 L485,128.63636363636363 L500,128.63636363636363 L515,128.63636363636363 L530,128.63636363636363 L545,128.63636363636363 L560,128.63636363636363 L575,128.63636363636363 L590,128.63636363636363" fill="none" stroke="#d29922" stroke-width="1.5"/><path d="M35,26.363636363636374 L50,140 L65,26.363636363636374 L80,140 L95,26.363636363636374 L110,26.363636363636374 L125,26.363636363636374 L140,26.363636363636374 L155,26.363636363636374 L170,26.363636363636374 L185,26.363636363636374 L200,26.363636363636374 L215,26.363636363636374 L230,26.363636363636374 L245,26.363636363636374 L260,26.363636363636374 L275,26.363636363636374 L290,26.363636363636374 L305,26.363636363636374 L320,26.363636363636374 L335,26.363636363636374 L350,26.363636363636374 L365,26.363636363636374 L380,26.363636363636374 L395,26.363636363636374 L410,26.363636363636374 L425,26.363636363636374 L440,26.363636363636374 L455,26.363636363636374 L470,26.363636363636374 L485,26.363636363636374 L500,26.363636363636374 L515,26.363636363636374 L530,26.363636363636374 L545,26.363636363636374 L560,26.363636363636374 L575,26.363636363636374 L590,26.363636363636374" fill="none" stroke="#3fb950" stroke-width="1.5"/>
+    <rect x="45" y="3" width="8" height="8" rx="2" fill="#d29922"/>
+    <text x="57" y="10" fill="#d29922" font-size="9">Dirty (1)</text>
+    <rect x="135" y="3" width="8" height="8" rx="2" fill="#3fb950"/>
+    <text x="147" y="10" fill="#3fb950" font-size="9">Clean (10)</text>
+  </svg></div>
+      <div><svg width="600" height="120" viewBox="0 0 600 120" style="max-width:100%;height:auto;">
+    <rect x="0" y="0" width="600" height="120" fill="transparent"/>
+    <path d="M35,66.90042826552462 L50,19.178265524625274 L65,78.55995717344754 L80,69.8634903640257 L95,59.45663811563169 L110,42.184154175588866 L125,30.5728051391863 L140,34.06584582441114 L155,41.26873661670235 L170,62.82922912205567 L185,34.884903640256965 L200,62.178800856531055 L215,60.10706638115632 L230,22.213597430406864 L245,32.78907922912205 L260,56.517665952890795 L275,23.94807280513919 L290,49.86884368308352 L305,55.65042826552463 L320,28.934689507494653 L335,66.70770877944327 L350,60.347965738758035 L365,62.46788008565311 L380,52.51873661670236 L395,67.74357601713062 L410,10 L425,43.94271948608137 L440,51.62740899357602 L455,47.00214132762313 L470,54.32548179871521 L485,41.53372591006424 L500,53.79550321199144 L515,43.62955032119915 L530,56.44539614561028 L545,52.59100642398287 L560,48.15845824411136 L575,35.80032119914347 L590,48.54389721627409 L590,100 L35,100 Z" fill="#58a6ff22" stroke="none"/><path d="M35,66.90042826552462 L50,19.178265524625274 L65,78.55995717344754 L80,69.8634903640257 L95,59.45663811563169 L110,42.184154175588866 L125,30.5728051391863 L140,34.06584582441114 L155,41.26873661670235 L170,62.82922912205567 L185,34.884903640256965 L200,62.178800856531055 L215,60.10706638115632 L230,22.213597430406864 L245,32.78907922912205 L260,56.517665952890795 L275,23.94807280513919 L290,49.86884368308352 L305,55.65042826552463 L320,28.934689507494653 L335,66.70770877944327 L350,60.347965738758035 L365,62.46788008565311 L380,52.51873661670236 L395,67.74357601713062 L410,10 L425,43.94271948608137 L440,51.62740899357602 L455,47.00214132762313 L470,54.32548179871521 L485,41.53372591006424 L500,53.79550321199144 L515,43.62955032119915 L530,56.44539614561028 L545,52.59100642398287 L560,48.15845824411136 L575,35.80032119914347 L590,48.54389721627409" fill="none" stroke="#58a6ff" stroke-width="1.5"/>
+    <text x="45" y="20" fill="#58a6ff" font-size="9">CPU: 213.6%</text></svg></div>
+      <div><svg width="600" height="120" viewBox="0 0 600 120" style="max-width:100%;height:auto;">
+    <rect x="0" y="0" width="600" height="120" fill="transparent"/>
+    <path d="M35,77.5 L50,77.5 L65,77.5 L80,77.5 L95,77.5 L110,77.5 L125,77.5 L140,77.5 L155,77.5 L170,76.6 L185,76.6 L200,76.6 L215,76.6 L230,76.6 L245,76.6 L260,76.6 L275,76.6 L290,76.6 L305,76.6 L320,76.6 L335,76.6 L350,76.6 L365,76.6 L380,76.6 L395,76.6 L410,76.6 L425,76.6 L440,76.6 L455,76.6 L470,76.6 L485,76.6 L500,76.6 L515,76.6 L530,76.6 L545,76.6 L560,76.6 L575,76.6 L590,76.6 L590,100 L35,100 Z" fill="#3fb95022" stroke="none"/><path d="M35,77.5 L50,77.5 L65,77.5 L80,77.5 L95,77.5 L110,77.5 L125,77.5 L140,77.5 L155,77.5 L170,76.6 L185,76.6 L200,76.6 L215,76.6 L230,76.6 L245,76.6 L260,76.6 L275,76.6 L290,76.6 L305,76.6 L320,76.6 L335,76.6 L350,76.6 L365,76.6 L380,76.6 L395,76.6 L410,76.6 L425,76.6 L440,76.6 L455,76.6 L470,76.6 L485,76.6 L500,76.6 L515,76.6 L530,76.6 L545,76.6 L560,76.6 L575,76.6 L590,76.6" fill="none" stroke="#3fb950" stroke-width="1.5"/>
+    <text x="45" y="20" fill="#3fb950" font-size="9">Disk: 26% (12Gi)</text></svg></div>
+      <div><svg width="600" height="100" viewBox="0 0 600 100" style="max-width:100%;height:auto;">
+    <rect x="0" y="0" width="600" height="100" fill="transparent"/>
+    <path d="M35,38 L50,75.33333333333333 L65,38 L80,75.33333333333333 L95,38 L110,38 L125,38 L140,38 L155,38 L170,38 L185,38 L200,38 L215,38 L230,38 L245,38 L260,38 L275,38 L290,38 L305,38 L320,38 L335,38 L350,38 L365,38 L380,38 L395,38 L410,38 L425,38 L440,38 L455,38 L470,38 L485,38 L500,38 L515,38 L530,38 L545,38 L560,38 L575,38 L590,38" fill="none" stroke="#3fb950" stroke-width="1.5"/>
+    <text x="45" y="20" fill="#3fb950" font-size="9">pm2: 9</text></svg></div>
+    </div>
+    <div class="metrics-info">Collected every 30 min via pm2 | 38 data points</div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="main-col">
+      <input type="text" class="search-bar" placeholder="Search projects..." oninput="filterProjects(this.value)">
+      <div class="actions">
+        <button class="btn primary" onclick="location.reload()">refresh</button>
+        <button class="btn" onclick="window.open('/api/raw-status')">json</button>
+        <button class="btn" onclick="showHelp()">help</button>
+        <span style="flex:1"></span>
+        <span class="last-updated" id="lastUpdated">22:19:33</span>
+      </div>
+      <div class="project-grid" id="projectGrid"><div class="project-card clean" data-dir="scheduled-skills" onclick="window.location.href='file:///Volumes/External/dev/scheduled-skills'">
+      <div class="project-header">
+        <span class="project-name" title="scheduled-skills">⏰ Планировщик задач</span>
+        <span class="project-desc">Запуск скриптов и навыков по расписанию</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">automation, schedule</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">164K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('scheduled-skills')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('scheduled-skills')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="open-interpreter" onclick="window.location.href='file:///Volumes/External/dev/open-interpreter'">
+      <div class="project-header">
+        <span class="project-name" title="open-interpreter">⚙️ Interpreter Core</span>
+        <span class="project-desc">Код и настройки Open Interpreter</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">code, infra</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">328K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('open-interpreter')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('open-interpreter')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="hermes-webui" onclick="window.location.href='file:///Volumes/External/dev/hermes-webui'">
+      <div class="project-header">
+        <span class="project-name" title="hermes-webui">🌐 Hermes Web UI</span>
+        <span class="project-desc">Веб-интерфейс для AI-чата — как Claude, только свой</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">code, web</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">200M</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('hermes-webui')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('hermes-webui')">verify</button>
+      </div>
+    </div>
+<div class="project-card no-git" data-dir="meeting-pipeline" onclick="window.location.href='file:///Volumes/External/dev/meeting-pipeline'">
+      <div class="project-header">
+        <span class="project-name" title="meeting-pipeline">🎙 Встречи → Конспекты</span>
+        <span class="project-desc">Автоматическая расшифровка и саммари записей встреч</span>
+        <span class="project-badge red"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">automation, bot</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">48K</span>
+      </div>
+      
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('meeting-pipeline')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('meeting-pipeline')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="transcribe-service" onclick="window.location.href='file:///Volumes/External/dev/transcribe-service'">
+      <div class="project-header">
+        <span class="project-name" title="transcribe-service">🎧 Transcriber API</span>
+        <span class="project-desc">Сервис транскрибации (без Telegram интерфейса)</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">service, automation</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">172K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('transcribe-service')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('transcribe-service')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="transcribe-bot" onclick="window.location.href='file:///Volumes/External/dev/transcribe-bot'">
+      <div class="project-header">
+        <span class="project-name" title="transcribe-bot">🎧 Transcriber Bot</span>
+        <span class="project-desc">Telegram бот для транскрибации голосовых сообщений и аудио</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">bot, automation</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">272K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="fix: file path handling, simplify docker-compose, add json import">fix: file path handling, simplify docker-compose, add json import</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('transcribe-bot')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('transcribe-bot')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="it-operations-framework" onclick="window.location.href='file:///Volumes/External/dev/it-operations-framework'">
+      <div class="project-header">
+        <span class="project-name" title="it-operations-framework">🏢 IT Operations Framework</span>
+        <span class="project-desc">Документация и регламенты IT-процессов</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">docs, framework</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">1.2M</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="update .interpreter-rules">update .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('it-operations-framework')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('it-operations-framework')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="project-notes" onclick="window.location.href='file:///Volumes/External/dev/project-notes'">
+      <div class="project-header">
+        <span class="project-name" title="project-notes">📝 Заметки и идеи</span>
+        <span class="project-desc">Общие мысли, документация, черновики по проектам</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">docs, notes</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">196K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('project-notes')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('project-notes')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="artifacts" onclick="window.location.href='file:///Volumes/External/dev/artifacts'">
+      <div class="project-header">
+        <span class="project-name" title="artifacts">📦 Артефакты</span>
+        <span class="project-desc">Сгенерированные файлы, экспорты, отчёты, результаты</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">docs, archive</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">480K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('artifacts')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('artifacts')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="uz-market-bot" onclick="window.location.href='file:///Volumes/External/dev/uz-market-bot'">
+      <div class="project-header">
+        <span class="project-name" title="uz-market-bot">🤖 UZ Market Bot</span>
+        <span class="project-desc">Telegram бот для поиска товаров на рынке Узбекистана (OLX, Uzum)</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">bot, automation</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">45M</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="chore: ignore rewrite_run.py">chore: ignore rewrite_run.py</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('uz-market-bot')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('uz-market-bot')">verify</button>
+      </div>
+    </div>
+<div class="project-card clean" data-dir="agents-toolkit" onclick="window.location.href='file:///Volumes/External/dev/agents-toolkit'">
+      <div class="project-header">
+        <span class="project-name" title="agents-toolkit">🧰 Agents Toolkit</span>
+        <span class="project-desc">Набор готовых инструментов и утилит для AI-агентов</span>
+        <span class="project-badge green"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">code, tools</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">728K</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="add .interpreter-rules">add .interpreter-rules</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('agents-toolkit')">files</button>
+        
+        <button class="btn btn-sm" onclick="verifyProject('agents-toolkit')">verify</button>
+      </div>
+    </div>
+<div class="project-card dirty" data-dir="my-project" onclick="window.location.href='file:///Volumes/External/dev/my-project'">
+      <div class="project-header">
+        <span class="project-name" title="my-project">🚀 Основной хаб</span>
+        <span class="project-desc">Пассивный доход, Telegram боты, Oracle Cloud, мониторинг акций — всё в одном</span>
+        <span class="project-badge yellow"></span>
+      </div>
+      <div class="project-meta">
+        <span class="tag">code, automation, bot</span>
+        <span class="tag rule-tag">rules</span>
+        <span class="tag">381M</span>
+      </div>
+      <div class="project-details"><span class="branch">main</span><span class="commit" title="fix: bot username, add finanalytics data to gitignore">fix: bot username, add finanalytics data to gitignore</span><span class="time">2 hours ago</span></div>
+      <div class="dirty-files"><span class="dirty-file untracked">+ buzz-agents.config.js</span><span class="dirty-file untracked">+ buzz-keys.json</span></div>
+      <div class="project-actions">
+        <button class="btn btn-sm" onclick="showFiles('my-project')">files</button>
+        <button class="btn btn-sm success" onclick="commitProject('my-project')">commit</button>
+        <button class="btn btn-sm" onclick="verifyProject('my-project')">verify</button>
+      </div>
+    </div></div>
+    </div>
+    <div class="side-col">
+      <div class="panel"><h3>System</h3>
+        <div class="stat-row"><span class="stat-label">CPU</span><span class="stat-value">344.3%</span></div>
+        <div class="stat-row"><span class="stat-label">Disk</span><span class="stat-value">12Gi / 228Gi (26%)</span></div>
+        <div class="stat-row"><span class="stat-label">Uptime</span><span class="stat-value">1 day</span></div>
+      </div>
+      <div class="panel"><h3>Backup</h3>
+        <div class="stat-row"><span class="stat-label">Last</span><span class="stat-value" style="color:#3fb950">2026-08-09</span></div>
+        <div class="stat-row"><span class="stat-label">Age</span><span class="stat-value" style="color:#8b949e">3h</span></div>
+      </div>
+      <div class="panel"><h3>pm2 (9)</h3><div class="sys-item"><span class="dot on"></span><span class="sys-name">22</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">4</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">5</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">20</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">7</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">8</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">21</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">3</span><span class="sys-meta">default</span></div>
+<div class="sys-item"><span class="dot on"></span><span class="sys-name">12</span><span class="sys-meta">default</span></div></div>
+      <div class="panel"><h3>launchd (7)</h3><div class="sys-item"><span class="dot off"></span><span class="sys-name">hh-jobs</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">watchdog</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">dashboard-update</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">stocks-us</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">stocks-uz</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">passive-income</span><span class="sys-meta">off</span></div>
+<div class="sys-item"><span class="dot off"></span><span class="sys-name">backup-interpreter</span><span class="sys-meta">off</span></div></div>
+      <div class="panel session-log"><h3>Sessions</h3><pre>| 20:00 | infra | Все dirty-репозитории: 10 из 12 грязные — требуют внимания | ⚠️ |
+| 20:10 | infra | Почищены dirty git — 12/12 чисты | ✅ |
+| 20:12 | infra | Дозаполнены .interpreter-rules для всех проектов | ✅ |
+| 20:15 | infra | Дашборд улучшен: кнопки открыть/коммит/проверить, поиск, статус-бар, dirty-files | ✅ |
+| 20:18 | infra | Все коммиты сделаны, gitignore настроены | ✅ |
+| 20:30 | infra | Dashboard v2.1: auto-refresh 30с, pm2/launchd/бэкап статус, боковая панель системы | ✅ |
+| 20:35 | infra | launchd dashboard-update в 17:00 — ежедневное обновление дашборда | ✅ |
+| 20:35 | infra | Дашборд = домашний питомец. Следить постоянно, поддерживать актуальным | ✅ |
+| 21:00 | infra | Dashboard v3.0: SVG-графики dirty/clean, CPU, диск, pm2 за 24ч | ✅ |
+| 21:00 | infra | Metrics collector: launchd каждые 30 мин, история 30 дней | ✅ |
+| 21:00 | infra | Дашборд = полноценный мониторинговый инструмент | ✅ |
+| 21:10 | infra | Dashboard v3.5: встроенный сборщик метрик в pm2 (каждые 30 мин), без launchd | ✅ |
+| 21:10 | infra | Проблема launchd → pm2: launchd не имеет доступа к /Volumes/External, pm2 работает | ✅ |
+| 21:10 | infra | 4 графика: dirty/clean, CPU, диск, pm2 — исторические тренды за 24ч | ✅ |
+| 21:20 | infra | PROJECT_META.json — человеческие названия и описания для всех 12 проектов | ✅ |
+| 21:20 | infra | Дашборд v3.6: friendly name + описание на каждой карточке | ✅ |
+| 21:20 | infra | PROJECTS.md обновлён с человеческими названиями | ✅ |
+| 21:35 | infra | Dashboard v4.0: кликабельные карточки, клик → открывает проект в Interpreter | ✅ |
+| 21:35 | infra | API /api/start/<name> — открывает вкладку + пишет active-project.txt | ✅ |
+| 21:35 | infra | start-project.sh — скрипт на внутреннем диске для открытия проекта | ✅ |</pre></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="modal"><div class="modal"><h2 id="modalTitle">...</h2><pre id="modalBody"></pre><div class="modal-actions"><button class="btn" onclick="closeModal()">Close</button></div></div></div>
+<script>
+
+function showFiles(name) {
+  fetch('/api/open/' + name).then(r => r.json()).then(d => {
+    document.getElementById('modalTitle').textContent = name;
+    document.getElementById('modalBody').textContent = d.files.join('\n');
+    document.getElementById('modal').className = 'modal-overlay show';
+  });
+}
+function commitProject(name) {
+  showToast('Committing...');
+  fetch('/api/commit/' + name).then(r => r.json()).then(d => {
+    showToast(d.message, d.error);
+    setTimeout(() => location.reload(), 1500);
+  });
+}
+function verifyProject(name) {
+  showToast('Verifying...');
+  fetch('/api/verify/' + name).then(r => r.json()).then(d => {
+    document.getElementById('modalTitle').textContent = 'Verify: ' + name;
+    document.getElementById('modalBody').textContent = d.result;
+    document.getElementById('modal').className = 'modal-overlay show';
+  });
+}
+function filterProjects(q) {
+  const ql = q.toLowerCase();
+  document.querySelectorAll('.project-card').forEach(c => {
+    c.style.display = c.dataset.dir.includes(ql) ? '' : 'none';
+  });
+}
+function showToast(m, e) {
+  const t = document.getElementById('toast');
+  t.textContent = m; t.className = 'toast show' + (e ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 3000);
+}
+function closeModal() { document.getElementById('modal').className = 'modal-overlay'; }
+function showHelp() {
+  document.getElementById('modalTitle').textContent = 'How to use';
+  document.getElementById('modalBody').textContent = 
+    'Click on a project card -> opens in Interpreter, I start working\n' +
+    'files -> show project files\n' +
+    'commit -> git add + commit\n' +
+    'verify -> check git status + python syntax\n' +
+    'refresh -> reload\n' +
+    'json -> raw API data\n' +
+    '\nAuto-refresh: 30s\nMetrics: every 30 min\nDaily update: 17:00\nBackup: 18:00';
+  document.getElementById('modal').className = 'modal-overlay show';
+}
+
+</script></body></html>

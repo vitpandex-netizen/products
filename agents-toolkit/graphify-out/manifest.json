@@ -1,0 +1,82 @@
+{
+  "batch_processor.py": {
+    "mtime": 1785064046.8884804,
+    "ast_hash": "c316a46c152b7af3a8bcfc4b6926624a",
+    "semantic_hash": "c316a46c152b7af3a8bcfc4b6926624a"
+  },
+  "cost_tracker.py": {
+    "mtime": 1785062792.8421612,
+    "ast_hash": "04c33d9f3c1e61f30008e2d043db1eda",
+    "semantic_hash": "04c33d9f3c1e61f30008e2d043db1eda"
+  },
+  "optimization_advanced.py": {
+    "mtime": 1785064013.2040577,
+    "ast_hash": "bdfe2462e2786377f26857c8cd6f3791",
+    "semantic_hash": "bdfe2462e2786377f26857c8cd6f3791"
+  },
+  "optimizer_config.py": {
+    "mtime": 1785062783.0163734,
+    "ast_hash": "aa968a2f5004cb0432e22ef24bb9fbc6",
+    "semantic_hash": "aa968a2f5004cb0432e22ef24bb9fbc6"
+  },
+  "prompt_optimizer.py": {
+    "mtime": 1785070685.6236002,
+    "ast_hash": "5ac12cf46e7dfc7bf5a1b432745de0a1",
+    "semantic_hash": "5ac12cf46e7dfc7bf5a1b432745de0a1"
+  },
+  "run_all.py": {
+    "mtime": 1785062426.3609557,
+    "ast_hash": "617a6e87ff646c9a930edb79b3515c3c",
+    "semantic_hash": "617a6e87ff646c9a930edb79b3515c3c"
+  },
+  "task_1_hh_jobs.py": {
+    "mtime": 1785062815.057015,
+    "ast_hash": "0b5773654030de594905503239b30e94",
+    "semantic_hash": "0b5773654030de594905503239b30e94"
+  },
+  "task_2_stocks_local.py": {
+    "mtime": 1785062808.4109094,
+    "ast_hash": "49e3853553d467ce70678961d7f7e1fc",
+    "semantic_hash": "49e3853553d467ce70678961d7f7e1fc"
+  },
+  "task_3_stocks_usa.py": {
+    "mtime": 1785062811.9966993,
+    "ast_hash": "cb63089d48d2bd3424f5edb319d77009",
+    "semantic_hash": "cb63089d48d2bd3424f5edb319d77009"
+  },
+  "task_4_world_events.py": {
+    "mtime": 1785062799.6063948,
+    "ast_hash": "b7f97399e112475b48490d6d07f71a8f",
+    "semantic_hash": "b7f97399e112475b48490d6d07f71a8f"
+  },
+  "task_5_education.py": {
+    "mtime": 1785064021.675873,
+    "ast_hash": "c0c05609d0f41eee8fcaa7d443c829e7",
+    "semantic_hash": "c0c05609d0f41eee8fcaa7d443c829e7"
+  },
+  "task_6_confidential.py": {
+    "mtime": 1785062381.903073,
+    "ast_hash": "9e572c0b3785a9077d4c3d1b698f4af1",
+    "semantic_hash": "9e572c0b3785a9077d4c3d1b698f4af1"
+  },
+  "task_7_passive_income.py": {
+    "mtime": 1785062802.7826457,
+    "ast_hash": "6419dd80d269826310d3afec99280f3f",
+    "semantic_hash": "6419dd80d269826310d3afec99280f3f"
+  },
+  "task_8_finances.py": {
+    "mtime": 1785062805.4681284,
+    "ast_hash": "5967d6b6025395e7f50f8c7c01ee8cbe",
+    "semantic_hash": "5967d6b6025395e7f50f8c7c01ee8cbe"
+  },
+  "OPTIMIZED_SYSTEM_PROMPT.md": {
+    "mtime": 1785070666.774739,
+    "ast_hash": "db47c7c1c653f6f01dfc3784138aa84f",
+    "semantic_hash": "db47c7c1c653f6f01dfc3784138aa84f"
+  },
+  "README.md": {
+    "mtime": 1785062453.9846408,
+    "ast_hash": "94263b4968906df185e231063c8f3ad3",
+    "semantic_hash": "94263b4968906df185e231063c8f3ad3"
+  }
+}

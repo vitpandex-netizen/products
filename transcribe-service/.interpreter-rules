@@ -1,0 +1,9 @@
+# .interpreter-rules for transcribe-service
+## Project type
+service, automation
+## Key files
+# Transcription service (no Telegram)
+## Tech stack
+Python
+## Rules
+# Service-only, no bot interface

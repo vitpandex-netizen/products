@@ -1,0 +1,348 @@
+🚀 HERMES: HH-Jobs Parser MVP - БОЕВОЕ ЗАДАНИЕ
+
+═════════════════════════════════════════════════════════════════════
+
+ПРОЕКТ: Автоматизация поиска работы на HH.uz
+СТАТУС: MVP (Core функционал)
+ДЕДЛАЙН: 48 часов
+ПРИОРИТЕТ: ВЫСОКИЙ
+
+═════════════════════════════════════════════════════════════════════
+
+КОНТЕКСТ:
+─────────
+Кандидат: IT Infrastructure Engineer с 19 годами опыта
+Ищет позиции в Ташкенте (офис/гибрид/удаленка)
+Зарплата: $4,500-6,000 net
+Специализация: Построение и сопровождение IT инфраструктуры
+
+Позиции которые ищу:
+- IT Infrastructure Engineer
+- Senior System Administrator
+- IT Manager / Head of IT
+- Network Engineer
+- System Engineer
+- IT Operations Engineer
+- Infrastructure Specialist
+
+Опыт (19 лет):
+- Виртуализация: VMware, Hyper-V, Proxmox
+- ОС: Windows Server, Linux, Active Directory
+- Мониторинг: Zabbix
+- Microsoft 365, сетевые инфраструктуры
+- SCADA, видеонаблюдение, Service Desk
+- Управление командами до 28 человек
+- Поддержка 400+ пользователей в 17+ филиалах
+- Отрасли: Fintech, Healthcare, Retail, Oil&Gas, Industrial
+
+НЕ рассматривает:
+- Госструктуры
+- Роли с участием в закупочных комитетах
+- Компании требующие переезда
+
+═════════════════════════════════════════════════════════════════════
+
+ЗАДАЧА:
+───────
+Реализовать MVP парсера вакансий HH.uz с анализом совпадения профиля.
+
+ЧТО СОЗДАВАТЬ:
+1. hh-jobs/src/hh_parser.py
+2. hh-jobs/src/matcher.py
+3. hh-jobs/src/responder.py
+4. Обновить hh-jobs/src/main.py
+
+═════════════════════════════════════════════════════════════════════
+
+ДЕТАЛИ РЕАЛИЗАЦИИ:
+──────────────────
+
+1️⃣  HH_PARSER.PY (Парсинг вакансий)
+────────────────────────────────────
+
+Что делает:
+- Подключается к HH API (https://api.hh.uz/api/v2)
+- Парсит вакансии по критериям из .env
+- Сохраняет в SQLite БД
+- Возвращает List[Vacancy]
+
+Параметры поиска (из .env):
+{
+  "text": "IT Infrastructure Engineer, Senior System Administrator, ...",
+  "area": 110,  # Узбекистан
+  "salary_from": 45000000  # ~$4,500 USD
+}
+
+Функции:
+```python
+class HHParser:
+    def __init__(self, api_token=None):
+        self.base_url = "https://api.hh.uz/api/v2"
+        self.session = requests.Session()
+
+    def search(self, keywords: str, min_salary: int) -> List[Vacancy]:
+        """Парсить вакансии и сохранить в БД"""
+        # GET /vacancies?text=...&area=110&salary_from=45000000
+        # Вернуть список Vacancy объектов
+        pass
+```
+
+Используемые класс и функции:
+- from shared.models import Vacancy  # Модель уже готова
+- from shared.db import Database     # БД утилиты готовы
+
+Поля Vacancy:
+- id, title, company, url
+- salary_from, salary_to
+- description, skills
+- experience (требуемый опыт)
+- employment_type
+- created_at
+
+Исключить:
+- Вакансии содержащие: "government", "procurement", "tender", "госструктура"
+
+═════════════════════════════════════════════════════════════════════
+
+2️⃣  MATCHER.PY (Анализ совпадения)
+──────────────────────────────────
+
+Что делает:
+- Получает профиль из .env
+- Считает score совпадения (0.0 - 1.0)
+- Возвращает MatchResult
+
+Профиль:
+```python
+profile = {
+  "skills": ["VMware", "Hyper-V", "Proxmox", "M365", "Zabbix", ...],
+  "experience_years": 19,
+  "preferred_salary": 4500,  # USD
+  "industries": ["Fintech", "Healthcare", "Retail", "Oil&Gas", ...],
+  "locations": ["Tashkent"]
+}
+```
+
+Функции:
+```python
+class VacancyMatcher:
+    def __init__(self, profile: dict):
+        self.profile = profile
+
+    def calculate_match(self, vacancy: Vacancy) -> MatchResult:
+        """Считать score и вернуть результат"""
+        # Сравнить:
+        # 1. Skills overlap (weight 0.5)
+        # 2. Salary match (weight 0.3)
+        # 3. Experience match (weight 0.2)
+        # Вернуть MatchResult(score, reasons)
+        pass
+```
+
+Алгоритм scoring:
+- Skills: Сколько из MY_SKILLS совпало с требуемыми? (0-1)
+- Salary: Зарплата >= MIN_SALARY? (boolean)
+- Experience: Требуемый опыт <= 19 лет? (boolean)
+- Final: skills*0.5 + (salary?0.3:0) + (experience?0.2:0)
+
+Минимум для отправки ответа: score >= 0.70
+
+═════════════════════════════════════════════════════════════════════
+
+3️⃣  RESPONDER.PY (Отправка ответов)
+────────────────────────────────────
+
+Что делает:
+- Отправляет ответы на вакансии через HH API
+- Логирует результаты
+
+Функции:
+```python
+class Responder:
+    def __init__(self, hh_user_id: str):
+        self.user_id = hh_user_id
+        self.base_url = "https://api.hh.uz/api/v2"
+
+    def respond(self, vacancy_id: int, text: str = "") -> bool:
+        """Отправить ответ на вакансию"""
+        # POST /vacancy/{vacancy_id}/responses
+        # Текст ответа из .env RESPONSE_TEXT
+        # Вернуть True/False
+        pass
+```
+
+Для MVP можно мокировать (pretend отправка):
+```python
+def respond(self, vacancy_id: int, text: str = "") -> bool:
+    logger.info(f"✅ Would respond to vacancy {vacancy_id}")
+    return True  # Для MVP достаточно
+```
+
+═════════════════════════════════════════════════════════════════════
+
+4️⃣  MAIN.PY (Основной цикл)
+───────────────────────────
+
+Что делает:
+- Инициализирует парсер, матчер, ответчик
+- Запускает основной цикл
+- Логирует процесс
+
+Структура:
+```python
+def main():
+    # 1. Загрузить конфиги
+    # 2. Парсить вакансии
+    vacancies = parser.search(keywords, min_salary)
+    logger.info(f"Found {len(vacancies)} vacancies")
+
+    # 3. Матчить
+    matches = [matcher.calculate_match(v) for v in vacancies]
+    good = [m for m in matches if m.is_good_match()]
+    logger.info(f"Matched {len(good)} vacancies")
+
+    # 4. Отправить ответы
+    for match in good:
+        if responder.respond(match.vacancy.id):
+            logger.info(f"✅ Responded to {match.vacancy.title} at {match.vacancy.company}")
+
+    logger.info("Done!")
+```
+
+═════════════════════════════════════════════════════════════════════
+
+ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ:
+──────────────────────
+
+📦 Зависимости:
+- requests
+- python-dotenv
+- shared/db.py (используй Database класс)
+- shared/models.py (используй Vacancy, MatchResult)
+
+🗄️  База данных:
+- SQLite в data/hh.db
+- Таблица vacancies (id, title, company, url, salary_from, salary_to, matched_score, responded_at, created_at)
+- Используй Database.execute_insert() для сохранения
+
+📝 Логирование:
+- logs/hh-jobs.log
+- Используй logging из Python
+- Форматы: INFO (основное), ERROR (ошибки), DEBUG (для тестирования)
+
+✅ Тестирование:
+- Парсить минимум 10 вакансий
+- Matcher: test perfect match = 1.0, no match = 0.0, partial = 0.5+
+- main.py: должно запуститься без ошибок
+
+═════════════════════════════════════════════════════════════════════
+
+ФАЙЛЫ И ПУТИ:
+─────────────
+
+Основные:
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/MVP.md (Полное ТЗ)
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/.env (Конфиг - УЖЕ ЗАПОЛНЕН)
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/requirements.txt
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/src/
+
+Shared:
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/shared/db.py (Database класс)
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/shared/models.py (Vacancy, MatchResult)
+
+═════════════════════════════════════════════════════════════════════
+
+ПОРЯДОК РАЗРАБОТКИ:
+──────────────────
+
+1. Напиши hh_parser.py (критичный путь)
+   - Подключись к API
+   - Парсь 5-10 вакансий
+   - Сохрани в БД
+   - Протестируй вручную
+
+2. Напиши matcher.py
+   - Реализуй scoring алгоритм
+   - Протестируй на 5 вакансиях
+
+3. Напиши responder.py
+   - Для MVP можно мокировать
+
+4. Обнови main.py
+   - Собери всё вместе
+   - Запусти end-to-end
+
+5. Git commits:
+   git add hh_parser.py && git commit -m "feat: implement HH parser"
+   git add matcher.py && git commit -m "feat: implement vacancy matcher"
+   git add responder.py && git commit -m "feat: implement responder"
+   git add src/main.py && git commit -m "feat: complete MVP main loop"
+
+═════════════════════════════════════════════════════════════════════
+
+ЗАПУСК И ТЕСТИРОВАНИЕ:
+─────────────────────
+
+1. Подготовка:
+cd /Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+2. Запуск:
+python src/main.py
+
+3. Проверка результатов:
+ls -la data/hh.db
+tail -50 logs/hh-jobs.log
+sqlite3 data/hh.db "SELECT title, company, salary_from FROM vacancies LIMIT 10;"
+
+═════════════════════════════════════════════════════════════════════
+
+КРИТЕРИИ УСПЕХА MVP:
+───────────────────
+
+✅ hh_parser.py:
+  - Парсит минимум 10 вакансий
+  - Сохраняет в БД
+  - Логирует процесс
+
+✅ matcher.py:
+  - Считает score (0.0-1.0)
+  - Perfect match = 1.0
+  - No match = 0.0
+  - Логирует результат
+
+✅ responder.py:
+  - Функция respond() работает
+  - Логирует ответы
+
+✅ main.py:
+  - Запускается без ошибок
+  - Полный цикл: parse → match → respond
+  - Логи пишутся корректно
+
+✅ БД:
+  - data/hh.db создана
+  - Таблица vacancies заполнена
+
+✅ Git:
+  - Все файлы закоммичены
+  - Коммит-сообщения информативны
+
+═════════════════════════════════════════════════════════════════════
+
+ПОМОЩЬ И ВОПРОСЫ:
+────────────────
+
+Если не понимаешь что-то:
+- Смотри /Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/MVP.md (полное описание)
+- Гугли "HH API Python" или "requests library Python"
+- Спроси вопрос в чате
+
+═════════════════════════════════════════════════════════════════════
+
+ДЕДЛАЙН: 48 ЧАСОВ
+СТАТУС: НАЧИНАЙ
+
+Удачи! 🚀

@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ghscout-pg
+    environment:
+      POSTGRES_DB: ghscout
+      POSTGRES_USER: ghscout
+      POSTGRES_PASSWORD: ghscout_pass
+    volumes:
+      - ghscout_pgdata:/var/lib/postgresql/data
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ghscout_net
+      - datacore-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ghscout"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: ghscout-redis
+    volumes:
+      - ghscout_redisdata:/data
+    networks:
+      - ghscout_net
+      - datacore-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  core:
+    build: .
+    container_name: ghscout-core
+    env_file: .env
+    ports:
+      - "8005:8005"
+    networks:
+      - ghscout_net
+      - datacore-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  collector:
+    build: .
+    container_name: ghscout-collector
+    env_file: .env
+    command: python -m collectors.runner
+    networks:
+      - ghscout_net
+      - datacore-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  ghscout_net:
+    driver: bridge
+  datacore-net:
+    external: true
+
+volumes:
+  ghscout_pgdata:
+  ghscout_redisdata:

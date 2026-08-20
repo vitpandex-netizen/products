@@ -1,0 +1,17 @@
+# Секреты — никогда в Git
+.env
+*.env
+.env.*
+!*.env.example
+secrets.vault
+.vault_env.*
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Служебные папки
+.DS_Store
+*.log

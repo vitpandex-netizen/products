@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Portfolio Dashboard",
+  "schemaVersion": 1,
+  "description": "Дашборд портфеля Виталия v2: SPCXx алерты, детектор просадок DCA (2%+), трекер долга, ежедневный P&L график, NYSE статус, DCA-календарь, стратегия."
+}
+</script>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфель — Виталий</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --border: #e8eaed;
+  --text: #1a1a2e;
+  --muted: #8a8fa8;
+  --green: #1a8a4a;
+  --green-bg: #eaf7ef;
+  --red: #c0392b;
+  --red-bg: #fdf2f1;
+  --orange: #d97706;
+  --orange-bg: #fffbeb;
+  --blue: #1d6fb8;
+  --blue-bg: #eff6ff;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 14px; font-size: 13px; line-height: 1.4; }
+
+/* ── CARDS ── */
+.card { background: var(--card); border-radius: 14px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 1px 8px rgba(0,0,0,.04); margin-bottom: 12px; }
+.card-title { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px; }
+
+/* ── HEADER ── */
+.header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.h-left h1 { font-size: 18px; font-weight: 800; }
+.h-left .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.h-right { display: flex; gap: 12px; align-items: center; }
+.clock-block { text-align: right; }
+.clock { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+.datestr { font-size: 11px; color: var(--muted); }
+.nyse-pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.nyse-open { background: var(--green-bg); color: var(--green); }
+.nyse-pre { background: var(--blue-bg); color: var(--blue); }
+.nyse-after { background: var(--orange-bg); color: var(--orange); }
+.nyse-closed { background: #f3f4f6; color: var(--muted); }
+
+/* ── DCA BANNER ── */
+.dca-banner { border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; margin-bottom: 12px; }
+.dca-aapl { background: var(--blue-bg); color: var(--blue); border: 1.5px solid #bfdbfe; }
+.dca-spy  { background: var(--green-bg); color: var(--green); border: 1.5px solid #a7f3d0; }
+.dca-none { background: #f9fafb; color: var(--muted); border: 1.5px solid var(--border); }
+
+/* ── ALERTS ── */
+.alert { border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px; font-size: 13px; font-weight: 600; }
+.alert-danger  { background: var(--red-bg);    color: var(--red);    border: 1.5px solid #fca5a5; }
+.alert-success { background: var(--green-bg);  color: var(--green);  border: 1.5px solid #86efac; }
+.alert-warn    { background: var(--orange-bg); color: var(--orange); border: 1.5px solid #fcd34d; }
+.alert-dip     { background: var(--purple-bg); color: var(--purple); border: 1.5px solid #c4b5fd; }
+
+/* ── SPCX CARD ── */
+.spcx-price-row { display: flex; align-items: baseline; gap: 10px; margin: 8px 0 14px; }
+.spcx-big { font-size: 30px; font-weight: 900; }
+.spcx-pct { font-size: 17px; font-weight: 700; }
+.g { color: var(--green); } .r { color: var(--red); } .m { color: var(--muted); }
+
+.spcx-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; }
+.inp-price { flex: 1; padding: 9px 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 16px; font-weight: 700; text-align: center; outline: none; transition: border-color .2s; }
+.inp-price:focus { border-color: var(--blue); }
+
+.levels { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 12px; }
+.lv { border-radius: 9px; padding: 9px 8px; text-align: center; }
+.lv-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 2px; }
+.lv-price { font-size: 15px; font-weight: 900; }
+.lv-pct   { font-size: 10px; margin-top: 1px; opacity: .75; }
+.lv-stop   { background: #fee2e2; color: #991b1b; }
+.lv-entry  { background: #ede9fe; color: #5b21b6; }
+.lv-t1     { background: #dbeafe; color: #1e40af; }
+.lv-t2     { background: #dcfce7; color: #166534; }
+
+/* Progress bar */
+.bar-wrap { margin-top: 4px; }
+.bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-bottom: 5px; }
+.bar-track { height: 10px; border-radius: 5px; background: linear-gradient(to right, #fca5a5 0%,#fca5a5 18%, #c4b5fd 18%,#c4b5fd 35%, #93c5fd 35%,#93c5fd 70%, #86efac 70%,#86efac 100%); position: relative; }
+.bar-dot { position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%; background: #1a1a2e; border: 2.5px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.35); transform: translate(-50%,-50%); transition: left .4s ease; }
+.bar-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 7px; }
+.spcx-badge { display: inline-block; padding: 3px 11px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.badge-hold { background: var(--orange-bg); color: var(--orange); }
+.badge-sell { background: var(--green-bg);  color: var(--green); }
+.badge-stop { background: var(--red-bg);    color: var(--red); }
+
+/* ── STATS ROW ── */
+.stats-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 12px; }
+.stat-card { background: var(--card); border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.07); }
+.stat-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 4px; }
+.stat-val { font-size: 22px; font-weight: 900; }
+.stat-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.stat-green { color: var(--green); }
+.stat-red   { color: var(--red); }
+.stat-blue  { color: var(--blue); }
+
+/* ── DEBT TRACKER ── */
+.debt-inputs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.debt-inputs > div { flex: 1; min-width: 120px; }
+.debt-inputs label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; font-weight: 600; }
+.field { width: 100%; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-weight: 600; outline: none; transition: border-color .2s; font-family: inherit; }
+.field:focus { border-color: var(--blue); }
+.debt-bar-wrap { margin: 8px 0; }
+.debt-bar-track { height: 12px; background: #f3f4f6; border-radius: 6px; overflow: hidden; }
+.debt-bar-fill  { height: 100%; border-radius: 6px; background: linear-gradient(to right, #34d399, #059669); transition: width .6s ease; }
+.debt-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 5px; }
+.debt-summary { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.debt-chip { flex: 1; min-width: 100px; background: #f9fafb; border-radius: 9px; padding: 10px 12px; text-align: center; }
+.debt-chip .dc-val { font-size: 18px; font-weight: 800; }
+.debt-chip .dc-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; }
+
+/* ── PORTFOLIO TABLE ── */
+.port-table { width: 100%; border-collapse: collapse; }
+.port-table th { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; padding: 4px 6px 8px; border-bottom: 2px solid var(--border); text-align: right; }
+.port-table th:first-child { text-align: left; }
+.port-table td { padding: 5px 6px; border-bottom: 1px solid #f5f6f8; vertical-align: middle; }
+.port-table td:not(:first-child) { text-align: right; }
+.port-table tr:hover td { background: #fafbfc; }
+.port-table tr:last-child td { border-bottom: none; }
+.section-sep td { background: #f9fafb; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; padding: 6px 6px 4px; border-bottom: none; }
+.ticker { font-weight: 700; font-size: 13px; }
+.note-tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 4px; margin-left: 4px; font-weight: 600; vertical-align: middle; }
+.tag-sell { background: #fee2e2; color: #991b1b; }
+.tag-add  { background: #dbeafe; color: #1e40af; }
+.tag-care { background: #fff7ed; color: #9a3412; }
+.mini-inp { width: 72px; padding: 4px 6px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 12px; font-weight: 600; text-align: right; outline: none; font-family: inherit; transition: border-color .2s; }
+.mini-inp:focus { border-color: var(--blue); background: #eff6ff; }
+.pnl-g { color: var(--green); font-weight: 700; }
+.pnl-r { color: var(--red);   font-weight: 700; }
+.pnl-m { color: var(--muted); }
+.dip-flag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
+.dip-buy  { background: var(--purple-bg); color: var(--purple); }
+.dip-drop { background: #fef3c7; color: #92400e; }
+.dip-ok   { color: var(--muted); font-size: 11px; }
+
+/* ── CHART ── */
+.chart-wrap { position: relative; height: 180px; }
+
+/* ── PNL HISTORY ── */
+.pnl-history-controls { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 12px; }
+.pnl-history-controls > div { flex: 1; min-width: 120px; }
+
+/* ── STRATEGY ── */
+.strategy-list { display: flex; flex-direction: column; gap: 8px; }
+.si { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; }
+.si-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.si-text strong { color: var(--text); }
+.si-text { color: #444; line-height: 1.5; }
+
+/* ── BUTTONS ── */
+.btn { padding: 8px 14px; border-radius: 9px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; transition: opacity .15s; }
+.btn:hover { opacity: .85; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-green   { background: var(--green); color: #fff; }
+.btn-ghost   { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-red     { background: var(--red); color: #fff; }
+.btn-sm { padding: 5px 10px; font-size: 11px; }
+
+.save-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.saved-ts { font-size: 11px; color: var(--muted); }
+.footer { text-align: center; font-size: 11px; color: #ccc; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="card header">
+  <div class="h-left">
+    <h1>📊 Портфель Виталия</h1>
+    <div class="sub">Telegram Wallet · с 9 марта 2026 · Ташкент UTC+5</div>
+  </div>
+  <div class="h-right">
+    <div id="nysePill" class="nyse-pill nyse-closed">⏸ NYSE закрыта</div>
+    <div class="clock-block">
+      <div class="clock" id="clock">--:--:--</div>
+      <div class="datestr" id="dateStr">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DCA BANNER ═══ -->
+<div id="dcaBanner" class="dca-banner dca-none">
+  <span>📅</span><span id="dcaText">Загрузка…</span>
+</div>
+
+<!-- ═══ ИМПОРТ ИЗ БРИФИНГА ═══ -->
+<div class="card" id="importCard" style="border: 2px dashed #c4b5fd; background: var(--purple-bg);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <div class="card-title" style="margin-bottom:0;color:var(--purple);">📡 Импорт цен из брифинга</div>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importCard').style.display='none'">✕</button>
+  </div>
+  <p style="font-size:11px;color:var(--purple);margin-bottom:8px;opacity:.8;">Скопируй строку цен из брифинга (9:00 / 14:00 / 21:00) и вставь сюда — все цены заполнятся автоматически.</p>
+  <div style="display:flex;gap:8px;align-items:stretch;">
+    <textarea id="importInput" placeholder="SPCX:213.50|AAPL:185.00|NVDA:132.00|BTC:105000|TON:3.85|..." style="flex:1;padding:8px 10px;border:1.5px solid #c4b5fd;border-radius:9px;font-size:12px;font-family:monospace;resize:vertical;min-height:52px;outline:none;background:#fff;"></textarea>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <button class="btn btn-primary" style="background:var(--purple);flex:1;" onclick="applyImport()">✅ Применить</button>
+      <button class="btn btn-ghost btn-sm" style="border-color:var(--purple);color:var(--purple);" onclick="shiftDay()">📅 Сдвинуть день</button>
+    </div>
+  </div>
+  <div id="importResult" style="font-size:11px;margin-top:6px;"></div>
+</div>
+
+<!-- ═══ ALERTS ═══ -->
+<div id="alertsBox"></div>
+
+<!-- ═══ SPCX CARD ═══ -->
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+    <div>
+      <div style="font-size:15px;font-weight:800;">🚀 SPCXx — SpaceX</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:1px;">IPO $135 · Заёмные средства · куплено 12 июня 2026</div>
+    </div>
+    <span class="spcx-badge badge-hold" id="spcxBadge">⏳ ДЕРЖАТЬ</span>
+  </div>
+
+  <div class="spcx-input-row">
+    <span style="white-space:nowrap;color:var(--muted);font-size:12px;">Текущая цена $</span>
+    <input type="number" class="inp-price" id="spcxPrice" placeholder="0.00" step="0.01" oninput="onSpcx()">
+  </div>
+
+  <div id="spcxDisplay" style="display:none">
+    <div class="spcx-price-row">
+      <span class="spcx-big" id="spcxBig">$0</span>
+      <span class="spcx-pct g" id="spcxPct">+0%</span>
+      <span style="font-size:12px;color:var(--muted)">от IPO ($135)</span>
+    </div>
+  </div>
+
+  <div class="levels">
+    <div class="lv lv-stop"> <div class="lv-label">🛑 Стоп</div>  <div class="lv-price">$114.75</div><div class="lv-pct">−15%</div></div>
+    <div class="lv lv-entry"><div class="lv-label">📌 Вход</div>  <div class="lv-price">$135.00</div><div class="lv-pct">IPO</div></div>
+    <div class="lv lv-t1">  <div class="lv-label">🔵 Выход 50%</div><div class="lv-price">$155–169</div><div class="lv-pct">+15–25%</div></div>
+    <div class="lv lv-t2">  <div class="lv-label">🟢 Выход 70%</div><div class="lv-price">$189+</div><div class="lv-pct">+40%+</div></div>
+  </div>
+
+  <div class="bar-wrap">
+    <div class="bar-labels"><span>$114</span><span>$135</span><span>$155–169</span><span>$189+</span></div>
+    <div class="bar-track"><div class="bar-dot" id="barDot" style="left:22%"></div></div>
+    <div class="bar-note" id="barNote">Введи текущую цену SPCXx выше</div>
+  </div>
+</div>
+
+<!-- ═══ STATS ROW ═══ -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-label">✅ P&L скорректированный</div>
+    <div class="stat-val stat-green" id="statPnl">—</div>
+    <div class="stat-sub">+$40.15 коррекция бага</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">📈 % годовых</div>
+    <div class="stat-val stat-blue" id="statAnn">—</div>
+    <div class="stat-sub" id="statDays">старт: 9 марта 2026</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">💳 Долг остаток</div>
+    <div class="stat-val stat-red" id="statDebt">—</div>
+    <div class="stat-sub">погасить приоритетно</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">🗓 Дней в рынке</div>
+    <div class="stat-val" id="statDaysN">—</div>
+    <div class="stat-sub">инвестирую с 09.03.2026</div>
+  </div>
+</div>
+
+<!-- ═══ DEBT TRACKER ═══ -->
+<div class="card">
+  <div class="card-title">💳 Трекер долга</div>
+  <div class="debt-inputs">
+    <div>
+      <label>Взял в долг $</label>
+      <input type="number" class="field" id="debtTotal" placeholder="напр. 500" oninput="onDebt()">
+    </div>
+    <div>
+      <label>Уже погашено $</label>
+      <input type="number" class="field" id="debtPaid" placeholder="0" oninput="onDebt()">
+    </div>
+    <div>
+      <label>Процентная ставка %/год</label>
+      <input type="number" class="field" id="debtRate" placeholder="напр. 24" oninput="onDebt()">
+    </div>
+  </div>
+  <div class="debt-bar-wrap">
+    <div class="debt-bar-track"><div class="debt-bar-fill" id="debtFill" style="width:0%"></div></div>
+    <div class="debt-meta">
+      <span>Погашено: <strong id="debtPctLabel">0%</strong></span>
+      <span>Осталось: <strong id="debtRemLabel">—</strong></span>
+    </div>
+  </div>
+  <div class="debt-summary" id="debtSummary"></div>
+</div>
+
+<!-- ═══ PORTFOLIO TABLE ═══ -->
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+    <div class="card-title" style="margin-bottom:0">📋 Портфель — детектор просадок</div>
+    <button class="btn btn-primary btn-sm" onclick="saveAll()">💾 Сохранить</button>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Вводи цены из Telegram Wallet. Просадка 2%+ = кандидат для DCA 🟣</p>
+  <table class="port-table">
+    <thead>
+      <tr>
+        <th>Актив</th>
+        <th>Вчера $</th>
+        <th>Сегодня $</th>
+        <th>Изм%</th>
+        <th>DCA?</th>
+      </tr>
+    </thead>
+    <tbody id="portBody"></tbody>
+  </table>
+</div>
+
+<!-- ═══ P&L ТРЕКЕР + ГРАФИК ═══ -->
+<div class="card">
+  <div class="card-title">📈 График P&L по дням</div>
+  <div class="pnl-history-controls">
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;font-weight:600;">P&L с платформы $ (как есть)</label>
+      <input type="number" class="field" id="platPnl" placeholder="напр. 309.85" oninput="onPlatPnl()">
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;font-weight:600;">Вложено всего $</label>
+      <input type="number" class="field" id="platInv" placeholder="напр. 1200" oninput="onPlatPnl()">
+    </div>
+    <div style="background:var(--green-bg);border-radius:10px;padding:10px 14px;text-align:center;min-width:160px;">
+      <div style="font-size:10px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.4px;">Скорр. P&L</div>
+      <div style="font-size:20px;font-weight:900;color:var(--green)" id="corrPnl">—</div>
+      <div style="font-size:10px;color:var(--muted)" id="corrAnn">% годовых: —</div>
+    </div>
+    <div style="align-self:flex-end;">
+      <button class="btn btn-green" onclick="recordPnl()">📌 Записать сегодня</button>
+    </div>
+  </div>
+  <div class="chart-wrap" id="chartWrap">
+    <canvas id="pnlChart"></canvas>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+    <span style="font-size:11px;color:var(--muted)" id="pnlHistCount">Нет записей</span>
+    <button class="btn btn-ghost btn-sm" onclick="if(confirm('Очистить историю P&L?')) clearPnlHistory()">🗑 Очистить историю</button>
+  </div>
+</div>
+
+<!-- ═══ STRATEGY ═══ -->
+<div class="card">
+  <div class="card-title">📋 Стратегия</div>
+  <div class="strategy-list">
+    <div class="si"><span class="si-icon">🔴</span><span class="si-text"><strong>Долг — приоритет #1.</strong> Погасить из зарплаты или частичного выхода из SPCXx.</span></div>
+    <div class="si"><span class="si-icon">⚠️</span><span class="si-text"><strong>ADI — продать.</strong> Программа доходности закончилась.</span></div>
+    <div class="si"><span class="si-icon">📈</span><span class="si-text"><strong>MSFTx и JPMx</strong> — нарастить после погашения долга.</span></div>
+    <div class="si"><span class="si-icon">🚫</span><span class="si-text"><strong>Не покупать растущий актив.</strong> Только DCA на просадках 2%+.</span></div>
+    <div class="si"><span class="si-icon">💵</span><span class="si-text"><strong>Минимум $20–30 USDT</strong> — всегда держать как ликвидность.</span></div>
+    <div class="si"><span class="si-icon">⚖️</span><span class="si-text"><strong>Не более 15%</strong> в одной позиции. SPCXx — исключение, мониторируется.</span></div>
+    <div class="si"><span class="si-icon">🔧</span><span class="si-text"><strong>Баг платформы:</strong> P&L в Telegram Wallet на <strong>$40.15 меньше</strong> реального. Всегда прибавлять.</span></div>
+    <div class="si"><span class="si-icon">📅</span><span class="si-text"><strong>DCA:</strong> Пн/Чт → AAPLx · Вт/Пт → SPYx · только при просадке 2%+</span></div>
+  </div>
+</div>
+
+<div class="save-row card" style="padding:10px 14px;">
+  <button class="btn btn-primary" onclick="saveAll()">💾 Сохранить всё</button>
+  <span class="saved-ts">Сохранено: <span id="savedTs">—</span></span>
+</div>
+
+<div class="footer">Данные хранятся локально · Обновляется при открытии</div>
+
+<script>
+// ══ CONSTANTS ══
+const STORAGE_KEY = 'vp3';
+const BUG = 40.15;
+const START = new Date('2026-03-09');
+const SPCX_ENTRY = 135, SPCX_STOP = 114.75, SPCX_T1A = 155, SPCX_T1B = 169, SPCX_T2 = 189;
+
+// ══ PORTFOLIO DATA ══
+const ASSETS = [
+  // group, id, name, tag
+  { g:'📈 Акции — Приоритет',     id:'SPCX',  name:'SPCXx',       tag:'borrowed', hide:true },
+  { g:'📈 Акции — Core',          id:'AAPL',  name:'AAPLx' },
+  { g:'📈 Акции — Core',          id:'SPY',   name:'SPYx' },
+  { g:'📈 Акции — Core',          id:'NVDA',  name:'NVDAx' },
+  { g:'📈 Акции — Core',          id:'TSLA',  name:'TSLAx' },
+  { g:'📈 Акции — Core',          id:'GOOGL', name:'GOOGLx' },
+  { g:'📈 Акции — Core',          id:'MSTR',  name:'MSTRx' },
+  { g:'📈 Акции — Core',          id:'NFLX',  name:'NFLXx' },
+  { g:'📈 Акции — Core',          id:'ORCL',  name:'ORCLx' },
+  { g:'📈 Акции — Core',          id:'INTC',  name:'INTCx' },
+  { g:'📈 Акции — Core',          id:'PEP',   name:'PEPx' },
+  { g:'📈 Акции — Core',          id:'SLV',   name:'SLVx' },
+  { g:'📈 Акции — Core',          id:'CRCL',  name:'CRCLx' },
+  { g:'📈 Акции — Нарастить',     id:'MSFT',  name:'MSFTx',       tag:'add' },
+  { g:'📈 Акции — Нарастить',     id:'JPM',   name:'JPMx',        tag:'add' },
+  { g:'📈 Акции — Нарастить',     id:'BAC',   name:'BACx' },
+  { g:'📈 Акции — Нарастить',     id:'AVGO',  name:'AVGOx' },
+  { g:'📈 Акции — Осторожно',     id:'XOM',   name:'XOMx',        tag:'care' },
+  { g:'📈 Акции — Осторожно',     id:'CVX',   name:'CVXx',        tag:'care' },
+  { g:'📈 Акции — Осторожно',     id:'ADI',   name:'ADI',         tag:'sell' },
+  { g:'₿ Крипто & Gold',          id:'BTC',   name:'BTC' },
+  { g:'₿ Крипто & Gold',          id:'TON',   name:'TON' },
+  { g:'₿ Крипто & Gold',          id:'TRX',   name:'TRX' },
+  { g:'₿ Крипто & Gold',          id:'MON',   name:'MON' },
+  { g:'₿ Крипто & Gold',          id:'XAUT',  name:'XAUT (Gold)' },
+];
+
+// ══ STORAGE ══
+function load() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; } }
+function save(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); document.getElementById('savedTs').textContent = new Date().toLocaleTimeString('ru-RU'); }
+
+// ══ CLOCK + NYSE ══
+function tick() {
+  const now = new Date();
+  // Tashkent UTC+5
+  const tash = new Date(now.getTime() + (5*60 + now.getTimezoneOffset()) * 60000);
+  document.getElementById('clock').textContent = tash.toTimeString().slice(0,8);
+  const DAYS=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'], MONTHS=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  document.getElementById('dateStr').textContent = `${DAYS[tash.getDay()]}, ${tash.getDate()} ${MONTHS[tash.getMonth()]} ${tash.getFullYear()}`;
+  updateDCA(tash.getDay());
+  updateNYSE(tash);
+  updateDaysInMarket();
+}
+setInterval(tick, 1000); tick();
+
+// NYSE status (EDT = UTC-4 in summer, EST = UTC-5 in winter — approximate with UTC-5 for simplicity, adjust sign)
+// Tashkent is UTC+5; ET is UTC-5 → Tashkent = ET + 10h
+// NYSE regular: 9:30–16:00 ET = 19:30–02:00 Tashkent (next day)
+// Pre-market: 04:00–09:30 ET = 14:00–19:30 Tashkent
+// After-hours: 16:00–20:00 ET = 02:00–06:00 Tashkent
+// Note: In EDT (summer, UTC-4): add 9h instead of 10h
+function updateNYSE(tash) {
+  const h = tash.getHours(), m = tash.getMinutes(), hm = h * 60 + m;
+  const pill = document.getElementById('nysePill');
+  // Approximate: summer EDT (9h offset from Tashkent)
+  // Pre-market:  14:00–19:30 Tashkent (approx, EDT)
+  // Regular:     19:30–01:00 Tashkent next day
+  // After:       01:00–05:00 Tashkent
+  // Closed:      05:00–14:00 Tashkent
+  let status, cls, countdown = '';
+  if (hm >= 14*60 && hm < 19*60+30) {
+    const rem = 19*60+30 - hm;
+    status = `📊 NYSE Pre-Market (до открытия ${Math.floor(rem/60)}ч ${rem%60}м)`; cls='nyse-pre';
+  } else if ((hm >= 19*60+30) || (hm < 1*60)) {
+    let rem = hm >= 19*60+30 ? (25*60 - hm) : (1*60 - hm);
+    status = `🟢 NYSE ОТКРЫТА (закрытие через ${Math.floor(rem/60)}ч ${rem%60}м)`; cls='nyse-open';
+  } else if (hm >= 1*60 && hm < 5*60) {
+    status = '🌙 NYSE After-Hours'; cls='nyse-after';
+  } else {
+    const rem = 14*60 - hm;
+    status = `⏸ NYSE закрыта (откроется через ${Math.floor(rem/60)}ч ${rem%60}м)`; cls='nyse-closed';
+  }
+  pill.textContent = status; pill.className = 'nyse-pill ' + cls;
+}
+
+// ══ DCA ══
+function updateDCA(dow) {
+  const b = document.getElementById('dcaBanner'), t = document.getElementById('dcaText');
+  const S = {1:{t:'AAPLx',c:'dca-aapl',e:'Пн'},2:{t:'SPYx',c:'dca-spy',e:'Вт'},4:{t:'AAPLx',c:'dca-aapl',e:'Чт'},5:{t:'SPYx',c:'dca-spy',e:'Пт'}};
+  const s = S[dow];
+  if (s) { b.className='dca-banner '+s.c; t.textContent=`📌 Сегодня ${s.e} — DCA в ${s.t} (только при просадке 2%+)`; }
+  else    { b.className='dca-banner dca-none'; t.textContent='📅 Сегодня DCA не по расписанию (Ср, Сб, Вс)'; }
+}
+
+// ══ SPCX ══
+function onSpcx() {
+  const p = parseFloat(document.getElementById('spcxPrice').value);
+  if (!p || isNaN(p)) return;
+  const pct = (p-SPCX_ENTRY)/SPCX_ENTRY*100;
+  const sign = pct>=0?'+':'';
+  document.getElementById('spcxDisplay').style.display='flex';
+  document.getElementById('spcxBig').textContent='$'+p.toFixed(2);
+  const pctEl=document.getElementById('spcxPct');
+  pctEl.textContent=sign+pct.toFixed(1)+'%';
+  pctEl.className='spcx-pct '+(pct>=0?'g':'r');
+  // Badge
+  const badge=document.getElementById('spcxBadge');
+  if(p<=SPCX_STOP){badge.textContent='🛑 СТОП-ЛОСС';badge.className='spcx-badge badge-stop';}
+  else if(p>=SPCX_T2){badge.textContent='🟢 ВЫХОДИТЬ 70%';badge.className='spcx-badge badge-sell';}
+  else if(p>=SPCX_T1A){badge.textContent='🔵 ВЫХОДИТЬ 50%';badge.className='spcx-badge badge-sell';}
+  else{badge.textContent='⏳ ДЕРЖАТЬ';badge.className='spcx-badge badge-hold';}
+  // Bar: range $100–$220
+  const pct2=Math.max(0,Math.min(100,(p-100)/(220-100)*100));
+  document.getElementById('barDot').style.left=pct2+'%';
+  const noteEl=document.getElementById('barNote');
+  if(p<=SPCX_STOP) noteEl.textContent=`⚠️ Ниже стоп-лосса! Рассмотреть выход.`;
+  else if(p>=SPCX_T2) noteEl.textContent=`✅ Tier 2 достигнут — продать 70–80% позиции`;
+  else if(p>=SPCX_T1A) noteEl.textContent=`✅ Tier 1 — продать 50% позиции`;
+  else noteEl.textContent=`До Tier 1 осталось: $${(SPCX_T1A-p).toFixed(2)} (+${((SPCX_T1A/p-1)*100).toFixed(1)}%)`;
+  // Alerts
+  updateAlerts(p, pct);
+}
+
+function updateAlerts(p, pct) {
+  const box=document.getElementById('alertsBox'); box.innerHTML='';
+  const mk=(type,msg)=>{const d=document.createElement('div');d.className='alert alert-'+type;d.textContent=msg;box.appendChild(d);};
+  if(p<=SPCX_STOP) mk('danger',`🛑 SPCXx $${p.toFixed(2)} — НИЖЕ СТОП-ЛОССА $114.75! Рассмотреть немедленный выход!`);
+  else if(p>=SPCX_T2) mk('success',`🟢 SPCXx $${p.toFixed(2)} (+${pct.toFixed(1)}%) — Tier 2. Продать 70–80%.`);
+  else if(p>=SPCX_T1A) mk('success',`🔵 SPCXx $${p.toFixed(2)} (+${pct.toFixed(1)}%) — Tier 1. Продать 50%.`);
+  else if(p<SPCX_ENTRY*0.97) mk('warn',`⚠️ SPCXx $${p.toFixed(2)} — ниже входной цены. Следи за стопом $114.75.`);
+  // Check dip alerts from portfolio
+  checkDipAlerts(box);
+}
+
+function checkDipAlerts(box) {
+  const d=load();
+  ASSETS.filter(a=>!a.hide).forEach(a=>{
+    const prev=parseFloat(d[a.id+'_y']||0), cur=parseFloat(d[a.id+'_t']||0);
+    if(!prev||!cur) return;
+    const dip=(prev-cur)/prev*100;
+    if(dip>=2) {
+      const mk=document.createElement('div'); mk.className='alert alert-dip';
+      mk.textContent=`🟣 DCA СИГНАЛ: ${a.name} просел на ${dip.toFixed(1)}% ($${prev.toFixed(2)} → $${cur.toFixed(2)})`;
+      box.appendChild(mk);
+    }
+  });
+}
+
+// ══ PORTFOLIO TABLE ══
+function renderTable() {
+  const d=load(), tbody=document.getElementById('portBody'); tbody.innerHTML='';
+  let lastG='';
+  ASSETS.filter(a=>!a.hide).forEach(a=>{
+    if(a.g!==lastG){
+      const tr=document.createElement('tr'); tr.className='section-sep';
+      tr.innerHTML=`<td colspan="5">${a.g}</td>`; tbody.appendChild(tr); lastG=a.g;
+    }
+    const yv=d[a.id+'_y']||'', tv=d[a.id+'_t']||'';
+    let pctHtml='<span class="pnl-m">—</span>', dipHtml='<span class="dip-ok">—</span>';
+    if(yv&&tv){
+      const prev=parseFloat(yv), cur=parseFloat(tv);
+      const dip=(prev-cur)/prev*100, ch=(cur-prev)/prev*100;
+      pctHtml=`<span class="${ch>=0?'pnl-g':'pnl-r'}">${ch>=0?'+':''}${ch.toFixed(1)}%</span>`;
+      if(dip>=2)    dipHtml=`<span class="dip-flag dip-buy">🟣 DCA −${dip.toFixed(1)}%</span>`;
+      else if(ch>=2) dipHtml=`<span class="dip-flag dip-drop">↑ Растёт</span>`;
+      else          dipHtml=`<span class="dip-ok">—</span>`;
+    }
+    const tagMap={sell:'<span class="note-tag tag-sell">продать</span>',add:'<span class="note-tag tag-add">нарастить</span>',care:'<span class="note-tag tag-care">осторожно</span>'};
+    const tag=a.tag?tagMap[a.tag]||'':'';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><span class="ticker">${a.name}</span>${tag}</td>
+      <td><input type="number" class="mini-inp" id="y_${a.id}" value="${yv}" placeholder="—" step="0.01" oninput="recalc('${a.id}')"></td>
+      <td><input type="number" class="mini-inp" id="t_${a.id}" value="${tv}" placeholder="—" step="0.01" oninput="recalc('${a.id}')"></td>
+      <td id="pct_${a.id}">${pctHtml}</td>
+      <td id="dip_${a.id}">${dipHtml}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function recalc(id) {
+  const yEl=document.getElementById('y_'+id), tEl=document.getElementById('t_'+id);
+  const prev=parseFloat(yEl?.value), cur=parseFloat(tEl?.value);
+  if(isNaN(prev)||isNaN(cur)||!prev){
+    document.getElementById('pct_'+id).innerHTML='<span class="pnl-m">—</span>';
+    document.getElementById('dip_'+id).innerHTML='<span class="dip-ok">—</span>';
+    return;
+  }
+  const ch=(cur-prev)/prev*100, dip=(prev-cur)/prev*100;
+  document.getElementById('pct_'+id).innerHTML=`<span class="${ch>=0?'pnl-g':'pnl-r'}">${ch>=0?'+':''}${ch.toFixed(1)}%</span>`;
+  if(dip>=2)     document.getElementById('dip_'+id).innerHTML=`<span class="dip-flag dip-buy">🟣 DCA −${dip.toFixed(1)}%</span>`;
+  else if(ch>=2) document.getElementById('dip_'+id).innerHTML=`<span class="dip-flag dip-drop">↑ Растёт</span>`;
+  else           document.getElementById('dip_'+id).innerHTML=`<span class="dip-ok">—</span>`;
+}
+
+// ══ DEBT TRACKER ══
+function onDebt() {
+  const total=parseFloat(document.getElementById('debtTotal').value)||0;
+  const paid =parseFloat(document.getElementById('debtPaid').value)||0;
+  const rate =parseFloat(document.getElementById('debtRate').value)||0;
+  const rem=Math.max(0,total-paid);
+  const pct=total>0?Math.min(100,(paid/total)*100):0;
+  document.getElementById('debtFill').style.width=pct+'%';
+  document.getElementById('debtPctLabel').textContent=pct.toFixed(1)+'%';
+  document.getElementById('debtRemLabel').textContent='$'+rem.toFixed(2);
+  document.getElementById('statDebt').textContent=total>0?'$'+rem.toFixed(2):'—';
+  // Summary chips
+  const sum=document.getElementById('debtSummary'); sum.innerHTML='';
+  if(total>0){
+    const dailyInterest=rem*(rate/100)/365;
+    const chips=[
+      {v:'$'+total.toFixed(0),l:'Взял'},
+      {v:'$'+paid.toFixed(0),l:'Погашено'},
+      {v:'$'+rem.toFixed(0),l:'Остаток'},
+      {v:'$'+dailyInterest.toFixed(2),l:'Проц/день'},
+    ];
+    chips.forEach(c=>{
+      const d=document.createElement('div'); d.className='debt-chip';
+      d.innerHTML=`<div class="dc-val">${c.v}</div><div class="dc-lbl">${c.l}</div>`;
+      sum.appendChild(d);
+    });
+  }
+}
+
+// ══ P&L ══
+function onPlatPnl() {
+  const plat=parseFloat(document.getElementById('platPnl').value);
+  const inv =parseFloat(document.getElementById('platInv').value);
+  const days=Math.floor((new Date()-START)/86400000);
+  const corr=isNaN(plat)?null:plat+BUG;
+  const corrEl=document.getElementById('corrPnl'), annEl=document.getElementById('corrAnn');
+  if(corr!==null){
+    corrEl.textContent=(corr>=0?'+':'')+'$'+corr.toFixed(2);
+    corrEl.style.color=corr>=0?'var(--green)':'var(--red)';
+    document.getElementById('statPnl').textContent=(corr>=0?'+':'')+'$'+corr.toFixed(2);
+    if(!isNaN(inv)&&inv>0){
+      const ann=(corr/inv)*(365/days)*100;
+      annEl.textContent='% годовых: '+(ann>=0?'+':'')+ann.toFixed(1)+'%';
+      document.getElementById('statAnn').textContent=(ann>=0?'+':'')+ann.toFixed(1)+'%';
+    }
+  } else { corrEl.textContent='—'; annEl.textContent='% годовых: —'; }
+}
+
+function updateDaysInMarket() {
+  const days=Math.floor((new Date()-START)/86400000);
+  document.getElementById('statDaysN').textContent=days;
+  document.getElementById('statDays').textContent='старт: 9 марта 2026';
+}
+
+// ══ P&L HISTORY & CHART ══
+let pnlChart=null;
+
+function getPnlHistory() { try { return JSON.parse(localStorage.getItem('vp_history') || '[]'); } catch { return []; } }
+function savePnlHistory(h) { localStorage.setItem('vp_history', JSON.stringify(h)); }
+
+function recordPnl() {
+  const plat=parseFloat(document.getElementById('platPnl').value);
+  if(isNaN(plat)){alert('Введи P&L с платформы');return;}
+  const corr=plat+BUG;
+  const today=new Date().toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'});
+  const h=getPnlHistory();
+  // Replace today's entry if exists
+  const idx=h.findIndex(x=>x.d===today);
+  if(idx>=0) h[idx]={d:today,v:corr}; else h.push({d:today,v:corr});
+  h.sort((a,b)=>a.d.localeCompare(b.d));
+  savePnlHistory(h);
+  drawChart();
+}
+
+function clearPnlHistory() { savePnlHistory([]); drawChart(); }
+
+function drawChart() {
+  const h=getPnlHistory();
+  const countEl=document.getElementById('pnlHistCount');
+  countEl.textContent=h.length>0?`${h.length} записей · последняя: ${h[h.length-1].d}`:'Нет записей — нажми «Записать сегодня»';
+  if(pnlChart){pnlChart.destroy();pnlChart=null;}
+  if(h.length<1) return;
+  const ctx=document.getElementById('pnlChart').getContext('2d');
+  const labels=h.map(x=>x.d), vals=h.map(x=>x.v);
+  const allPos=vals.every(v=>v>=0);
+  const color=allPos?'#1a8a4a':'#1d6fb8';
+  const bgColor=allPos?'rgba(26,138,74,.1)':'rgba(29,111,184,.1)';
+  pnlChart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[{
+        label:'P&L скорр. $',
+        data:vals,
+        borderColor:color,
+        backgroundColor:bgColor,
+        borderWidth:2.5,
+        pointBackgroundColor:color,
+        pointRadius:4,
+        fill:true,
+        tension:.35
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw>=0?'+':'')+'$'+ctx.raw.toFixed(2)}}},
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:10},color:'#8a8fa8'}},
+        y:{grid:{color:'#f0f0f0'},ticks:{font:{size:10},color:'#8a8fa8',callback:v=>(v>=0?'+':'')+'$'+v.toFixed(0)}}
+      }
+    }
+  });
+}
+
+// ══ SAVE ALL ══
+function saveAll() {
+  const d=load();
+  // SPCXx
+  const sv=document.getElementById('spcxPrice').value; if(sv) d['SPCX_cur']=sv;
+  // Portfolio prices
+  ASSETS.filter(a=>!a.hide).forEach(a=>{
+    const y=document.getElementById('y_'+a.id)?.value; if(y) d[a.id+'_y']=y;
+    const t=document.getElementById('t_'+a.id)?.value; if(t) d[a.id+'_t']=t;
+  });
+  // Debt
+  ['debtTotal','debtPaid','debtRate'].forEach(k=>{ const v=document.getElementById(k).value; if(v) d[k]=v; });
+  // P&L
+  const pp=document.getElementById('platPnl').value; if(pp) d['platPnl']=pp;
+  const pi=document.getElementById('platInv').value; if(pi) d['platInv']=pi;
+  save(d);
+  // Refresh dip alerts
+  updateAlerts(parseFloat(document.getElementById('spcxPrice').value)||0, 0);
+}
+
+// ══ RESTORE FROM STORAGE ══
+function restore() {
+  const d=load();
+  // SPCXx
+  if(d['SPCX_cur']){document.getElementById('spcxPrice').value=d['SPCX_cur'];onSpcx();}
+  // Debt
+  ['debtTotal','debtPaid','debtRate'].forEach(k=>{if(d[k])document.getElementById(k).value=d[k];});
+  if(d['debtTotal']) onDebt();
+  // P&L
+  if(d['platPnl']) document.getElementById('platPnl').value=d['platPnl'];
+  if(d['platInv']) document.getElementById('platInv').value=d['platInv'];
+  if(d['platPnl']||d['platInv']) onPlatPnl();
+}
+
+// ══ IMPORT FROM BRIEFING ══
+// Mapping: ticker → asset id in ASSETS
+const TICKER_MAP = {
+  SPCX:'SPCX', AAPL:'AAPL', SPY:'SPY', NVDA:'NVDA', TSLA:'TSLA',
+  GOOGL:'GOOGL', MSTR:'MSTR', NFLX:'NFLX', ORCL:'ORCL', INTC:'INTC',
+  PEP:'PEP', SLV:'SLV', CRCL:'CRCL', MSFT:'MSFT', JPM:'JPM',
+  BAC:'BAC', AVGO:'AVGO', XOM:'XOM', CVX:'CVX', ADI:'ADI',
+  BTC:'BTC', TON:'TON', TRX:'TRX', MON:'MON', XAU:'XAUT', XAUT:'XAUT'
+};
+
+function applyImport() {
+  const raw = document.getElementById('importInput').value.trim();
+  if (!raw) return;
+  const pairs = raw.split('|');
+  let applied = 0, skipped = 0;
+  pairs.forEach(pair => {
+    const [key, val] = pair.split(':');
+    if (!key || !val) return;
+    const id = TICKER_MAP[key.trim().toUpperCase()];
+    const price = parseFloat(val.trim());
+    if (!id || isNaN(price)) { skipped++; return; }
+    if (id === 'SPCX') {
+      document.getElementById('spcxPrice').value = price;
+      onSpcx();
+    }
+    const tEl = document.getElementById('t_' + id);
+    if (tEl) { tEl.value = price; recalc(id); applied++; }
+  });
+  document.getElementById('importResult').innerHTML =
+    `<span style="color:var(--green)">✅ Применено: ${applied} цен</span>${skipped?' <span style="color:var(--muted)">· не найдено: '+skipped+'</span>':''}`;
+  saveAll();
+}
+
+function shiftDay() {
+  // Copy all "today" → "yesterday" to prepare for new day's import
+  const d = load();
+  ASSETS.filter(a=>!a.hide).forEach(a => {
+    const tEl = document.getElementById('t_' + a.id);
+    const yEl = document.getElementById('y_' + a.id);
+    if (tEl?.value && yEl) {
+      yEl.value = tEl.value;
+      tEl.value = '';
+      recalc(a.id);
+    }
+  });
+  document.getElementById('importResult').innerHTML =
+    '<span style="color:var(--blue)">📅 День сдвинут — «Сегодня» стало «Вчера». Вставь новые цены из брифинга.</span>';
+}
+
+// ══ INIT ══
+renderTable();
+restore();
+drawChart();
+updateDaysInMarket();
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinAnalytics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f1a; color: #e0e0e0; padding: 16px; }
+h1 { font-size: 22px; margin-bottom: 16px; color: #fff; }
+.card { background: #1a1a2e; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.card h2 { font-size: 14px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.value { font-size: 28px; font-weight: 700; color: #fff; }
+.value.green { color: #4caf50; }
+.value.red { color: #f44336; }
+.value.blue { color: #2196f3; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1 / -1; }
+.row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #2a2a3e; }
+.row:last-child { border: none; }
+.label { color: #aaa; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.badge.M { background: #4caf50; color: #fff; }
+.badge.B { background: #2196f3; color: #fff; }
+.badge.C { background: #ff9800; color: #fff; }
+canvas { max-height: 200px; }
+</style>
+</head>
+<body>
+<h1>🏦 FinAnalytics</h1>
+<div id="date" style="color:#888;margin-bottom:16px;"></div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Доходы</h2>
+    <div class="value green" id="income">0</div>
+  </div>
+  <div class="card">
+    <h2>Расходы</h2>
+    <div class="value red" id="expense">0</div>
+  </div>
+  <div class="card full">
+    <h2>Баланс</h2>
+    <div class="value blue" id="balance">0</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Долги</h2>
+  <div class="grid">
+    <div><span class="value" id="debt_count">0</span><br><span style="color:#888;font-size:12px;">кредитов</span></div>
+    <div><span class="value" id="debt_monthly">0</span><br><span style="color:#888;font-size:12px;">сум/мес</span></div>
+    <div class="full"><span class="value red" id="debt_total">0</span><br><span style="color:#888;font-size:12px;">общий долг</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Расходы по категориям</h2>
+  <canvas id="chartCategories"></canvas>
+</div>
+
+<div class="card">
+  <h2>Бюджет: план vs факт</h2>
+  <canvas id="chartBudget"></canvas>
+</div>
+
+<div class="card">
+  <h2>Платёжный календарь</h2>
+  <div id="calendar"></div>
+</div>
+
+<script>
+async function load() {
+  const r = await fetch('/api/data');
+  const d = await r.json();
+  const b = d.budget;
+  const debt = d.debt;
+
+  document.getElementById('date').textContent = '📅 ' + b.month;
+  document.getElementById('income').textContent = fmt(b.income_total) + ' сум';
+  document.getElementById('expense').textContent = fmt(b.expense_total) + ' сум';
+  document.getElementById('balance').textContent = fmt(b.balance) + ' сум';
+  document.getElementById('debt_count').textContent = debt.count;
+  document.getElementById('debt_monthly').textContent = fmt(debt.total_monthly);
+  document.getElementById('debt_total').textContent = fmt(debt.total_debt) + ' сум';
+
+  // Categories pie
+  const cats = b.categories.filter(c => c.fact > 0).slice(0, 8);
+  new Chart(document.getElementById('chartCategories'), {
+    type: 'doughnut',
+    data: {
+      labels: cats.map(c => c.name),
+      datasets: [{ data: cats.map(c => c.fact), backgroundColor: ['#4caf50','#2196f3','#ff9800','#f44336','#9c27b0','#00bcd4','#ffeb3b','#795548'] }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#aaa', font: { size: 10 } } } } }
+  });
+
+  // Budget bar
+  const top = b.categories.filter(c => c.fact > 0).slice(0, 6);
+  new Chart(document.getElementById('chartBudget'), {
+    type: 'bar',
+    data: {
+      labels: top.map(c => c.name),
+      datasets: [
+        { label: 'Факт', data: top.map(c => c.fact), backgroundColor: '#2196f3' },
+        { label: 'План', data: top.map(c => c.budget), backgroundColor: '#ff9800', opacity: 0.7 }
+      ]
+    },
+    options: { responsive: true, scales: { y: { ticks: { callback: v => fmt(v), color: '#888' } } },
+      plugins: { legend: { labels: { color: '#aaa' } } } }
+  });
+
+  // Calendar
+  const cal = d.calendar;
+  const periods = { '1': 'До 1-го', '10': 'До 10-го', '15': 'До 15-го', '30': 'До 30-го' };
+  let calHtml = '';
+  for (const p of ['1','10','15','30']) {
+    if (cal[p] && cal[p].length > 0) {
+      const total = cal[p].reduce((s, c) => s + c.amount, 0);
+      calHtml += `<div class="row"><span class="label">${periods[p]}</span><span>${fmt(total)} сум</span></div>`;
+      for (const c of cal[p]) {
+        calHtml += `<div class="row" style="padding-left:16px;font-size:12px;"><span><span class="badge ${c.priority}">${c.priority}</span> ${c.bank}</span><span>${fmt(c.amount)}</span></div>`;
+      }
+    }
+  }
+  document.getElementById('calendar').innerHTML = calHtml || '<div style="color:#666">Нет данных</div>';
+}
+
+function fmt(n) {
+  if (!n) return '0';
+  return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# .interpreter-rules for open-interpreter
+## Project type
+code, infra
+## Key files
+# Open Interpreter app code
+## Tech stack
+Python
+## Rules
+# Core app code

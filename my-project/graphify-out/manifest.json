@@ -1,0 +1,172 @@
+{
+  "hh-jobs/src/hh_parser.py": {
+    "mtime": 1785230516.105923,
+    "ast_hash": "057b42e2cb4c38f5c26077c85cf1f16e",
+    "semantic_hash": "057b42e2cb4c38f5c26077c85cf1f16e"
+  },
+  "hh-jobs/src/main.py": {
+    "mtime": 1785384598.4474833,
+    "ast_hash": "4476e8a529e34646815ca149b520e502",
+    "semantic_hash": "4476e8a529e34646815ca149b520e502"
+  },
+  "hh-jobs/src/matcher.py": {
+    "mtime": 1785231327.2536297,
+    "ast_hash": "a181db6bfff9888fb8b89ad3aace7d2d",
+    "semantic_hash": "a181db6bfff9888fb8b89ad3aace7d2d"
+  },
+  "hh-jobs/src/responder.py": {
+    "mtime": 1785213881.4217184,
+    "ast_hash": "dfb34120ffd18e2eafa3eb4db889f0ca",
+    "semantic_hash": "dfb34120ffd18e2eafa3eb4db889f0ca"
+  },
+  "hh-remote-jobs/src/__init__.py": {
+    "mtime": 1785387938.1398547,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "hh-remote-jobs/src/hh_client.py": {
+    "mtime": 1785386406.8336782,
+    "ast_hash": "1b3f030924d4f51adbbd8e0d2981266e",
+    "semantic_hash": "1b3f030924d4f51adbbd8e0d2981266e"
+  },
+  "hh-remote-jobs/src/main.py": {
+    "mtime": 1785428176.368745,
+    "ast_hash": "2b98fdd9462a8b6eca73ef21c3c6a3cc",
+    "semantic_hash": "2b98fdd9462a8b6eca73ef21c3c6a3cc"
+  },
+  "hh-remote-jobs/src/matcher.py": {
+    "mtime": 1785387013.234759,
+    "ast_hash": "6ce2f2cebee1b7180c48232efa676cc1",
+    "semantic_hash": "6ce2f2cebee1b7180c48232efa676cc1"
+  },
+  "hh-remote-jobs/src/responder.py": {
+    "mtime": 1785387432.0688357,
+    "ast_hash": "ff67754d2ecc0d53302cacbc74983234",
+    "semantic_hash": "ff67754d2ecc0d53302cacbc74983234"
+  },
+  "shared/db.py": {
+    "mtime": 1785072962.6030576,
+    "ast_hash": "f4f891b54678bbf784e8ecc5221d2b02",
+    "semantic_hash": "f4f891b54678bbf784e8ecc5221d2b02"
+  },
+  "shared/models.py": {
+    "mtime": 1785230131.6931043,
+    "ast_hash": "e0a4f372cb4bee157a8fa640ab192eb1",
+    "semantic_hash": "e0a4f372cb4bee157a8fa640ab192eb1"
+  },
+  "shared/tools/uzse_ticker_file.py": {
+    "mtime": 1785117763.8545578,
+    "ast_hash": "64042fab93bda3369807c52e64bb5124",
+    "semantic_hash": "64042fab93bda3369807c52e64bb5124"
+  },
+  ".github/workflows/tests.yml": {
+    "mtime": 1785073050.2288306,
+    "ast_hash": "7324dc9d5b3f4a2f0eb1a355745f0605",
+    "semantic_hash": "7324dc9d5b3f4a2f0eb1a355745f0605"
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1785073068.1295762,
+    "ast_hash": "b6c6a65cc3fcd9b084d99721f817c6b4",
+    "semantic_hash": "b6c6a65cc3fcd9b084d99721f817c6b4"
+  },
+  "MORNING_REPORT.md": {
+    "mtime": 1785092170.5768042,
+    "ast_hash": "c575c614fe4185f3dc8a47a8cff223fd",
+    "semantic_hash": "c575c614fe4185f3dc8a47a8cff223fd"
+  },
+  "README.md": {
+    "mtime": 1785072917.1698496,
+    "ast_hash": "dc515667cfa7b4cc1d046ae21e8b9650",
+    "semantic_hash": "dc515667cfa7b4cc1d046ae21e8b9650"
+  },
+  "READY_TO_LAUNCH.md": {
+    "mtime": 1785092222.4693067,
+    "ast_hash": "ddfbcc6eeba0cb6024cea17a4008f4df",
+    "semantic_hash": "ddfbcc6eeba0cb6024cea17a4008f4df"
+  },
+  "finanalytics/README.md": {
+    "mtime": 1785072999.529822,
+    "ast_hash": "f8b8b62596b54e1f4b11898bc87016e6",
+    "semantic_hash": "f8b8b62596b54e1f4b11898bc87016e6"
+  },
+  "finanalytics/requirements.txt": {
+    "mtime": 1785073014.4063866,
+    "ast_hash": "76b85a5f547e523c820f8b2b5c3e83d6",
+    "semantic_hash": "76b85a5f547e523c820f8b2b5c3e83d6"
+  },
+  "hh-jobs/COMMUNICATION.md": {
+    "mtime": 1785091946.7414622,
+    "ast_hash": "b5c8e12b74342238c0c4d869dc2290e5",
+    "semantic_hash": "b5c8e12b74342238c0c4d869dc2290e5"
+  },
+  "hh-jobs/HERMES_START.txt": {
+    "mtime": 1785092133.4151053,
+    "ast_hash": "1b9cd68ca9493b63c65fc9fc2dff3048",
+    "semantic_hash": "1b9cd68ca9493b63c65fc9fc2dff3048"
+  },
+  "hh-jobs/HERMES_TASK.txt": {
+    "mtime": 1785091722.6782732,
+    "ast_hash": "e3d43358c63a3e9cc013e5a41b14d439",
+    "semantic_hash": "e3d43358c63a3e9cc013e5a41b14d439"
+  },
+  "hh-jobs/HERMES_TASK_2.txt": {
+    "mtime": 1785149123.7876809,
+    "ast_hash": "4ecf272c5f4b2b8e56568bba3b7607c9",
+    "semantic_hash": "4ecf272c5f4b2b8e56568bba3b7607c9"
+  },
+  "hh-jobs/MVP.md": {
+    "mtime": 1785091684.0543737,
+    "ast_hash": "b62135b5b6999575bee1b98fd8234dd8",
+    "semantic_hash": "b62135b5b6999575bee1b98fd8234dd8"
+  },
+  "hh-jobs/PROMPT_FOR_HERMES.md": {
+    "mtime": 1785091980.5350623,
+    "ast_hash": "370aeb3740062d6557df7c0a1753d595",
+    "semantic_hash": "370aeb3740062d6557df7c0a1753d595"
+  },
+  "hh-jobs/README.md": {
+    "mtime": 1785072933.653794,
+    "ast_hash": "62451a0f3329e97670360a339463c042",
+    "semantic_hash": "62451a0f3329e97670360a339463c042"
+  },
+  "hh-jobs/STATUS.md": {
+    "mtime": 1785386938.1185665,
+    "ast_hash": "0904b093a7208a18fc5cbb63d6bd1497",
+    "semantic_hash": "0904b093a7208a18fc5cbb63d6bd1497"
+  },
+  "hh-jobs/requirements.txt": {
+    "mtime": 1785072938.2130187,
+    "ast_hash": "d087c30a94cec6c067a9836b78ab06ec",
+    "semantic_hash": "d087c30a94cec6c067a9836b78ab06ec"
+  },
+  "hh-remote-jobs/HERMES_TASK.md": {
+    "mtime": 1785384151.9491067,
+    "ast_hash": "1446f84a03a2d0336a36ea27b12d96a0",
+    "semantic_hash": "1446f84a03a2d0336a36ea27b12d96a0"
+  },
+  "hh-remote-jobs/requirements.txt": {
+    "mtime": 1785384297.5502272,
+    "ast_hash": "442e909808d36d8559a6991a77c7b0f3",
+    "semantic_hash": "442e909808d36d8559a6991a77c7b0f3"
+  },
+  "stocks-ru/README.md": {
+    "mtime": 1785072981.784519,
+    "ast_hash": "ab88011f519a29d97e0ff5638ea02e7d",
+    "semantic_hash": "ab88011f519a29d97e0ff5638ea02e7d"
+  },
+  "stocks-ru/requirements.txt": {
+    "mtime": 1785073004.615793,
+    "ast_hash": "c205483f271509e2607bee6e865f1707",
+    "semantic_hash": "c205483f271509e2607bee6e865f1707"
+  },
+  "stocks-us/README.md": {
+    "mtime": 1785072990.334177,
+    "ast_hash": "74b9e83d6b5f6d42f65f8026d7ec09c9",
+    "semantic_hash": "74b9e83d6b5f6d42f65f8026d7ec09c9"
+  },
+  "stocks-us/requirements.txt": {
+    "mtime": 1785073009.7537754,
+    "ast_hash": "0cc744628111e760e9c239b0f8630982",
+    "semantic_hash": "0cc744628111e760e9c239b0f8630982"
+  }
+}

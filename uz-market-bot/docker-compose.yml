@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  market-bot:
+    build: .
+    container_name: uz-market-bot
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+    environment:
+      - TZ=Asia/Tashkent

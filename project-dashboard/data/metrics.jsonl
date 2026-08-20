@@ -1,0 +1,5 @@
+{"ts":"2026-08-09T20:53:04+0500","dirty":0,"clean":11,"nogit":1,"cpu":213.8,"disk_pct":25,"disk_used":"12Gi","disk_total":"228Gi","mem_total":8,"pm2_online":8,"pm2_error":0,"launchd_ok":0,"launchd_fail":,"backup_age":1,"uptime":"1 day"}
+{"ts":"2026-08-09T20:57:48+0500","dirty":0,"clean":11,"nogit":1,"cpu":135.6,"disk_pct":25,"disk_used":"12Gi","disk_total":"228Gi","mem_total":8,"pm2_online":8,"pm2_error":0,"launchd_ok":0,"launchd_fail":,"backup_age":1,"uptime":"1 day"}
+{"ts":"2026-08-09T20:58:30+0500","dirty":0,"clean":11,"nogit":1,"cpu":130.4,"disk_pct":25,"disk_used":"12Gi","disk_total":"228Gi","mem_total":,"pm2_online":8,"pm2_error":0,"launchd_ok":0,"launchd_fail":,"backup_age":1,"uptime":"1 day"}
+{"ts":"2026-08-09T20:59:42+0500","dirty":0,"clean":11,"nogit":1,"cpu":91.3,"disk_pct":25,"disk_used":"12Gi","disk_total":"228Gi","pm2_online":8,"backup_age":1,"uptime":"1 day"}
+{"ts":"2026-08-09T21:02:07+0500","dirty":1,"clean":10,"nogit":1,"cpu":145.0,"disk_pct":25,"disk_used":"12Gi","disk_total":"228Gi","mem_total":8,"pm2_online":9,"launchd_ok":5,"launchd_fail":3,"backup_age":1,"uptime":"1 day"}

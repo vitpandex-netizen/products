@@ -1,0 +1,44 @@
+🚀 HERMES - НАЧИНАЙ ПРЯМО СЕЙЧАС
+
+ЗАДАЧА: Реализовать HH-Jobs MVP парсер
+
+ДЕДЛАЙН: 48 часов (до завтра 23:30)
+
+ВСЕ ФАЙЛЫ УЖЕ ГОТОВЫ В ПАПКЕ:
+/Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs/
+
+ЧИТАЙ В ЭТОМ ПОРЯДКЕ:
+1. MVP.md - что нужно сделать
+2. PROMPT_FOR_HERMES.md - как это сделать
+3. COMMUNICATION.md - как мы общаемся
+
+ГЛАВНОЕ:
+- Ты работаешь НЕЗАВИСИМО
+- Claude мониторит твой прогресс каждый час
+- Обновляй STATUS.md когда есть прогресс
+- Делай commits с понятными сообщениями
+- Если блокер → пиши в STATUS.md, Claude спросит пользователя
+
+БЫСТРЫЙ СТАРТ:
+
+cd /Users/vitaliyr/Desktop/Cowork/ClaudeCODE/my-project/hh-jobs
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+НАЧНИ С:
+1. hh_parser.py - парсинг вакансий HH.uz
+2. matcher.py - анализ совпадения
+3. responder.py - отправка ответов
+4. main.py - основной цикл
+
+ПРОФИЛЬ:
+- Должность: IT Infrastructure Engineer, Senior SysAdmin, IT Manager
+- Опыт: 19 лет
+- Зарплата: $4,500-6,000 USD
+- Локация: Ташкент
+- Исключить: Госструктуры, закупки
+
+ВСЁ ОСТАЛЬНОЕ В ФАЙЛАХ.
+
+НАЧИНАЙ!

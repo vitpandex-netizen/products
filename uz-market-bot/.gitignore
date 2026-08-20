@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.env
+config/config.json
+data/*.db
+node_modules/
+.DS_Store
+fix_*.py
+data/error.log
+rewrite_run.py

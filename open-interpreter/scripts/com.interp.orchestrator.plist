@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.interp.orchestrator</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>/Users/vitaliyr/Desktop/Cowork/Open Interpter/scripts/orchestrator.py</string>
+        <string>--loop</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/vitaliyr/Desktop/Cowork/Open Interpter</string>
+    <key>StandardOutPath</key>
+    <string>/Users/vitaliyr/Desktop/Cowork/Open Interpter/logs/orchestrator.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/vitaliyr/Desktop/Cowork/Open Interpter/logs/orchestrator.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>/Users/vitaliyr</string>
+    </dict>
+</dict>
+</plist>

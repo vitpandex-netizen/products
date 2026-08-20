@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Portfolio Dashboard",
+  "schemaVersion": 1,
+  "description": "Живой дашборд портфеля Виталия: алерты SPCXx по тиред-стратегии, DCA-календарь, трекер цен по всем позициям, скорректированный P&L с поправкой на баг платформы +$40.15, аннуализированная доходность."
+}
+</script>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 Портфель — Виталий</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 16px; font-size: 14px; }
+
+h2 { font-size: 13px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+
+.header { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.header-left h1 { font-size: 17px; font-weight: 700; color: #1a1a2e; }
+.header-left .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
+.header-right { text-align: right; }
+.clock { font-size: 22px; font-weight: 700; color: #1a1a2e; font-variant-numeric: tabular-nums; }
+.date-str { font-size: 12px; color: #888; }
+
+.dca-banner { border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; }
+.dca-banner.aapl { background: linear-gradient(135deg, #e8f4fd, #cde8fb); color: #1565c0; border: 1px solid #90caf9; }
+.dca-banner.spy { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #2e7d32; border: 1px solid #a5d6a7; }
+.dca-banner.none { background: #f5f5f5; color: #888; border: 1px solid #e0e0e0; }
+.dca-icon { font-size: 20px; }
+
+/* SPCXx CARD */
+.spcx-card { background: #fff; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.spcx-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.spcx-title { font-size: 16px; font-weight: 700; }
+.spcx-badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-hold { background: #fff3e0; color: #e65100; }
+.badge-sell { background: #e8f5e9; color: #2e7d32; }
+.badge-stop { background: #ffebee; color: #c62828; }
+
+.spcx-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.spcx-current { font-size: 28px; font-weight: 800; }
+.spcx-change { font-size: 16px; font-weight: 600; }
+.green { color: #2e7d32; }
+.red { color: #c62828; }
+.orange { color: #e65100; }
+.gray { color: #888; }
+
+.spcx-input-row { display: flex; gap: 10px; margin-bottom: 14px; align-items: center; }
+.spcx-input-row input { flex: 1; padding: 8px 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 16px; font-weight: 700; text-align: center; outline: none; transition: border-color 0.2s; }
+.spcx-input-row input:focus { border-color: #1976d2; }
+.spcx-input-row label { font-size: 12px; color: #888; }
+
+.levels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.level-item { border-radius: 8px; padding: 8px 10px; text-align: center; }
+.level-item .level-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
+.level-item .level-price { font-size: 16px; font-weight: 800; }
+.level-item .level-pct { font-size: 11px; margin-top: 2px; opacity: 0.8; }
+.level-stop { background: #ffebee; color: #c62828; }
+.level-entry { background: #ede7f6; color: #5e35b1; }
+.level-t1 { background: #e3f2fd; color: #1565c0; }
+.level-t2 { background: #e8f5e9; color: #2e7d32; }
+
+/* LEVEL BAR */
+.level-bar-wrap { margin: 14px 0 4px; }
+.level-bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: #888; margin-bottom: 4px; }
+.level-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #ffcdd2 0%, #ffcdd2 20%, #fff9c4 20%, #fff9c4 45%, #bbdefb 45%, #bbdefb 75%, #c8e6c9 75%, #c8e6c9 100%); position: relative; }
+.level-marker { position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%; background: #1a1a2e; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transform: translateX(-50%); transition: left 0.4s ease; }
+.level-bar-note { font-size: 11px; color: #888; text-align: center; margin-top: 6px; }
+
+/* PORTFOLIO TABLE */
+.portfolio-card { background: #fff; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.portfolio-table { width: 100%; border-collapse: collapse; }
+.portfolio-table th { font-size: 11px; color: #888; text-align: left; padding: 4px 8px 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid #f0f0f0; }
+.portfolio-table th.right { text-align: right; }
+.portfolio-table td { padding: 6px 8px; border-bottom: 1px solid #fafafa; font-size: 13px; }
+.portfolio-table td.right { text-align: right; }
+.portfolio-table tr:last-child td { border-bottom: none; }
+.portfolio-table tr:hover td { background: #fafafa; }
+.ticker { font-weight: 700; font-size: 13px; }
+.section-row td { background: #fafafa; font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 8px 4px; }
+.price-input { width: 80px; padding: 4px 6px; border: 1.5px solid #e8e8e8; border-radius: 6px; font-size: 12px; text-align: right; outline: none; transition: border-color 0.2s; font-family: inherit; }
+.price-input:focus { border-color: #1976d2; background: #e3f2fd; }
+.pnl-positive { color: #2e7d32; font-weight: 600; }
+.pnl-negative { color: #c62828; font-weight: 600; }
+.pnl-neutral { color: #888; }
+.priority-sell { background: #fff8e1 !important; }
+.priority-sell td:first-child::after { content: ' ⚠️'; font-size: 10px; }
+
+/* P&L SUMMARY */
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.summary-card { background: #fff; border-radius: 12px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.summary-card .s-label { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+.summary-card .s-value { font-size: 22px; font-weight: 800; margin: 4px 0 2px; }
+.summary-card .s-note { font-size: 11px; color: #aaa; }
+.pnl-card { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+.pnl-card .s-value { color: #1b5e20; }
+.warn-card { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+.warn-card .s-value { color: #bf360c; font-size: 16px; }
+
+/* STRATEGY */
+.strategy-card { background: #fff; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.strategy-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f5f5f5; }
+.strategy-item:last-child { border-bottom: none; }
+.s-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.s-text { font-size: 13px; line-height: 1.5; }
+.s-text strong { color: #1a1a2e; }
+
+.btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s; }
+.btn-primary { background: #1976d2; color: #fff; }
+.btn-primary:hover { background: #1565c0; }
+.btn-ghost { background: transparent; color: #1976d2; border: 1.5px solid #1976d2; }
+.btn-ghost:hover { background: #e3f2fd; }
+
+.footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 4px; }
+.alert-banner { border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.alert-danger { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+.alert-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.alert-warn { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>📊 Портфель Виталия</h1>
+    <div class="subtitle">Telegram Wallet · Ташкент UTC+5</div>
+  </div>
+  <div class="header-right">
+    <div class="clock" id="clock">--:--:--</div>
+    <div class="date-str" id="dateStr">—</div>
+  </div>
+</div>
+
+<!-- DCA BANNER -->
+<div class="dca-banner none" id="dcaBanner">
+  <span class="dca-icon">📅</span>
+  <span id="dcaText">Загрузка...</span>
+</div>
+
+<!-- ALERTS -->
+<div id="alertsContainer"></div>
+
+<!-- SPCXx CARD -->
+<div class="spcx-card">
+  <div class="spcx-header">
+    <div>
+      <div class="spcx-title">🚀 SPCXx — SpaceX</div>
+      <div style="font-size:12px;color:#888;margin-top:2px;">IPO $135 · Заёмные средства</div>
+    </div>
+    <span class="spcx-badge badge-hold" id="spcxBadge">ДЕРЖАТЬ</span>
+  </div>
+
+  <div class="spcx-input-row">
+    <label style="white-space:nowrap">Текущая цена $</label>
+    <input type="number" id="spcxPrice" placeholder="0.00" step="0.01" oninput="onSpcxUpdate()">
+    <button class="btn btn-primary" onclick="saveAll()">💾 Сохранить всё</button>
+  </div>
+
+  <div class="spcx-price-row" id="spcxPriceDisplay" style="display:none">
+    <span class="spcx-current" id="spcxCurrentVal">$0</span>
+    <span class="spcx-change" id="spcxChangeVal">+0%</span>
+    <span style="font-size:12px;color:#888">от IPO ($135)</span>
+  </div>
+
+  <div class="levels-grid">
+    <div class="level-item level-stop">
+      <div class="level-label">🛑 Стоп-лосс</div>
+      <div class="level-price">$114.75</div>
+      <div class="level-pct">−15%</div>
+    </div>
+    <div class="level-item level-entry">
+      <div class="level-label">📌 Вход IPO</div>
+      <div class="level-price">$135.00</div>
+      <div class="level-pct">0%</div>
+    </div>
+    <div class="level-item level-t1">
+      <div class="level-label">🔵 Выход 50%</div>
+      <div class="level-price">$155–$169</div>
+      <div class="level-pct">+15% / +25%</div>
+    </div>
+    <div class="level-item level-t2">
+      <div class="level-label">🟢 Выход 70%</div>
+      <div class="level-price">$189+</div>
+      <div class="level-pct">+40%</div>
+    </div>
+  </div>
+
+  <div class="level-bar-wrap">
+    <div class="level-bar-labels">
+      <span>$114.75</span><span>$135</span><span>$155–169</span><span>$189+</span>
+    </div>
+    <div class="level-bar">
+      <div class="level-marker" id="spcxMarker" style="left:20%"></div>
+    </div>
+    <div class="level-bar-note" id="spcxBarNote">Введи текущую цену SPCXx</div>
+  </div>
+</div>
+
+<!-- PORTFOLIO TABLE -->
+<div class="portfolio-card">
+  <h2>Портфель — текущие цены</h2>
+  <p style="font-size:12px;color:#888;margin-bottom:10px;">Введи цены из Telegram Wallet. Данные сохраняются автоматически.</p>
+  <table class="portfolio-table">
+    <thead>
+      <tr>
+        <th>Актив</th>
+        <th class="right">Цена входа $</th>
+        <th class="right">Сейчас $</th>
+        <th class="right">P&L %</th>
+      </tr>
+    </thead>
+    <tbody id="portfolioBody"></tbody>
+  </table>
+</div>
+
+<!-- P&L SUMMARY -->
+<div class="summary-grid">
+  <div class="summary-card pnl-card">
+    <div class="s-label">✅ P&L скорректированный</div>
+    <div class="s-value green" id="totalPnl">+$350</div>
+    <div class="s-note">включает +$40.15 коррекцию бага</div>
+  </div>
+  <div class="summary-card">
+    <div class="s-label">📈 Дней в рынке</div>
+    <div class="s-value" id="daysInMarket">102</div>
+    <div class="s-note">старт: 9 марта 2026</div>
+  </div>
+</div>
+
+<!-- TOTAL P&L TRACKER -->
+<div class="portfolio-card" style="margin-bottom:14px">
+  <h2>Трекер P&L (из платформы)</h2>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <div style="flex:1;min-width:200px">
+      <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">P&L по платформе $ (как есть)</label>
+      <input type="number" id="platformPnl" class="price-input" style="width:100%;padding:8px 10px;font-size:15px" placeholder="напр. 309.85" oninput="updateTotalPnl()">
+    </div>
+    <div style="flex:1;min-width:200px">
+      <label style="font-size:12px;color:#888;display:block;margin-bottom:4px">Вложено всего $</label>
+      <input type="number" id="totalInvested" class="price-input" style="width:100%;padding:8px 10px;font-size:15px" placeholder="напр. 1200" oninput="updateTotalPnl()">
+    </div>
+    <div style="flex:1;min-width:180px;background:#f0f9f0;border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">СКОРРЕКТИРОВАННЫЙ P&L</div>
+      <div style="font-size:20px;font-weight:800;color:#2e7d32" id="correctedPnl">—</div>
+      <div style="font-size:11px;color:#888" id="annualizedReturn">% годовых: —</div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGY REMINDERS -->
+<div class="strategy-card">
+  <h2>📋 Стратегия и приоритеты</h2>
+  <div class="strategy-item">
+    <span class="s-icon">🔴</span>
+    <span class="s-text"><strong>Приоритет #1 — Погасить долг</strong> из зарплаты или частичного выхода из SPCXx</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">⚠️</span>
+    <span class="s-text"><strong>ADI — продать</strong>: программа доходности закончилась, нет причин держать</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">📈</span>
+    <span class="s-text"><strong>MSFTx и JPMx</strong> — нарастить до значимых позиций после погашения долга</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">🚫</span>
+    <span class="s-text"><strong>Не покупать растущий актив</strong> — только докупка на просадках 2%+</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">💵</span>
+    <span class="s-text"><strong>Минимум $20–30 USDT</strong> всегда на счету как ликвидность</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">⚖️</span>
+    <span class="s-text"><strong>Не более 15%</strong> в одной позиции (SPCXx — мониторируемое исключение)</span>
+  </div>
+  <div class="strategy-item">
+    <span class="s-icon">🔧</span>
+    <span class="s-text"><strong>Баг платформы:</strong> P&L из Telegram Wallet показывает на <strong>$40.15</strong> меньше реального — всегда прибавлять</span>
+  </div>
+</div>
+
+<div class="footer">Последнее обновление: <span id="lastSaved">никогда</span> · Инвестиции с 9 марта 2026</div>
+
+<script>
+// ─── PORTFOLIO DATA ───
+const PORTFOLIO = [
+  { id:'SPCX',  name:'SPCXx',       group:'Акции', entry:135,   priority:'borrowed' },
+  { id:'AAPL',  name:'AAPLx',       group:'Акции', entry:null },
+  { id:'SPY',   name:'SPYx',        group:'Акции', entry:null },
+  { id:'NVDA',  name:'NVDAx',       group:'Акции', entry:null },
+  { id:'MSFT',  name:'MSFTx',       group:'Акции', entry:null, note:'увеличить' },
+  { id:'JPM',   name:'JPMx',        group:'Акции', entry:null, note:'увеличить' },
+  { id:'GOOGL', name:'GOOGLx',      group:'Акции', entry:null },
+  { id:'TSLA',  name:'TSLAx',       group:'Акции', entry:null },
+  { id:'MSTR',  name:'MSTRx',       group:'Акции', entry:null },
+  { id:'AVGO',  name:'AVGOx',       group:'Акции', entry:null },
+  { id:'NFLX',  name:'NFLXx',       group:'Акции', entry:null },
+  { id:'ORCL',  name:'ORCLx',       group:'Акции', entry:null },
+  { id:'INTC',  name:'INTCx',       group:'Акции', entry:null },
+  { id:'PEP',   name:'PEPx',        group:'Акции', entry:null },
+  { id:'XOM',   name:'XOMx',        group:'Акции', entry:null, note:'не добавлять' },
+  { id:'CVX',   name:'CVXx',        group:'Акции', entry:null, note:'не добавлять' },
+  { id:'BAC',   name:'BACx',        group:'Акции', entry:null },
+  { id:'SLV',   name:'SLVx',        group:'Акции', entry:null },
+  { id:'CRCL',  name:'CRCLx',       group:'Акции', entry:null },
+  { id:'ADI',   name:'ADI',         group:'Акции', entry:null, priority:'sell' },
+  { id:'XAUT',  name:'XAUT (Gold)', group:'Крипто/Gold', entry:null },
+  { id:'BTC',   name:'BTC',         group:'Крипто/Gold', entry:null },
+  { id:'TON',   name:'TON',         group:'Крипто/Gold', entry:null },
+  { id:'TRX',   name:'TRX',         group:'Крипто/Gold', entry:null },
+  { id:'MON',   name:'MON',         group:'Крипто/Gold', entry:null },
+];
+
+const STORAGE_KEY = 'vitaliy_portfolio_v2';
+
+// ─── LOAD/SAVE ───
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+}
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById('lastSaved').textContent = new Date().toLocaleTimeString('ru-RU');
+}
+function saveAll() {
+  const data = loadData();
+  // Save SPCXx
+  const spcxVal = document.getElementById('spcxPrice').value;
+  if (spcxVal) data['SPCX_current'] = parseFloat(spcxVal);
+  // Save portfolio prices
+  PORTFOLIO.forEach(p => {
+    const el = document.getElementById('price_' + p.id);
+    const entryEl = document.getElementById('entry_' + p.id);
+    if (el && el.value) data[p.id + '_current'] = parseFloat(el.value);
+    if (entryEl && entryEl.value) data[p.id + '_entry'] = parseFloat(entryEl.value);
+  });
+  // Save platform P&L
+  const plat = document.getElementById('platformPnl').value;
+  const inv = document.getElementById('totalInvested').value;
+  if (plat) data['platformPnl'] = parseFloat(plat);
+  if (inv) data['totalInvested'] = parseFloat(inv);
+  saveData(data);
+  onSpcxUpdate();
+  updateTotalPnl();
+}
+
+// ─── CLOCK ───
+function updateClock() {
+  const now = new Date();
+  const tash = new Date(now.getTime() + (5 * 60 - now.getTimezoneOffset()) * 60000);
+  document.getElementById('clock').textContent = tash.toTimeString().slice(0,8);
+  const days = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+  const months = ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+  document.getElementById('dateStr').textContent = `${days[tash.getDay()]}, ${tash.getDate()} ${months[tash.getMonth()]} ${tash.getFullYear()}`;
+  updateDCA(tash.getDay());
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ─── DCA BANNER ───
+function updateDCA(dayOfWeek) {
+  const banner = document.getElementById('dcaBanner');
+  const text = document.getElementById('dcaText');
+  const schedule = {
+    1: { ticker:'AAPLx', msg:'Сегодня Пн — день DCA в AAPLx (только на просадке 2%+)', cls:'aapl' },
+    2: { ticker:'SPYx',  msg:'Сегодня Вт — день DCA в SPYx (только на просадке 2%+)', cls:'spy'  },
+    4: { ticker:'AAPLx', msg:'Сегодня Чт — день DCA в AAPLx (только на просадке 2%+)', cls:'aapl' },
+    5: { ticker:'SPYx',  msg:'Сегодня Пт — день DCA в SPYx (только на просадке 2%+)', cls:'spy'  },
+  };
+  const s = schedule[dayOfWeek];
+  banner.className = 'dca-banner ' + (s ? s.cls : 'none');
+  text.textContent = s ? '📌 ' + s.msg : '📅 Сегодня нет DCA по расписанию (Ср, Сб или Вс)';
+}
+
+// ─── SPCXx UPDATE ───
+const SPCX_ENTRY = 135;
+const SPCX_STOP = 114.75;
+const SPCX_T1_MIN = 155;
+const SPCX_T1_MAX = 169;
+const SPCX_T2 = 189;
+
+function onSpcxUpdate() {
+  const price = parseFloat(document.getElementById('spcxPrice').value);
+  if (!price || isNaN(price)) return;
+
+  const pct = ((price - SPCX_ENTRY) / SPCX_ENTRY * 100);
+  const pctStr = (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%';
+
+  const display = document.getElementById('spcxPriceDisplay');
+  display.style.display = 'flex';
+  document.getElementById('spcxCurrentVal').textContent = '$' + price.toFixed(2);
+
+  const changeEl = document.getElementById('spcxChangeVal');
+  changeEl.textContent = pctStr;
+  changeEl.className = 'spcx-change ' + (pct >= 0 ? 'green' : 'red');
+
+  // Badge
+  const badge = document.getElementById('spcxBadge');
+  if (price <= SPCX_STOP) {
+    badge.textContent = '🛑 СТОП-ЛОСС'; badge.className = 'spcx-badge badge-stop';
+  } else if (price >= SPCX_T2) {
+    badge.textContent = '🟢 ВЫХОДИТЬ 70%'; badge.className = 'spcx-badge badge-sell';
+  } else if (price >= SPCX_T1_MIN) {
+    badge.textContent = '🔵 ВЫХОДИТЬ 50%'; badge.className = 'spcx-badge badge-sell';
+  } else {
+    badge.textContent = '⏳ ДЕРЖАТЬ'; badge.className = 'spcx-badge badge-hold';
+  }
+
+  // Marker on bar
+  // Range: $114.75 to ~$210 mapped to 0-100%
+  const barMin = 100, barMax = 220;
+  const markerPct = Math.max(0, Math.min(100, (price - barMin) / (barMax - barMin) * 100));
+  document.getElementById('spcxMarker').style.left = markerPct + '%';
+
+  const note = document.getElementById('spcxBarNote');
+  if (price <= SPCX_STOP) note.textContent = `⚠️ Ниже стоп-лосса $${SPCX_STOP}! Рассмотреть выход.`;
+  else if (price >= SPCX_T2) note.textContent = `✅ Выше Tier 2 ($${SPCX_T2}) — продать 70-80% позиции`;
+  else if (price >= SPCX_T1_MIN) note.textContent = `✅ В зоне Tier 1 ($${SPCX_T1_MIN}–$${SPCX_T1_MAX}) — продать 50% позиции`;
+  else note.textContent = `📌 Держать. До Tier 1 осталось: $${(SPCX_T1_MIN - price).toFixed(2)} (+${((SPCX_T1_MIN/price-1)*100).toFixed(1)}%)`;
+
+  // Alerts
+  updateAlerts(price, pct);
+}
+
+function updateAlerts(price, pct) {
+  const container = document.getElementById('alertsContainer');
+  container.innerHTML = '';
+  if (price <= SPCX_STOP) {
+    addAlert(container, 'danger', `🛑 SPCXx: $${price.toFixed(2)} — НИЖЕ стоп-лосса $114.75! Рассмотреть немедленный выход!`);
+  } else if (price >= SPCX_T2) {
+    addAlert(container, 'success', `🟢 SPCXx: $${price.toFixed(2)} (+${pct.toFixed(1)}%) — Достигнут Tier 2. Продать 70-80% позиции.`);
+  } else if (price >= SPCX_T1_MIN) {
+    addAlert(container, 'success', `🔵 SPCXx: $${price.toFixed(2)} (+${pct.toFixed(1)}%) — В зоне Tier 1. Продать 50% позиции.`);
+  } else if (price < SPCX_ENTRY * 0.95) {
+    addAlert(container, 'warn', `⚠️ SPCXx: $${price.toFixed(2)} — Ниже цены входа на ${Math.abs(pct).toFixed(1)}%. Следить за стопом $114.75.`);
+  }
+}
+
+function addAlert(container, type, msg) {
+  const div = document.createElement('div');
+  div.className = `alert-banner alert-${type}`;
+  div.textContent = msg;
+  container.appendChild(div);
+}
+
+// ─── PORTFOLIO TABLE ───
+function renderPortfolio() {
+  const data = loadData();
+  const tbody = document.getElementById('portfolioBody');
+  tbody.innerHTML = '';
+  let lastGroup = '';
+
+  PORTFOLIO.forEach(p => {
+    if (p.group !== lastGroup) {
+      const tr = document.createElement('tr');
+      tr.className = 'section-row';
+      tr.innerHTML = `<td colspan="4">${p.group === 'Крипто/Gold' ? '₿ ' : '📈 '}${p.group}</td>`;
+      tbody.appendChild(tr);
+      lastGroup = p.group;
+    }
+
+    const currentVal = data[p.id + '_current'] || '';
+    const entryVal = data[p.id + '_entry'] || p.entry || '';
+    const isPrioritySell = p.priority === 'sell';
+
+    let pnlHtml = '<span class="pnl-neutral">—</span>';
+    if (currentVal && entryVal) {
+      const pct = (currentVal - entryVal) / entryVal * 100;
+      const cls = pct >= 0 ? 'pnl-positive' : 'pnl-negative';
+      pnlHtml = `<span class="${cls}">${pct >= 0 ? '+' : ''}${pct.toFixed(1)}%</span>`;
+    }
+
+    const tr = document.createElement('tr');
+    if (isPrioritySell) tr.className = 'priority-sell';
+    tr.innerHTML = `
+      <td><span class="ticker">${p.name}</span>${p.note ? '<br><span style="font-size:10px;color:#888">'+p.note+'</span>' : ''}${isPrioritySell ? '<br><span style="font-size:10px;color:#e65100">продать</span>' : ''}</td>
+      <td class="right"><input type="number" id="entry_${p.id}" class="price-input" value="${entryVal}" placeholder="—" step="0.01" oninput="recalcRow('${p.id}')"></td>
+      <td class="right"><input type="number" id="price_${p.id}" class="price-input" value="${currentVal}" placeholder="—" step="0.01" oninput="recalcRow('${p.id}')"></td>
+      <td class="right" id="pnl_${p.id}">${pnlHtml}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Restore SPCXx
+  const spcxCurrent = data['SPCX_current'];
+  if (spcxCurrent) {
+    document.getElementById('spcxPrice').value = spcxCurrent;
+    onSpcxUpdate();
+  }
+
+  // Restore P&L fields
+  if (data['platformPnl']) document.getElementById('platformPnl').value = data['platformPnl'];
+  if (data['totalInvested']) document.getElementById('totalInvested').value = data['totalInvested'];
+  updateTotalPnl();
+}
+
+function recalcRow(id) {
+  const entryEl = document.getElementById('entry_' + id);
+  const currentEl = document.getElementById('price_' + id);
+  const pnlEl = document.getElementById('pnl_' + id);
+  const entry = parseFloat(entryEl?.value);
+  const current = parseFloat(currentEl?.value);
+  if (!isNaN(entry) && !isNaN(current) && entry > 0) {
+    const pct = (current - entry) / entry * 100;
+    const cls = pct >= 0 ? 'pnl-positive' : 'pnl-negative';
+    pnlEl.innerHTML = `<span class="${cls}">${pct >= 0 ? '+' : ''}${pct.toFixed(1)}%</span>`;
+  } else {
+    pnlEl.innerHTML = '<span class="pnl-neutral">—</span>';
+  }
+}
+
+// ─── P&L SUMMARY ───
+const BUG_CORRECTION = 40.15;
+const START_DATE = new Date('2026-03-09');
+
+function updateTotalPnl() {
+  const platVal = parseFloat(document.getElementById('platformPnl').value);
+  const invested = parseFloat(document.getElementById('totalInvested').value);
+
+  const corrected = !isNaN(platVal) ? platVal + BUG_CORRECTION : null;
+  const pnlEl = document.getElementById('correctedPnl');
+  const annEl = document.getElementById('annualizedReturn');
+
+  if (corrected !== null) {
+    pnlEl.textContent = (corrected >= 0 ? '+' : '') + '$' + corrected.toFixed(2);
+    pnlEl.style.color = corrected >= 0 ? '#2e7d32' : '#c62828';
+  } else {
+    pnlEl.textContent = '—';
+  }
+
+  if (corrected !== null && !isNaN(invested) && invested > 0) {
+    const days = Math.floor((new Date() - START_DATE) / 86400000);
+    document.getElementById('daysInMarket').textContent = days;
+    const annRate = (corrected / invested) * (365 / days) * 100;
+    annEl.textContent = `% годовых: ${annRate >= 0 ? '+' : ''}${annRate.toFixed(1)}%`;
+  } else {
+    const days = Math.floor((new Date() - START_DATE) / 86400000);
+    document.getElementById('daysInMarket').textContent = days;
+    annEl.textContent = 'Введи P&L и сумму вложений';
+  }
+}
+
+// ─── INIT ───
+renderPortfolio();
+updateTotalPnl();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# .interpreter-rules for hermes-webui
+## Project type
+code, web
+## Key files
+# Hermes Web UI — AI chat interface
+## Tech stack
+Web, JS
+## Rules
+# User-facing web UI

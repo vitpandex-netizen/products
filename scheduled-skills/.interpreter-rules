@@ -1,0 +1,9 @@
+# .interpreter-rules for scheduled-skills
+## Project type
+automation, schedule
+## Key files
+# Scheduled task runners
+## Tech stack
+Python, launchd
+## Rules
+# Runs on schedule, check schedules before modifying

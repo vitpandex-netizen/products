@@ -1,0 +1,16 @@
+# HH Remote Jobs — Requirements
+
+# API & HTTP
+requests==2.31.0
+python-dotenv==1.0.0
+
+# Database (sqlite3 — встроенный)
+
+# Logging
+python-json-logger==2.0.7
+
+# Testing
+pytest==7.4.0
+
+# Фаза 3 (Telegram-каналы, личный аккаунт) — раскомментировать когда дойдём:
+# telethon==1.36.0

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  LaunchAgent для stocks-us — каждые 30 минут.
+  NYSE работает 14:30-21:00 UTC (19:30-02:00 Tashkent).
+  main.py фильтрует по TRADE_START_UTC/TRADE_END_UTC из .env.
+
+  Установка:
+    cp launchd/uz.stocks.us.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/uz.stocks.us.plist
+
+  Отладка:
+    launchctl start uz.stocks.us
+    tail -f /Volumes/External/dev/my-project/stocks-us/logs/stocks-us-launchd.log
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uz.stocks.us</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Volumes/External/dev/my-project/stocks-us/venv/bin/python3</string>
+        <string>src/main.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Volumes/External/dev/my-project/stocks-us</string>
+
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Volumes/External/dev/my-project/stocks-us/logs/stocks-us-launchd.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Volumes/External/dev/my-project/stocks-us/logs/stocks-us-launchd.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>

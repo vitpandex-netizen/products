@@ -1,0 +1,33 @@
+# Секреты — никогда в Git
+.env
+*.env
+.env.*
+!*.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+credentials*
+secrets/
+secrets*
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Служебные папки
+.codex/
+.hermes/
+.DS_Store
+
+# Логи и данные
+logs/
+*.log
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# graphify (регенерируемый кэш)
+graphify-out/cache/

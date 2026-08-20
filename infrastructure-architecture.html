@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hermes Infrastructure — Architecture Diagram</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'JetBrains Mono', monospace; background: #020617; color: #e2e8f0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+.container { max-width: 1200px; width: 100%; }
+.header { text-align: center; padding: 30px 0; }
+.header h1 { font-size: 28px; color: #22d3ee; }
+.header .subtitle { font-size: 12px; color: #64748b; margin-top: 8px; }
+.header .dot { display: inline-block; width: 10px; height: 10px; background: #22d3ee; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+svg { width: 100%; height: auto; }
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.card { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 20px; }
+.card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.card-dot { width: 8px; height: 8px; border-radius: 50%; }
+.card-dot.cyan { background: #22d3ee; }
+.card-dot.green { background: #34d399; }
+.card-dot.violet { background: #a78bfa; }
+.card h3 { font-size: 14px; color: #e2e8f0; }
+.card ul { list-style: none; }
+.card li { font-size: 11px; color: #94a3b8; padding: 4px 0; border-bottom: 1px solid #1e293b; }
+.card li:last-child { border-bottom: none; }
+.footer { margin-top: 24px; font-size: 10px; color: #475569; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <h1><span class="dot"></span> Hermes Infrastructure</h1>
+  <div class="subtitle">3 сервера · 12 сервисов · 16 проектов · Единая точка входа</div>
+</div>
+
+<svg viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grid Background -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fb7185"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="700" fill="url(#grid)"/>
+
+  <!-- Legend -->
+  <g transform="translate(20, 20)">
+    <rect x="0" y="0" width="280" height="90" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="15" y="20" font-size="10" fill="#64748b">Legend</text>
+    <rect x="15" y="30" width="12" height="12" rx="2" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1"/>
+    <text x="32" y="40" font-size="9" fill="#94a3b8">Frontend / Chat</text>
+    <rect x="15" y="48" width="12" height="12" rx="2" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1"/>
+    <text x="32" y="58" font-size="9" fill="#94a3b8">Backend / Services</text>
+    <rect x="15" y="66" width="12" height="12" rx="2" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1"/>
+    <text x="32" y="76" font-size="9" fill="#94a3b8">Database / Storage</text>
+    <rect x="140" y="30" width="12" height="12" rx="2" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1"/>
+    <text x="157" y="40" font-size="9" fill="#94a3b8">Cloud / Infra</text>
+    <rect x="140" y="48" width="12" height="12" rx="2" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1"/>
+    <text x="157" y="58" font-size="9" fill="#94a3b8">Security</text>
+    <line x1="140" y1="72" x2="200" y2="72" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="205" y="76" font-size="9" fill="#94a3b8">Encrypted</text>
+  </g>
+
+  <!-- ===== US SERVER ===== -->
+  <g transform="translate(40, 140)">
+    <rect x="0" y="0" width="480" height="340" rx="12" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="20" y="25" font-size="14" fill="#fbbf24" font-weight="bold">🖥️ US Server (Intel) — Основной 24/7</text>
+    <text x="20" y="42" font-size="9" fill="#64748b">8GB RAM · 145GB SSD · Ubuntu 24.04 · 100.84.223.96</text>
+
+    <!-- Caddy -->
+    <rect x="20" y="60" width="140" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="35" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Caddy Proxy</text>
+    <text x="35" y="96" font-size="8" fill="#94a3b8">Единый вход :80</text>
+
+    <!-- Bitget -->
+    <rect x="180" y="60" width="140" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="195" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Bitget Bot</text>
+    <text x="195" y="96" font-size="8" fill="#94a3b8">Торговля 24/7</text>
+
+    <!-- Uptime Kuma -->
+    <rect x="340" y="60" width="120" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="355" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Uptime Kuma</text>
+    <text x="355" y="96" font-size="8" fill="#94a3b8">Мониторинг :3001</text>
+
+    <!-- HH Jobs -->
+    <rect x="20" y="130" width="140" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="35" y="152" font-size="12" fill="#e2e8f0" font-weight="bold">HH Jobs</text>
+    <text x="35" y="166" font-size="8" fill="#94a3b8">Поиск работы (cron)</text>
+
+    <!-- HH Remote -->
+    <rect x="180" y="130" width="140" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="195" y="152" font-size="12" fill="#e2e8f0" font-weight="bold">HH Remote</text>
+    <text x="195" y="166" font-size="8" fill="#94a3b8">Удалёнка (cron)</text>
+
+    <!-- Control Plane -->
+    <rect x="340" y="130" width="120" height="50" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="355" y="152" font-size="12" fill="#e2e8f0" font-weight="bold">Control Plane</text>
+    <text x="355" y="166" font-size="8" fill="#94a3b8">IT Ops API :8000</text>
+
+    <!-- Node Exporter -->
+    <rect x="20" y="200" width="140" height="50" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="35" y="222" font-size="12" fill="#e2e8f0" font-weight="bold">Node Exporter</text>
+    <text x="35" y="236" font-size="8" fill="#94a3b8">Метрики :9100</text>
+
+    <!-- Health Monitor -->
+    <rect x="180" y="200" width="140" height="50" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="195" y="222" font-size="12" fill="#e2e8f0" font-weight="bold">Health Monitor</text>
+    <text x="195" y="236" font-size="8" fill="#94a3b8">Пинг каждые 5 мин</text>
+
+    <!-- Git Sync -->
+    <rect x="340" y="200" width="120" height="50" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="355" y="222" font-size="12" fill="#e2e8f0" font-weight="bold">Git Sync</text>
+    <text x="355" y="236" font-size="8" fill="#94a3b8">Бэкап каждые 6ч</text>
+
+    <!-- Arrow: Internet → Caddy -->
+    <line x1="240" y1="55" x2="90" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="150" y="52" font-size="8" fill="#64748b">Трафик из интернета</text>
+  </g>
+
+  <!-- ===== MAC ===== -->
+  <g transform="translate(560, 140)">
+    <rect x="0" y="0" width="480" height="340" rx="12" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="20" y="25" font-size="14" fill="#22d3ee" font-weight="bold">💻 Mac (M1) — Разработка + AI</text>
+    <text x="20" y="42" font-size="9" fill="#64748b">8GB RAM · 228GB SSD · macOS · 100.89.205.45</text>
+
+    <!-- Hermes Agent -->
+    <rect x="20" y="60" width="140" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="35" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Hermes Agent</text>
+    <text x="35" y="96" font-size="8" fill="#94a3b8">Чат + AI</text>
+
+    <!-- Admin Panel -->
+    <rect x="180" y="60" width="140" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="195" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Admin Panel</text>
+    <text x="195" y="96" font-size="8" fill="#94a3b8">Управление :3030</text>
+
+    <!-- Ollama -->
+    <rect x="340" y="60" width="120" height="50" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="355" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Ollama</text>
+    <text x="355" y="96" font-size="8" fill="#94a3b8">Локальный AI</text>
+
+    <!-- PM2 Services -->
+    <rect x="20" y="130" width="200" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="35" y="152" font-size="12" fill="#e2e8f0" font-weight="bold">PM2 Services</text>
+    <text x="35" y="166" font-size="8" fill="#94a3b8">meeting-pipeline · watch · dashboard</text>
+
+    <!-- Meeting Pipeline -->
+    <rect x="240" y="130" width="140" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="255" y="152" font-size="12" fill="#e2e8f0" font-weight="bold">Meeting Pipeline</text>
+    <text x="255" y="166" font-size="8" fill="#94a3b8">Транскрипция</text>
+
+    <!-- 16 Projects -->
+    <rect x="20" y="200" width="360" height="50" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="35" y="222" font-size="12" fill="#e2e8f0" font-weight="bold">📁 16 проектов</text>
+    <text x="35" y="236" font-size="8" fill="#94a3b8">bitget-bot · hh-jobs · finanalytics · stocks · meeting-pipeline · hermes-webui · it-ops · uz-market · transcribe · multi-agent</text>
+
+    <!-- Projects -->
+    <rect x="20" y="270" width="440" height="50" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="35" y="292" font-size="12" fill="#e2e8f0" font-weight="bold">📂 Sub-projects</text>
+    <text x="35" y="306" font-size="8" fill="#94a3b8">hh-jobs · hh-remote · stocks-uz · stocks-us · finanalytics · passive-income · agents-toolkit · scheduled-skills</text>
+  </g>
+
+  <!-- ===== ORACLE ===== -->
+  <g transform="translate(40, 510)">
+    <rect x="0" y="0" width="320" height="140" rx="12" fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="20" y="25" font-size="14" fill="#fb7185" font-weight="bold">☁️ Oracle Cloud — Exit Node</text>
+    <text x="20" y="42" font-size="9" fill="#64748b">954MB RAM · 45GB · 100.94.224.89</text>
+
+    <!-- WireGuard -->
+    <rect x="20" y="60" width="140" height="50" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+    <text x="35" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">WireGuard</text>
+    <text x="35" y="96" font-size="8" fill="#94a3b8">Exit node · Шифрование</text>
+
+    <!-- Docker -->
+    <rect x="180" y="60" width="120" height="50" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="195" y="82" font-size="12" fill="#e2e8f0" font-weight="bold">Docker</text>
+    <text x="195" y="96" font-size="8" fill="#94a3b8">caddy · health · buzz</text>
+  </g>
+
+  <!-- ===== CONNECTIONS ===== -->
+  <!-- User → US Server -->
+  <line x1="400" y1="130" x2="400" y2="115" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="125" font-size="8" fill="#64748b">Ты (телефон/Mac)</text>
+
+  <!-- US → Mac -->
+  <line x1="520" y1="310" x2="560" y2="310" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="520" y1="310" x2="560" y2="310" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="525" y="305" font-size="8" fill="#64748b">Reverse proxy</text>
+
+  <!-- US → Oracle (encrypted) -->
+  <line x1="200" y1="480" x2="200" y2="510" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow-dashed)"/>
+  <text x="210" y="498" font-size="8" fill="#fb7185">WireGuard (шифровано)</text>
+
+  <!-- Mac → Oracle (encrypted) -->
+  <line x1="800" y1="480" x2="800" y2="510" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="720" y="498" font-size="8" fill="#fb7185">WireGuard (шифровано)</text>
+
+  <!-- Oracle → Internet -->
+  <line x1="200" y1="650" x2="200" y2="680" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="210" y="675" font-size="8" fill="#64748b">Интернет (167.138.162.167)</text>
+</svg>
+
+<!-- Info Cards -->
+<div class="card-grid">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot cyan"></div>
+      <h3>US Server</h3>
+    </div>
+    <ul>
+      <li>• Caddy — единый вход (80)</li>
+      <li>• Bitget-bot — торговля 24/7</li>
+      <li>• HH Jobs + HH Remote — работа</li>
+      <li>• Uptime Kuma — мониторинг</li>
+      <li>• Control Plane — IT Ops API</li>
+      <li>• Node Exporter + Health Monitor</li>
+      <li>• Git Sync — бэкап кода</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot green"></div>
+      <h3>Mac (M1)</h3>
+    </div>
+    <ul>
+      <li>• Hermes Agent — чат с AI</li>
+      <li>• Admin Panel — управление (3030)</li>
+      <li>• Ollama — локальный AI offline</li>
+      <li>• PM2 — 6 сервисов</li>
+      <li>• Meeting Pipeline — транскрипция</li>
+      <li>• 16 проектов в /Users/vitaliyr/dev/</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-dot violet"></div>
+      <h3>Oracle Cloud</h3>
+    </div>
+    <ul>
+      <li>• WireGuard exit node</li>
+      <li>• Весь трафик шифрованный</li>
+      <li>• Docker — caddy, health</li>
+      <li>• IP: 168.138.162.167</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  Hermes Infrastructure v2.0 · 12 августа 2026 · Единая точка входа: http://100.84.223.96
+</div>
+</div>
+</body>
+</html>

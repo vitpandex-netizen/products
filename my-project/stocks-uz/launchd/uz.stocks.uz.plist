@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  LaunchAgent для stocks-uz — запуск каждые 30 минут.
+
+  Часы работы UZSE (UTC+5, пн-пт) не подтверждены документально.
+  main.py сам фильтрует по TRADE_START_HOUR/TRADE_END_HOUR из .env.
+
+  Установка (однократно):
+    cp launchd/uz.stocks.uz.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/uz.stocks.uz.plist
+
+  Отладка:
+    launchctl start uz.stocks.uz          # запустить вручную
+    tail -f /Volumes/External/dev/my-project/stocks-uz/logs/stocks-uz.log
+    launchctl list | grep stocks          # статус
+
+  Удалить:
+    launchctl unload ~/Library/LaunchAgents/uz.stocks.uz.plist
+    rm ~/Library/LaunchAgents/uz.stocks.uz.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uz.stocks.uz</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Volumes/External/dev/my-project/stocks-uz/venv/bin/python3</string>
+        <string>src/main.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Volumes/External/dev/my-project/stocks-uz</string>
+
+    <!-- Каждые 30 минут -->
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>StandardOutPath</key>
+    <string>/Volumes/External/dev/my-project/stocks-uz/logs/stocks-uz-launchd.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Volumes/External/dev/my-project/stocks-uz/logs/stocks-uz-launchd.log</string>
+
+    <!-- Не запускать если Mac выключен в момент запуска -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>

@@ -1,0 +1,9 @@
+# .interpreter-rules for meeting-pipeline
+## Project type
+automation, bot
+## Key files
+# Meeting pipeline automation
+## Tech stack
+Python, pm2
+## Rules
+# pm2-managed, runs on schedule
