@@ -172,7 +172,20 @@
 | **Связи** | Telegram (topic 7607 — AnyIdea), DataCore |
 | **Изоляция** | 🟡 В экосистеме (через DataCore шину) |
 
-#### 14. Multi-Agent Chat
+#### 14. Expert Consilium (Консилиум Экспертов)
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟢 Active на US Server |
+| **Суть** | Telegram бот + веб-дашборд: вопрос → 5 ИИ-экспертов → консолидированный ответ |
+| **Роли** | Стратег (DeepSeek), Аналитик (Gemini), Критик (Claude), Креативщик (GPT-4o), Синтезатор (Grok) |
+| **Режимы** | Smart Mode: базовый (бюджетный) / премиум (для сложных вопросов) |
+| **Бот** | @Expert_consilium_bot, топик 7941 |
+| **Сервер** | US Server services/expert-consilium, Docker Compose |
+| **Стек** | PostgreSQL + Redis + FastAPI + OpenRouter + Caddy gateway |
+| **Связи** | Web Dashboard, Caddy (:8083/consilium/*) |
+| **Изоляция** | 🟡 В экосистеме (через Caddy gateway) |
+
+#### 15. Multi-Agent Chat
 | Поле | Значение |
 |------|----------|
 | **Статус** | 🟡 Active (Orbstack) |
@@ -221,12 +234,17 @@
 | **Статус** | 🟡 WIP |
 | **Суть** | Централизованная админка для всех сервисов |
 
-#### 21. IT Operations Framework (ITOPS)
+#### 21. ITOPS — IT Operations Framework (коммерческий продукт)
 | Поле | Значение |
 |------|----------|
-| **Статус** | 🟢 Active на **US Server** |
-| **Суть** | Документация и регламенты IT-процессов |
-| **Сервер** | US Server it-ops |
+| **Статус** | 🟢 Active |
+| **Суть** | **Отдельный коммерческий продукт.** Enterprise IT-поддержка: заявки, SLA, Telegram self-service, AI Voice Operator |
+| **Архитектура** | Core Service + Event Bus (Redis) + PostgreSQL. Полностью независимая, своя шина, своя БД |
+| **Сервер** | US Server (изолированная инфраструктура) |
+| **Telegram** | Свой бот, отличается от всех наших личных проектов |
+| **AI Voice** | STT → LLM → ответ, встроен в Telegram бот. Без Twilio |
+| **Репозиторий** | `vitpandex-netizen/it-operations-framework` (отдельный) |
+| **Изоляция** | 🟢 **Полная — НИКАК не связан с нашими проектами** |
 
 ---
 
@@ -262,6 +280,7 @@
 
 | Топик | ID | Проекты |
 |-------|-----|---------|
+| Expert Consilium | 7941 | Expert Consilium |
 | UZ Stocks | 576 | Stocks UZ |
 | US Stocks | 577 | — |
 | HH Jobs | 15 | HH Jobs |
