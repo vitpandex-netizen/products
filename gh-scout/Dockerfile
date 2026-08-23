@@ -10,9 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 # Код
 COPY . .
 
-# Здоровье
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-    CMD python -c "import httpx; httpx.get('http://localhost:8005/api/v1/health', timeout=5)"
+# Здоровье — для core сервиса проверяется через API /api/v1/health
+# Для collector healthcheck не нужен (worker без HTTP)
 
 EXPOSE 8005
 

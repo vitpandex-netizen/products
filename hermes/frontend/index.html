@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERMES — кокпит портфеля</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0B1020; color: #E7ECF5; font-family: system-ui, -apple-system, sans-serif; min-height: 100vh; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px 16px 60px; }
+
+/* Header */
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid #263149; }
+.logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+.logo span { color: #C8A24C; }
+.updated { color: #8A97B0; font-size: 12px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; background: #131A2E; border-radius: 10px; padding: 4px; overflow-x: auto; }
+.tab { padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; color: #8A97B0; border: none; background: transparent; white-space: nowrap; font-family: inherit; }
+.tab.active { background: #263149; color: #E7ECF5; font-weight: 600; }
+.tab:hover { color: #E7ECF5; }
+
+/* Cards */
+.card { background: #131A2E; border: 1px solid #263149; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.card-title { font-size: 14px; font-weight: 600; }
+.card-sub { color: #8A97B0; font-size: 12px; }
+
+/* Gauge */
+.gauge { position: relative; height: 6px; background: #0F1526; border-radius: 999px; border: 1px solid #263149; margin: 8px 0; }
+.gauge-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; opacity: 0.55; transition: width 0.5s; }
+.gauge-target { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #C8A24C; }
+.gauge-current { position: absolute; top: -2px; width: 8px; height: 10px; border-radius: 2px; transition: left 0.5s; }
+
+/* Labels */
+.label { color: #8A97B0; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+/* Signal groups */
+.signal-group { margin-bottom: 20px; }
+.signal-group-title { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+.sell .signal-group-title { color: #E5624F; background: #E5624F15; }
+.watch .signal-group-title { color: #E0A93B; background: #E0A93B15; }
+.buy .signal-group-title { color: #3FB98A; background: #3FB98A15; }
+.hold .signal-group-title { color: #8A97B0; background: #8A97B015; }
+
+/* Signal card */
+.signal-ticker { font-size: 18px; font-weight: 600; }
+.signal-price { font-size: 14px; color: #8A97B0; }
+.signal-verdict { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 4px; }
+.signal-msg { font-size: 12px; color: #8A97B0; margin-top: 4px; }
+
+/* Stats row */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.stat { background: #131A2E; border: 1px solid #263149; border-radius: 10px; padding: 12px; text-align: center; }
+.stat-value { font-size: 20px; font-weight: 700; font-family: ui-monospace, monospace; }
+.stat-label { color: #8A97B0; font-size: 11px; margin-top: 2px; }
+.stat-green { color: #3FB98A; }
+.stat-red { color: #E5624F; }
+.stat-amber { color: #E0A93B; }
+
+/* Bond table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: #8A97B0; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 4px; border-bottom: 1px solid #263149; }
+td { padding: 8px 4px; border-bottom: 1px solid #131A2E; }
+tr:hover td { background: #0F1526; }
+.insured { color: #3FB98A; }
+.not-insured { color: #E5624F; }
+
+/* Calendar */
+.cal-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #131A2E; }
+.cal-date { font-family: ui-monospace, monospace; font-size: 13px; color: #C8A24C; min-width: 80px; }
+.cal-label { flex: 1; font-size: 13px; }
+.cal-kind { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 6px; border-radius: 3px; }
+.kind-ipo { background: #3FB98A20; color: #3FB98A; }
+.kind-maturity { background: #E5624F20; color: #E5624F; }
+.kind-dividend { background: #E0A93B20; color: #E0A93B; }
+.kind-todo { background: #8A97B020; color: #8A97B0; }
+.kind-bond { background: #C8A24C20; color: #C8A24C; }
+
+/* Loading */
+.loading { text-align: center; padding: 40px; color: #8A97B0; font-family: ui-monospace, monospace; }
+.error { background: #E5624F15; border: 1px solid #E5624F; color: #E5624F; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 13px; }
+
+@media (max-width: 600px) {
+  .container { padding: 12px 10px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .tabs { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div class="header">
+    <div class="logo">HERMES <span>▼</span></div>
+    <div class="updated" id="updated"></div>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="signals">Сигналы</button>
+    <button class="tab" data-tab="portfolio">Позиции</button>
+    <button class="tab" data-tab="bonds">ИИС / облигации</button>
+    <button class="tab" data-tab="calendar">Календарь</button>
+  </div>
+  <div id="content"><div class="loading">загрузка…</div></div>
+</div>
+
+<script>
+const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8003/api' : '/hermes/api';
+
+const nf = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+const nf2 = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 });
+const fmt = n => nf.format(Math.round(n || 0));
+const now = () => new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Tashkent' });
+
+async function api(path) {
+  const r = await fetch(`${API}${path}`);
+  if (!r.ok) throw new Error(`${r.status}: ${await r.text()}`);
+  return r.json();
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    render(tab.dataset.tab);
+  });
+});
+
+async function render(tab) {
+  const el = document.getElementById('content');
+  document.getElementById('updated').textContent = `обновлено: ${now()}`;
+  try {
+    if (tab === 'signals') el.innerHTML = await renderSignals();
+    else if (tab === 'portfolio') el.innerHTML = await renderPortfolio();
+    else if (tab === 'bonds') el.innerHTML = await renderBonds();
+    else if (tab === 'calendar') el.innerHTML = await renderCalendar();
+  } catch(e) {
+    el.innerHTML = `<div class="error">${e.message}</div>`;
+  }
+}
+
+function gauge(ratio, color) {
+  const span = 1.3;
+  const curX = Math.min(Math.max((ratio || 0), 0), span) / span * 100;
+  const tgtX = (1 / span) * 100;
+  return `<div class="gauge">
+    <div class="gauge-fill" style="width:${curX}%;background:${color}"></div>
+    <div class="gauge-target" style="left:${tgtX}%"></div>
+    <div class="gauge-current" style="left:calc(${curX}% - 3px);background:${color}"></div>
+  </div>`;
+}
+
+function signalCard(s) {
+  const colors = { SELL: '#E5624F', CONTRADICTION: '#E0A93B', NEAR: '#E0A93B', UPSIDE: '#3FB98A', HOLD: '#8A97B0' };
+  const color = colors[s.verdict] || '#8A97B0';
+  const ratio = s.ratio || 0;
+  return `<div class="card">
+    <div class="card-header">
+      <div>
+        <div class="signal-ticker">${s.ticker}</div>
+        <div class="signal-price">${s.message}</div>
+      </div>
+      <div class="signal-verdict" style="background:${color}20;color:${color}">${s.verdict}</div>
+    </div>
+    ${ratio > 0 ? gauge(ratio, color) : ''}
+    ${s.contra ? s.contra.map(c => `<div class="signal-msg">${c.analyst}: ${fmt(c.value)}</div>`).join('') : ''}
+  </div>`;
+}
+
+async function renderSignals() {
+  const signals = await api('/signals');
+  let html = '<div class="stats">' +
+    `<div class="stat"><div class="stat-value stat-red">${signals.sell.length}</div><div class="stat-label">Продать</div></div>` +
+    `<div class="stat"><div class="stat-value stat-amber">${signals.watch.length}</div><div class="stat-label">Внимание</div></div>` +
+    `<div class="stat"><div class="stat-value stat-green">${signals.buy.length}</div><div class="stat-label">Потенциал</div></div>` +
+    `<div class="stat"><div class="stat-value">${signals.hold.length}</div><div class="stat-label">Держать</div></div>` +
+  '</div>';
+
+  for (const [group, items, cls] of [['sell', signals.sell, 'sell'], ['watch', signals.watch, 'watch'], 
+                                       ['buy', signals.buy, 'buy'], ['hold', signals.hold, 'hold']]) {
+    if (items.length === 0) continue;
+    html += `<div class="signal-group ${cls}"><div class="signal-group-title">${group.toUpperCase()} (${items.length})</div>`;
+    html += items.map(signalCard).join('');
+    html += '</div>';
+  }
+  return html;
+}
+
+async function renderPortfolio() {
+  const data = await api('/portfolio');
+  if (!data.positions || data.positions.length === 0) return '<div class="card"><div class="card-title">Нет позиций</div></div>';
+  
+  const bb = data.barbell || {};
+  const conc = data.concentration || {};
+  
+  let html = `<div class="stats">
+    <div class="stat"><div class="stat-value">${fmt(data.total_value)}</div><div class="stat-label">Стоимость</div></div>
+    <div class="stat"><div class="stat-value ${data.total_pl >= 0 ? 'stat-green' : 'stat-red'}">${data.total_pl >= 0 ? '+' : ''}${fmt(data.total_pl)}</div><div class="stat-label">P&L</div></div>
+    <div class="stat"><div class="stat-value stat-amber">${bb.equity_pct || 0}%</div><div class="stat-label">Акции</div></div>
+    <div class="stat"><div class="stat-value">${bb.bond_pct || 0}%</div><div class="stat-label">Облигации</div></div>
+    <div class="stat"><div class="stat-value ${(conc.top_pct || 0) > 25 ? 'stat-red' : 'stat-green'}">${conc.top_pct || 0}%</div><div class="stat-label">Концентрация</div></div>
+  </div>`;
+  
+  html += '<div class="card"><table><tr><th>Тикер</th><th>Кол-во</th><th>Средняя</th><th>Цена</th><th>Стоимость</th><th>P&L</th></tr>';
+  for (const p of data.positions) {
+    html += `<tr>
+      <td><strong>${p.ticker}</strong></td>
+      <td>${fmt(p.shares)}</td>
+      <td>${fmt(p.avg_price)}</td>
+      <td>${fmt(p.current_price)}</td>
+      <td>${fmt(p.value)}</td>
+      <td style="color:${p.pl >= 0 ? '#3FB98A' : '#E5624F'}">${p.pl >= 0 ? '+' : ''}${fmt(p.pl)} (${p.pl_pct >= 0 ? '+' : ''}${p.pl_pct.toFixed(1)}%)</td>
+    </tr>`;
+  }
+  html += '</table></div>';
+  return html;
+}
+
+async function renderBonds() {
+  const data = await api('/bonds');
+  if (!data.bonds || data.bonds.length === 0) return '<div class="card"><div class="card-title">Нет облигаций</div></div>';
+  
+  const summary = data.summary || {};
+  let html = `<div class="stats">
+    <div class="stat"><div class="stat-value stat-green">${fmt(summary.total_monthly)}</div><div class="stat-label">Купон/мес</div></div>
+    <div class="stat"><div class="stat-value">${fmt(summary.total_annual)}</div><div class="stat-label">Купон/год</div></div>
+    <div class="stat"><div class="stat-value">${summary.count}</div><div class="stat-label">Выпусков</div></div>
+  </div>`;
+  
+  html += '<div class="card"><table><tr><th>Тикер</th><th>Ставка</th><th>Номинал</th><th>YTM</th><th>Купон/мес</th><th>Погашение</th><th>Страховка</th></tr>';
+  for (const b of summary.bonds || []) {
+    html += `<tr>
+      <td><strong>${b.ticker}</strong></td>
+      <td>${b.coupon_rate}%</td>
+      <td>${fmt(b.nominal || 0)}</td>
+      <td style="color:#E0A93B">${b.ytm}%</td>
+      <td>${fmt(b.monthly_coupon)}</td>
+      <td>${b.years_to_maturity}г</td>
+      <td class="${b.insured ? 'insured' : 'not-insured'}">${b.insured ? '✅' : '❌'}</td>
+    </tr>`;
+  }
+  html += '</table></div>';
+  return html;
+}
+
+async function renderCalendar() {
+  const data = await api('/catalysts');
+  if (!data.catalysts || data.catalysts.length === 0) return '<div class="card"><div class="card-title">Нет событий</div></div>';
+  
+  let html = '<div class="card">';
+  for (const c of data.catalysts) {
+    html += `<div class="cal-item">
+      <div class="cal-date">${c.fuzzy_label || c.date.slice(0,10)}</div>
+      <div class="cal-label">${c.label}</div>
+      <div class="cal-kind kind-${c.kind}">${c.kind}</div>
+    </div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+// Initial render
+render('signals');
+</script>
+</body>
+</html>

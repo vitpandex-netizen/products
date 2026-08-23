@@ -129,11 +129,29 @@ class GitHubCollector:
                 stars_el = article.select_one(".d-inline-block.float-sm-right")
                 today_el = article.select_one(".float-sm-right .d-inline-block")
 
+                # Парсинг звёзд: из "14397 stars this week" берём только число
+                stars_text = stars_el.text.strip() if stars_el else ""
+                stars_num = 0
+                if stars_text:
+                    import re
+                    nums = re.findall(r'\d+', stars_text.replace(",", ""))
+                    if nums:
+                        stars_num = int(nums[0])
+
+                # Парсинг звёзд за сегодня: из "1,234 stars today" берём число
+                today_text = today_el.text.strip() if today_el else ""
+                today_num = 0
+                if today_text:
+                    import re
+                    nums = re.findall(r'\d+', today_text.replace(",", ""))
+                    if nums:
+                        today_num = int(nums[0])
+
                 results.append({
                     "repo_full_name": full_name,
                     "description": desc_el.text.strip() if desc_el else "",
-                    "stars": int(stars_el.text.strip().replace(",", "")) if stars_el else 0,
-                    "stars_today": 0,  # сложно распарсить, пропускаем
+                    "stars": stars_num,
+                    "stars_today": today_num,
                     "language": language or "",
                 })
 

@@ -1,0 +1,109 @@
+version: "3.8"
+
+services:
+  consilium-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: consilium-api
+    restart: unless-stopped
+    ports:
+      - "8007:8007"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - consilium-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8007/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  consilium-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: consilium-worker
+    restart: unless-stopped
+    command: ["python", "-m", "src.worker"]
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - consilium-net
+    deploy:
+      replicas: 1
+    healthcheck:
+      disable: true
+
+  consilium-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: consilium-bot
+    restart: unless-stopped
+    command: ["python", "-m", "src.bot"]
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_started
+    networks:
+      - consilium-net
+    healthcheck:
+      disable: true
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: consilium-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infra/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5444:5432"  # нестандартный порт чтобы не конфликтовать
+    networks:
+      - consilium-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: consilium-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6444:6379"  # нестандартный порт
+    networks:
+      - consilium-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  consilium-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

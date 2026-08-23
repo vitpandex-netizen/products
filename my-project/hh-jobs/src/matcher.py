@@ -18,6 +18,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from shared.models import Vacancy, MatchResult
 from shared.db import Database
 
+# Title-based matcher for RSS (no description)
+from title_matcher import score_title as score_title_only
+
 logger = logging.getLogger(__name__)
 
 MATCH_THRESHOLD = 0.70
@@ -228,6 +231,14 @@ class VacancyMatcher:
             + experience_score * active_weights["experience"]
         )
         total = round(min(total, 1.0), 3)
+
+        # Title-based boost: use score_title as a complement for RSS-only data
+        title_score = score_title_only(vacancy.title)
+        if title_score > total:
+            reasons.append(
+                f"Title boost: title_score={title_score:.2f} > total={total:.2f} -> using title_score"
+            )
+            total = title_score
 
         # Руководящая позиция (CIO/CTO/ИТ-директор/Head of IT и т.п.) —
         # принудительный минимум score. RSS-фид даёт только заголовок без
