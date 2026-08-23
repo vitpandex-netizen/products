@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERMES — кокпит портфеля</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0B1020;color:#E7ECF5;font-family:system-ui,-apple-system,sans-serif;min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #263149}
+.logo{font-size:20px;font-weight:700;letter-spacing:1px}
+.logo span{color:#C8A24C}
+.updated{color:#8A97B0;font-size:12px}
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:#131A2E;border-radius:10px;padding:4px;overflow-x:auto}
+.tab{padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;color:#8A97B0;border:none;background:transparent;white-space:nowrap;font-family:inherit}
+.tab.active{background:#263149;color:#E7ECF5;font-weight:600}
+.tab:hover{color:#E7ECF5}
+.card{background:#131A2E;border:1px solid #263149;border-radius:12px;padding:16px;margin-bottom:12px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.card-title{font-size:14px;font-weight:600}
+.card-sub{color:#8A97B0;font-size:12px}
+.gauge{position:relative;height:6px;background:#0F1526;border-radius:999px;border:1px solid #263149;margin:8px 0}
+.gauge-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;opacity:0.55;transition:width 0.5s}
+.gauge-target{position:absolute;top:-3px;bottom:-3px;width:2px;background:#C8A24C}
+.gauge-current{position:absolute;top:-2px;width:8px;height:10px;border-radius:2px;transition:left 0.5s}
+.label{color:#8A97B0;font-size:10px;letter-spacing:1.5px;text-transform:uppercase}
+.signal-group{margin-bottom:20px}
+.signal-group-title{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;padding:4px 8px;border-radius:4px;display:inline-block}
+.sell .signal-group-title{color:#E5624F;background:#E5624F15}
+.watch .signal-group-title{color:#E0A93B;background:#E0A93B15}
+.buy .signal-group-title{color:#3FB98A;background:#3FB98A15}
+.hold .signal-group-title{color:#8A97B0;background:#8A97B015}
+.signal-ticker{font-size:18px;font-weight:600}
+.signal-price{font-size:14px;color:#8A97B0}
+.signal-verdict{font-size:11px;font-weight:600;letter-spacing:0.5px;padding:2px 8px;border-radius:4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:#131A2E;border:1px solid #263149;border-radius:10px;padding:12px;text-align:center}
+.stat-value{font-size:20px;font-weight:700;font-family:ui-monospace,monospace}
+.stat-label{color:#8A97B0;font-size:11px;margin-top:2px}
+.stat-green{color:#3FB98A}
+.stat-red{color:#E5624F}
+.stat-amber{color:#E0A93B}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:#8A97B0;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;padding:8px 4px;border-bottom:1px solid #263149}
+td{padding:8px 4px;border-bottom:1px solid #131A2E}
+.insured{color:#3FB98A}
+.not-insured{color:#E5624F}
+.cal-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #131A2E}
+.cal-date{font-family:ui-monospace,monospace;font-size:13px;color:#C8A24C;min-width:80px}
+.cal-label{flex:1;font-size:13px}
+.cal-kind{font-size:10px;text-transform:uppercase;letter-spacing:0.5px;padding:2px 6px;border-radius:3px}
+.kind-ipo{background:#3FB98A20;color:#3FB98A}
+.kind-maturity{background:#E5624F20;color:#E5624F}
+.kind-todo{background:#8A97B020;color:#8A97B0}
+.loading{text-align:center;padding:40px;color:#8A97B0;font-family:ui-monospace,monospace}
+.error{background:#E5624F15;border:1px solid #E5624F;color:#E5624F;padding:12px;border-radius:8px;margin-bottom:12px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div class="header">
+    <div class="logo">BGT Bot <span>v</span></div>
+    <div class="updated" id="updated"></div>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="signals">Signal</button>
+    <button class="tab" data-tab="portfolio">Portfolio</button>
+    <button class="tab" data-tab="bonds">Bonds</button>
+    <button class="tab" data-tab="calendar">Calendar</button>
+  </div>
+  <div id="content"><div class="loading">Loading...</div></div>
+</div>
+<script>
+var API = window.location.pathname.indexOf("/hermes") === 0 ? "/hermes/api" : "/api";
+var nf = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 });
+var fmt = function(n) { return nf.format(Math.round(n || 0)); };
+
+function api(path) {
+  return fetch("" + API + path).then(function(r) {
+    if (!r.ok) return r.text().then(function(t) { throw new Error(t.slice(0,100)); });
+    return r.json();
+  });
+}
+
+document.querySelectorAll(".tab").forEach(function(tab) {
+  tab.addEventListener("click", function() {
+    document.querySelectorAll(".tab").forEach(function(t) { t.classList.remove("active"); });
+    tab.classList.add("active");
+    render(tab.dataset.tab);
+  });
+});
+
+var colors = { SELL: "#E5624F", CONTRADICTION: "#E0A93B", NEAR: "#E0A93B", UPSIDE: "#3FB98A", HOLD: "#8A97B0" };
+
+function gauge(ratio, color) {
+  var cur = Math.min(Math.max((ratio || 0), 0), 1.3) / 1.3 * 100;
+  var tgt = (1 / 1.3) * 100;
+  return '<div class="gauge"><div class="gauge-fill" style="width:' + cur + '%;background:' + color + '"></div><div class="gauge-target" style="left:' + tgt + '%"></div><div class="gauge-current" style="left:calc(' + cur + '% - 3px);background:' + color + '"></div></div>';
+}
+
+function card(s) {
+  var c = colors[s.verdict] || "#8A97B0";
+  var extra = "";
+  if (s.ratio > 0) extra = gauge(s.ratio, c);
+  if (s.contra) {
+    for (var i = 0; i < s.contra.length; i++) {
+      extra += '<div class="card-sub">' + s.contra[i].analyst + ": " + fmt(s.contra[i].value) + "</div>";
+    }
+  }
+  return '<div class="card"><div class="card-header"><div><div class="signal-ticker">' + s.ticker + '</div><div class="signal-price">' + s.message + '</div></div><div class="signal-verdict" style="background:' + c + '20;color:' + c + '">' + s.verdict + '</div></div>' + extra + '</div>';
+}
+
+function groupHtml(items, cls, label) {
+  if (!items || !items.length) return "";
+  var h = '<div class="signal-group ' + cls + '"><div class="signal-group-title">' + label + " (" + items.length + ")</div>";
+  for (var i = 0; i < items.length; i++) h += card(items[i]);
+  return h + "</div>";
+}
+
+function render(tab) {
+  var el = document.getElementById("content");
+  document.getElementById("updated").textContent = new Date().toLocaleString("ru-RU", { timeZone: "Asia/Tashkent" });
+  if (tab === "signals") {
+    api("/signals").then(function(d) {
+      var h = '<div class="stats"><div class="stat"><div class="stat-value stat-red">' + d.sell.length + '</div><div class="stat-label">Sell</div></div><div class="stat"><div class="stat-value stat-amber">' + d.watch.length + '</div><div class="stat-label">Watch</div></div><div class="stat"><div class="stat-value stat-green">' + d.buy.length + '</div><div class="stat-label">Buy</div></div><div class="stat"><div class="stat-value">' + d.hold.length + '</div><div class="stat-label">Hold</div></div></div>';
+      h += groupHtml(d.sell, "sell", "SELL");
+      h += groupHtml(d.watch, "watch", "WATCH");
+      h += groupHtml(d.buy, "buy", "BUY");
+      h += groupHtml(d.hold, "hold", "HOLD");
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  } else if (tab === "portfolio") {
+    api("/portfolio").then(function(d) {
+      if (!d.positions || !d.positions.length) { el.innerHTML = '<div class="card"><div class="card-title">No positions</div></div>'; return; }
+      var bb = d.barbell || {};
+      var h = '<div class="stats"><div class="stat"><div class="stat-value">' + fmt(d.total_value) + '</div><div class="stat-label">Value</div></div><div class="stat"><div class="stat-value ' + (d.total_pl >= 0 ? "stat-green" : "stat-red") + '">' + (d.total_pl >= 0 ? "+" : "") + fmt(d.total_pl) + '</div><div class="stat-label">P&L</div></div><div class="stat"><div class="stat-value stat-amber">' + (bb.equity_pct || 0) + '%</div><div class="stat-label">Equity</div></div><div class="stat"><div class="stat-value">' + (bb.bond_pct || 0) + '%</div><div class="stat-label">Bonds</div></div></div>';
+      h += '<div class="card"><table><tr><th>Ticker</th><th>Shares</th><th>Avg</th><th>Price</th><th>Value</th><th>P&L</th></tr>';
+      for (var i = 0; i < d.positions.length; i++) {
+        var p = d.positions[i];
+        h += "<tr><td><strong>" + p.ticker + '</strong></td><td>' + fmt(p.shares) + '</td><td>' + fmt(p.avg_price) + '</td><td>' + fmt(p.current_price) + '</td><td>' + fmt(p.value) + '</td><td style="color:' + (p.pl >= 0 ? "#3FB98A" : "#E5624F") + '">' + (p.pl >= 0 ? "+" : "") + fmt(p.pl) + " (" + (p.pl_pct >= 0 ? "+" : "") + p.pl_pct.toFixed(1) + "%)</td></tr>";
+      }
+      h += "</table></div>";
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  } else if (tab === "bonds") {
+    api("/bonds").then(function(d) {
+      if (!d.bonds || !d.bonds.length) { el.innerHTML = '<div class="card"><div class="card-title">No bonds</div></div>'; return; }
+      var s = d.summary || {};
+      var h = '<div class="stats"><div class="stat"><div class="stat-value stat-green">' + fmt(s.total_monthly) + '</div><div class="stat-label">Coupon/mo</div></div><div class="stat"><div class="stat-value">' + fmt(s.total_annual) + '</div><div class="stat-label">Coupon/yr</div></div><div class="stat"><div class="stat-value">' + s.count + '</div><div class="stat-label">Issues</div></div></div>';
+      h += '<div class="card"><table><tr><th>Ticker</th><th>Rate</th><th>YTM</th><th>Coupon/mo</th><th>Maturity</th><th>Insured</th></tr>';
+      for (var i = 0; i < (s.bonds || []).length; i++) {
+        var b = s.bonds[i];
+        h += "<tr><td><strong>" + b.ticker + '</strong></td><td>' + b.coupon_rate + '%</td><td style="color:#E0A93B">' + b.ytm + '%</td><td>' + fmt(b.monthly_coupon) + '</td><td>' + b.years_to_maturity + 'y</td><td class="' + (b.insured ? "insured" : "not-insured") + '">' + (b.insured ? "OK" : "NO") + "</td></tr>";
+      }
+      h += "</table></div>";
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  } else if (tab === "calendar") {
+    api("/catalysts").then(function(d) {
+      if (!d.catalysts || !d.catalysts.length) { el.innerHTML = '<div class="card"><div class="card-title">No events</div></div>'; return; }
+      var h = '<div class="card">';
+      for (var i = 0; i < d.catalysts.length; i++) {
+        var c = d.catalysts[i];
+        h += '<div class="cal-item"><div class="cal-date">' + (c.fuzzy_label || c.date.slice(0,10)) + '</div><div class="cal-label">' + c.label + '</div><div class="cal-kind kind-' + c.kind + '">' + c.kind + "</div></div>";
+      }
+      h += "</div>";
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  }
+}
+</script>
+</body>
+</html>

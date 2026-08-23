@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Консилиум Экспертов</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #2a2a4a;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 1.8em; color: #fff; }
+        header p { color: #888; margin-top: 5px; }
+        .stats {
+            display: flex; gap: 20px; justify-content: center;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #1a1a3a;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-width: 120px;
+        }
+        .stat-card .num { font-size: 2em; font-weight: bold; color: #7c3aed; }
+        .stat-card .label { font-size: 0.85em; color: #888; margin-top: 5px; }
+        .card {
+            background: #1a1a3a;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: #7c3aed; }
+        .card-header {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 10px;
+        }
+        .card .mode {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .mode-basic { background: #2d4a2d; color: #4ade80; }
+        .mode-premium { background: #4a2d4a; color: #c084fc; }
+        .status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+        }
+        .status-completed { background: #1a3a2a; color: #4ade80; }
+        .status-processing { background: #3a3a1a; color: #facc15; }
+        .status-pending { background: #2a2a3a; color: #888; }
+        .status-failed { background: #3a1a1a; color: #f87171; }
+        .card .question {
+            color: #c0c0e0;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        .card .meta {
+            display: flex; gap: 15px;
+            font-size: 0.8em; color: #666;
+        }
+        .card a {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+        .card a:hover { text-decoration: underline; }
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        .empty h2 { margin-bottom: 10px; }
+        footer {
+            text-align: center; padding: 30px; color: #444; font-size: 0.8em;
+        }
+        .badge {
+            display: inline-block; padding: 2px 8px; border-radius: 10px;
+            font-size: 0.7em; margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Консилиум Экспертов</h1>
+            <p>Дашборд запросов и анализа</p>
+        </header>
+
+        {% set total = requests|length %}
+        {% set completed = requests|selectattr('status', 'equalto', 'completed')|list|length %}
+        <div class="stats">
+            <div class="stat-card">
+                <div class="num">{{ total }}</div>
+                <div class="label">Всего запросов</div>
+            </div>
+            <div class="stat-card">
+                <div class="num">{{ completed }}</div>
+                <div class="label">Выполнено</div>
+            </div>
+            <div class="stat-card">
+                <div class="num">{{ total - completed }}</div>
+                <div class="label">В обработке</div>
+            </div>
+        </div>
+
+        {% if requests %}
+            {% for req in requests %}
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span class="mode mode-{{ req.mode }}">{{ '⚡ Базовый' if req.mode == 'basic' else '🌟 Премиум' }}</span>
+                        <span class="status status-{{ req.status }}">{{ req.status }}</span>
+                    </div>
+                    <div class="meta">
+                        <span>👤 {{ req.user_id }}</span>
+                        <span>🕐 {{ req.created_at.strftime('%d.%m %H:%M') if req.created_at else '—' }}</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <a href="/request/{{ req.id }}">{{ req.question[:150] }}{% if req.question|length > 150 %}...{% endif %}</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                <h2>📭 Пока нет запросов</h2>
+                <p>Напиши что-нибудь в Telegram топик, и запросы появятся здесь</p>
+            </div>
+        {% endif %}
+
+        <footer>
+            Expert Consilium v0.1.0 — Работает на OpenRouter + PostgreSQL + Redis
+        </footer>
+    </div>
+</body>
+</html>

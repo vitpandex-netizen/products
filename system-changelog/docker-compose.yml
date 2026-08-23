@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  changelog:
+    build: .
+    container_name: system-changelog
+    ports:
+      - "8300:8300"
+    environment:
+      - MESSAGE_BUS_URL=http://100.84.223.96:8200
+      - CHANGELOG_API_URL=http://localhost:8300
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - datacore-net
+
+networks:
+  datacore-net:
+    external: true
