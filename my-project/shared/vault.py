@@ -6,7 +6,7 @@ VAULT_PYTHON = '/usr/bin/python3'
 
 logger = logging.getLogger(__name__)
 
-def get(key: str) -> str | None:
+def get(key: str):
     try:
         r = subprocess.run([VAULT_PYTHON, VAULT_SCRIPT, 'get', key],
                           capture_output=True, text=True, timeout=5)

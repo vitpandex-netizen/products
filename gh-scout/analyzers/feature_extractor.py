@@ -92,14 +92,49 @@ class FeatureExtractor:
         # Разбиваем на секции/пункты
         sections = self._split_into_sections(body)
 
+        # Фильтруем мусорные секции
+        NOISE_KEYWORDS = [
+            "what's changed", "what's new", "contributors", "changelog",
+            "full changelog", "how to get this update", "how to update",
+            "documentation", "feedback and issues", "new contributors",
+            "all contributors", "installation", "install", "getting started",
+            "license", "upgrade guide", "migration guide", "release notes",
+            "release info", "about this release", "acknowledgements",
+            "special thanks", "thanks to", "credits",
+        ]
+
         for section in sections:
+            section_lower = section.lower()[:200]
+
+            # Пропускаем мусорные заголовки
+            if any(nk in section_lower for nk in NOISE_KEYWORDS) and len(section) < 300:
+                continue
+
+            # Пропускаем простые упоминания contributor'ов
+            if re.search(r"@\w+", section) and len(section) < 80:
+                continue
+
             category = self._categorize(section)
             title = self._extract_title(section)
             if not title:
                 continue
 
+            # Пропускаем заглушки
+            if title.lower() in ("what's changed", "what's new", "features", "bug fixes", "bugfix",
+                                  "new features", "new", "fixes", "improvements", "changelog",
+                                  "release", "releases", "version", "initial release"):
+                continue
+
+            # Пропускаем заголовки релизов типа "Semantica v0.6.7" или "# Semantica v0.6.7"
+            if re.match(r"^[A-Za-z]+[ -][vV]?\d+\.\d+", title):
+                continue
+
             our_projects = self._match_our_projects(section)
             relevance = self._calc_relevance(section, our_projects)
+
+            # Только реальные фичи (с содержанием)
+            if len(section.split()) < 5:
+                continue
 
             features.append({
                 "title": title[:200],
@@ -151,22 +186,45 @@ class FeatureExtractor:
         # Заголовок markdown
         header_match = re.search(r"^#{1,3}\s+(.+)$", text, re.MULTILINE)
         if header_match:
-            return header_match.group(1).strip()
+            header = header_match.group(1).strip()
+            # Пропускаем общие заголовки
+            if header.lower() not in ("what's changed", "what's new", "features", "bug fixes", "bugfix", "fixes", "improvements",
+                                       "new features", "new", "changelog", "contributors", "new contributors"):
+                return header[:100]
 
         # Первая строка с "- **" или "* **" (жирный пункт)
         bold_match = re.search(r"[-*]\s+\*\*(.+?)\*\*", text)
         if bold_match:
-            return bold_match.group(1).strip()
+            return bold_match.group(1).strip()[:100]
 
-        # Первая строка с "- " или "* "
-        item_match = re.search(r"[-*]\s+([A-Z][^.]*\.?)", text)
+        # PR-стиль: "- [#1071](url) Fix: preserve..." → "preserve..."
+        pr_match = re.search(r"[-*]\s+\[#\d+\]\([^)]*\)\s*(?:Fix|Add|Update|Improve|Support|Change|Remove|Refactor):\s*(.{5,80})", text, re.IGNORECASE)
+        if pr_match:
+            return pr_match.group(1).strip()[:100]
+
+        # AutoGPT-стиль: "- **#14021** - AI-voice narrative..." → "AI-voice narrative..."
+        agpt_match = re.search(r"[-*]\s+\*\*#?\d+\*\*\s*-\s*(.{5,80})", text)
+        if agpt_match:
+            title = agpt_match.group(1).strip()
+            if not title.lower().startswith("fix") and len(title) > 5:
+                return title[:100]
+
+        # Первая строка с "- " или "* " — это конкретная фича
+        item_match = re.search(r"[-*]\s+([A-Za-z][^.]*[.:])", text)
         if item_match:
-            return item_match.group(1).strip()[:100]
+            title = item_match.group(1).strip()
+            # Убираем PR-ссылку: "- [#1071](url) Fix: ..." → "Fix: ..."
+            title = re.sub(r"^\[#\d+\]\([^)]*\)\s*", "", title).strip()
+            # Если это похоже на PR-ссылку, берём контекст
+            if len(title) > 5 and title.lower() not in ("features", "bug fixes", "fixes", "new"):
+                return title[:100]
 
         # Первая содержательная строка
         for line in text.split("\n"):
             line = line.strip()
-            if line and not line.startswith("#") and len(line) > 10:
+            if line and not line.startswith("#") and len(line) > 15:
+                # Убираем PR-ссылку из строки
+                line = re.sub(r"\[#\d+\]\([^)]*\)\s*", "", line).strip()
                 return line[:100]
 
         return None

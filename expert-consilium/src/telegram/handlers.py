@@ -146,6 +146,7 @@ async def handle_question(message: Message) -> None:
                 complexity_score=complexity,
             )
             request_id = request.id
+            await session.commit()
 
         # Push task to Redis queue
         redis = await get_redis()
