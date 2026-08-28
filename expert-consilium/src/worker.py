@@ -83,6 +83,7 @@ async def run_worker() -> None:
                         await result_publisher.publish_expert_result(
                             request_id, result
                         )
+                    await session.commit()
 
                 # Run synthesizer
                 logger.info(f"Running synthesizer for {request_id}")
@@ -131,6 +132,7 @@ async def run_worker() -> None:
                     # Mark request completed
                     repo = RequestRepository(session)
                     await repo.mark_completed(request_id)
+                    await session.commit()
 
                 # Publish final result
                 parsed = parse_synthesized_response(synthesized_text)

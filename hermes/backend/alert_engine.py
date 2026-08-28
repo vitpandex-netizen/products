@@ -48,7 +48,7 @@ def daily_brief():
 
     now = datetime.now(TASHKENT)
     lines = [
-        f"📊 *BGT Bot Daily Brief*",
+        f"📊 *HERMES Daily Brief*",
         f"📅 {now.strftime('%d.%m.%Y %H:%M')} Tashkent",
         "",
     ]
