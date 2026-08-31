@@ -2,7 +2,7 @@
 
 > **Единый центр управления всеми проектами.**
 > Для новых чатов: начинай с этого файла.
-> Статус: 🟡 Active | Обновлено: 2026-08-19
+> Статус: 🟡 Active | Обновлено: 2026-09-01
 
 ---
 
@@ -190,6 +190,61 @@
 |------|----------|
 | **Статус** | 🟡 Active (Orbstack) |
 | **Суть** | Multi-agent чат с несколькими AI |
+
+---
+
+### 🟢 GH Scout & Память (ядро мониторинга, 2026-08)
+
+#### GH Scout — GitHub Project Monitor
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟢 Active на **US Server** :8005 |
+| **Суть** | Мониторинг топовых GitHub проектов, трендов, генерация рекомендаций |
+| **API** | `:8005`, gateway `/ghscout/*`, Telegram @ghscout_bot |
+| **Проекты** | 17 конкурентов (Freqtrade, CCXT, AutoGPT, LangChain, CrewAI...) |
+| **Cron** | Дайджест 11:00, Auto-Improver 10:00, Weekly Пн 10:00 |
+| **Связи** | Context DB, Message Bus, все агенты |
+| **Репозиторий** | `vitpandex-netizen/products` (в монорепо) |
+
+#### Context DB — единая память
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟢 Active на **US Server** :8006 |
+| **Суть** | Единое информационное поле для всех агентов (OpenViking-inspired) |
+| **API** | `:8006`, gateway `/context/*`, CLI `ctx`, MCP для Claude/Codex |
+| **Интеграции** | CLI + MCP + Message Bus + REST |
+| **Репозиторий** | `vitpandex-netizen/context-db` |
+
+#### Workspace — Unified Workspace
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟢 Active на **US Server** :8008 |
+| **Суть** | Единое пространство: чат, дашборд, задачи, доки, нотификации (Macro-inspired) |
+| **Веб** | `:8008`, gateway `/workspace/*`, Telegram Mini App |
+| **Репозиторий** | `vitpandex-netizen/workspace` |
+
+#### Trading Agents — Multi-Agent Trading
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟡 Active (у BGT) |
+| **Суть** | 5 AI-агентов голосуют по сделкам + FinRL + Web3 DeFi (TradingAgents-inspired) |
+| **Репозиторий** | `vitpandex-netizen/trading-agents` |
+
+#### MoneyPrinter — AI Video Generator
+| Поле | Значение |
+|------|----------|
+| **Статус** | ⏸ Пауза (обсудить перед запуском) |
+| **Суть** | Тема → AI сценарий → TTS → FFmpeg → видео (MoneyPrinterTurbo-inspired) |
+| **Репозиторий** | `vitpandex-netizen/moneyprinter` |
+
+#### Backup System
+| Поле | Значение |
+|------|----------|
+| **Статус** | 🟢 Active, ежедневно 3:00 UTC+5 |
+| **Суть** | Бэкап всех PG баз + Context DB + конфигов, ротация 7 дней |
+| **Скрипт** | `~/dev/gh-scout/scripts/backup.sh` на US Server |
+
+---
 
 #### 15. Hermes Web UI
 | Поле | Значение |
