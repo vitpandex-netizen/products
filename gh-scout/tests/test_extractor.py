@@ -38,6 +38,28 @@ TEST_BODIES = [
 - Fix WebSocket reconnection backoff
 - Fix memory leak in session management
 """,
+    # unsloth v0.1.806-beta (мусор — не должен давать рекомендаций)
+    """Run Qwen3.8-Flash-Next and GLM-5.3-Flash up to 2x faster with MTP. MTP is enabled by default, you can still disable it.
+Also our new release includes 170+ training, chat, hardware, and performance improvements.
+
+## Highlights
+*  **Smoother model loading** (less errors) across local servers and connected providers.
+* Faster and less laggy UI with follow-up turns much faster for all chats.
+*  **Safer chat edits** that preserve tool cards, reply details, and conversation branches.
+
+## What's Changed
+* Put the smart offload planner back by @aaron
+* Fix memory fragmentation by @bob
+* Add MTP support for GLM-5.3 by @carol
+
+## Audio
+* Added support for MiniMax-Music3, Higgs, MOSS audio models.
+* Audio model loading is now faster.
+
+## Chat + tools
+- Run several tool calls at once without mixing up their arguments.
+- Chat history is now compressed automatically.
+""",
 ]
 
 fe = FeatureExtractor()
