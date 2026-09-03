@@ -53,27 +53,27 @@ OUR_PROJECTS_KEYWORDS = {
         "trading", "bot", "order", "position", "strategy", "grid", "dca",
         "stop-loss", "take-profit", "trailing", "leverage", "margin",
         "signal", "backtest", "arbitrage", "market-making", "liquidity",
-        "portfolio", "risk", "pnl", "profit", "balance", "exchange",
+        "portfolio", "risk", "pnl", "profit", "exchange",
         "binance", "bybit", "okx", "kucoin", "bitget", "hyperliquid",
         "websocket", "realtime", "candle", "indicator", "rsi", "macd",
         "ema", "sma", "bollinger", "freqtrade", "3commas", "octobot",
     ],
     "finanalytics": [
         "analytics", "dashboard", "chart", "metric", "kpi", "report",
-        "visualization", "bi", "data", "insight", "forecast", "trend",
-        "financial", "stock", "crypto", "portfolio", "performance",
-        "valuation", "screener", "filter", "alert", "notification",
+        "visualization", "forecast", "financial", "stock",
+        "crypto", "portfolio", "valuation", "screener",
+        "filter", "alert", "notification",
     ],
     "anyidea": [
-        "idea", "trend", "market", "research", "discovery", "scout",
+        "idea", "market", "research", "discovery", "scout",
         "collector", "crawler", "scraper", "rss", "feed", "aggregator",
-        "recommendation", "suggestion", "insight", "opportunity",
+        "recommendation", "suggestion", "opportunity",
     ],
     "itops": [
         "monitoring", "alerting", "incident", "deployment", "ci/cd",
         "automation", "orchestration", "infrastructure", "docker",
         "kubernetes", "devops", "sre", "observability", "telemetry",
-        "logging", "metrics", "health", "uptime", "sla",
+        "logging", "metrics", "uptime", "sla",
     ],
 }
 
@@ -93,20 +93,42 @@ class FeatureExtractor:
         sections = self._split_into_sections(body)
 
         # Фильтруем мусорные секции
+        # Жёсткие шумовые заголовки — секция целиком отсекается,
+        # даже если она длинная (это обзоры/оглавления, не фичи)
+        NOISE_HARD_HEADERS = [
+            "highlights", "overview", "summary", "about", "introduction",
+            "table of contents", "documentation", "getting started",
+            "installation", "acknowledgements", "special thanks",
+            "thanks to", "credits", "contributors", "new contributors",
+            "all contributors", "feedback and issues", "license",
+            "upgrade guide", "migration guide", "how to get this update",
+            "how to update", "what's new in", "release info",
+            "about this release",
+        ]
+        # Мягкие шумовые слова — отсекаются только короткие секции.
+        # "what's changed" НЕ жёсткий: внутри часто реальные фичи (PR-список)
         NOISE_KEYWORDS = [
-            "what's changed", "what's new", "contributors", "changelog",
-            "full changelog", "how to get this update", "how to update",
-            "documentation", "feedback and issues", "new contributors",
-            "all contributors", "installation", "install", "getting started",
-            "license", "upgrade guide", "migration guide", "release notes",
-            "release info", "about this release", "acknowledgements",
-            "special thanks", "thanks to", "credits",
+            "what's changed", "what's new", "changelog",
+            "full changelog", "release notes",
         ]
 
         for section in sections:
             section_lower = section.lower()[:200]
+            section_trimmed = section.strip()
 
-            # Пропускаем мусорные заголовки
+            # ─── Жёсткий фильтр: секция НАЧИНАЕТСЯ с шумового заголовка ───
+            # ## Highlights, ## Overview, ## Documentation и т.п. —
+            # пропускаем всю секцию, даже если она длинная (>300 символов).
+            # "What's Changed" сюда НЕ входит — внутри могут быть реальные фичи.
+            header_match_start = re.match(
+                r"^#{1,3}\s*([^\r\n#]{2,60})", section_trimmed
+            )
+            if header_match_start:
+                header_text = header_match_start.group(1).strip().lower()
+                if any(nk in header_text for nk in NOISE_HARD_HEADERS):
+                    continue
+
+            # Пропускаем мусорные заголовки (внутри секции, короткие)
             if any(nk in section_lower for nk in NOISE_KEYWORDS) and len(section) < 300:
                 continue
 
@@ -123,6 +145,16 @@ class FeatureExtractor:
             if title.lower() in ("what's changed", "what's new", "features", "bug fixes", "bugfix",
                                   "new features", "new", "fixes", "improvements", "changelog",
                                   "release", "releases", "version", "initial release"):
+                continue
+
+            # Пропускаем bump-заголовки (обновление зависимостей, не фича)
+            if re.match(r"(?i)^(bump|update|upgrade|deps?|chore)[: ]", title.strip()):
+                continue
+
+            # Срезаем суффикс автора "by @username" из PR-заголовков:
+            # "Add graph traversal API by @asmith" → "Add graph traversal API"
+            title = re.sub(r"\s+by @[\w-]+$", "", title.strip()).strip()
+            if len(title) < 5:
                 continue
 
             # Пропускаем заголовки релизов типа "Semantica v0.6.7" или "# Semantica v0.6.7"
@@ -230,15 +262,29 @@ class FeatureExtractor:
         return None
 
     def _match_our_projects(self, text: str) -> List[str]:
-        """Определить, к каким нашим проектам релевантна фича."""
+        """Определить, к каким нашим проектам релевантна фича.
+        Использует word-boundary \b, чтобы избежать ложных совпадений
+        подстрок (data в update, trend в extending и т.п.)."""
         matched = []
         text_lower = text.lower()
 
         for project, keywords in OUR_PROJECTS_KEYWORDS.items():
+            score = 0
             for kw in keywords:
-                if kw.lower() in text_lower:
-                    matched.append(project)
-                    break
+                # Word-boundary match: \bkw\b — только целые слова
+                if re.search(rf"\b{re.escape(kw)}\b", text_lower):
+                    score += 1
+            # Нужно минимум 2 совпадения ИЛИ 1 сильное (длинное) слово
+            # чтобы отсеять случайные совпадения по одному общему слову
+            if score >= 2:
+                matched.append(project)
+            elif score == 1:
+                # Одиночное совпадение — только если ключевое слово специфично
+                # (длиннее 6 символов или составное через дефис)
+                for kw in keywords:
+                    if re.search(rf"\b{re.escape(kw)}\b", text_lower) and len(kw) >= 7:
+                        matched.append(project)
+                        break
 
         return matched
 
@@ -281,8 +327,17 @@ class RecommendationEngine:
         """Обработать релиз и создать рекомендации."""
         features = self.extractor.extract_features(release)
 
+        # Минимальный порог релевантности — отсекаем мусорные совпадения.
+        # 0.45 = тег (0.4) + keyword (0.05) — минимально содержательная фича.
+        # Мусор (Chat + tools, Highlights) не имеет тегов — отсекается матчингом.
+        MIN_RELEVANCE = 0.45
+
         for feat_data in features:
             if not feat_data["our_projects_tags"]:
+                continue
+
+            # Отсекаем слаборелевантные фичи (случайные keyword-совпадения)
+            if feat_data["relevance"] < MIN_RELEVANCE:
                 continue
 
             # Создаём ExtractedFeature
@@ -304,6 +359,21 @@ class RecommendationEngine:
 
                 # Для каждого нашего проекта создаём рекомендацию
                 for target in feat_data["our_projects_tags"]:
+                    # Дедупликация: та же фича из того же релиза для того же проекта
+                    existing = (
+                        session.query(Recommendation)
+                        .filter(
+                            Recommendation.target_project == target,
+                            Recommendation.source_repo == project.repo_full_name,
+                            Recommendation.source_release == release.tag_name,
+                            Recommendation.title == f"[{project.name}] {feat_data['title']}",
+                        )
+                        .first()
+                    )
+                    if existing:
+                        logger.debug(f"Skip duplicate rec for {target}")
+                        continue
+
                     rec = Recommendation(
                         project_id=project.id,
                         feature_id=feature.id,
@@ -321,8 +391,7 @@ class RecommendationEngine:
 
                 session.commit()
                 logger.info(
-                    f"Created {len(feat_data['our_projects_tags'])} recommendations "
-                    f"from {project.name}/{release.tag_name}"
+                    f"Created recommendations for {project.name}/{release.tag_name}"
                 )
             except Exception as e:
                 session.rollback()
