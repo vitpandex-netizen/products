@@ -11,7 +11,6 @@ services:
       - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ghscout_net
-      - datacore-net
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ghscout"]
@@ -26,7 +25,6 @@ services:
       - ghscout_redisdata:/data
     networks:
       - ghscout_net
-      - datacore-net
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -39,7 +37,7 @@ services:
     container_name: ghscout-core
     env_file: .env
     ports:
-      - "8005:8005"
+      - "127.0.0.1:8005:8005"
     networks:
       - ghscout_net
       - datacore-net
@@ -57,7 +55,6 @@ services:
     command: python -m collectors.runner
     networks:
       - ghscout_net
-      - datacore-net
     depends_on:
       postgres:
         condition: service_healthy
