@@ -37,6 +37,37 @@
 
 ## 📝 Журнал передачи задач (Свежие сверху)
 
+### [2026-09-11 01:45] [Antigravity] — [Ночной аудит инфраструктуры / Закрытие TASK-001, 002, 003, 005]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** `8b36303` на `vitpandex-netizen`
+- **Что сделано на ночном дежурстве:**
+  1. **TASK-001 (Ликвидация CrashLoop `ghscout-core`):** Обнаружена скрытая сетевая коллизия Docker DNS: `ghscout-core` находился одновременно в `ghscout_net` и `datacore-net`, где хост `postgres` резолвился в `datacore-pg`. Базы изолированы, в `.env` прописаны явные хосты `ghscout-pg` и `ghscout-redis`. Сервис `ghscout-core` поднят, здоров, отвечает `{"status":"ok"}`.
+  2. **TASK-002 (Автоматический ночной бэкап баз данных):** Скрипт `/home/us/bin/backup-stack.sh` расширен. Теперь автоматически дампятся и сжимаются `authentik`, `datacore` (84M), `consilium` (11K), `ghscout` (2.2M) и состояние Hermes с ротацией 7 дней. Тестовый прогон выполнен успешно.
+  3. **TASK-003 (Сетевая изоляция портов API):** Все внутренние сервисы (`finanalytics-api: 8010`, `datacore-api-v2: 8001`, `linkid-api: 8014`, `linkid-admin: 8015`, `ghscout-core: 8005`, `linkid-db: 5435`, `linkid-redis: 6381`) переведены с публичного биндинга `0.0.0.0` на безопасный локальный `127.0.0.1`.
+  4. **TASK-005 (HH Jobs SQL баг):** В `src/bot.py` колонка `published_at` заменена на `created_at`. Запрос `/top` («Топ Match») протестирован на боевой базе — возвращает топ вакансий без ошибок.
+  5. **BGT (Фоновый дозор):** `live-trend.service` стабильно активен с лимитом `$500` и сканирует рынок.
+- **Верификация:** `docker ps` подтверждает отсутствие портов на `0.0.0.0` для внутренних API, `curl` возвращает 200 OK, бэкапы лежат в `/home/us/backups/`.
+- **Эстафета следующему агенту:** Инфраструктура полностью вычищена и защищена. Утром ждём пробуждения владельца и первый сигнал от BGT.
+
+### [2026-09-11 01:35] [Antigravity] — [HH Jobs / Релизная политика Enterprise и фиксация дефекта TASK-005]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** production / `my-project/hh-jobs/`
+- **Что сделано:**
+  1. **Успешный запуск боевого контура:** Пользователь подтвердил успешный запуск бота `@hhjob_ai_bot` и интерфейса Telegram Mini App («UZ IT Jobs»). Защита Whitelist сработала в боевом режиме.
+  2. **Регистрация дефекта в Едином бэклоге ([`~/dev/BACKLOG.md`](file:///Users/vitaliyr/dev/BACKLOG.md)):**
+     - Добавлен тикет **`TASK-005`** (`🔴 P1`, дедлайн 2026-09-12): *Ошибка выборки `no such column: published_at` в боте `@hhjob_ai_bot`*.
+     - Локализована первопричина: в `src/bot.py` SQL-запрос `get_top_vacancies_text()` обращается к полю `published_at`, которого нет в схеме SQLite (`hh.db`), правильное поле — `created_at`.
+     - Зафиксированы шаги воспроизведения, ожидаемый результат и Definition of Done (DoD).
+  3. **Внедрение Релизной политики Enterprise-Grade ([`RELEASE_POLICY.md`](file:///Users/vitaliyr/dev/my-project/hh-jobs/RELEASE_POLICY.md)):**
+     - Регламентировано семантическое версионирование SemVer 2.0.0 (`v1.0.0` $\to$ `v1.0.1` хотфикс $\to$ `v1.1.0` фичи).
+     - Закреплены 5 рубежей контроля качества (Gate 1: синтаксис $\to$ Gate 2: аудит ИБ Grade A $\to$ Gate 3: Peer Review Триады $\to$ Gate 4: Smoke Test на US Server $\to$ Gate 5: QA Sign-off).
+     - Определена процедура мгновенного отката (Rollback Policy) при сбоях P0.
+  4. **Журнал изменений ([`CHANGELOG.md`](file:///Users/vitaliyr/dev/my-project/hh-jobs/CHANGELOG.md)) и [`STATUS.md`](file:///Users/vitaliyr/dev/my-project/hh-jobs/STATUS.md):**
+     - Оформлен релиз `v1.0.0` (Production TMA + Bot + Scrapers) по стандарту Keep a Changelog.
+     - Запланирован хотфикс `v1.0.1` (TASK-005 + Bookmarks MVP).
+- **Верификация:** Аудит безопасности `audit.py` подтвердил наивысший рейтинг **Grade A** (0 Critical, 0 High), структура бэклога и релизной документации полностью валидна.
+- **Эстафета следующему агенту:** На спринт 12 сентября запланировано исправление `TASK-005` (замена `published_at` на `created_at` в `src/bot.py` и ревизия всех SQL-запросов) с последующим релизом `v1.0.1`.
+
 ### [2026-09-11 01:20] [Antigravity] — [BGT / Фаза 2: Снятие лимита капитала, фиксация прибыли PONS и запуск Dynamic Compounding]
 - **Статус:** 🟢 DONE
 - **Коммит / Ветка:** `6a52b9d` на `vitpandex-netizen/bitget-bot` (`trading/improvements`)
