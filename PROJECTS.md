@@ -47,15 +47,16 @@
 #### 1. Bitget-bot — Трейдинг
 | Поле | Значение |
 |------|----------|
-| **Статус** | 🟢 Active 24/7 на **US Server** |
-| **Суть** | Автоматический grid-трейдинг ETH/USDT |
-| **Баланс** | ~$88 (цель: $100 → $200 → $500) |
-| **Стратегия** | DCA Grid 2x, 2 уровня, шаг 2%, TP 2%, трейлинг стоп 2% |
-| **API** | Bitget API (через ccxt), Telegram алерты |
-| **Сервер** | US Server services/bitget-bot, systemd |
-| **Связи** | Trading Dashboard (:3002), Telegram FinAnalytics (239) |
+| **Статус** | 🟢 Active 24/7 на **US Server** (`live-trend.service`) |
+| **Суть** | Трендовый импульсный трейдинг (Momentum Breakout + ATR Trailing) |
+| **Баланс** | **$107.97 USDT** чистый кэш (цели: **$120 до 13.09** → **$200** → **$1000 к концу сентября**) |
+| **Стратегия** | Dynamic Compounding (до 85% депо в позиции, плечо 2x, риск 5% = ~$5.40 по ATR-стопу, трейлинг 3.5×ATR) |
+| **Пул пар** | Топ-6 по бэктесту: ENA, SOL, ETH, XRP, UNI, BTC |
+| **API** | Bitget Futures API v3 (ccxt + BitgetAPIClient), Telegram алерты |
+| **Сервер** | US Server (`/home/us/bitget-bot/`), systemd (`live-trend.service`) |
+| **Связи** | Trading Dashboard (:3002), Telegram Mini App (:8090) |
 | **Изоляция** | 🟢 Изолирован — только API наружу |
-| **Следующий шаг** | Добавить SOL пару, достичь $100 |
+| **Следующий шаг** | Взять цель $120 на первом же пробое (ETH/BTC/SOL) |
 
 #### 2. Trading Dashboard
 | Поле | Значение |
@@ -75,24 +76,15 @@
 | **Связи** | Trading Dashboard |
 | **Изоляция** | 🟢 Изолирован |
 
-#### 4. HH Jobs — Поиск работы (офис)
+#### 4. HH Jobs Suite — Мониторинг вакансий
 | Поле | Значение |
 |------|----------|
-| **Статус** | 🟢 Active на **US Server** |
-| **Суть** | Поиск IT Director / Head of IT позиций в Ташкенте |
-| **Параметры** | 54 ключевых слова, 69 навыков, порог 0.30 |
-| **API** | HH.ru API, Telegram уведомления |
-| **Сервер** | US Server services/hh-jobs |
-| **Связи** | Telegram (thread 15 — HH Jobs) |
-| **Изоляция** | 🟢 Изолирован |
-
-#### 5. HH Remote — Удалённая работа
-| Поле | Значение |
-|------|----------|
-| **Статус** | 🟢 Active на **US Server** |
-| **Суть** | Поиск удалённых IT вакансий |
-| **Сервер** | US Server services/hh-remote |
-| **Связи** | Telegram (thread 52 — HH-Remote) |
+| **Статус** | 🟢 Active 24/7 на **US Server** (`crontab` + `systemd`) |
+| **Коллекторы** | 1. `hh-jobs` (Ташкент, 54kw/69sk, RSS)<br>2. `hh-remote` (СНГ-удалёнка, RSS)<br>3. `habr-jobs` (Хабр Карьера, REST API)<br>4. `remote-jobs` (RemoteOK + WeWorkRemotely) |
+| **Telegram Mini App** | 🇺🇿 **«UZ IT Jobs»** (`https://us.tailc8105c.ts.net/uzjobs`) — FastAPI + SQLite (`:8095`), Tailscale Funnel HTTPS |
+| **Сервер** | US Server `services/{hh-jobs,hh-remote,habr-jobs,remote-jobs}` |
+| **Расписание** | HH Ташкент (каждые 2 ч 08:00–20:00), HH Remote (09,13,17,21), Habr (14,20), Remote (09:30,21:30) |
+| **Telegram** | Топик 15 (HH Jobs, Habr, Remote), Топик 52 (HH-Remote), Menu Button у бота |
 | **Изоляция** | 🟢 Изолирован |
 
 ---
