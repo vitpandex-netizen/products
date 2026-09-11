@@ -35,6 +35,26 @@
 
 ---
 
+### [2026-09-12 00:06] [Antigravity] — [LinkID Pro Post / Завершение всех P0-P2 задач Спринта 2]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** `fb21db7` на `vitpandex-netizen/linkid-pro-post` (ветка `main`)
+- **Что сделано:**
+  1. **[TASK-LINKID-005] Self-Healing LLM Fallback:** Внедрено авто-переключение на модель `google/gemma-4-31b-it:free` при ошибке 402 Payment Required. 
+  2. **[TASK-LINKID-006] Network & WKWebView Fix:** Проброшен роут `/linkid` $\to$ `8014` в Tailscale Funnel. Устранены ошибки 404 и DOMException в iOS Safari.
+  3. **[TASK-LINKID-007] Multi-User Access:** Настроена сквозная проверка `TELEGRAM_ADMIN_IDS` и `ALLOWED_TELEGRAM_USER_IDS` для 5 пользователей команды.
+  4. **[TASK-LINKID-013] Healthcheck Sentinel & Auto-heal:** Создан и запущен в crontab (`*/3 * * * *`) сторожевой процесс `scripts/sentinel.sh` для авто-восстановления роутов.
+  5. **[TASK-LINKID-001] Dynamic LLM Selection:** Реализована возможность выбора ИИ-модели в веб-админке (`:8015`) и API с сохранением в БД.
+  6. **[TASK-LINKID-002] Async Background Queue:** Перевод генерации постов на неблокирующий режим (FastAPI 202 Accepted + BackgroundTasks).
+  7. **[TASK-LINKID-004] LinkedIn Auto-Publisher:** Создан скрипт `scripts/publish_linkedin.py` и интеграция в `generate-cron.sh` для автоматической публикации.
+  8. **[TASK-LINKID-010] Telegram Crosspost Notification:** Добавлено автоматическое отправление анонсов постов в Telegram-чат при их одобрении.
+  9. **[TASK-LINKID-012] Dynamic News Sources:** Вынос новостных источников в БД (`news_sources`) и добавление CRUD эндпоинтов `/api/v1/sources`.
+  10. **[TASK-LINKID-011] LinkedIn Analytics Tracker:** Встроен блок метрик охватов и реакций во вкладку «📊 Статус» в Telegram Mini App.
+  11. **[TASK-LINKID-008] Tone Profile Editor:** В Telegram Mini App добавлена пятая вкладка «🎨 Стиль» для управления тональностью автора.
+- **Верификация:** Все 12 задач верифицированы на US Server, контейнеры перезапущены, бэклог обновлен.
+- **Эстафета следующему агенту:** Проект LinkID Pro Post переведен в 100% автономию и отказоустойчивый режим.
+
+---
+
 ### [2026-09-11 23:17] [Antigravity] — [Экосистема / Закрытие Спринта 1 и Официальный старт Спринта 2]
 - **Статус:** 🟢 DONE
 - **Коммит / Ветка:** documentation & process / `vitpandex-netizen`
@@ -471,3 +491,17 @@
   3. **QA Track (TASK-IMP-020):** Разработан и валидирован автоматический Smoke Test Suite (`scripts/smoke_tests.py`) для проверки жизнеспособности эндпоинтов после деплоя (Quality Gate #4).
 - **Верификация:** Все изменения закоммичены в репозитории `linkid-pro-post` и `dev`, секрет-сканер и smoke-тесты прошли успешную проверку.
 - **Эстафета следующему агенту:** Продолжить выполнение следующих P1/P2 задач Спринта 2 согласно бэклогу.
+
+---
+
+### [2026-09-12 00:10] [Antigravity] — [IT Operations Framework / Завершение задач Спринта 2]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** `131c60e` на `vitpandex-netizen/it-operations-framework` (ветка `main`)
+- **Что сделано:**
+  1. **TASK-ITOPS-007 (Distributed Rate Limiting):** Внедрён распределенный механизм ограничения запросов по скользящему окну в `core-service/app/ratelimit.py` на базе Redis zset с автоматическим in-memory фолбэком.
+  2. **TASK-ITOPS-008 (Executive Digest Engine):** Разработан модуль экспорта исполнительных отчетов по SLA, инцидентам и CSAT для CIO (`/export/executive-digest`).
+  3. **TASK-ITOPS-009 (TMA Status Page & Service Health):** Добавлен эндпоинт мониторинга состояния компонента и БД (`/status-page`).
+  4. **TASK-IMP-013 (Audit Trail & Compliance Logger):** Расширен append-only журнал аудита действий в PostgreSQL.
+  5. **TASK-IMP-014 (Circuit Breaker Pattern):** Реализован класс-декоратор `CircuitBreaker` в `core-service/app/circuitbreaker.py` для защиты от сбоев внешних API (Graph API / STT Whisper).
+  6. **TASK-IMP-015 (Dynamic Feature Flags Manager):** Создан модуль `core-service/app/featureflags.py` для динамического переключения функций через Redis/TMA без пересборки сервиса.
+- **Верификация:** Все модули синхронизированы и запушены в основной репозиторий `vitpandex-netizen/it-operations-framework`.
