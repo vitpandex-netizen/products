@@ -193,7 +193,7 @@
 | **Статус** | 🟢 Active на **US Server** :8005 |
 | **Суть** | Мониторинг топовых GitHub проектов, трендов, генерация рекомендаций |
 | **API** | `:8005`, gateway `/ghscout/*`, Telegram @ghscout_bot |
-| **Проекты** | 17 конкурентов (Freqtrade, CCXT, AutoGPT, LangChain, CrewAI...) |
+| **Проекты** | 50+ ведущих open-source репозиториев (Freqtrade, CCXT, AutoGPT, LangChain, CrewAI...) |
 | **Cron** | Дайджест 11:00, Auto-Improver 10:00, Weekly Пн 10:00 |
 | **Связи** | Context DB, Message Bus, все агенты |
 | **Репозиторий** | `vitpandex-netizen/products` (в монорепо) |
@@ -284,14 +284,14 @@
 #### 21. ITOPS — IT Operations Framework (коммерческий продукт)
 | Поле | Значение |
 |------|----------|
-| **Статус** | 🟢 Active |
-| **Суть** | **Отдельный коммерческий продукт.** Enterprise IT-поддержка: заявки, SLA, Telegram self-service, AI Voice Operator |
-| **Архитектура** | Core Service + Event Bus (Redis) + PostgreSQL. Полностью независимая, своя шина, своя БД |
-| **Сервер** | US Server (изолированная инфраструктура) |
-| **Telegram** | Свой бот, отличается от всех наших личных проектов |
-| **AI Voice** | STT → LLM → ответ, встроен в Telegram бот. Без Twilio |
+| **Статус** | 🟢 Active (**v0.5.18**, Enterprise Hardened) |
+| **Суть** | **Флагманский коммерческий продукт для CIO.** Enterprise IT-поддержка: инциденты, JML (Active Directory), SLA, Telegram Mini App, AI Voice Operator (Whisper STT), База знаний, коммерческий прайс в UZS |
+| **Архитектура** | Core Service (FastAPI) + Event Bus (Redis Streams) + PostgreSQL + Control Plane + AI Agent. Полностью независимый суверенный стек |
+| **Сервер** | US Server (`/home/us/dev/itops-deploy`, порт `:9095`) |
+| **Telegram** | AI Voice Assistant с транскрипцией аудио/голосовых и TMA |
+| **CI / CD** | GitHub Actions (`.github/workflows/ci.yml`: Ruff, 578 тестов Pytest, 19 PowerShell скриптов, сборка Docker) |
 | **Репозиторий** | `vitpandex-netizen/it-operations-framework` (отдельный) |
-| **Изоляция** | 🟢 **Полная — НИКАК не связан с нашими проектами** |
+| **Изоляция** | 🟢 **Полная — 100% суверенность, никаких общих баз или связей с личными ботами** |
 
 ---
 
@@ -315,11 +315,15 @@
 | **Статус** | 💤 Sleep |
 | **Суть** | Планировщик задач по расписанию |
 
-#### 25. LinkID Pro Post
+#### 25. LinkID Pro Post (Автоматизация PR в LinkedIn)
 | Поле | Значение |
 |------|----------|
-| **Статус** | 💤 Sleep |
-| **Суть** | Автопостинг в соцсети |
+| **Статус** | 🟢 Active на **US Server** (Docker Compose) |
+| **Суть** | Автоматическая генерация (DeepSeek v4 Pro), ревью и постинг экспертного контента IT-директора в LinkedIn (2 поста/день) |
+| **API / Веб** | Core API `:8014`, Admin `:8015`, WebApp `:8093` (Tailscale Funnel `/linkid-app`) |
+| **Бот / UI** | `@linkid_ai_bot`, Telegram Mini App с защитой `initData HMAC`, Authentik OAuth админка |
+| **БД / Ресурсы** | PostgreSQL `:5435`, Redis `:6381`, бэкап 3:00 UTC+5 |
+| **Изоляция** | 🟢 Изолирован (своя БД, свой бот, свои порты) |
 
 ---
 
