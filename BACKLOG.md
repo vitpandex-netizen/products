@@ -97,6 +97,13 @@
 | **TASK-BGT-030** | **Спринт 3** | Умный Авто-Компаундинг Депозита ($107 → $120 → $200 → $1000) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-14 | 📋 To Do |
 | **TASK-BGT-031** | **Спринт 3** | Защита от Чёрных Лебедей (Flash Crash Black Swan Circuit Breaker) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-15 | 📋 To Do |
 | **TASK-BGT-032** | **Спринт 3** | DEX On-Chain Liquidity Watcher (Uniswap v3 / Raydium Pool Tracker) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔵 P3 | 2026-09-18 | 📋 To Do |
+| **TASK-BGT-033** | **Спринт 3** | Бот подписок @bgt_signals_bot & Crypto Pay / Stars Gateway | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🔴 P1 | 2026-09-16 | 📋 To Do |
+| **TASK-BGT-034** | **Спринт 3** | Orderbook Heatmap & Depth Imbalance Engine (L2 Стенки) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-BGT-035** | **Спринт 3** | Интерактивный Бэктестер в Telegram по команде `/backtest` | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟢 P3 | 2026-09-18 | 📋 To Do |
+| **TASK-BGT-036** | **Спринт 3** | Multi-Timeframe Confluence Engine (Согласованность 1m+15m+1h+4h) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-BGT-037** | **Спринт 3** | Chandelier Exit Trailing Engine (Динамический стоп от пиков) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-BGT-038** | **Спринт 3** | Автоматический Журнал Сделок (Google Sheets / Notion Sync API) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟢 P3 | 2026-09-17 | 📋 To Do |
+| **TASK-BGT-039** | **Спринт 3** | Execution Slippage & Latency Profiler (Профайлер качества исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-18 | 📋 To Do |
 | **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика в 1 клик) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 📋 To Do |
 | **TASK-HH-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и ЗП | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-15 | 📋 To Do |
 | **TASK-HH-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 📋 To Do |
