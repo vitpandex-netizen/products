@@ -7,8 +7,9 @@
 
 ## 🎯 Спринты экосистемы
 
-- **🏁 Спринт 1 (11–12 сентября 2026 г.):** Стабилизация инфраструктуры, санитария серверов, первичные хотфиксы, релиз IT Ops v0.5.16 и запуск QA Intake Engine. *(Завершён)*
-- **🚀 Спринт 2 (13–20 сентября 2026 г.):** Масштабирование LinkID Pro Post (авто-постинг в LinkedIn, Celery очереди, fallback-модели), расширение IT Operations Framework (Rate Limiting, PDF Digests, CI/CD), алгоритмический R&D BGT (WebSocket Stream, Lead-Lag Binance, Squeeze Detector), монетизация Stocks UZ и умные отклики HH Jobs. *(Текущий активный спринт)*
+- **🏁 Спринт 1 (11 сентября 2026 г.):** Базовая инфраструктура BGT, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed, Smart Scaling Out, Whale CVD Filter. *(Завершён)*
+- **🏆 Спринт 2 (11 сентября 2026 г.):** HFT Binance Lead-Lag, Short Breakouts, Dynamic Leverage Engine, Paper Auto-Promoter, Executive Morning Digest, TMA Signals API. *(Завершён)*
+- **🚀 Спринт 3 (12–20 сентября 2026 г.):** Масштабирование BGT к цели $1000/мес: визуальный TMA "BGT Signals" UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита $107 → $120 → $200 → $1000, Black Swan Circuit Breaker. *(Текущий активный спринт)*
 
 ---
 
@@ -90,6 +91,12 @@
 | **TASK-BGT-026** | **Спринт 2** | BGT: Детектор сжатия волатильности (TTM Squeeze Detector) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 📋 To Do |
 | **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг кошельков) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | 📋 To Do |
 | **TASK-ALPHA-002** | **Спринт 2** | [Alpha Scout] DEX/CEX Spread Scanner (Сопоставление Raydium с Bitget) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-BGT-027** | **Спринт 3** | BGT Signals Telegram Mini App (Витрина сигналов под модель $35/мес) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-BGT-028** | **Спринт 3** | Machine Learning Signal Filter (XGBoost/LightGBM фильтр ложных входов) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-16 | 📋 To Do |
+| **TASK-BGT-029** | **Спринт 3** | Динамический Авто-Балансировщик Капитала на основе Sharpe Ratio | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-BGT-030** | **Спринт 3** | Умный Авто-Компаундинг Депозита ($107 → $120 → $200 → $1000) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-14 | 📋 To Do |
+| **TASK-BGT-031** | **Спринт 3** | Защита от Чёрных Лебедей (Flash Crash Black Swan Circuit Breaker) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-15 | 📋 To Do |
+| **TASK-BGT-032** | **Спринт 3** | DEX On-Chain Liquidity Watcher (Uniswap v3 / Raydium Pool Tracker) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔵 P3 | 2026-09-18 | 📋 To Do |
 | **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика в 1 клик) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 📋 To Do |
 | **TASK-HH-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и ЗП | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-15 | 📋 To Do |
 | **TASK-HH-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 📋 To Do |
