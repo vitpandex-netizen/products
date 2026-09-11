@@ -66,6 +66,8 @@ td{padding:8px 4px;border-bottom:1px solid #131A2E}
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="signals">Signal</button>
     <button class="tab" data-tab="portfolio">Portfolio</button>
+    <button class="tab" data-tab="screener">Value Screener</button>
+    <button class="tab" data-tab="dividends">Dividends (YTC)</button>
     <button class="tab" data-tab="bonds">Bonds</button>
     <button class="tab" data-tab="calendar">Calendar</button>
   </div>
@@ -139,6 +141,30 @@ function render(tab) {
       for (var i = 0; i < d.positions.length; i++) {
         var p = d.positions[i];
         h += "<tr><td><strong>" + p.ticker + '</strong></td><td>' + fmt(p.shares) + '</td><td>' + fmt(p.avg_price) + '</td><td>' + fmt(p.current_price) + '</td><td>' + fmt(p.value) + '</td><td style="color:' + (p.pl >= 0 ? "#3FB98A" : "#E5624F") + '">' + (p.pl >= 0 ? "+" : "") + fmt(p.pl) + " (" + (p.pl_pct >= 0 ? "+" : "") + p.pl_pct.toFixed(1) + "%)</td></tr>";
+      }
+      h += "</table></div>";
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  } else if (tab === "screener") {
+    api("/tma/fundamentals").then(function(d) {
+      if (!d.items || !d.items.length) { el.innerHTML = '<div class="card"><div class="card-title">Нет данных</div></div>'; return; }
+      var h = '<div class="card"><table><tr><th>Ticker</th><th>P/E</th><th>P/B</th><th>ROE</th><th>Div Yield</th><th>Graham Val</th><th>Status</th></tr>';
+      for (var i = 0; i < d.items.length; i++) {
+        var it = d.items[i];
+        var stColor = it.pe_ratio < 3.5 ? "#3FB98A" : (it.pe_ratio < 4.0 ? "#E0A93B" : "#8A97B0");
+        h += "<tr><td><strong>" + it.ticker + '</strong></td><td>' + it.pe_ratio + '</td><td>' + it.pb_ratio + '</td><td style="color:#3FB98A">' + it.roe + '%</td><td style="color:#C8A24C">' + it.dividend_yield + '%</td><td>' + fmt(it.graham_value) + '</td><td style="color:' + stColor + '">' + (it.status || "Evaluated") + "</td></tr>";
+      }
+      h += "</table></div>";
+      el.innerHTML = h;
+    }).catch(function(e) { el.innerHTML = '<div class="error">' + e.message + "</div>"; });
+  } else if (tab === "dividends") {
+    api("/tma/dividends/yield").then(function(d) {
+      if (!d.items || !d.items.length) { el.innerHTML = '<div class="card"><div class="card-title">Нет данных по дивидендам</div></div>'; return; }
+      var h = '<div class="stats"><div class="stat"><div class="stat-value stat-green">' + fmt(d.total_expected_payout_uzs) + ' UZS</div><div class="stat-label">Ожидаемые выплаты</div></div></div>';
+      h += '<div class="card"><table><tr><th>Ticker</th><th>Shares</th><th>Avg Cost</th><th>Div/Share</th><th>Yield to Cost</th><th>Mkt Yield</th><th>Expected Payout</th></tr>';
+      for (var i = 0; i < d.items.length; i++) {
+        var it = d.items[i];
+        h += "<tr><td><strong>" + it.ticker + '</strong></td><td>' + fmt(it.shares) + '</td><td>' + fmt(it.avg_price) + '</td><td>' + fmt(it.div_per_share) + '</td><td style="color:#3FB98A;font-weight:700">' + it.yield_to_cost_pct + '%</td><td style="color:#C8A24C">' + it.market_yield_pct + '%</td><td style="color:#3FB98A">' + fmt(it.expected_payout_uzs) + " UZS</td></tr>";
       }
       h += "</table></div>";
       el.innerHTML = h;

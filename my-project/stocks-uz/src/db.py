@@ -29,6 +29,15 @@ class DB:
             ticker TEXT PRIMARY KEY, price REAL, closing_price REAL,
             sector TEXT, updated_at TEXT NOT NULL
         )""")
+        c.execute("""CREATE TABLE IF NOT EXISTS fundamentals_metrics (
+            ticker TEXT PRIMARY KEY,
+            pe_ratio REAL,
+            pb_ratio REAL,
+            roe REAL,
+            graham_value REAL,
+            dividend_yield REAL,
+            updated_at TEXT NOT NULL
+        )""")
         c.execute("""CREATE TABLE IF NOT EXISTS portfolio (
             ticker TEXT PRIMARY KEY, shares REAL, avg_price REAL,
             target_pct REAL, stop_loss_pct REAL, notes TEXT,
@@ -60,6 +69,14 @@ class DB:
             price REAL, change_pct REAL, message TEXT,
             sent INTEGER DEFAULT 0, created_at TEXT NOT NULL
         )""")
+        c.execute("""CREATE TABLE IF NOT EXISTS ohlcv_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker TEXT NOT NULL, date TEXT NOT NULL,
+            open REAL, high REAL, low REAL, close REAL, volume INTEGER,
+            fetched_at TEXT NOT NULL,
+            UNIQUE(ticker, date)
+        )""")
+        c.execute("CREATE INDEX IF NOT EXISTS idx_ohlcv_ticker ON ohlcv_history(ticker, date)")
         self.conn.commit()
 
     def save_prices(self, quotes: dict):
@@ -75,10 +92,26 @@ class DB:
         return dict(row) if row else None
 
     def get_all_latest_prices(self) -> dict:
+        # Цены из price_history (регулярный сбор) + fallback на fundamentals (вручную/Jett live)
         rows = self.conn.execute(
             "SELECT ticker, price, closing_price, day_change_pct, fetched_at FROM price_history WHERE id IN (SELECT MAX(id) FROM price_history GROUP BY ticker)"
         ).fetchall()
-        return {r['ticker']: dict(r) for r in rows}
+        result = {r['ticker']: dict(r) for r in rows}
+
+        # Дополняем тикерами, которых нет в price_history, но есть в fundamentals (Jett live, ручные)
+        frows = self.conn.execute(
+            "SELECT ticker, price, closing_price, updated_at as fetched_at FROM fundamentals"
+        ).fetchall()
+        for r in frows:
+            if r['ticker'] not in result:
+                result[r['ticker']] = {
+                    "ticker": r["ticker"],
+                    "price": r["price"],
+                    "closing_price": r["closing_price"] or r["price"],
+                    "day_change_pct": None,
+                    "fetched_at": r["fetched_at"],
+                }
+        return result
 
     def save_idea(self, ticker: str, direction: str, price: float, target: float = None, stop: float = None, score: int = 0, rationale: str = "", risk: str = "medium") -> int:
         now = datetime.now(TASHKENT).isoformat()
@@ -103,6 +136,13 @@ class DB:
 
     def get_portfolio(self) -> list:
         rows = self.conn.execute("SELECT * FROM portfolio ORDER BY ticker").fetchall()
+        return [dict(r) for r in rows]
+
+    def get_portfolio_tradeable(self) -> list:
+        """Только позиции с рыночными данными (no_market_data=0)."""
+        rows = self.conn.execute(
+            "SELECT * FROM portfolio WHERE no_market_data IS NULL OR no_market_data=0 ORDER BY ticker"
+        ).fetchall()
         return [dict(r) for r in rows]
 
     def add_to_portfolio(self, ticker: str, shares: float, price: float):
@@ -173,6 +213,46 @@ class DB:
     def mark_alert_sent(self, alert_id: int):
         self.conn.execute("UPDATE alerts SET sent=1 WHERE id=?", (alert_id,))
         self.conn.commit()
+
+    def save_ohlcv(self, ticker: str, history: list[dict]):
+        """Сохранить OHLCV историю (upsert по ticker+date)."""
+        now = datetime.now(TASHKENT).isoformat()
+        for h in history:
+            date = h.get("date", "")[:10]
+            if not date:
+                continue
+            self.conn.execute(
+                """INSERT OR REPLACE INTO ohlcv_history
+                   (ticker, date, open, high, low, close, volume, fetched_at)
+                   VALUES (?,?,?,?,?,?,?,?)""",
+                (ticker, date, h.get("open"), h.get("high"), h.get("low"),
+                 h.get("close"), h.get("volume"), now))
+        self.conn.commit()
+
+    def get_ohlcv(self, ticker: str, days: int = 90) -> list[dict]:
+        """Получить OHLCV из кэша."""
+        rows = self.conn.execute(
+            "SELECT * FROM ohlcv_history WHERE ticker=? ORDER BY date DESC LIMIT ?",
+            (ticker, days)).fetchall()
+        return [dict(r) for r in rows]
+
+    def ohlcv_ticker_count(self) -> int:
+        """Сколько тикеров имеют кэшированные OHLCV."""
+        row = self.conn.execute("SELECT COUNT(DISTINCT ticker) FROM ohlcv_history").fetchone()
+        return row[0] if row else 0
+
+    def get_latest_insights(self, days=5, limit=8):
+        """Последние инсайты из каналов (тикер → событие → влияние)."""
+        try:
+            rows = self.conn.execute("""
+                SELECT ticker, event, impact, channel, message, fetched_at
+                FROM insights
+                WHERE fetched_at >= datetime('now', ?)
+                ORDER BY fetched_at DESC LIMIT ?
+            """, (f'-{days} days', limit)).fetchall()
+            return [dict(r) for r in rows]
+        except Exception:
+            return []
 
     def get_portfolio_summary(self) -> dict:
         portfolio = self.get_portfolio()
