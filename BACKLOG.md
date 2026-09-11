@@ -1,388 +1,272 @@
 # 📋 Единый бэклог Триады (Triad Unified Backlog)
 
 > **Статус:** Канонический реестр задач всей экосистемы (`Antigravity` + `Claude Code` + `Hermes` + `QA Team`).  
-> **Правило:** Любая доработка, фикс бага или архитектурная задача **обязательно** фиксируется здесь с указанием приоритета, ответственного, дедлайна и Definition of Done (DoD).
+> **Правило:** Любая доработка, фикс бага или архитектурная задача **обязательно** фиксируется здесь с указанием Спринта, Приоритета, Ответственного, Дедлайна и Definition of Done (DoD).
 
 ---
 
-## 🎯 Актуальный спринт: 11–12 сентября 2026 г.
+## 🎯 Спринты экосистемы
 
-| ID | Задача | Проект / Домен | Ответственный Чат / Бот | Исполнитель (Агент) | Приоритет | Срок | Статус |
-| :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **TASK-001** | Восстановление `ghscout-core` (DNS коллизия postgres/redis) | **GH Scout** | Чат GH Scout (`@ghscout_bot`) | **Antigravity (Ночное дежурство)** | 2026-09-12 | 🟢 Done |
-| **TASK-002** | Включение `datacore-pg`, `consilium`, `ghscout` в ночной бэкап | **DataCore / Consilium** | Чат DataCore / Master Orchestrator | **Antigravity (Инфраструктура)** | 2026-09-12 | 🟢 Done |
-| **TASK-003** | Сетевая изоляция API: биндинг портов `127.0.0.1` на US Server | **Инфраструктура / API** | Чат Master Orchestrator (Antigravity) | **Antigravity (Безопасность)** | 2026-09-12 | 🟢 Done |
-| **TASK-004** | Автоматизация приема баг-репортов (QA Intake Engine `scripts/qa_intake.py`) | **QA Track / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity (Процессы)** | 2026-09-12 | 🟢 Done |
-| **TASK-005** | [HH Jobs] Ошибка выборки: `no such column: published_at` в боте | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Antigravity (Хотфикс)** | 2026-09-12 | 🟢 Done |
-| **TASK-006** | Разработка Единой политики Триады и стандартов релизного управления | **Экосистема / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity (Архитектура)** | 2026-09-12 | 🟢 Done |
-| **TASK-008** | [HH Jobs] Архивация и очистка неактуальных вакансий (Retention Policy) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 2026-09-13 | 🟢 Done |
-| **TASK-009** | [HH Jobs] Полная персонализация AI-матчинга под резюме пользователя | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🔴 P1 | 2026-09-11 | 🟢 Done |
-| **TASK-007** | [Stocks UZ] Не отображается график тикера URTS на мобильном TMA (Тестовый прогон) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-12 | 🟢 Done |
-| **TASK-LINK-001** | [LinkID] Динамический выбор LLM в админке + лёгкая модель по умолчанию + валидация вебхуков | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Чат LinkID** | 🔴 P1 | 2026-09-12 | 📋 To Do |
-| **TASK-ITOPS-001** | Санитария US Server: архивация устаревшей копии `/home/us/dev/it-operations-framework` | **IT Ops** (Инфраструктура) | 🟡 P2 | **Antigravity** | 2026-09-12 | 🟢 Done |
-| **TASK-ITOPS-002** | Voice Operator & AI Agent: интеграция голосовых сообщений STT Whisper | **IT Operations** | Чат IT Ops | **Antigravity** | 🔴 P1 | 2026-09-13 | 🟢 Done |
-| **TASK-ITOPS-003** | Верификация и интеграция KB API (База знаний) в клиенты и документацию | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-14 | 🟢 Done |
-| **TASK-ITOPS-004** | Коммерческий пакет: финализация прайса (UZS), реквизитов и контракта пилота | **IT Operations** | Чат IT Ops | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done |
-| **TASK-SYS-001** | Оптимизация US Server (Quick Wins: очистка кэша Docker, vacuum journald) | **Инфраструктура / Сервер** | Чат Master Orchestrator (Antigravity) | **Antigravity (Сисадмин)** | 🟡 P2 | 2026-09-11 | 🟢 Done |
-| **TASK-ITOPS-005** | Core API Hardening: Graph Token Cache & Rate Limiting | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-15 | 🟢 Done |
-| **TASK-ITOPS-006** | Автоматизированный CI/CD пайплайн (GitHub Actions: lint, test, docker build) | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-15 | 🟢 Done |
-| **TASK-ITOPS-007** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 📋 To Do |
-| **TASK-ITOPS-008** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 📋 To Do |
-| **TASK-ITOPS-009** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 📋 To Do |
-
-| **TASK-010** | [Stocks UZ] Push-уведомления "Утренний Бриф" в Telegram (09:50 AM) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-14 | 📋 To Do |
-| **TASK-011** | [Stocks UZ] Модуль Риск-менеджмента и Asset Allocation (Pie Charts) в TMA | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-15 | 📋 To Do |
-| **TASK-012** | [Stocks UZ] AI-Сканер Аномальных Объемов (Smart Money Detection) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-16 | 📋 To Do |
-| **TASK-013** | [Stocks UZ] Фундаментальный AI-Скринер (Value Investing: P/E, P/B, ROE) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-15 | 📋 To Do |
----
-
-## 📝 Детализация задач текущего спринта
-
-### [TASK-001] Починить CrashLoop в `ghscout-core`
-- **Проблема:** Контейнер падает каждые 30 сек с ошибкой `asyncpg.exceptions.InvalidPasswordError: password authentication failed for user "ghscout"`.
-- **Что сделать:**
-  1. Сверить пароль пользователя `ghscout` в БД `ghscout-pg` и в `.env` сервиса `/home/us/services/gh-scout/`.
-  2. Обновить конфигурацию, перезапустить контейнер.
-- **Definition of Done (DoD):**
-  - Контейнер `ghscout-core` в статусе `Up (healthy)`.
-  - В логах `docker logs ghscout-core` отсутствуют ошибки авторизации, сбор данных активен.
-
-### [TASK-002] Добавить `datacore-pg` и `consilium-postgres` в автоматический ночной бэкап
-- **Проблема:** Сейчас в `/home/us/bin/backup-stack.sh` бэкапятся только Authentik и Hermes. Финансовые данные `finanalytics` и история `consilium` под угрозой потери при сбое диска.
-- **Что сделать:**
-  1. Добавить команды `pg_dump` для баз данных `datacore` (в контейнере `datacore-pg`) и `consilium` (в `consilium-postgres`).
-  2. Настроить автоматическое сжатие `gzip` и ротацию (хранение последних 7 дампов).
-  3. Провести тестовый прогон скрипта вручную и убедиться в создании архивов.
-- **Definition of Done (DoD):**
-  - В каталоге `/home/us/backups/` формируются дампы `datacore-*.sql.gz` и `consilium-*.sql.gz`.
-  - Таймер `stack-backup.timer` успешно выполняет полный цикл без ошибок.
-
-### [TASK-003] Закрыть привязку портов `0.0.0.0` для внутренних API
-- **Проблема:** Сервисы `finanalytics-api: 8010`, `datacore-api-v2: 8001`, `linkid-api: 8014`, `linkid-admin: 8015` слушают `0.0.0.0` и доступны в локальной сети без авторизации.
-- **Что сделать:**
-  1. В файлах `docker-compose.yml` заменить порты на `127.0.0.1:8010:8000` (или шлюз `172.26.0.1:`).
-  2. Перезапустить compose-стеки.
-  3. Проверить, что доступ к сервисам остался доступен через Caddy и Tailscale.
-- **Definition of Done (DoD):**
-  - В выводе `docker ps` порты имеют вид `127.0.0.1:PORT->...` либо `172.26.0.1:PORT->...`.
-  - Прямой доступ из внешней сети закрыт, через Tailscale всё работает штатно.
-
-### [TASK-005] [HH Jobs] Ошибка выборки: `no such column: published_at` в боте @hhjob_ai_bot
-- **Статус:** 🟢 Готово (Fixed locally and deployed).
-- **Проблема:** При нажатии кнопки «🔥 Топ Match» или вызове команды `/top` в боте `@hhjob_ai_bot` выводится ошибка: `⚠️ Ошибка выборки: no such column: published_at`.
-- **Первопричина (Root Cause):** В `src/bot.py` функция `get_top_vacancies_text()` выполняет SQL-запрос с сортировкой `ORDER BY matched_score DESC, published_at DESC`. В структуре таблицы `vacancies` базы SQLite (`data/hh.db`) колонка даты публикации называется `created_at`, а колонка `published_at` отсутствует.
-- **Шаги для воспроизведения:**
-  1. Открыть диалог с `@hhjob_ai_bot` в Telegram.
-  2. Отправить команду `/top` или нажать инлайн-кнопку «🔥 Топ Match».
-- **План исправления (Выполнено 2026-09-12):**
-  1. В `src/bot.py` заменить `published_at` на `created_at`.
-  2. Проверить все остальные SQL-запросы в проекте (`src/matcher.py`, `src/hh_parser.py`, `webapp/server.py`) на согласованность со схемой `hh.db`.
-  3. Провести ревью через Триаду, закоммитить в `vitpandex-netizen/products` и задеплоить на US Server.
-- **Definition of Done (DoD):**
-  - Запрос к SQLite в `src/bot.py` использует валидные поля схемы (`created_at`).
-  - Команда `/top` и кнопка «🔥 Топ Match» в боте возвращают форматированный список из топ-5 вакансий с реальными процентами Match Score и ссылками.
-  - Ошибки в логах `journalctl -u hhjob-bot.service` отсутствуют.
-
-### [TASK-006] Разработка Единой политики Триады и релизного управления (Enterprise Governance Framework)
-- **Контекст:** Масштабирование коммерческого качества на все проекты экосистемы. Необходимо разработать единый канонический свод политик, регламентирующий управление релизами, информационную безопасность, ведение бэклога и взаимодействие внутри Триады (`Antigravity`, `Claude Code`, `Hermes`) и с тестировщиками (QA).
-- **Структура Единого свода политик:**
-  1. **Политика релизного управления (Global Release Policy):**
-     - Версионирование SemVer 2.0.0 (`MAJOR.MINOR.PATCH`).
-     - 5 рубежей качества (Quality Gates): `Синтаксис` $\to$ `ИБ-аудит (Grade A)` $\to$ `Ревью Триады` $\to$ `Smoke-тест на сервере` $\to$ `QA Sign-off`.
-     - Регламент мгновенного отката (Rollback Policy) при инцидентах P0.
-     - Обязательный журнал изменений (`CHANGELOG.md`) по стандарту *Keep a Changelog* для каждого сервиса.
-  2. **Политика управления дефектами и бэклогом (Backlog & Issue Lifecycle Policy):**
-     - Единый канонический источник правды: [`~/dev/BACKLOG.md`](file:///Users/vitaliyr/dev/BACKLOG.md).
-     - Обязательные атрибуты каждого тикета: ID, Приоритет (P0–P3), Ответственный, Дедлайн, DoD.
-     - Запрет спонтанной разработки без тикета.
-  3. **Политика Триады и Консилиума (Triad Governance & Consilium Policy):**
-     - Ролевая модель: Antigravity (Архитектор, Системный инженер, Ночной дежурный), Claude Code (Лид-разработчик, Релиз-инженер), Hermes (Аналитик, Автономный исследователь), QA Team (Валидация функционала).
-     - Протокол эстафеты через [`~/dev/TRIAD_SYNC.md`](file:///Users/vitaliyr/dev/TRIAD_SYNC.md).
-     - Регламент консилиума `[CONSILIUM_REQUEST]` для архитектурных решений P0/P1.
-     - Стандарт непреложной защиты торгового депозита: принцип «BGT Untouchable».
-     - Стандарт нулевых поблажек: принцип «Zero Compromise».
-     - Стандарт непрерывного обучения владельца: «Owner Mentorship & Knowledge Transfer».
-- **Definition of Done (DoD):**
-  - Разработан и опубликован канонический документ: [`~/dev/TRIAD_GOVERNANCE_POLICY.md`](file:///Users/vitaliyr/dev/TRIAD_GOVERNANCE_POLICY.md).
-  - Сформирована глобальная релизная политика: [`~/dev/RELEASE_POLICY.md`](file:///Users/vitaliyr/dev/RELEASE_POLICY.md).
-  - Все регламенты интегрированы во все узлы памяти (`GEMINI.md`, `CLAUDE.md`, `MEMORY.md`).
-  - Статус зафиксирован в [`~/dev/TRIAD_SYNC.md`](file:///Users/vitaliyr/dev/TRIAD_SYNC.md).
+- **🏁 Спринт 1 (11–12 сентября 2026 г.):** Стабилизация инфраструктуры, санитария серверов, первичные хотфиксы и запуск QA Intake Engine. *(Завершён)*
+- **🚀 Спринт 2 (13–20 сентября 2026 г.):** Отказоустойчивость LinkID Pro Post, фоновые очереди (Celery), авто‑публикация в LinkedIn, мульти‑пользовательский доступ, расширение IT Operations Framework и алгоритмический R&D БGT. *(Текущий активный спринт)*
 
 ---
 
+## 📊 Реестр задач спринтов
 
-### [TASK-007] [Stocks UZ] Не отображается график тикера URTS на мобильном TMA
-- **Категория / Проект:** `Stocks UZ`
-- **Автор репорта:** @tester_qa
-- **Приоритет:** 🟡 P2
-- **Шаги для воспроизведения:**
-1. Открыть бот @stock_uz_bot
-  2. Нажать кнопку TMA
-  3. Выбрать тикер URTS
-- **Ожидаемый результат:**
-  График загружен
-- **Фактический результат:**
-  Белый экран
-- **Definition of Done (DoD):**
-  1. Дефект устранен в кодовой базе проекта.
-  2. Пройдены ворота качества: синтаксис (Gate 1), аудит ИБ Grade A (Gate 2), ревью Триады (Gate 3).
-  3. Изменения задеплоены на US Server и проверены (Gate 4).
-  4. QA-тестировщик подтвердил исправление (Gate 5 QA Sign-off).
+| ID | Спринт | Задача | Проект / Домен | Ответственный Чат / Бот | Исполнитель (Агент) | Приоритет | Срок | Статус |
+| :--- | :---: | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| **TASK-001** | **Спринт 1** | Восстановление `ghscout-core` (DNS коллизия postgres/redis) | **GH Scout** | Чат GH Scout (`@ghscout_bot`) | **Antigravity (Ночное дежурство)** | 🔴 P1 | 2026-09-12 | 🟢 Done |
+| **TASK-002** | **Спринт 1** | Включение `datacore-pg`, `consilium`, `ghscout` в ночной бэкап | **DataCore / Consilium** | Чат DataCore / Master Orchestrator | **Antigravity (Инфраструктура)** | 🟡 P2 | 2026-09-12 | 🟢 Done |
+| **TASK-003** | **Спринт 1** | Сетевая изоляция API: биндинг портов `127.0.0.1` на US Server | **Инфраструктура / API** | Чат Master Orchestrator (Antigravity) | **Antigravity (Безопасность)** | 🔴 P1 | 2026-09-12 | 🟢 Done |
+| **TASK-004** | **Спринт 1** | Автоматизация приема баг‑репортов (QA Intake Engine `scripts/qa_intake.py`) | **QA Track / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity (Процессы)** | 🟡 P2 | 2026-09-12 | 🟢 Done |
+| **TASK-005** | **Спринт 1** | [HH Jobs] Ошибка выборки: `no such column: published_at` в боте | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Antigravity (Хотфикс)** | 🔴 P1 | 2026-09-12 | 🟢 Done |
+| **TASK-006** | **Спринт 1** | Разработка Единой политики Триады и стандартов релизного управления | **Экосистема / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity (Архитектура)** | 🔴 P1 | 2026-09-12 | 🟢 Done |
+| **TASK-007** | **Спринт 1** | [Stocks UZ] Не отображается график тикера URTS на мобильном TMA | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-12 | 🟢 Done |
+| **TASK-008** | **Спринт 1** | [HH Jobs] Архивация и очистка неактуальных вакансий (Retention Policy) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-13 | 🟢 Done |
+| **TASK-009** | **Спринт 1** | [HH Jobs] Полная персонализация AI‑матчинга под резюме пользователя | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🔴 P1 | 2026-09-11 | 🟢 Done |
+| **TASK-ITOPS-001** | **Спринт 1** | Санитария US Server: архивация устаревшей копии `it-operations-framework` | **IT Ops** (Инфраструктура) | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-12 | 🟢 Done |
+| **TASK-ITOPS-002** | **Спринт 1** | Voice Operator & AI Agent: интеграция голосовых сообщений STT Whisper | **IT Operations** | Чат IT Ops | **Antigravity** | 🔴 P1 | 2026-09-13 | 🟢 Done |
+| **TASK-ITOPS-003** | **Спринт 1** | Верификация и интеграция KB API (База знаний) в клиенты и документацию | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-14 | 🟢 Done |
+| **TASK-ITOPS-004** | **Спринт 1** | Коммерческий пакет: финализация прайса (UZS), реквизитов и контракта пилота | **IT Operations** | Чат IT Ops | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done |
+| **TASK-ITOPS-005** | **Спринт 1** | Core API Hardening: Graph Token Cache & Rate Limiting | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-15 | 🟢 Done |
+| **TASK-ITOPS-006** | **Спринт 1** | Автоматизированный CI/CD пайплайн (GitHub Actions: lint, test, docker build) | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-15 | 🟢 Done |
+| **TASK-SYS-001** | **Спринт 1** | Оптимизация US Server (Quick Wins: очистка кэша Docker, vacuum journald) | **Инфраструктура / Сервер** | Чат Master Orchestrator (Antigravity) | **Antigravity (Сисадмин)** | 🟡 P2 | 2026-09-11 | 🟢 Done |
+| **TASK-BGT-017** | **Спринт 1** | BGT: Динамический адаптивный фильтр волатильности (ATR Expansion Filter) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-11 | 🟢 Done |
+| **TASK-LINKID-005** | **Спринт 2** | [LinkID] Self‑Healing LLM Fallback (авто‑переключение на Gemma‑4‑31B Free при 402) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-12 | 🟢 Done |
+| **TASK-LINKID-006** | **Спринт 2** | [LinkID] Фикс роутинга Funnel `/linkid` в Tailscale (устранение 404 / DOMException iOS) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-12 | 🟢 Done |
+| **TASK-LINKID-007** | **Спринт 2** | [LinkID] Синхронизация доступа для 5 Telegram ID (TELEGRAM_ADMIN_IDS) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-12 | 🟢 Done |
+| **TASK-LINKID-003** | **Спринт 2** | [LinkID] Устранение двойного парсинга новостей в скрипте `generate_posts.py` | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-12 | 🟢 Done |
+| **TASK-LINKID-001** | **Спринт 2** | [LinkID] Динамический выбор LLM в веб‑админке (`:8015`) + сохранение в БД | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Чат LinkID** | 🔴 P1 | 2026-09-14 | 📋 To Do |
+| **TASK-LINKID-002** | **Спринт 2** | [LinkID] Асинхронная очередь генерации постов через Celery / Redis | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity / LinkID Agent** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-LINKID-004** | **Спринт 2** | [LinkID] Интеграция авто‑публикации постов в LinkedIn (REST API Cron) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🔴 P1 | 2026-09-16 | 📋 To Do |
+| **TASK-LINKID-008** | **Спринт 2** | [LinkID] Редактор профиля тональности и стиля автора (Tone Profile) в TMA | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-LINKID-009** | **Спринт 2** | [LinkID] Автогенерация обложек и инфографики к постам (DALL‑E 3 / Flux API) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🔵 P3 | 2026-09-18 | 📋 To Do |
+| **TASK-LINKID-010** | **Спринт 2** | [LinkID] Авто-кросспостинг анонсов постов в Telegram-топик команды | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-15 | 📋 To Do |
+| **TASK-LINKID-011** | **Спринт 2** | [LinkID] Аналитика просмотров и охватов LinkedIn в TMA (Engagement Tracker) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-LINKID-012** | **Спринт 2** | [LinkID] Динамический менеджер источников новостей (RSS/TG-каналы) в админке | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-LINKID-013** | **Спринт 2** | [LinkID] Healthcheck Sentinel & Auto-heal (Авто-восстановление сетевых роутов) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-14 | 📋 To Do |
+| **TASK-LINKID-014** | **Спринт 2** | [LinkID] Экспорт контент-плана постов в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🔵 P3 | 2026-09-18 | 📋 To Do |
+| **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-ITOPS-009** | **Спринт 2** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 📋 To Do |
+| **TASK-010** | **Спринт 2** | [Stocks UZ] Push‑уведомления "Утренний Бриф" в Telegram (09:50 AM) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-14 | 📋 To Do |
+| **TASK-011** | **Спринт 2** | [Stocks UZ] Модуль Risk‑Management и Asset Allocation (Pie Charts) в TMA | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-15 | 📋 To Do |
+| **TASK-012** | **Спринт 2** | [Stocks UZ] AI‑Сканер Аномальных Объёмов (Smart Money Detection) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-16 | 📋 To Do |
+| **TASK-013** | **Спринт 2** | [Stocks UZ] Фундаментальный AI‑Скринер (Value Investing: P/E, P/B, ROE) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-BGT-011** | **Спринт 2** | BGT: Интеграция "Уровня Жадности" (Market Greed / Regime Filter) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-BGT-015** | **Спринт 2** | BGT: All-Weather Архитектура (Мульти-режимность тренд/флэт) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🔴 P1 | 2026-09-18 | 📋 To Do |
+| **TASK-BGT-018** | **Спринт 2** | BGT: WebSocket Price Stream Engine (переход с REST-поллинга на тикеры мгновенного исполнения) | **BGT (Bitget Bot)** | Чат BGT | **Antigravity / BGT Agent** | 🔴 P1 | 2026-09-16 | 📋 To Do |
+| **TASK-BGT-019** | **Спринт 2** | BGT: AI Safety Circuit-Breaker (Защита от сбоев биржи и таймаутов API при выставлении SL) | **BGT (Bitget Bot)** | Чат BGT | **Antigravity / BGT Agent** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг сделок ТОП-20 кошельков в Telegram) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | 📋 To Do |
+| **TASK-ALPHA-002** | **Спринт 2** | [Alpha Scout] DEX/CEX Spread Scanner (Сопоставление пулов Raydium/Uniswap с Bitget/MEXC) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🟡 P2 | 2026-09-17 | 📋 To Do |
+| **TASK-LINKID-010** | **Спринт 2** | [LinkID] AI Auto-Image Generation (Автогенерация обложек для LinkedIn постов через Flux/SDXL) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-STOCKS-014** | **Спринт 2** | [Stocks UZ] Telegram Instant Signal Alerts (Детектор инсайдерских выкупов за 5 мин до закрытия UZSE) | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-15 | 📋 To Do |
+| **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика на вакансию в 1 клик в TMA) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 📋 To Do |
+| **TASK-SYS-002** | **Спринт 2** | Unified Health Dashboard & Daily Backup Verification (Ежедневный дайджест статуса сервисов в 08:00) | **Инфраструктура / Сервер** | Чат Master Orchestrator | **Antigravity (Сисадмин)** | 🟡 P2 | 2026-09-14 | 📋 To Do |
 
-### [TASK-008] [HH Jobs] Архивация и очистка неактуальных вакансий (Data Retention Policy)
-- **Проблема:** В базе `hh.db` уже накопилось 900+ вакансий. Большинство старых позиций (старше 14-30 дней) уже закрыты или не актуальны, что захламляет интерфейс TMA и замедляет выборку.
-- **План реализации (на выбор):**
-  1. Либо добавить крон-скрипт (Data Pruner), который раз в сутки удаляет записи старше 30 дней.
-  2. Либо добавить статус (`is_archived`) и при парсинге проверять доступность/статус закрытия вакансии на сайте.
-- **Definition of Done (DoD):**
-  - Выбран метод очистки.
-  - Написан и активирован скрипт/механизм архивации, который скрывает или удаляет старые вакансии из выдачи `/api/vacancies`.
+
 
 ---
 
-## 🧪 Интеграция тестировщика (QA Track)
-
-### [TASK-004] Автоматизация приема баг-репортов от тестировщика (QA Intake Engine)
-- **Контекст:** Внедрение автоматизированного конвейера приема дефектов от QA-инженера.
-- **Реализация:** Разработан и протестирован модуль `~/dev/scripts/qa_intake.py`:
-  1. Автоматический расчет следующего ID (`TASK-XXX`).
-  2. Парсинг неструктурированного текста (Шаги, Ожидание, Факт, Приоритет, Проект).
-  3. Автоматическая вставка в таблицу спринта и блок детализации `~/dev/BACKLOG.md`.
-  4. Автоматическая публикация уведомления в эстафетный журнал `~/dev/TRIAD_SYNC.md`.
-  5. CLI интерфейс (`add`, `parse`, `next-id`) готов для интеграции с Telegram-ботом или вебхуком.
-- **Definition of Done (DoD):**
-  - Создан и протестирован скрипт `scripts/qa_intake.py`.
-  - Успешно зарегистрирован тестовый дефект `TASK-007`.
-  - Статус синхронизирован в Триаде.
+| **TASK-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и вилок ЗП | **HH Jobs** | Чат HH Jobs | **Antigravity** | 🟡 P2 | 2026-09-15 | 📋 To Do |
+| **TASK-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs | **Antigravity** | 🟡 P2 | 2026-09-16 | 📋 To Do |
 
 ---
 
-### [TASK-010] [Stocks UZ] Push-уведомления "Утренний Бриф" в Telegram
-- **Суть:** Добавление фонового джоба, который каждое утро в 09:50 (перед открытием) отправляет пользователю выжимку из базы: активные лимитные заявки, статус рынка и основные инсайты за ночь.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Чат Stocks UZ | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
-- **DoD:**
-  1. Реализован CRON-джоб в python бэкенде или системном cron-е сервера.
-  2. Формирование markdown-сообщения с данными из `portfolio` и `insights`.
-  3. Отправка через API Telegram-бота авторизованным пользователям.
+## 📝 Детализация задач Спринта 2 (Активный спринт)
 
-### [TASK-011] [Stocks UZ] Модуль Риск-менеджмента и Asset Allocation (Pie Charts) в TMA
-- **Суть:** Внедрение визуализации распределения активов в портфеле (по секторам, по брокерам) через Chart.js или Lightweight Charts на главной странице TMA (раздел Портфель).
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Чат Stocks UZ | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
-- **DoD:**
-  1. Добавление эндпоинта `/api/tma/allocation` в `src/api.py`.
-  2. Рендеринг круговой диаграммы на фронтенде TMA.
-  3. Вывод предупреждений о перегрузке (например, >40% в банках).
+### 🔗 LinkID Pro Post
 
-### [TASK-012] [Stocks UZ] AI-Сканер Аномальных Объемов (Smart Money Detection)
-- **Суть:** Анализатор таблицы `trade_flow` на предмет аномальных, разовых крупных сделок, выбивающихся из среднего дневного объема тикера. Автоматическая нотификация.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** Чат Stocks UZ | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
-- **DoD:**
-  1. Алгоритм вычисления скользящей средней объемов и детекция спайков.
-  2. Генерация push-алерта в Telegram.
+#### [TASK-LINKID-005] Self-Healing LLM Fallback (Авто-переключение на бесплатную модель)
+- **Контекст:** При отсутствии средств на провайдере OpenRouter модель DeepSeek v4 Pro возвращает HTTP 402 Payment Required, что приводило к сбою генерации.
+- **Решение:** Внедрен список кандидатных моделей (`deepseek-v4-pro` $\to$ `google/gemma-4-31b-it:free` $\to$ `google/gemma-4-26b-a4b-it:free`). При получении ошибки 402 система автоматически переключается на бесплатную модель без сбоя для пользователя.
+- **Статус:** 🟢 Done (Коммит `3e7e62f`, верифицировано на сервере).
 
-### [TASK-013] [Stocks UZ] Фундаментальный AI-Скринер (Value Investing)
-- **Суть:** Автоматизированный сбор и анализ финансовой отчетности с OpenInfo.uz (или аналогичных источников). Расчет мультипликаторов P/E (Цена/Прибыль), P/B (Цена/Капитал) и ROE для выявления фундаментально недооцененных компаний.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** Чат Stocks UZ | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
-- **DoD:**
-  1. Настроен парсер квартальных и годовых отчетов (выручка, чистая прибыль, капитал).
-  2. В БД добавлена таблица `fundamentals_metrics` (P/E, P/B).
-  3. Бот генерирует еженедельный дайджест "Топ-5 недооцененных бумаг рынка".
+#### [TASK-LINKID-006] Настройка проксирования API через Tailscale Funnel & Устранение DOMException в iOS
+- **Контекст:** Mini App совершал запросы на `/linkid/api/v1/*`, но в Tailscale Funnel отсутствовал роут на бэкенд, из-за чего Caddy отдавал пустой 404, а WKWebView на iOS выбрасывал ошибку `DOMException: The string did not match the expected pattern`.
+- **Решение:** Добавлен прокси-маршрут `/linkid` $\to$ `127.0.0.1:8014` в Tailscale Funnel и скрипт `scripts/restore-serve.sh`.
+- **Статус:** 🟢 Done (Коммит `b82c43e`, проверено клиентом).
+
+#### [TASK-LINKID-007] Синхронизация доступа для команды (5 Telegram ID)
+- **Контекст:** Бэкенд и бот проверяли только `TELEGRAM_ADMIN_IDS`, перекрывая `ALLOWED_TELEGRAM_USER_IDS`, из-за чего доступ имел только 1 человек.
+- **Решение:** Обновлен код авторизации (`bot.py` и `backend/app/api/__init__.py`), объединяющий оба источника. На сервере в `.env` внесены все 5 разрешенных ID (`110627043`, `644427986`, `7345133591`, `7400177636`, `8021197289`).
+- **Статус:** 🟢 Done (Коммит `40d9381`, контейнеры перезапущены).
+
+#### [TASK-LINKID-001] Динамический выбор LLM в веб-админке (`:8015`)
+- **Суть:** Добавление UI-селектора в веб-админку LinkID для переключения генерации между моделями (Claude 3.5, DeepSeek, GPT-4o-mini, Gemma) с сохранением настроек в БД.
+- **Приоритет:** 🔴 P1 (High) | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+- **DoD:** Выбор модели сохраняется в БД `UserStyleProfile`, генератор забирает актуальную модель из настроек.
+
+#### [TASK-LINKID-002] Асинхронная очередь генерации постов через Celery / Redis
+- **Суть:** Перенос вызова парсера и нейросети из синхронного HTTP-потока в фоновую очередь Celery, чтобы исключить риск 504 Gateway Timeout.
+- **Приоритет:** 🔴 P1 (High) | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+- **DoD:** Эндпоинт `/posts/generate` отдаёт `202 Accepted` и `task_id`. Mini App поллит статус выполнения.
+
+#### [TASK-LINKID-004] Интеграция авто-публикации постов в LinkedIn (REST API Cron)
+- **Суть:** Реализация фонового джоба для автоматической публикации `approved` постов напрямую в профиль LinkedIn через официальный REST API.
+- **Приоритет:** 🔴 P1 (High) | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** Пост автоматически публикуется в LinkedIn по расписанию, статус меняется на `published`.
+
+#### [TASK-LINKID-008] Редактор профиля тональности и стиля автора (Tone Profile) в TMA
+- **Суть:** Добавление вкладки в Telegram Mini App для тонкой настройки тона (Управленческий, Инженерный, Аналитический) и запрещенных стоп-слов.
+- **Приоритет:** 🟡 P2 (Medium) | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+- **DoD:** Пользователь редактирует стиль в TMA, промпт генератора динамически подстраивается.
+
+#### [TASK-LINKID-009] Автогенерация обложек и инфографики к постам (DALL-E 3 / Flux API)
+- **Суть:** Генерация графических карточек/обложек для LinkedIn постов на основе темы и ключевых тезисов.
+- **Приоритет:** 🔵 P3 (Low) | **Срок:** 2026-09-18 | **Статус:** 📋 To Do
+- **DoD:** К посту прикрепляется сгенерированное изображение, доступное для предпросмотра в TMA.
+
+#### [TASK-LINKID-010] Авто-кросспостинг анонсов постов в Telegram-топик команды
+- **Суть:** Автоматическая публикация анонса готовых/одобренных постов в служебный Telegram-топик или канал для архивирования и оперативного ревью всей командой.
+- **Приоритет:** 🟡 P2 (Medium) | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+- **DoD:** При одобрении поста бот автоматически отсылает форматированный анонс с инлайн-ссылкой в Telegram-топик.
+
+#### [TASK-LINKID-011] Аналитика просмотров и охватов LinkedIn в TMA (Engagement Tracker)
+- **Суть:** Сбор статистики (показы, лайки, комментарии, шеринги) через LinkedIn REST API для опубликованных постов и рендеринг графиков во вкладке «Статус» в Mini App.
+- **Приоритет:** 🟡 P2 (Medium) | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+- **DoD:** Во вкладке «Статус» TMA отображаются графики охватов и топ-3 самых виральных постов за месяц.
+
+#### [TASK-LINKID-012] Динамический менеджер источников новостей (RSS/TG-каналы) в админке
+- **Суть:** Вынос хардкода новостных сайтов из `generate_posts.py` в БД и веб-админку (`:8015`), чтобы владелец мог добавлять и отключать RSS-ленты и Telegram-каналы для парсинга контекста.
+- **Приоритет:** 🟡 P2 (Medium) | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** В админке есть раздел «Источники новостей» с тумблерами активностей и добавлением новых ссылок.
+
+#### [TASK-LINKID-013] Healthcheck Sentinel & Auto-heal (Авто-восстановление сетевых роутов)
+- **Суть:** Сторожевой фоновый процесс (Healthcheck Sentinel), проверяющий доступность API и публичного `/linkid-app` раз в 5 минут и автоматически выполняющий `restore-serve.sh` при любых сбоях сети или перезагрузке сервера.
+- **Приоритет:** 🔴 P1 (High) | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+- **DoD:** Скрипт-сторож добавлен в systemd/cron, при падении маршрута Funnel он восстанавливается за <30 секунд без участия человека.
+
+#### [TASK-LINKID-014] Экспорт контент-плана постов в iCal / Google Calendar (.ics feed)
+- **Суть:** Генерация персонализированного `.ics` календаря со всеми запланированными публикациями для импорта в Apple Calendar / Google Calendar.
+- **Приоритет:** 🔵 P3 (Low) | **Срок:** 2026-09-18 | **Статус:** 📋 To Do
+- **DoD:** Эндпоинт `/api/v1/posts/calendar.ics` отдаёт валидный iCal-файл с расписанием постов.
+
+---
+
+### 🏢 IT Operations Framework
+
+#### [TASK-ITOPS-007] Распределённый Rate Limiting через Redis (Sliding Window)
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** Лимиты хранятся в Redis, поддержке подвержены мульти-воркерные развертывания.
+
+#### [TASK-ITOPS-008] Executive PDF/Excel Digest Engine для CIO
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+- **DoD:** Автогенерация брендированных PDF/Excel отчетов по SLA и инцидентам для IT-директора.
+
+#### [TASK-ITOPS-009] Telegram Mini App Status Page & Service Health
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-18 | **Статус:** 📋 To Do
+- **DoD:** Вкладка в TMA со статусом сервисов и аварией в реальном времени.
+
+---
+
+### 📈 Stocks UZ & BGT (Трейдинг и Инвестиции)
+
+#### [TASK-010] [Stocks UZ] Push-уведомления "Утренний Бриф" (09:50 AM)
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+
+#### [TASK-011] [Stocks UZ] Модуль Риск-менеджмента и Asset Allocation (Pie Charts)
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+
+#### [TASK-012] [Stocks UZ] AI-Сканер Аномальных Объемов (Smart Money)
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+
+#### [TASK-013] [Stocks UZ] Фундаментальный AI-Скринер (Value Investing: P/E, P/B, ROE)
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+
+#### [TASK-016] [Stocks UZ] Авто-мониторинг OpenInfo.uz (Существенные факты и финансовые отчеты)
+- **Суть:** Парсер корпоративных новостей и публикаций отчетов на OpenInfo.uz с instant Telegram-уведомлением при появлении решений по дивидендам или годовых отчетов.
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** Опережение рынка при выходе дивидендных новостей, лаг < 2 мин.
+
+#### [TASK-017] [Stocks UZ] Калькулятор дивидендной доходности (Yield to Cost в % и UZS)
+- **Суть:** Расчет доходности в % и суммах UZS как к текущей рыночной цене, так и к средней цене покупки по портфелю инвестора (GoInvest + Jett).
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+- **DoD:** Отображение в TMA и алертов по дивидендам с суммой в UZS и потенциалом рои %.
+
+#### [TASK-018] [Stocks UZ] Сканер неликвидных стаканов и неэффективных спредов (>10%)
+- **Суть:** Поиск аномальных разрывов между Best Bid и Best Ask на UZSE для постановки выгодных лимитных заявок (забор объема у нетерпеливых продавцов).
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+- **DoD:** Алерт при появлении спреда > 10% с расчетом точки выставления лимитки.
+
+#### [TASK-019] [Stocks UZ] Target Price Push-Alerts (Уведомления о достижении цен закупки)
+- **Суть:** Мониторинг целевых цен дозакупки (напр. BIOK 14 000 - 14 200 UZS, URTS 10 500 UZS) с мгновенным уведомлением при достижении уровня.
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+- **DoD:** Мгновенный алерт в Telegram с диплинком на стакан в TMA.
+
+#### [TASK-BGT-011] BGT: Интеграция "Уровня Жадности" (Market Greed / Regime Filter)
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+
+#### [TASK-BGT-012] BGT: Динамический TP/SL (Smart Scaling Out)
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+
+#### [TASK-BGT-015] BGT: All-Weather Архитектура (Мульти-режимность)
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-18 | **Статус:** 📋 To Do
+
+#### [TASK-BGT-018] BGT: WebSocket Price Stream Engine
+- **Суть:** Перевод расчёта индикаторов и входов в сделки с REST-поллинга (`90s`) на прямые WebSocket-стримы котировок Bitget. Это снизит задержку входа при Donchian-пробоях с десятков секунд до миллисекунд.
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** Задержка от импульса цены до отправки ордера $< 300$ мс, fall-back на REST при разрыве связи.
+
+#### [TASK-BGT-023] BGT: Lead-Lag Сигнал Binance (Cross-Exchange Front-running)
+- **Суть:** Binance лидирует на крипторынке в 90% случаев. Скрипт отслеживает пробои на Binance 15m. Если Binance пробивает уровень на 2-5 секунд раньше Bitget, бот входит на Bitget до того, как маркетмейкер подвинет цену.
+- **Спринт:** Спринт 2 | **Приоритет:** 🔴 P1 | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+- **DoD:** Опережение задержки Bitget на 1-3 секунды при пробоях.
+
+#### [TASK-BGT-024] BGT: Пирамидинг на супер-трендах (Safe Pyramiding)
+- **Суть:** Долив в позицию при продолжении сильного тренда. Если сделка переведена в безубыток (Smart Scaling Out) и цена проходит +4 ATR, бот добавляет +25% к позиции за счет накопленного незафиксированного профита.
+- **Спринт:** Спринт 2 | **Приоритет:** 🟡 P2 | **Срок:** 2026-09-15 | **Статус:** 📋 To Do
+- **DoD:** Увеличение итогового PnL на длинных трендах на 20-30%.
+
+#### [TASK-BGT-025] BGT: Утренний Executive Дайджест в Telegram (08:00 UTC+5)
+- **Суть:** Ежедневная утренняя сводка владельцу: режим рынка (Greed/Fear), результаты работы ночного оптимизатора, лидеры Paper Trading и статус депозита.
+- **Спринт:** Спринт 2 | **Приоритет:** 🟢 P3 | **Срок:** 2026-09-13 | **Статус:** 📋 To Do
+- **DoD:** Автоматическая отправка 1 структурированного сообщения каждое утро в Telegram.
+
+#### [TASK-BGT-026] BGT: Детектор сжатия волатильности (TTM Squeeze Detector)
+- **Суть:** Анализ сужения Полос Боллинджера (Bollinger Bands Squeeze) на 4h. Когда волатильность сжимается до годовых минимумов, бот готовится к выстрелу на 15-30% и повышает чувствительность входов.
+- **Спринт:** Спринт 2 | **Приоритет:** 🟡 P2 | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
+- **DoD:** Определение фазы накопления перед сильным импульсом.
+
+
+
+---
+
+### 🚀 Alpha Scout (Поиск арбитража и сигналов)
+
+#### [TASK-ALPHA-001] Polymarket On-Chain Whale Alert Bot
+- **Суть:** Фоновый сервисный бот, отслеживающий ончейн-транзакции в Polygon для ТОП-20 кошельков лидерборда Polymarket. При открытии позиции $> \$1,000$ отправляется мгновенный алерт в Telegram.
+- **Приоритет:** 🔴 P1 | **Срок:** 2026-09-14 | **Статус:** 📋 To Do
+- **DoD:** Бот работает 24/7 на US Server, Telegram-уведомления содержат ссылку на исход, размер позиции и кошелек кита.
+
+#### [TASK-ALPHA-002] DEX/CEX Spread Scanner (Solana & EVM vs Bitget/MEXC)
+- **Суть:** Сканер разницы цен между пулами ликвидности Raydium/Uniswap и котировками централизованных бирж для поиска асимметричных возможностей арбитража.
+- **Приоритет:** 🟡 P2 | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
+- **DoD:** Дайджест аномалий со спредом $> 3\%$ генерируется в расчете на реальное исполнение.
+
+
+---
 
 ## 📐 Правила ведения бэклога (Enterprise Process Standard)
 
 1. **Единый источник правды (Single Source of Truth):**
    - Никаких задач «на словах» или забытых в чатах. Любая задача, идея или баг обязательно фиксируется в этом файле.
 2. **Атрибуты каждой задачи:**
-   - `ID`: сквозной номер (`TASK-XXX`).
+   - `ID`: сквозной номер (`TASK-XXX` или `TASK-PROJECT-XXX`).
+   - `Спринт`: номер спринта (`Спринт 1`, `Спринт 2` и т.д.).
    - `Приоритет`: P0 (Blocker), P1 (High), P2 (Medium), P3 (Low).
    - `Ответственный`: конкретный агент (`Antigravity`, `Claude Code`, `Hermes`) или разработчик.
    - `Срок реализации`: фиксированная дата дедлайна.
-   - `Definition of Done (DoD)`: четкие технические критерии, по которым QA или владелец принимают работу.
+   - `Definition of Done (DoD)`: четкие технические критерии принятия работы.
 3. **Жизненный цикл задачи:**
-   `📋 To Do` → `⏳ In Progress` → `🔍 Review / QA` → `🟢 Done`.
-4. **Доменная привязка чатов (Chat Domain Affinity) и изоляция проектов:**
-   - Каждый проект ведется в **отдельном выделенном чате** и держит 100% фокус строго на своем домене:
-     - **Чат BGT (`trading-agents` / `bitget-bot`):** Автоматический интеллектуальный трейдинг (непрерывный поиск, скоринг и динамический отбор наиболее потенциальных пар, мульти-активный спот/фьючерсы, фандинг-арбитраж, бэктесты, P&L, риск-менеджмент). **НИКОМУ КРОМЕ BGT КАТЕГОРИЧЕСКИ НЕЛЬЗЯ ЛЕЗТЬ В ТРЕЙДИНГ ИЛИ ТРОГАТЬ БОЕВОГО БОТА.**
-     - **Чат HH Jobs (`hh-jobs` / `hh-remote`):** Вакансии (IT Director / Head of IT / Remote), TMA «UZ IT Jobs», бот `@hhjob_ai_bot`, парсеры.
-     - **Чат Stocks UZ (`stocks-uz`):** Мониторинг **всего рынка акций Узбекистана (РФБ «Тошкент» / UZSE)**, непрерывный поиск потенциальных и недооцененных бумаг, аналитика TG-каналов, дашборд `:8004`.
-     - **Чат FinAnalytics (`finanalytics`):** Долги, кредиты, бюджеты, платёжный календарь, бот `@finanalytics_ai_bot`.
-     - **Чат IT Ops (`it-operations-framework`):** Флагманский Enterprise ITSM продукт. **ТОЛЬКО чат IT Ops уполномочен вносить изменения в проект.** Полная автономия от личных ботов и баз данных.
-     - **Чат DataCore (`datacore`):** Шина рыночных данных, Polymarket/Yahoo коллекторы, Redis Pub/Sub, API `:8001`.
-     - **Чат Expert Consilium (`expert-consilium`):** Мультиагентный консилиум 5 ИИ-экспертов через `@Expert_consilium_bot`.
-     - **Чат AnyIdea (`anyidea`):** Сбор и скоринг бизнес-идей через `@anyidea_ai_bot`.
-     - **Чат GH Scout (`ghscout`):** Мониторинг **50+ ведущих open-source репозиториев** конкурентов и технологических трендов.
-     - **Чат LinkID (`linkid`):** Профессиональный постинг и контент-дистрибуция.
-     - **Antigravity IDE (Master Orchestrator):** Общесистемная координация, архитектура, инфраструктура US Server, безопасность (Vault/Network), Единый бэклог, ночное дежурство.
+   `📋 To Do` $\to$ `⏳ In Progress` $\to$ `🔍 Review / QA` $\to$ `🟢 Done`.
 
 ---
-
-## 📈 Стратегический R&D пайплайн BGT (Алгоритмика & Спринты)
-
-> **Статус спринтов:**
-> - 🟢 **Спринт 1 (DONE):** Базовая инфраструктура, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed Sensor, Smart Scaling Out, Whale CVD Filter, Dynamic Volatility.
-> - 🚀 **Спринт 2 (ACTIVE):** Двусторонняя торговля (Shorts), фикс PEPE, TMA Signals & Stats, Auto-Promote Paper->LIVE, Dynamic Leverage.
-
-### [TASK-008] BGT: Ежедневный Walk-Forward Оптимизатор
-- **Суть:** Ночной скрипт `daily_optimizer.py` для калибровки параметров Donchian, ATR и стопов под текущий режим рынка.
-- **Спринт:** Спринт 1 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Задеплоено, systemd timer)
-
-### [TASK-009] BGT: Telegram Kill-Switch & Admin Listener
-- **Суть:** Интеграция фонового слушателя `tg_admin.py` для мгновенного закрытия всех позиций по команде `/halt` и просмотра статуса по `/status`.
-- **Спринт:** Спринт 1 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Задеплоено `bgt-tg-admin.service`)
-
-### [TASK-011] BGT: "Уровень Жадности" (Market Greed / Regime Filter)
-- **Суть:** Математический расчет перегрева рынка (Funding + Расстояние от SMA50 + RSI) через `market_sensor.py` и `brain.py` для адаптации риска.
-- **Спринт:** Спринт 1 | **Приоритет:** 🟡 P2 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Задеплоено `bgt-market-sensor`)
-
-### [TASK-012] BGT: Динамический TP/SL (Smart Scaling Out)
-- **Суть:** Фиксация 30% прибыли при движении на +2 ATR, перенос остатка в безубыток и тяга трейлингом.
-- **Спринт:** Спринт 1 | **Приоритет:** 🟡 P2 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Внедрено в `live_trend.py`)
-
-### [TASK-013] BGT: Сонар китов и фильтр бычьих ловушек (Whale CVD Tracking)
-- **Суть:** Мониторинг крупных ордеров (>$50k) через `whale_sonar.py` и блокировка ложных пробоев в `live_trend.py` при отрицательной дельте.
-- **Спринт:** Спринт 1 | **Приоритет:** 🔵 P3 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Задеплоено `bgt-whale-sonar`)
-
-### [TASK-017] BGT: Фильтр волатильности (ATR Expansion Filter)
-- **Суть:** Блокировка входов во флэт-болоте и активация только при расширении волатильности `a_short / a_long >= 1.05`.
-- **Спринт:** Спринт 1 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** 🟢 Done (Релиз `v0.2.1`)
-
----
-
-### 🚀 СПРИНТ 2 (Текущий фокус)
-
-### [TASK-014] BGT: Микро-импульсный скальпинг 1m (Momentum Scalper)
-- **Суть:** Скальпинг быстрых 1-минутных всплесков волатильности на срыве стопов.
-- **Спринт:** Спринт 2 | **Приоритет:** 🔵 P3 | **Ответственный:** Триада (BGT) | **Статус:** ⏳ Paper Trading (`bgt-scalper.service`)
-
-### [TASK-015] BGT: All-Weather Архитектура (Мульти-режимный Мета-мозг)
-- **Суть:** Полная автоматическая адаптация алгоритма под флэт (Mean-Reversion) и тренд (Donchian Breakout) на базе `brain.py`.
-- **Спринт:** Спринт 2 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** ⏳ In Progress (Фаза 1 задеплоена)
-
-### [TASK-016] BGT: Статистический Арбитраж (Pair Trading SOL/ADA)
-- **Суть:** Торговля спредом пар SOL и ADA без риска направления рынка (Long SOL / Short ADA при Z-score > 2).
-- **Спринт:** Спринт 2 | **Приоритет:** 🔵 P3 | **Ответственный:** Триада (BGT) | **Статус:** ⏳ Paper Trading (`bgt-stat-arb.service`)
-
-### [TASK-018] BGT: Двусторонняя торговля (LONG + SHORT Breakouts)
-- **Суть:** Внедрение шорт-входов в `live_trend.py` при пробое нижнего канала `dch_low`, когда EMA20 < EMA50 и CVD < 0. Заработок на дампах рынка.
-- **Спринт:** Спринт 2 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** 📋 To Do
-
-### [TASK-019] BGT: Корректировка тикера PEPE в daily_optimizer.py
-- **Суть:** Исправление имени тикера на `PEPE/USDT:USDT` для точного ночного расчета параметров в `daily_optimizer.py`.
-- **Спринт:** Спринт 2 | **Приоритет:** 🔴 P1 | **Ответственный:** Триада (BGT) | **Статус:** 📋 To Do
-
-### [TASK-020] BGT: Telegram Mini App "BGT Signals & Stats" (Витрина подписок)
-- **Суть:** Ревизия `miniapp.py`, адаптация под публичный интерфейс витрины сигналов и открытой статистики для привлечения платных подписчиков ($35-$50/мес) к цели $1000/мес.
-- **Спринт:** Спринт 2 | **Приоритет:** 🟡 P2 | **Ответственный:** Триада (BGT) | **Статус:** 📋 To Do
-
-### [TASK-021] BGT: Авто-перевод Paper-ботов в LIVE (Auto-Promoter)
-- **Суть:** Оркестратор для `stat_arb` и `scalper`: при достижении PnL > +$5 и WR > 60% за 48 часов, отправляет алерт в Telegram на перевод в LIVE.
-- **Спринт:** Спринт 2 | **Приоритет:** 🔵 P3 | **Ответственный:** Триада (BGT) | **Статус:** 📋 To Do
-
-### [TASK-022] BGT: Динамический движок плеча (Dynamic Leverage Engine)
-- **Суть:** Автоматический расчет безопасного плеча (1x-3x) на основе ATR монеты, гарантирующий ровно 2% риска на депозит.
-- **Спринт:** Спринт 2 | **Приоритет:** 🟡 P2 | **Ответственный:** Триада (BGT) | **Статус:** 📋 To Do
-
 
 ## 💡 Ежедневный поток идей заработка и R&D (Daily Alpha Stream)
-
-> **Формат:** Каждый день агент генерирует 1 новую валидированную идею по заработку/арбитражу и 1 идею по улучшению существующих проектов (включая BGT) для совместного обсуждения и внедрения.
 
 | Дата | Категория | Идея / Направление | Суть и Профит | Статус |
 | :--- | :--- | :--- | :--- | :---: |
 | **2026-09-11** | **Alpha Stream (Идея №1)** | **Prediction Markets Arbitrage & Whale Scanner (Polymarket)** | Разработка модуля `alpha-scout` для поиска спредов/арбитража вероятностей 5m BTC и трекинга кошельков топ-50 трейдеров Polymarket с алертами в Telegram. | ⏳ In Progress (`scratch/`) |
 | **2026-09-11** | **BGT Upgrade** | **BGT Dynamic Volatility Regime (ATR Expansion Filter)** | Фильтр флэтового болота для BGT: вход в сделки только на расширении волатильности (`a_short / a_long >= 1.05`) для исключения ложных входов. | 🟢 Done (`v0.2.1`) |
-
-
-
----
-
-## 🔗 LinkID Pro Post (Контент и продвижение)
-
-### [TASK-LINK-001] Динамический выбор LLM в админке + лёгкая модель по умолчанию + валидация генератора
-- **Суть:** Убрать жесткую привязку к дорогой модели DeepSeek v4 Pro. По умолчанию для тестирования и регулярной генерации использовать легкую/недорогую модель (например, `deepseek-chat` / `flash` / `gpt-4o-mini`). В админке LinkID (`:8015`) добавить динамический переключатель провайдера и модели (`LLM_PROVIDER`, `LLM_MODEL`) с сохранением в БД, чтобы владелец мог менять модель по своему желанию. Проверить интеграцию вебхуков.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** Чат LinkID / Antigravity | **Срок:** 2026-09-12 | **Статус:** 📋 To Do
-- **DoD:**
-  1. По умолчанию генерация постов использует быструю/недорогую модель без ошибки 402.
-  2. В веб-админке LinkID появился селектор выбора моделей (DeepSeek Chat, DeepSeek v4 Pro, Claude, GPT-4o-mini).
-  3. Проверена работа автогенерации и отправка вебхуков публикации.
-
-### [TASK-LINKID-002] Отказ от subprocess и блокирующих запросов (Background Workers)
-- **Суть:** API вызывает скрипт `generate_posts.py` через `subprocess.run`, что блокирует поток на 1-2 минуты и часто приводит к 504 Timeout на уровне Caddy или Tailscale. Из-за этого у редактора в Mini App «отваливается» генерация. Нужно перенести логику парсинга и ИИ-генерации в Celery (очередь в Redis уже прописана в docker-compose) или `BackgroundTasks` FastAPI.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** LinkID Agent | **Статус:** 📋 To Do
-- **DoD:** Эндпоинт `/posts/generate` моментально возвращает `{"status": "processing", "task_id": ...}`, а генерация идет в фоне. Mini App опрашивает статус.
-
-### [TASK-LINKID-003] Устранение двойного парсинга новостей в генераторе
-- **Суть:** Скрипт `generate_posts.py` делает `fetch_context()` два раза за один запуск: внутри `main()` и внутри `generate_posts()`. Это удваивает время парсинга (15 секунд вместо 7) и спамит источники.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** LinkID Agent | **Статус:** 📋 To Do
-- **DoD:** Парсинг контекста выполняется 1 раз, данные кэшируются или передаются аргументом.
-
-### [TASK-LINKID-004] Интеграция автоматической публикации (LinkedIn API)
-- **Суть:** Сейчас проект доводит посты только до статуса `approved`, и редактор копирует их вручную. В `.env` уже есть заготовки для `LINKEDIN_ACCESS_TOKEN`. Необходимо добавить celery-воркер, который будет автоматически раз в день (по cron) публиковать approved-посты напрямую в LinkedIn от лица владельца.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** LinkID Agent | **Статус:** 📋 To Do
-- **DoD:** Пост автоматически появляется в профиле LinkedIn без участия человека.
-
----
-
-## 🏢 IT Operations Framework (Enterprise ITSM)
-
-### [TASK-ITOPS-001] Санитария боевого окружения US Server
-- **Суть:** На US Server обнаружен старый каталог `/home/us/dev/it-operations-framework`, отстающий от `origin/main` на 136 коммитов и содержащий разрозненные незакоммиченные файлы. Боевые контейнеры работают из `/home/us/dev/itops-deploy`. Необходимо безопасно заархивировать старый каталог, исключив риск коллизий и работы в неверной директории.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Antigravity | **Срок:** 2026-09-12 | **Статус:** 🟢 Done
-- **DoD:**
-  1. Создан архив `/home/us/_archive/it-operations-framework-legacy-2026-09-11.tar.gz`.
-  2. Каталог `/home/us/dev/it-operations-framework` удален с сервера.
-  3. Единственным источником развертывания на сервере остается `/home/us/dev/itops-deploy`.
-
-### [TASK-ITOPS-002] Voice Operator & AI Agent: поддержка голосовых сообщений STT Whisper
-- **Суть:** Модуль `ai-agent` в `channels/ai-agent/app/main.py` обрабатывает текстовые сообщения сотрудников и выполняет действия (инциденты, SLA, активы, КБ). В `channels/telegram` был написан прототип `handle_voice`. Необходимо унифицировать и оснастить `channels/ai-agent` полноценным обработчиком голосовых сообщений: скачивание аудио `voice/audio`, вызов STT (Whisper API через OpenRouter или OpenAI) и передача распознанного текста в LLM агентскую цепочку.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** Antigravity | **Срок:** 2026-09-13 | **Статус:** 🟢 Done (Коммит `7b15c89`, релиз v0.5.14)
-- **DoD:**
-  1. В `channels/ai-agent/app/main.py` добавлен хэндлер `F.voice | F.audio` и функция `_stt_transcribe`.
-  2. Реализована обработка ошибок STT (тихий отказ с подсказкой пользователю).
-  3. Проводка переменных `ITOP_AI_STT_API_KEY`, `ITOP_AI_STT_BASE_URL`, `ITOP_AI_STT_MODEL` в `docker-compose.yml` и `.env.example`.
-  4. Покрыто тестами в `core-service/tests/test_tg.py`. Все 561 тест проходят успешно. Изменения запушены в `main` и подтянуты на US Server.
-
-### [TASK-ITOPS-003] Верификация и интеграция KB API (База знаний)
-- **Суть:** Модуль базы знаний `core-service/app/modules/kb` и `kbadmin` содержит чтение и поиск статей. Необходимо провести сквозное тестирование эндпоинтов `/api/v1/kb/categories`, `/api/v1/kb/articles`, `/api/v1/kb/articles/{slug}` и связать с поиском через AI-агента и веб-консоль.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Antigravity | **Срок:** 2026-09-14 | **Статус:** 🟢 Done (Коммит `266ac00`, релиз v0.5.15)
-- **DoD:**
-  1. Эндпоинты `/api/v1/kb/*` покрыты 8 автотестами в `core-service/tests/test_kb.py` (категории, фильтрация, поиск со сниппетами, рендеринг Markdown/HTML, auth, 404).
-  2. Исправлен баг в `channels/ai-agent/app/main.py`: ранее агент ожидал ключ `articles` вместо `data`, из-за чего поиск в КБ всегда выдавал пустоту. Теперь запрос передает `?search=...` и возвращает статьи со сниппетами.
-  3. Все 571 тест успешно пройдены, изменения запушены в `main` и обновлены на US Server.
-
-### [TASK-ITOPS-004] Коммерческий пакет: финализация прайса (UZS) и контракта пилота
-- **Суть:** Подготовка коммерческой базы для первой сделки в Узбекистане (пилот на 10-50 мест, AD, частная компания) согласно `COMMERCIAL_UZ.md`. Финализация прайса в UZS, ставки НДС, реквизитов продавца и подготовка шаблона договора On-prem лицензии.
-- **Приоритет:** 🔴 P1 (High) | **Ответственный:** Antigravity | **Срок:** 2026-09-14 | **Статус:** 🟢 Done (Релиз v0.5.16, коммит 3e94d1b)
-- **DoD:**
-  1. В `config.json` и админке зафиксированы валидные параметры (НДС 12%, реквизиты, валюта UZS).
-  2. Готов официальный документ коммерческого предложения / пилотного регламента для CIO (`docs/PILOT_PROPOSAL_CIO.md`).
-
-### [TASK-ITOPS-005] Core API Hardening: Graph Token Cache & Rate Limiting
-- **Суть:** Добавлено кэширование токенов приложения Microsoft Graph с автоматическим упреждающим обновлением за 5 минут до истечения срока (in-memory, per tenant/client lock) и глобальный Starlette RateLimitMiddleware на публичные точки входа (/api/v1/auth/, /api/v1/tg/, вебхуки, CSAT, согласования) с заголовками Retry-After.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Antigravity | **Срок:** 2026-09-15 | **Статус:** 🟢 Done (Релиз v0.5.17, коммит 752d576)
-- **DoD:**
-  1. Токены кэшируются в памяти с автоматическим обновлением за 5 минут до истечения срока (тест `test_graph_client.py`).
-  2. Добавлен middleware ограничения частоты запросов (тест `test_ratelimit_middleware.py`). Все 578 тестов пройдены.
-
-### [TASK-ITOPS-006] Автоматизированный CI/CD пайплайн (GitHub Actions)
-- **Суть:** Создан GitHub Actions пайплайн для автоматической проверки качества при пушах и PR в репозиторий `vitpandex-netizen/it-operations-framework`.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Antigravity | **Срок:** 2026-09-15 | **Статус:** 🟢 Done (Релиз v0.5.18, коммит 02ecb1e)
-- **DoD:**
-  1. Файл `.github/workflows/ci.yml` настроен, валиден (синтаксис YAML проверен) и включает матрицу из 4 джоб.
-  2. На каждый push/PR запускаются: Ruff (`core-service` + `ai-agent` + `control-plane`), Pytest (578 тестов `core-service`, 23 теста `control-plane`), валидация 19 PowerShell скриптов, сборка Docker-образов `core-service`, `ai-agent` и `control-plane`.
-
-### [TASK-ITOPS-007] Распределённый Rate Limiting через Redis (Sliding Window / IncrBy)
-- **Суть:** Перенос текущего in-memory ограничения частоты запросов на скользящее окно в Redis (IncrBy + Expire) для поддержания горизонтального масштабирования (2+ воркера) и мгновенного сброса лимитов из админки.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Чат IT Ops | **Срок:** 2026-09-16 | **Статус:** 📋 To Do
-- **DoD:** Ограничения хранятся в Redis, мульти-воркерный запуск сохраняет лимиты, тесты пройдены.
-
-### [TASK-ITOPS-008] Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты)
-- **Суть:** Разработать модуль автогенерации еженедельного/ежемесячного сводного PDF/Excel-отчёта для IT-директора (метрики SLA, топ категорий проблем, эффективность AI Voice Operator, загрузка линии поддержки).
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Чат IT Ops | **Срок:** 2026-09-17 | **Статус:** 📋 To Do
-- **DoD:** Эндпоинт отчётов отдаёт брендированный PDF, рассылка по расписанию работает в Telegram/Email.
-
-### [TASK-ITOPS-009] Telegram Mini App Status Page & Service Health (Мониторинг сервисов)
-- **Суть:** Вкладка «Состояние сервисов» в Telegram Mini App для пользователей с отображением публичных статусов критических систем (почта, AD, ERP, 1С, интернет) и уведомлениями об авариях.
-- **Приоритет:** 🟡 P2 (Medium) | **Ответственный:** Чат IT Ops | **Срок:** 2026-09-18 | **Статус:** 📋 To Do
-- **DoD:** В TMA рендерится интерактивная плашка статуса сервисов, подгружаемая через API.
-
