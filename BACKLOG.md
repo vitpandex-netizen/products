@@ -89,7 +89,7 @@
 | **TASK-BGT-024** | **Спринт 2** | BGT: Пирамидинг на супер-трендах (Safe Pyramiding) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-BGT-025** | **Спринт 2** | BGT: Утренний Executive Дайджест в Telegram (08:00 UTC+5) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟢 P3 | 2026-09-13 | 🟢 Done |
 | **TASK-BGT-026** | **Спринт 2** | BGT: Детектор сжатия волатильности (TTM Squeeze Detector) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 🟢 Done |
-| **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг кошельков) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done |
+| **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг сделок ТОП-20 кошельков в Telegram) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | ⏳ In Progress (API Исследовано) |
 | **TASK-ALPHA-002** | **Спринт 2** | [Alpha Scout] DEX/CEX Spread Scanner (Сопоставление Raydium с Bitget) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-BGT-027** | **Спринт 3** | BGT Signals Telegram Mini App (Витрина сигналов под модель $35/мес) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-15 | 🟢 Done |
 | **TASK-BGT-028** | **Спринт 3** | Machine Learning Signal Filter (XGBoost/LightGBM фильтр ложных входов) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-16 | 🟢 Done |
@@ -106,6 +106,15 @@
 | **TASK-BGT-039** | **Спринт 3** | Execution Slippage & Latency Profiler (Профайлер качества исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-18 | 🟢 Done |
 | **TASK-BGT-040** | **Спринт 3** | Lead‑Lag Error Recovery & Alerting (обработка ошибок и оповещение в Telegram) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
 | **TASK-BGT-041** | **Спринт 3** | TradingView Alert Integration (импорт сигналов из TradingView в lead_lag.json) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-042** | **Спринт 3** | ML-Model CI / Test Suite (автоматические тесты модели XGBoost/LightGBM) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-043** | **Спринт 3** | Sharpe-Ratio Monitor & Notification (оповещение при падении < 1.0) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-044** | **Спринт 3** | Liquidity Drop Alert (оповещение при падении ликвидности > 20% за 5 мин) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-045** | **Спринт 3** | Payment-Gateway Integration (Stripe/PayPal для подписки) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-046** | **Спринт 3** | Mobile-Responsive Heatmap (адаптивный дизайн для Orderbook Heatmap) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-047** | **Спринт 3** | Coverage Report for Backtester (генерация markdown-отчёта покрытий) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-048** | **Спринт 3** | Dynamic Chandelier Params (UI-контролы для изменения параметров) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-049** | **Спринт 3** | Backup Journal to S3 (резервное копирование журнала сделок) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-050** | **Спринт 3** | Grafana Dashboard for Latency (дашборд метрик исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
 | **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика в 1 клик) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-HH-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и ЗП | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-HH-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |
