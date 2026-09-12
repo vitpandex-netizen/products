@@ -1,18 +1,19 @@
-### [2026-09-12 09:14] [Antigravity] — [Alpha Scout / Успешное завершение Спринта 1 (v0.2.0)]
-- **Статус:** 🟢 DONE
-- **Проект:** Alpha Scout (`~/dev/alpha-scout/`)
-- **Коммит / Ветка:** `71e5d52` на `main`
-- **Что сделано:**
-  1. **TASK-ALPHA-005 (DEX/CEX Spread Scanner):** Интегрирован DexScreener API + Bitget Futures для поиска спреда >3%. Добавлены алерты в Telegram с дедупликацией.
-  2. **TASK-ALPHA-006 (Whale Tracker):** Добавлен ончейн трекинг балансов конкретных кошельков в Polygon через Polygonscan API (fallback: Gamma API Volume Alert).
-  3. **TASK-ALPHA-007 (Systemd/Infrastructure):** Создан `run_scanners.sh` и `alpha-scout.service` для развертывания демона на US Server (24/7).
-  4. **QA и Верификация:** Проведен полный прогон всего комбайна, скрипты находят спреды в реальном времени и пишут логи без ошибок. 
-- **Эстафета следующему агенту:** Спринт полностью завершен и верифицирован. Ожидаем задачи следующего спринта (например, расширение на новые EVM-сети).
-
 # Triad Sync (Global Handoff & Context)
 
 ## Последнее обновление
 - **Дата:** 2026-09-12
+- **Проект:** BGT (bitget-bot)
+- **Агент:** Antigravity
+
+## Статус: 🟢 СПРИНТ 4 — P0 ИНФРАСТРУКТУРА ЗАВЕРШЕНА
+Проект **BGT** переведен на полностью модульную архитектуру и защищен механизмами авто-восстановления.
+- **Архитектура:** Monolith-файлы `bot.py` и `strategies.py` разбиты на пакеты `core/` и `strategies/`. Тесты успешно проходят, линтер чист.
+- **Надежность:** Внедрена система `heartbeat` для `live_trend.py`. Скрипт `watchdog.py` теперь умеет сам делать `systemctl restart` зависшего торгового движка и принимать вебхуки от Prometheus Alertmanager для пересылки в Telegram.
+- **Деплой:** Созданы systemd unit файлы (`bgt-live-trend.service`, `bgt-watchdog.service`, `bgt-exporter.service`) и установочный скрипт `deploy/install_services.sh`.
+
+## Инструкции для следующего агента (BGT):
+P0-задачи закрыты. Бот готов к накатыванию на боевой US-сервер (через `deploy/install_services.sh`). Можно приступать к задачам **P1 — Торговая логика и Risk Management** (Whale Sonar Filter, Dynamic Leverage & ATR-фильтры).
+
 - **Проект:** BGT (bitget-bot)
 - **Агент:** Antigravity
 
@@ -115,3 +116,21 @@
 
 ## Инструкции для следующего агента (IT Ops):
 Спринт 5 завершен. Проект IT Ops теперь обладает функционалом AIOps и Zero Trust. Ожидайте дальнейших указаний владельца (CIO) для Спринта 6.
+### 2026-09-12 14:19 - Antigravity
+- **Проект**: LinkID Pro Post
+- **Статус**: 🟢 DONE (Спринт 4)
+- **Что сделано**: 
+  - Выполнена задача TASK-LINKID-021 (Systemd Watchdog & Auto-restart).
+  - Скрипт `sentinel.sh` переписан в фоновый демон `sentinel-daemon.sh` с бесконечным циклом и ping'ом `systemd-notify WATCHDOG=1`.
+  - Создан systemd service `linkid-sentinel.service` (WatchdogSec=600).
+  - Создан systemd wrapper `linkid-app.service` для управления жизненным циклом `docker-compose up -d`.
+  - Старые cron-скрипты удалены.
+### 2026-09-12 14:25 - Antigravity
+- **Проект**: LinkID Pro Post
+- **Статус**: 🟢 DONE (Спринт 4)
+- **Что сделано**: 
+  - Реализован TASK-LINKID-033 (AI Visual Infographics & Meme Generator).
+  - В `ImageGenerator` добавлены методы `generate_infographic` и `generate_meme`.
+  - В `celery_app.py` добавлена привязка генерации нужных типов изображений по типу поста (`listicle`, `tutorial`, `funny`, `meme`).
+  - Telegram-бот переведён на асинхронный вызов генерации через API Celery (`/api/v1/posts/generate`), полностью убран legacy `subprocess`.
+  - В клавиатуру бота добавлены быстрые кнопки: «🤡 Мем/Шутка» и «📊 Инфографика».
