@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>UZ IT Jobs — Вакансии Узбекистана</title>
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand">
+          <div class="flag-icon">🇺🇿</div>
+          <div>
+            <h1>UZ IT Jobs</h1>
+            <p class="subtitle">Рынок труда Ташкента &bull; 24/7</p>
+          </div>
+        </div>
+        <div class="header-badge" id="header-badge">
+          <span class="live-dot"></span>
+          <span id="badge-total-count">918+ вак.</span>
+        </div>
+      </div>
+
+      <!-- Поисковая строка (видна на вкладке вакансий) -->
+      <div class="search-bar" id="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Поиск: CIO, DevOps, TBC, 1С..." autocomplete="off">
+        <button id="search-clear" class="btn-clear hidden">&times;</button>
+      </div>
+
+      <!-- Горизонтальные фильтры-чипы -->
+      <div class="filter-scroll" id="category-chips">
+        <button class="chip active" data-category="all">Все</button>
+        <button class="chip highlight" data-category="top_match">🔥 Топ Match</button>
+        <button class="chip" data-category="c_level">👔 Руководство</button>
+        <button class="chip" data-category="devops">🛠 DevOps & SRE</button>
+        <button class="chip" data-category="security">🔒 Инфобез</button>
+        <button class="chip" data-category="dev">💻 Разработка</button>
+        <button class="chip" data-category="enterprise">🏢 1С & ERP</button>
+      </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="app-main">
+      <!-- ВКЛАДКА 1: ВАКАНСИИ -->
+      <section id="tab-jobs" class="tab-pane active">
+        <div class="list-meta">
+          <span id="results-count">Загрузка вакансий...</span>
+          <div class="sort-select-wrapper">
+            <select id="sort-select">
+              <option value="score">По совпадению %</option>
+              <option value="date">По дате (новые)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="vacancies-list" class="vacancies-list">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Загрузка вакансий с US Server...</p>
+          </div>
+        </div>
+
+        <div id="load-more-container" class="load-more-container hidden">
+          <button id="btn-load-more" class="btn-load-more">Показать еще</button>
+        </div>
+      </section>
+
+      <!-- ВКЛАДКА 2: АНАЛИТИКА РЫНКА РУз -->
+      <section id="tab-analytics" class="tab-pane hidden">
+        <div class="analytics-hero">
+          <h2>📊 IT-Рынок Узбекистана</h2>
+          <p class="analytics-date" id="analytics-date">Анализ базы данных 918+ позиций</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-val text-emerald" id="stat-total-vacancies">918</div>
+            <div class="stat-lbl">Всего вакансий</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val text-blue" id="stat-total-companies">200+</div>
+            <div class="stat-lbl">Работодателей</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val text-gold" id="stat-good-matches">160+</div>
+            <div class="stat-lbl">Матчей &ge; 30%</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="card-header">
+            <h3>🏢 Топ работодателей в IT (Ташкент)</h3>
+          </div>
+          <p class="section-desc">Компании с наибольшим числом открытых позиций в базе:</p>
+          <div id="top-employers-list" class="employers-list"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="card-header">
+            <h3>🛠 Востребованный стек технологий</h3>
+          </div>
+          <p class="section-desc">Доля упоминаний в требованиях к соискателям:</p>
+          <div id="tech-clusters-list" class="tech-list"></div>
+        </div>
+
+        <div class="section-card info-box">
+          <div class="info-title">💡 Специфика рынка Ташкента</div>
+          <p class="info-text">
+            Крупнейшими драйверами найма в Узбекистане являются финтех и банки (TBC, Anor Bank, UZCARD/НМПЦ, Paynet),
+            а также ритейл и телеком. Наибольший спрос наблюдается на архитекторов баз данных (PostgreSQL, Oracle),
+            DevOps/Linux-инженеров и руководителей с опытом трансформации и построения отказоустойчивых систем.
+          </p>
+        </div>
+      </section>
+
+      <!-- ВКЛАДКА 3: ПРОФИЛЬ КАНДИДАТА -->
+      <section id="tab-profile" class="tab-pane hidden">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar">👨‍💻</div>
+            <div class="profile-info">
+              <h3>Виталий</h3>
+              <p class="profile-role">IT Director • Head of IT • Infrastructure Architect</p>
+              <div class="profile-meta">
+                <span>📍 Ташкент / Remote</span>
+                <span>⏳ 19 лет опыта</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="card-header">
+            <h3>🎯 Персональный матчинг вакансий</h3>
+          </div>
+          <div class="setting-item">
+            <div class="setting-label">
+              <span>Минимальный порог скоринга:</span>
+              <strong id="threshold-val">30%</strong>
+            </div>
+            <input type="range" id="threshold-slider" min="0" max="60" step="5" value="30" class="slider">
+          </div>
+          <div class="keywords-box">
+            <div class="setting-label"><span>Ключевые компетенции профиля:</span></div>
+            <div class="skill-tags">
+              <span class="skill-tag active">IT Management</span>
+              <span class="skill-tag active">DevOps / SRE</span>
+              <span class="skill-tag active">Linux / Highload</span>
+              <span class="skill-tag active">Информационная безопасность</span>
+              <span class="skill-tag active">PostgreSQL / Oracle</span>
+              <span class="skill-tag active">VMware / Virtualization</span>
+              <span class="skill-tag active">Zabbix / Мониторинг</span>
+              <span class="skill-tag active">ITIL / SLA</span>
+              <span class="skill-tag active">Архитектура сетей</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="card-header">
+            <h3>⚡ Инфраструктура мониторинга</h3>
+          </div>
+          <div class="server-status-box">
+            <div class="status-row">
+              <span>Сервер коллекторов:</span>
+              <strong class="text-emerald">🟢 US Server (24/7 crontab)</strong>
+            </div>
+            <div class="status-row">
+              <span>Источники:</span>
+              <span>HH.uz RSS (54kw), Habr, RemoteOK</span>
+            </div>
+            <div class="status-row">
+              <span>Telegram алерты:</span>
+              <span>Топики 15 (Jobs) и 52 (Remote)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="app-nav">
+      <button class="nav-item active" data-tab="jobs">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <span>Вакансии</span>
+      </button>
+
+      <button class="nav-item" data-tab="analytics">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Аналитика РУз</span>
+      </button>
+
+      <button class="nav-item" data-tab="profile">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Профиль</span>
+      </button>
+    </nav>
+
+    <!-- Modal Bottom Sheet Деталей Вакансии -->
+    <div id="vacancy-modal" class="modal-backdrop hidden">
+      <div class="modal-sheet">
+        <div class="modal-drag-handle"></div>
+        <div class="modal-header">
+          <div class="modal-badge-row">
+            <span id="modal-match-score" class="score-badge">0%</span>
+            <span id="modal-location" class="location-badge">Ташкент</span>
+          </div>
+          <h2 id="modal-title" class="modal-title">—</h2>
+          <div id="modal-company" class="modal-company">—</div>
+          <div id="modal-salary" class="modal-salary">—</div>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-section">
+            <h4>Описание и требования</h4>
+            <div id="modal-description" class="modal-desc-content"></div>
+          </div>
+
+          <div class="modal-section" id="cover-letter-section">
+            <div class="cl-header">
+              <h4>📝 Персонализированный отклик</h4>
+              <div class="lang-switch">
+                <button id="cl-lang-ru" class="btn-lang active">RU</button>
+                <button id="cl-lang-uz" class="btn-lang">UZ</button>
+              </div>
+            </div>
+            <div class="cl-box">
+              <textarea id="cl-text" readonly rows="7"></textarea>
+              <button id="btn-copy-cl" class="btn-copy">Копировать сопроводительное письмо</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a id="modal-external-link" href="#" target="_blank" class="btn-apply">Открыть на HH.uz ↗</a>
+          <button id="btn-close-modal" class="btn-close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
