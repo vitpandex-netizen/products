@@ -46,3 +46,13 @@
 - **Криптографическая защита WebApp:** Валидация подписи `initData` по алгоритму HMAC-SHA256 с использованием секретного ключа бота. Прямые запросы из интернета без авторизации мгновенно блокируются с кодом `403 Forbidden`.
 - **Pre-Push контроль:** Кодовая база проверена аудитором `audit.py` с присвоением наивысшего рейтинга **Grade A** (0 утечек секретов).
 - **Хранение секретов:** Токен `HH_JOBS_BOT_TOKEN` защищён в зашифрованном Vault (`~/.secure/vault.enc`) и изолированном `.env` с правами `chmod 600`.
+
+## [1.2.0] - 2026-09-12 (Sprints 2, 3, 4)
+### Added
+- **AI Matching & Deep LLM Scoring:** Интеграция парсинга неявных навыков, Red Flag Detector (токсичность) и предсказание скрытых ЗП (TASK-HH-027, TASK-HH-028, TASK-HH-033).
+- **Executive Workflow:** Внедрен поиск ЛПР (Executive Scout), генерация кастомных Cover Letters и PDF-резюме под вакансию (TASK-HH-016, TASK-HH-021, TASK-HH-023).
+- **Automation:** Headless Auto-Apply (имитация) в 1 клик, трекинг откликов (TASK-HH-015, TASK-HH-025, TASK-HH-029).
+- **Multi-Persona:** Поддержка переключения профилей CIO / CISO / CTO (TASK-HH-031, TASK-HH-032).
+- **Notifications:** Ежедневный Executive Digest и мгновенные Whale Alerts для C-Level вакансий от $4000+ (TASK-HH-019, TASK-HH-024).
+- **Copilot:** Голосовой симулятор собеседований и Company Backchannel Radar (TASK-HH-034, TASK-HH-035).
+- **Habr Parser:** Интегрирован дополнительный источник парсинга (TASK-HH-020).
