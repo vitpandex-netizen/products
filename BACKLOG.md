@@ -46,7 +46,16 @@
 | **TASK-LINKID-011** | **Спринт 2** | [LinkID] Аналитика просмотров и охватов LinkedIn в TMA (Engagement Tracker) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-LINKID-012** | **Спринт 2** | [LinkID] Динамический менеджер источников новостей (RSS/TG-каналы) в админке | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-LINKID-013** | **Спринт 2** | [LinkID] Healthcheck Sentinel & Auto-heal (Авто-восстановление сетевых роутов) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done |
-| **TASK-LINKID-014** | **Спринт 2** | [LinkID] Экспорт контент-плана постов в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🔵 P3 | 2026-09-18 | 🟢 Done |
+| **TASK-LINKID-015** | **Спринт 3** | [LinkID] Расширяемая очередь публикаций и генерации (Redis Streams / RabbitMQ) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 📋 To Do |
+| **TASK-LINKID-016** | **Спринт 3** | [LinkID] Динамический Whitelist Telegram ID (управление через Admin UI) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 📋 To Do |
+| **TASK-LINKID-017** | **Спринт 3** | [LinkID] Автогенерация визуальных обложек к постам (DALL-E 3 / Flux API / SD) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 📋 To Do |
+| **TASK-LINKID-018** | **Спринт 3** | [LinkID] Интеграция Claude 3.5 Sonnet & DeepSeek V3 в LLM Selector | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 📋 To Do |
+| **TASK-LINKID-019** | **Спринт 3** | [LinkID] Prometheus-метрики использования LLM, токенов и латенси | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-24 | 📋 To Do |
+| **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 📋 To Do |
+| **TASK-LINKID-021** | **Спринт 3** | [LinkID] Systemd Watchdog & Auto-restart при сбоях cron-скриптов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 📋 To Do |
+| **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 📋 To Do |
+| **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 📋 To Do |
+| **TASK-LINKID-024** | **Спринт 3** | [LinkID] OpenAPI / Swagger документация v2 эндпоинтов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-28 | 📋 To Do |
 | **TASK-ITOPS-005** | **Спринт 2** | Core API Hardening: Graph Token Cache & Rate Limiting | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
@@ -393,6 +402,18 @@
 |---|---|---|---|---|---|---|---|---|
 | TASK‑STOCKS‑078 | 4 | Добавить парсинг 5 новых TG‑каналов аналитики | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑10‑08 | TODO |
 | TASK‑STOCKS‑079 | 4 | Реализовать автоматический алерт при росте цены >15% | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑15 | TODO |
+| TASK‑STOCKS‑080 | 4 | Интеграция парсера раскрытия отчетов OpenInfo.uz и NAPP (финансовые результаты) | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑18 | TODO |
+| TASK‑STOCKS‑081 | 4 | Авто-трекинг решений ГОС/ВОС акционеров по дивидендам и ex-date | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑20 | TODO |
+| TASK‑STOCKS‑082 | 4 | Расчёт коэффициентов ликвидности и Altman Z-Score банкротства эмитентов | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑10‑22 | TODO |
+| TASK‑STOCKS‑083 | 4 | Центр Push-уведомлений и подписок на тикеры в Telegram Mini App | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑25 | TODO |
+| TASK‑STOCKS‑084 | 4 | Backtesting Engine стоимостных и дивидендных стратегий (2021–2026) | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑10‑28 | TODO |
+| TASK‑STOCKS‑085 | 4 | Мониторинг крупноблочных сделок внесистемного рынка UZSE / NAPP (OTC) | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑30 | TODO |
+| TASK‑STOCKS‑086 | 4 | Индекс полной доходности рынка Узбекистана (UZSE Total Return Index - UZTR) | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑11‑02 | TODO |
+| TASK‑STOCKS‑087 | 4 | Экспорт PDF/Excel инвест-тизера по акциям (Executive Investment Teaser) | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑11‑05 | TODO |
+| TASK‑STOCKS‑088 | 4 | Авто-расчёт налогов на дивиденды и прирост капитала (UZ Tax Calculator) | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑11‑08 | TODO |
+| TASK‑STOCKS‑089 | 4 | Telegram Bot Inline-режим (@stock_uz_bot): поиск карточек и графиков в любом чате | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑11‑10 | TODO |
+
+
 
 ### Alpha Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
@@ -414,4 +435,44 @@
 |---|---|---|---|---|---|---|---|---|
 | TASK‑INFRA‑007 | 4 | Обновить Tailscale‑маршрутизацию между US‑Server и Mac‑машиной | Инфраструктура | infra‑bot | antigravity | High | 2026‑09‑30 | TODO |
 | TASK‑INFRA‑008 | 4 | Настроить автоматический бэкап Git репозиториев | Инфраструктура | infra‑bot | antigravity | Medium | 2026‑10‑15 | TODO |
+
+### 🚀 Расширенные задачи Спринта 4 (Инновации & Масштабирование)
+
+#### IT Operations Framework
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑ITOPS‑035 | 4 | Enterprise SSO & SAML2/OIDC Auth Module (Keycloak / Azure AD / Okta) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑05 | 📋 To Do |
+| TASK‑ITOPS‑036 | 4 | Multi-Tenant Isolation & Customer Tenant Provisioning Engine | IT Operations | Чат IT Ops | IT Ops Agent | 🟡 P2 | 2026‑11‑08 | 📋 To Do |
+| TASK‑ITOPS‑037 | 4 | Self-Healing Infrastructure Sentinel (Авто-восстановление при выходе метрик за пределы) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑12 | 📋 To Do |
+
+#### BGT (bitget-bot)
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑BGT‑044 | 4 | Cross-DEX/CEX Delta-Neutral Funding Arbitrage Engine (Bitget / Hyperliquid) | BGT | Чат BGT | BGT Agent | 🔴 P1 | 2026‑10‑25 | 📋 To Do |
+| TASK‑BGT‑045 | 4 | Emergency Volatility & Black Swan Circuit-Breaker (Отмена ордеров при резком дампе) | BGT | Чат BGT | BGT Agent | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
+
+#### LinkID Pro Post
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑LINKID‑033 | 4 | AI Visual Infographics & Meme Generator (Flux / SDXL API под брендбук) | LinkID | linkid-bot | LinkID Agent | 🔴 P1 | 2026‑10‑15 | 📋 To Do |
+| TASK‑LINKID‑034 | 4 | Auto-Engagement & Smart Comment Replier Engine (Авто-ответы на комментарии) | LinkID | linkid-bot | LinkID Agent | 🟡 P2 | 2026‑10‑18 | 📋 To Do |
+
+#### HH Jobs / HH Remote Jobs
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑HHJOBS‑017 | 4 | AI Salary Estimator & Tech-Stack Gap Matcher (Оценка вилки & проверка навыков) | HH Jobs | hh-jobs-bot | HH Jobs Agent | 🔴 P1 | 2026‑10‑15 | 📋 To Do |
+| TASK‑HHJOBS‑018 | 4 | Automated One-Click Resume Tailoring Engine (Подгонка резюме и писем под вакансии) | HH Jobs | hh-jobs-bot | HH Jobs Agent | 🟡 P2 | 2026‑10‑20 | 📋 To Do |
+
+#### Stocks UZ
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑STOCKS‑090 | 4 | Smart Money & Insider Accumulation Alert Engine (Детектор аномальных покупок на UZSE) | Stocks UZ | uz-stocks-bot | Stocks UZ Agent | 🔴 P1 | 2026‑11‑12 | 📋 To Do |
+| TASK‑STOCKS‑091 | 4 | Automated DCF & Comparable Valuation Model (Авто-расчет справедливой стоимости) | Stocks UZ | uz-stocks-bot | Stocks UZ Agent | 🟡 P2 | 2026‑11‑15 | 📋 To Do |
+
+#### GH Scout & Alpha Scout
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑GHSCOUT‑013 | 4 | Open-Source Trend Radar & Breakthrough Alert (Отслеживание быстрорастущих AI-проектов) | GH Scout | gh-scout-bot | GH Scout Agent | 🟡 P2 | 2026‑10‑18 | 📋 To Do |
+
+
 

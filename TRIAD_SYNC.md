@@ -35,6 +35,22 @@
 
 ---
 
+### [2026-09-12 08:45] [Antigravity] — [LinkID Pro Post / Запуск Спринта 3 и динамический Whitelist Telegram ID (TASK-LINKID-016)]
+- **Статус:** 🟢 DONE
+- **Проект:** LinkID Pro Post (`~/dev/linkid/`)
+- **Коммит / Ветка:** `718d198` на `main` (`vitpandex-netizen/linkid-pro-post`)
+- **Что сделано:**
+  1. **Сформирован и утверждён Спринт 3:** Детализированный план масштабного спринта 3 зафиксирован в `SPRINT_3.md` и внесен в канонический единый бэклог `~/dev/BACKLOG.md`.
+  2. **Реализован TASK-LINKID-016 (Динамический Whitelist Telegram ID):**
+     - Добавлена модель `AllowedTelegramUser` в PostgreSQL (таблица `allowed_telegram_users`).
+     - Созданы CRUD-эндпоинты API: `GET /api/v1/allowed-users`, `POST /api/v1/allowed-users`, `DELETE /api/v1/allowed-users/{telegram_id}`.
+     - Обновлена авторизация `require_telegram_auth` для гибридной проверки (загрузка из `.env` + динамические записи из БД).
+     - Добавлен UI-раздел «👥 Telegram Whitelist» в админ-панель (`admin/templates/users.html` + роуты в `admin/main.py`).
+  3. **Деплой и верификация:** Изменения закоммичены, отправлены в репозиторий, подтянуты на US Server. Контейнеры `linkid-api` и `linkid-admin` перезапущены. Тестовый администратор с Telegram ID `110627043` занесён в БД через API и проверен.
+- **Эстафета следующему агенту:** Переходить к реализации следующей задачи P0 из Спринта 3 — `TASK-LINKID-015` (Расширяемая очередь генерации и публикации на Redis Streams / RabbitMQ).
+
+---
+
 ### [2026-09-12 08:35] [Antigravity] — [Инфраструктура & Безопасность / Выкатка Unified AI Rate-Limit Sentinel TASK-SYS-003]
 - **Статус:** 🟢 DONE
 - **Проект:** Инфраструктура US Server
@@ -592,8 +608,12 @@
 - **Верификация:** Файлы проверены локально, готово к коммиту.
 - **Эстафета следующему агенту:** Выполнить `git add BACKLOG.md TRIAD_SYNC.md && git commit -m "docs(itops): add Sprint 3 backlog items" && git push origin main`.
 
-### [2026-09-12 08:30] [Antigravity] — [IT Ops / Планирование Sprint 4]
+### [2026-09-12 08:50] [Antigravity] — [Экосистема / Масштабное расширение Спринта 4]
 - **Статус:** 📋 TO_DO
-- **Что сделано:** Сформирован план Спринта 4 (список задач) и записан в `implementation_plan.md`. Задачи добавлены в `BACKLOG.md`.
-- **Верификация:** BACKLOG.md проверен, задачи корректно вставлены; `implementation_plan.md` содержит полное описание.
-- **Эстафета следующему агенту:** Выполнить `git add BACKLOG.md TRIAD_SYNC.md && git commit -m "docs(itops): add Sprint 4 backlog items" && git push origin main`.
+- **Что сделано:** 
+  1. Проведен глубокий R&D анализ экосистемы продуктов (IT Ops, BGT, LinkID, HH Jobs, Stocks UZ, GH Scout).
+  2. В `BACKLOG.md` добавлены высокоимпактные задачи Спринта 4 (`TASK-ITOPS-035`...`037`, `TASK-BGT-044`...`045`, `TASK-LINKID-033`...`034`, `TASK-HHJOBS-017`...`018`, `TASK-STOCKS-090`...`091`, `TASK-GHSCOUT-013`).
+  3. План покрывает Enterprise SSO/Multi-Tenancy (IT Ops), дельта-нейтральный фандинг-арбитраж и Black Swan Circuit Breaker (BGT), AI-инфографику и авто-комментирование (LinkID), оценку зарплатных вилок и генератор резюме (HH Jobs), Smart Money инсайды и DCF (Stocks UZ).
+- **Верификация:** Изменения верифицированы в `BACKLOG.md` и готовы к отправке в Git.
+- **Эстафета следующему агенту:** Приступить к последовательному исполнению P1 задач Спринта 4 согласно доменной изоляции чатов.
+
