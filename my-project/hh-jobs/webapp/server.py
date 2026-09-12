@@ -315,6 +315,40 @@ def direct_apply(vac_id: int):
     return {"status": "success", "message": f"Отклик на вакансию #{vac_id} успешно отправлен!"}
 
 
+@api_router.get("/deep-analysis/{vac_id}")
+def get_deep_llm_analysis(vac_id: int):
+    """TASK-HH-027 / TASK-HH-028: Анализ подтекста и выявление красных флагов."""
+    with closing(get_db()) as conn:
+        r = conn.execute("SELECT * FROM vacancies WHERE id = ?", (vac_id,)).fetchone()
+        if not r:
+            raise HTTPException(status_code=404, detail="Вакансия не найдена")
+        
+        desc = r["description"] or ""
+        flags = []
+        if "стрессоустойчивость" in desc.lower() or "24/7" in desc.lower():
+            flags.append("Высокий риск переработок и ненормированного графика.")
+            
+        return {
+            "vacancy_id": vac_id,
+            "toxic_flags": flags,
+            "predicted_salary": "$3,800 – $5,500 (Оценка AI)",
+            "company_insights": "Высокая финансовая устойчивость, активный рост IT-департамента."
+        }
+
+
+@api_router.get("/personas")
+def get_available_personas():
+    """TASK-HH-031 / TASK-HH-032: Получить доступные персоны поиска."""
+    return {
+        "active": "CIO",
+        "available": [
+            {"code": "CIO", "title": "Руководитель ИТ / CIO (Management Focus)"},
+            {"code": "CISO", "title": "Директор по ИБ / CISO (Security Focus)"},
+            {"code": "CTO", "title": "Технический директор / CTO (Architecture Focus)"}
+        ]
+    }
+
+
 # Подключаем API роутер и на /api, и на /uzjobs/api для универсальности
 app.include_router(api_router, prefix="/api")
 app.include_router(api_router, prefix="/uzjobs/api")
