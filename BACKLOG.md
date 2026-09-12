@@ -495,3 +495,11 @@
 | TASK‑ITOPS‑041 | 5 | Chaos Monkey API & Fault Injection (Внедрение отказов для теста resilience) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-27 | 🟢 Done |
 | TASK‑ITOPS‑042 | 5 | Zombie Resource Hunter (Поиск брошенных тестовых окружений / mock) | IT Operations | Чат IT Ops | Antigravity | 🔵 P3 | 2026-11-29 | 🟢 Done |
 | TASK‑ITOPS‑043 | 5 | Behavioral Rate Limiter (Блокировка IP на базе паттернов поведения) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-12-01 | 🟢 Done |
+
+### 🔬 R&D Sprint & Cross-Project Backlog (Ожидает реализации)
+| ID | Спринт | Задача | Проект / Домен | Ответственный Чат / Бот | Исполнитель (Агент) | Приоритет | Срок | Статус |
+| :--- | :---: | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| **TASK-ITOPS-024** | **Спринт 6** | Деплой R&D инфраструктуры (MinIO, InfluxDB, ETL) на боевой US Server | **IT Ops / Infra** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-10 | 📋 To Do |
+| **TASK-ITOPS-023** | **Спринт 6** | Написать автоматический сканер для ревизии `.env` файлов и секретов (Zero Tolerance Check) | **IT Ops / Security** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-12 | 📋 To Do |
+| **TASK-BGT-042** | **Спринт 6** | Привязать новый DSL-парсер к сканеру Топ-200 монет для динамического скоринга активов | **BGT** | Чат BGT | **Antigravity** | 🟡 P2 | 2026-10-15 | 📋 To Do |
+| **TASK-LINKID-031** | **Спринт 6** | Интеграция LLM v4 Pro в ContentEngine на основе данных из парсера Habr | **LinkID** | Чат LinkID | **Antigravity** | 🟡 P2 | 2026-10-20 | 📋 To Do |
