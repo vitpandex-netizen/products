@@ -1,0 +1,25 @@
+# Environment variables (CRITICAL: Zero Secrets in Git)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+.venv/
+env/
+*.log
+
+# Databases & Data
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
