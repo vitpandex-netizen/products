@@ -271,9 +271,11 @@ def generate_cover_letter(req: CoverLetterRequest):
     return {"cover_letter": text}
 
 
+from src.osint_xray import generate_psychological_brief
+
 @api_router.get("/scout/{vac_id}")
 def get_executive_scout(vac_id: int):
-    """TASK-HH-023: Поиск ЛПР компании в LinkedIn и анализ слепых зон (Skill Gap)."""
+    """TASK-HH-023 & TASK-HH-040: Поиск ЛПР и OSINT X-Ray."""
     with closing(get_db()) as conn:
         r = conn.execute("SELECT * FROM vacancies WHERE id = ?", (vac_id,)).fetchone()
         if not r:
@@ -283,18 +285,13 @@ def get_executive_scout(vac_id: int):
         query = f"site:linkedin.com/in/ ({comp}) AND (CEO OR Founder OR HRD OR 'Head of HR' OR 'IT Director')"
         link = f"https://www.google.com/search?q={urllib.parse.quote(query)}"
         
-        # TASK-HH-026: Skill Gap Radar
-        gaps = [
-            "Обязательно подчеркните 20-летний опыт управления ИТ и ИБ.",
-            "Для C-level позиции акцентируйте внимание на оптимизации бюджетов CAPEX/OPEX."
-        ]
-        if "security" in title.lower() or "безопасность" in title.lower():
-            gaps.append("Выделите опыт работы с DLP SearchInform и Zero Trust моделью.")
+        # Интеграция OSINT-модуля (генерация досье на вероятного ЛПР)
+        osint_dossier = generate_psychological_brief("CEO / IT Director", comp, "Hiring Manager")
 
         return {
             "company": comp,
             "linkedin_scout_url": link,
-            "skill_gap_radar": gaps
+            "osint_dossier": osint_dossier
         }
 
 

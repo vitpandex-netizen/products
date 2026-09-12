@@ -1,0 +1,7 @@
+{
+    "_comment": "Секреты читаются из vault (~/.secure/vault.enc). Ключи: UZ_MARKET_TELEGRAM_TOKEN, UZ_MARKET_CHAT_ID, UZ_MARKET_THREAD_ID, OPENROUTER_API_KEY",
+    "telegram_token": "__VAULT__",
+    "openrouter_key": "__VAULT__",
+    "telegram_chat_id": "__VAULT__",
+    "telegram_thread_id": "__VAULT__"
+}

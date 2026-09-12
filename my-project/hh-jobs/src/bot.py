@@ -196,6 +196,28 @@ def handle_message(msg: dict, allowed_ids: set):
         )
         send_message(chat_id, welcome_text, reply_markup=get_app_keyboard())
 
+    elif text.startswith("/set_profile"):
+        skills = text.replace("/set_profile", "").strip()
+        if not skills:
+            send_message(chat_id, "⚠️ Укажите навыки через запятую.\nПример: /set_profile Python, SQL, Docker")
+        else:
+            try:
+                with sqlite3.connect(DB_PATH) as conn:
+                    cur = conn.execute("SELECT user_id FROM user_profiles WHERE user_id = ?", (user_id,))
+                    if cur.fetchone():
+                        conn.execute("UPDATE user_profiles SET skills = ? WHERE user_id = ?", (skills, user_id))
+                    else:
+                        conn.execute("INSERT INTO user_profiles (user_id, skills) VALUES (?, ?)", (user_id, skills))
+                send_message(chat_id, f"✅ Профиль сохранён!\nНавыки: {skills}\n\nСмотреть подборку: /my_digest")
+            except Exception as e:
+                send_message(chat_id, f"⚠️ Ошибка: {e}")
+
+    elif text == "/my_digest":
+        send_message(chat_id, "⏳ Анализирую вакансии под ваш профиль...")
+        from digest_generator import get_personal_digest
+        digest_text = get_personal_digest(user_id)
+        send_message(chat_id, digest_text, reply_markup=get_app_keyboard())
+
     elif text == "/stats":
         send_message(chat_id, get_stats_text(), reply_markup=get_app_keyboard())
 
@@ -210,6 +232,8 @@ def handle_message(msg: dict, allowed_ids: set):
             chat_id,
             "Доступные команды:\n"
             "/app — Открыть приложение UZ IT Jobs\n"
+            "/set_profile <навыки> — Настроить профиль\n"
+            "/my_digest — Моя персональная подборка\n"
             "/stats — Статистика IT-рынка РУз\n"
             "/top — Топ подходящих вакансий\n"
             "/start — Главное меню"

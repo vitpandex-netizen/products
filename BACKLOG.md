@@ -10,7 +10,7 @@
 - **🏁 Спринт 1 (11 сентября 2026 г.):** Базовая инфраструктура BGT, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed, Smart Scaling Out, Whale CVD Filter. *(Завершён)*
 - **🏆 Спринт 2 (11 сентября 2026 г.):** HFT Binance Lead-Lag, Short Breakouts, Dynamic Leverage Engine, Paper Auto-Promoter, Executive Morning Digest, TMA Signals API. *(Завершён)*
 - **🚀 Спринт 3 (12 сентября 2026 г.):** LinkID Pro Post: Celery/Redis очереди, Whitelist Telegram, Claude 3.5 & DeepSeek V3, генерация обложек DALL-E, Prometheus метрики. *(Завершён)*
-- **📦 Спринт 4 (В планировании):** Продолжение задач LinkID (CI/CD, ICS, Swagger) и IT Ops Framework.
+- **📦 Спринт 4 (Активный спринт):** Продолжение задач LinkID (CI/CD, ICS, Swagger) и IT Ops Framework.
 
 ---
 
@@ -52,7 +52,7 @@
 | **TASK-LINKID-017** | **Спринт 3** | [LinkID] Автогенерация визуальных обложек к постам (DALL-E 3 / Flux API / SD) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 🟢 Done |
 | **TASK-LINKID-018** | **Спринт 3** | [LinkID] Интеграция Claude 3.5 Sonnet & DeepSeek V3 в LLM Selector | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 🟢 Done |
 | **TASK-LINKID-019** | **Спринт 3** | [LinkID] Prometheus-метрики использования LLM, токенов и латенси | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-24 | 🟢 Done |
-| **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Closed |
+| **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Done |
 | **TASK-LINKID-021** | **Спринт 3** | [LinkID] Systemd Watchdog & Auto-restart при сбоях cron-скриптов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Closed |
 | **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 🟢 Closed |
 | **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 🟢 Closed |
@@ -61,17 +61,17 @@
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-ITOPS-009** | **Спринт 2** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 🟢 Done |
-| **TASK-ITOPS-010** | **Спринт 3** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-20 | 📋 To Do |
-| **TASK-ITOPS-011** | **Спринт 3** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | 📋 To Do |
-| **TASK-ITOPS-012** | **Спринт 3** | Интегрировать health‑check микросервис для внешних зависимостей (SMTP, AD, 1С) в виде отдельного FastAPI‑сервиса | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-24 | 📋 To Do |
-| **TASK-ITOPS-013** | **Спринт 3** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 📋 To Do |
-| **TASK-ITOPS-014** | **Спринт 3** | Реализовать UI‑конфигурацию Feature Flags в Mini‑App (просмотр/переключение без redeploy) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-27 | 📋 To Do |
-| **TASK-ITOPS-015** | **Спринт 3** | Добавить CI‑step для статического анализа секретов (gitleaks + secret‑guard) в GitHub Actions | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026-09-28 | 📋 To Do |
-| **TASK-ITOPS-016** | **Спринт 3** | Написать набор e2e‑тестов (Playwright) для статуса сервиса и доступа к Mini‑App | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026-09-30 | 📋 To Do |
-| **TASK-ITOPS-017** | **Спринт 3** | Обновить документацию: добавить диаграммы архитектуры (Mermaid) и инструкции по развёртыванию в Docker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-30 | 📋 To Do |
-| **TASK-ITOPS-018** | **Спринт 3** | Внедрить автоматический ротацию токенов доступа к внешним API (Graph API, Whisper) через Vault | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-10-02 | 📋 To Do |
-| **TASK-ITOPS-019** | **Спринт 3** | Добавить оповещения в Telegram о превышении лимитов Rate Limiting для критических сервисов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-02 | 📋 To Do |
-| **TASK-ITOPS-020** | **Спринт 3** | Провести обзор и оптимизацию Docker‑образов (мульти‑stage, уменьшить размер) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-04 | 📋 To Do |
+| **TASK-ITOPS-010** | **Спринт 4** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-20 | 📋 To Do |
+| **TASK-ITOPS-011** | **Спринт 4** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-ITOPS-012** | **Спринт 4** | Интегрировать health‑check микросервис для внешних зависимостей (SMTP, AD, 1С) в виде отдельного FastAPI‑сервиса | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-24 | 📋 To Do |
+| **TASK-ITOPS-013** | **Спринт 4** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 📋 To Do |
+| **TASK-ITOPS-014** | **Спринт 4** | Реализовать UI‑конфигурацию Feature Flags в Mini‑App (просмотр/переключение без redeploy) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-27 | 📋 To Do |
+| **TASK-ITOPS-015** | **Спринт 4** | Добавить CI‑step для статического анализа секретов (gitleaks + secret‑guard) в GitHub Actions | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026-09-28 | 📋 To Do |
+| **TASK-ITOPS-016** | **Спринт 4** | Написать набор e2e‑тестов (Playwright) для статуса сервиса и доступа к Mini‑App | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026-09-30 | 📋 To Do |
+| **TASK-ITOPS-017** | **Спринт 4** | Обновить документацию: добавить диаграммы архитектуры (Mermaid) и инструкции по развёртыванию в Docker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-30 | 📋 To Do |
+| **TASK-ITOPS-018** | **Спринт 4** | Внедрить автоматический ротацию токенов доступа к внешним API (Graph API, Whisper) через Vault | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-10-02 | 📋 To Do |
+| **TASK-ITOPS-019** | **Спринт 4** | Добавить оповещения в Telegram о превышении лимитов Rate Limiting для критических сервисов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-02 | 📋 To Do |
+| **TASK-ITOPS-020** | **Спринт 4** | Провести обзор и оптимизацию Docker‑образов (мульти‑stage, уменьшить размер) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-04 | 📋 To Do |
 | **TASK-IMP-001** | **Спринт 2** | Добавить preview‑mode для автогенерации постов в LinkID | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-002** | **Спринт 2** | Сохранять историю последних 5 выбранных LLM и предлагать автодополнение | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-003** | **Спринт 2** | Реализовать retry‑логику с экспоненциальной задержкой для неуспешных вебхуков | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
@@ -423,6 +423,10 @@
 | TASK‑ALPHASCOUT‑009 | 4 | **Jupiter/1inch Routing:** Оценка реального Price Impact & Slippage при арбитраже | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑09 | TODO |
 | TASK‑ALPHASCOUT‑010 | 4 | **Polymarket Shadow-Trader:** Подгрузка истории PnL китов через Polymarket CLOB API | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑10‑14 | TODO |
 | TASK‑ALPHASCOUT‑011 | 4 | Интеграция парсера новых токенов (Pump.fun / Raydium New Pools) | Alpha Scout | alpha‑scout | antigravity | 🔵 Low | 2026‑10‑18 | TODO |
+| TASK‑ALPHASCOUT‑012 | 5 | US Equities Options Flow Monitor (COT, OpenInterest) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑11‑05 | TODO |
+| TASK‑ALPHASCOUT‑013 | 5 | Интеграция данных UZSE/NAPP (ETF, OTC) в единый аналитический слой | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑11‑12 | TODO |
+| TASK‑ALPHASCOUT‑014 | 5 | Пары металлов & сырья (Gold/Silver, Oil/WTI) – статистический арбитраж | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑11‑20 | TODO |
+| TASK‑ALPHASCOUT‑015 | 5 | Cross‑Market Arbitrage: Crypto ↔ TradFi (Polymarket → Gold, Oil) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑12‑01 | TODO |
 ### GH Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
