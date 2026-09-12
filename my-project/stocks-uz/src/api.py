@@ -525,3 +525,28 @@ class VoicePromptInput(BaseModel):
 def agent_query(input_data: VoicePromptInput, db: DB = Depends(get_db)):
     agent = VoiceAgent(db)
     return agent.process_query(input_data.prompt)
+
+
+# ===== Stage 3 Auto-Execution & Rebalancing Endpoints =====
+from auto_execution import AutoExecutionEngine
+
+class TrailingStopInput(BaseModel):
+    ticker: str
+    current_price: float
+    highest_price: float
+    trail_pct: float = 5.0
+
+@app.get("/api/trading/rebalance")
+def trading_rebalance(threshold_pct: float = 5.0, db: DB = Depends(get_db)):
+    engine = AutoExecutionEngine(db)
+    return engine.calculate_rebalance(threshold_pct=threshold_pct)
+
+@app.post("/api/trading/trailing-stop")
+def trading_trailing_stop(input_data: TrailingStopInput):
+    engine = AutoExecutionEngine()
+    return engine.update_trailing_stop(
+        ticker=input_data.ticker.upper(),
+        current_price=input_data.current_price,
+        highest_price=input_data.highest_price,
+        trail_pct=input_data.trail_pct
+    )
