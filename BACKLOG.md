@@ -419,13 +419,13 @@
 ### Alpha Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
-| TASK‑ALPHASCOUT‑008 | 4 | **Auto-Execution MVP:** Авто-вход в дельта-нейтральные позиции по Funding Rate (Bitget + Bybit) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑05 | TODO |
+| TASK‑ALPHASCOUT‑008 | 4 | **Auto-Execution MVP:** Авто-вход в дельта-нейтральные позиции по Funding Rate (Bitget + Bybit) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑05 | 🟢 Done |
 | TASK‑ALPHASCOUT‑009 | 4 | **Jupiter/1inch Routing:** Оценка реального Price Impact & Slippage при арбитраже | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑09 | TODO |
 | TASK‑ALPHASCOUT‑010 | 4 | **Polymarket Shadow-Trader:** Подгрузка истории PnL китов через Polymarket CLOB API | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑10‑14 | TODO |
 | TASK‑ALPHASCOUT‑011 | 4 | Интеграция парсера новых токенов (Pump.fun / Raydium New Pools) | Alpha Scout | alpha‑scout | antigravity | 🔵 Low | 2026‑10‑18 | TODO |
-| TASK‑ALPHASCOUT‑012 | 5 | US Equities Options Flow Monitor (COT, OpenInterest) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑11‑05 | TODO |
+| TASK‑ALPHASCOUT‑012 | 5 | US Equities Options Flow Monitor (COT, OpenInterest) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑11‑05 | 🟢 Done |
 | TASK‑ALPHASCOUT‑013 | 5 | Интеграция данных UZSE/NAPP (ETF, OTC) в единый аналитический слой | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑11‑12 | TODO |
-| TASK‑ALPHASCOUT‑014 | 5 | Пары металлов & сырья (Gold/Silver, Oil/WTI) – статистический арбитраж | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑11‑20 | TODO |
+| TASK‑ALPHASCOUT‑014 | 5 | Пары металлов & сырья (Gold/Silver, Oil/WTI) – статистический арбитраж | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑11‑20 | 🟢 Done |
 | TASK‑ALPHASCOUT‑015 | 5 | Cross‑Market Arbitrage: Crypto ↔ TradFi (Polymarket → Gold, Oil) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑12‑01 | TODO |
 ### GH Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
@@ -499,7 +499,27 @@
 ### 🔬 R&D Sprint & Cross-Project Backlog (Ожидает реализации)
 | ID | Спринт | Задача | Проект / Домен | Ответственный Чат / Бот | Исполнитель (Агент) | Приоритет | Срок | Статус |
 | :--- | :---: | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **TASK-ITOPS-024** | **Спринт 6** | Деплой R&D инфраструктуры (MinIO, InfluxDB, ETL) на боевой US Server | **IT Ops / Infra** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-10 | 📋 To Do |
-| **TASK-ITOPS-023** | **Спринт 6** | Написать автоматический сканер для ревизии `.env` файлов и секретов (Zero Tolerance Check) | **IT Ops / Security** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-12 | 📋 To Do |
-| **TASK-BGT-042** | **Спринт 6** | Привязать новый DSL-парсер к сканеру Топ-200 монет для динамического скоринга активов | **BGT** | Чат BGT | **Antigravity** | 🟡 P2 | 2026-10-15 | 📋 To Do |
-| **TASK-LINKID-031** | **Спринт 6** | Интеграция LLM v4 Pro в ContentEngine на основе данных из парсера Habr | **LinkID** | Чат LinkID | **Antigravity** | 🟡 P2 | 2026-10-20 | 📋 To Do |
+| **TASK-ITOPS-024** | **Спринт 6** | Деплой R&D инфраструктуры (MinIO, InfluxDB, ETL) на боевой US Server | **IT Ops / Infra** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-10 | 🟢 Done |
+| **TASK-ITOPS-023** | **Спринт 6** | Написать автоматический сканер для ревизии `.env` файлов и секретов (Zero Tolerance Check) | **IT Ops / Security** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-10-12 | 🟢 Done |
+| **TASK-BGT-042** | **Спринт 6** | Привязать новый DSL-парсер к сканеру Топ-200 монет для динамического скоринга активов | **BGT** | Чат BGT | **Antigravity** | 🟡 P2 | 2026-10-15 | 🟢 Done |
+| **TASK-LINKID-031** | **Спринт 6** | Интеграция LLM v4 Pro в ContentEngine на основе данных из парсера Habr | **LinkID** | Чат LinkID | **Antigravity** | 🟡 P2 | 2026-10-20 | 🟢 Done |
+
+---
+
+### 📊 Спринт 5 – Stocks UZ (Масштабный R&D & ИИ-Экосистема)
+
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑STOCKS‑092 | 5 | ML-Модель прогнозирования краткосрочных трендов котировок (Random Forest / LightGBM) | Stocks UZ | uz-stocks-bot | Antigravity | 🔴 P1 | 2026-11-15 | 🟢 Done |
+| TASK‑STOCKS‑093 | 5 | ИИ-Анализ сентимента TG-каналов (LLM Sentiment Scoring новостей UZSE) | Stocks UZ | uz-stocks-bot | Antigravity | 🔴 P1 | 2026-11-18 | 🟢 Done |
+| TASK‑STOCKS‑094 | 5 | Детектор аномальных манипуляций и фиктивных сделок (Pump & Dump / Wash Trading) | Stocks UZ | uz-stocks-bot | Antigravity | 🟡 P2 | 2026-11-20 | 🟢 Done |
+| TASK‑STOCKS‑095 | 5 | Интеграция интерактивных графиков TradingView (Lightweight Charts Canvas в TMA) | Stocks UZ | uz-stocks-bot | Antigravity | 🔴 P1 | 2026-11-22 | 🟢 Done |
+| TASK‑STOCKS‑096 | 5 | Тепловая карта рынка (Heatmap) и Матрица межотраслевой корреляции UZSE | Stocks UZ | uz-stocks-bot | Antigravity | 🟡 P2 | 2026-11-25 | 🟢 Done |
+| TASK‑STOCKS‑097 | 5 | Переход на асинхронный Connection Pool базы данных (`aiosqlite` / SQLAlchemy Async) | Stocks UZ | uz-stocks-bot | Antigravity | 🔴 P1 | 2026-11-28 | 🟢 Done |
+| TASK‑STOCKS‑098 | 5 | Модуль автоматического бэкапа БД SQLite и Redis в шифрованное хранилище Vault | Stocks UZ | uz-stocks-bot | Antigravity | 🟡 P2 | 2026-12-01 | 🟢 Done |
+| TASK‑STOCKS‑099 | 5 | Подготовка Docker-контейнеров, Systemd сервисов и деплой на US Server (24/7) | Stocks UZ | uz-stocks-bot | Antigravity | 🔴 P1 | 2026-12-03 | 🟢 Done |
+| TASK‑STOCKS‑100 | 5 | Симуляция портфельных рисков методом Монте-Карло (1,000 вероятностных путей) | Stocks UZ | uz-stocks-bot | Antigravity | 🟡 P2 | 2026-12-05 | 🟢 Done |
+| TASK‑STOCKS‑101 | 5 | Авто-мониторинг первичных размещений акций и приватизации (IPO/SPO Tracker) | Stocks UZ | uz-stocks-bot | Antigravity | 🟡 P2 | 2026-12-08 | 🟢 Done |
+| TASK‑STOCKS‑102 | 5 | ESG и Корпоративный рейтинг прозрачности эмитентов (Transparency Scorecard) | Stocks UZ | uz-stocks-bot | Antigravity | 🔵 P3 | 2026-12-10 | 🟢 Done |
+
+

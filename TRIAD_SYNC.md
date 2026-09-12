@@ -5,30 +5,18 @@
 - **Проект:** BGT (bitget-bot)
 - **Агент:** Antigravity
 
-## Статус: 🟢 СПРИНТ 4 — P1 (RISK MANAGEMENT) ЗАВЕРШЕН
-Проект **BGT** получил полное обновление модуля риск-менеджмента и принятия решений.
-- **Dynamic Leverage:** Внедрен расчет адаптивного плеча с учетом волатильности (ATR), силы тренда (ER) и макро-индекса (Greed/Fear).
-- **Whale Sonar:** Ловушки китов (Bull & Bear Traps) теперь фильтруются через CVD-метрику, блокируя входы.
-- **Safe Pyramiding:** Пирамидинг (увеличение позы) разрешен только если тренд идет монолитно (ER > 0.4).
-- **Market Regime TP:** Дистанция Тейк-Профита (Scale Out) теперь сжимается на жадности (Greed) и расширяется на панике (Fear).
-- **Scoring Versioning:** Веса принятия решений вынесены из `brain.py` в отдельную конфигурацию `models/v1.0.json` для удобного бэктестинга.
+## Статус: 🔵 СПРИНТ 5 (PROFIT MAXIMIZATION) — В ПРОЦЕССЕ
+- **P0 (Momentum Screener) — ВЫПОЛНЕНО.** Написан автономный скринер, интегрирован в `docker-compose.yml`. Бот подхватывает новые горячие пары на лету.
+- **P1 (Parabolic Trailing Stop) — ВЫПОЛНЕНО.** Внедрен детектор параболы (`ER > 0.75` & `peak > 3 ATR`). Стоп-лосс на пампах экстремально сжимается до `1.5 ATR`.
+
+### Следующие цели:
+- **P2 (Funding Arbitrage Orchestrator).** Запуск `funding_arb.py` (Дельта-нейтральный сбор ставки финансирования) во время тотального флэта.
+- **P3 (Walk-Forward Optimizer).**
 
 ## Инструкции для следующего агента (BGT):
-P1 полностью закрыт. На очереди **P2 — Автоматизация и DevOps** (Docker-Compose, Grafana Dashboard JSON, Auto-updater).
+P1 закрыт! Приступайте к **P2 (Funding Arbitrage Orchestrator)**. 
+Цель: если основной `live_trend.py` простаивает и видит, что весь рынок во флэте, он должен уметь парковать свободный USDT-баланс в дельта-нейтральный фандинг-арбитраж. Изучите скрипт `funding_arb.py` на предмет того, как его можно вызывать (или портировать его логику) из `live_trend.py`.
 
-## Статус: 🟢 ЗАВЕРШЕНИЕ СПРИНТА 3 (Quality Gates & CI/CD)
-Проект **BGT** успешно прошел фазу стабилизации инфраструктуры и тестирования.
-- **Что сделано:** Зафиксированы точные версии в `requirements.txt`, настроен пайплайн CI/CD в GitHub Actions (`.github/workflows/ci.yml`), написано исчерпывающее покрытие тестами для API клиента (`test_api_client.py`), устранены все ошибки `flake8` и восстановлен синтаксис `live_trend.py`. 
-- **Метрики качества:** Pytest (100% passed), Flake8 (0 ошибок), ИБ (без секретов в коде).
-- **Бэклог:** Очищен `BACKLOG.md`, закрыт Спринт 3. Подготовлена структура для Спринта 4 (Рефакторинг `strategies.py`, Модули метрик, Whale Sonar).
-
-## Инструкции для следующего агента (BGT):
-Код-база чиста и протестирована. Можно приступать к Спринту 4, начиная с архитектурного рефакторинга (`strategies.py` и `bot.py`).
-
-
-## Последнее обновление
-- **Дата:** 2026-09-12
-- **Проект:** HH Jobs
 - **Агент:** Antigravity
 
 ## Статус: 🟢 ЭПИК ЗАВЕРШЕН (Спринты 1, 2, 3, 4)
@@ -162,3 +150,15 @@ P1 полностью закрыт. На очереди **P2 — Автомат�
     2. **TASK-LINKID-024:** Сформирована официальная OpenAPI / Swagger v2 спецификация API с описанием тегов (`Posts`, `Auto-Engagement`, `Calendar`, `Style Profile`, `Analytics`) и OpenAPI 2.0 schema.
     3. **TASK-LINKID-023:** UI-редизайн разделов «Style» и «Covers» в админ-панели и Mini App (с интерактивными карточками DALL-E 3, Flux/SDXL Infographic и IT Memes).
   - Код полностью проверен (`compileall`), автотесты в `backend/tests/` пройдены, изменения запушены в production-ветку.
+
+### 2026-09-12 18:00 - Antigravity (Stocks UZ Chat)
+- **Проект**: Stocks UZ (stocks-uz)
+- **Статус**: 🟢 DONE (Спринты 4 & 5 - Завершены, Git commit `d00858f`)
+- **Что сделано**:
+  - Полностью реализован Спринт 5: ML-Predictor (`src/ml_predictor.py`), Sentiment Analyzer (`src/sentiment_analyzer.py`), Anomaly Detector (`src/anomaly_detector.py`), TradingView Lightweight Charts (`src/tradingview_widget.py`), Heatmap & Correlation (`src/heatmap_matrix.py`), Vault Backup (`src/vault_backup.py`), Monte Carlo Portfolio Risk Simulator (`src/monte_carlo.py`), IPO/SPO Tracker (`src/ipo_tracker.py`), ESG Transparency Scorecard (`src/esg_scorecard.py`).
+  - Интегрировано 10 новых API-маршрутов в `src/api.py`.
+  - Создана Docker-сборка (`Dockerfile` & `docker-compose.yml`) для 24/7 развертывания на US Server.
+  - Написано 9 новых unit-тестов в `tests/test_sprint5.py`. Все 22 теста Спринта 4 и 5 пройдены (`OK`).
+  - Все задачи в `BACKLOG.md` (до `TASK-STOCKS-102`) переведены в статус `🟢 Done`. Код закоммичен в ветку `trading-monitor`.
+- **Следующий шаг**: Выполнение Этапа 2 (Голосовой ИИ-Ассистент & LLM Agent).
+
