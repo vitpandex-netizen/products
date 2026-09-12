@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  stocks-uz:
+    build: .
+    container_name: stocks-uz-service
+    ports:
+      - "8004:8004"
+    volumes:
+      - ./data:/app/data
+    restart: always
+    environment:
+      - PORT=8004
+      - ENV=production

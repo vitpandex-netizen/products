@@ -449,3 +449,67 @@ def startup():
         updated_at TEXT
     )""")
     db.conn.commit()
+
+
+# ===== Sprint 5 Endpoints =====
+from ml_predictor import MLPredictor
+from sentiment_analyzer import SentimentAnalyzer
+from anomaly_detector import AnomalyDetector
+from tradingview_widget import TradingViewWidget
+from heatmap_matrix import HeatmapMatrix
+from vault_backup import VaultBackup
+from monte_carlo import MonteCarloSimulator
+from ipo_tracker import IPOTracker
+from esg_scorecard import ESGScorecard
+from fastapi.responses import HTMLResponse
+
+@app.get("/api/ml/predict/{ticker}")
+def ml_predict(ticker: str, db: DB = Depends(get_db)):
+    predictor = MLPredictor(db)
+    return predictor.predict_ticker(ticker.upper())
+
+@app.get("/api/sentiment/ticker/{ticker}")
+def sentiment_ticker(ticker: str, db: DB = Depends(get_db)):
+    analyzer = SentimentAnalyzer(db)
+    return analyzer.analyze_ticker_sentiment(ticker.upper())
+
+@app.get("/api/anomalies/{ticker}")
+def anomalies(ticker: str, db: DB = Depends(get_db)):
+    detector = AnomalyDetector(db)
+    return detector.detect_anomalies(ticker.upper())
+
+@app.get("/api/charts/tradingview/{ticker}", response_class=HTMLResponse)
+def tradingview_chart(ticker: str, db: DB = Depends(get_db)):
+    ohlcv = db.get_ohlcv(ticker.upper(), days=90)
+    return TradingViewWidget.render_lightweight_chart(ticker.upper(), ohlcv)
+
+@app.get("/api/heatmap")
+def heatmap(db: DB = Depends(get_db)):
+    hm = HeatmapMatrix(db)
+    return {"items": hm.generate_heatmap()}
+
+@app.get("/api/correlation")
+def correlation(tickers: str = "URTS,ALKB,CBSK,BIOK", db: DB = Depends(get_db)):
+    ticker_list = [t.strip().upper() for t in tickers.split(",") if t.strip()]
+    hm = HeatmapMatrix(db)
+    return hm.calculate_correlation_matrix(ticker_list)
+
+@app.post("/api/backup/create")
+def backup_create():
+    backup = VaultBackup()
+    return backup.create_backup()
+
+@app.get("/api/risk/monte-carlo")
+def monte_carlo(db: DB = Depends(get_db)):
+    sim = MonteCarloSimulator(db)
+    return sim.simulate_portfolio()
+
+@app.get("/api/ipos")
+def ipos():
+    tracker = IPOTracker()
+    return {"events": tracker.get_upcoming_ipos()}
+
+@app.get("/api/esg/{ticker}")
+def esg_scorecard(ticker: str, db: DB = Depends(get_db)):
+    scorecard = ESGScorecard(db)
+    return scorecard.evaluate_transparency(ticker.upper())
