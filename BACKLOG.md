@@ -489,9 +489,9 @@
 #### IT Operations Framework
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
-| TASK‑ITOPS‑038 | 5 | LLM-Driven Auto-Triage & RCA (Генерация отчетов об инцидентах через LLM) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-20 | 📋 To Do |
-| TASK‑ITOPS‑039 | 5 | Just-In-Time (JIT) DB Access Engine (Временные креды PostgreSQL на базе ролей) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-22 | 📋 To Do |
-| TASK‑ITOPS‑040 | 5 | Distributed Tracing Middleware (Интеграция OpenTelemetry для трейсинга) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-25 | 📋 To Do |
-| TASK‑ITOPS‑041 | 5 | Chaos Monkey API & Fault Injection (Внедрение отказов для теста resilience) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-27 | 📋 To Do |
-| TASK‑ITOPS‑042 | 5 | Zombie Resource Hunter (Поиск брошенных тестовых окружений / mock) | IT Operations | Чат IT Ops | Antigravity | 🔵 P3 | 2026-11-29 | 📋 To Do |
-| TASK‑ITOPS‑043 | 5 | Behavioral Rate Limiter (Блокировка IP на базе паттернов поведения) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-12-01 | 📋 To Do |
+| TASK‑ITOPS‑038 | 5 | LLM-Driven Auto-Triage & RCA (Генерация отчетов об инцидентах через LLM) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-20 | 🟢 Done |
+| TASK‑ITOPS‑039 | 5 | Just-In-Time (JIT) DB Access Engine (Временные креды PostgreSQL на базе ролей) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-22 | 🟢 Done |
+| TASK‑ITOPS‑040 | 5 | Distributed Tracing Middleware (Интеграция OpenTelemetry для трейсинга) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-25 | 🟢 Done |
+| TASK‑ITOPS‑041 | 5 | Chaos Monkey API & Fault Injection (Внедрение отказов для теста resilience) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-27 | 🟢 Done |
+| TASK‑ITOPS‑042 | 5 | Zombie Resource Hunter (Поиск брошенных тестовых окружений / mock) | IT Operations | Чат IT Ops | Antigravity | 🔵 P3 | 2026-11-29 | 🟢 Done |
+| TASK‑ITOPS‑043 | 5 | Behavioral Rate Limiter (Блокировка IP на базе паттернов поведения) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-12-01 | 🟢 Done |
