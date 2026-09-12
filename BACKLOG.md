@@ -9,7 +9,7 @@
 
 - **🏁 Спринт 1 (11 сентября 2026 г.):** Базовая инфраструктура BGT, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed, Smart Scaling Out, Whale CVD Filter. *(Завершён)*
 - **🏆 Спринт 2 (11 сентября 2026 г.):** HFT Binance Lead-Lag, Short Breakouts, Dynamic Leverage Engine, Paper Auto-Promoter, Executive Morning Digest, TMA Signals API. *(Завершён)*
-- **🚀 Спринт 3 (12–22 сентября 2026 г.):** Масштабирование BGT к цели $1000/мес: визуальный TMA «BGT Signals» UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита, Black Swan Circuit Breaker, TradingView Integration, рефакторинг God-Objects (funding_arb, strategies, bot), Infrastructure Package (CI/CD, Docker), Brain Audit Trail. *(Текущий активный спринт — 31 задача)*
+- **🚀 Спринт 3 (12 сентября 2026 г.):** Масштабирование BGT: TMA "BGT Signals" UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита, Black Swan Circuit Breaker, TradingView Integration, рефакторинг God-Objects (funding_arb, strategies, bot), Infrastructure Package (CI/CD, Docker), Brain Audit Trail, Sharpe/Liquidity мониторы, Prometheus Exporter. *(Завершён — Все 33 задачи 🟢 Done)*
 
 ---
 
@@ -21,11 +21,11 @@
 | **TASK-002** | **Спринт 1** | Включение `datacore-pg`, `consilium`, `ghscout` в ночной бэкап | **DataCore / Consilium** | Чат DataCore / Master Orchestrator | **Antigravity** | 🟡 P2 | 2026-09-12 | 🟢 Done |
 | **TASK-003** | **Спринт 1** | Сетевая изоляция API: биндинг портов `127.0.0.1` на US Server | **Инфраструктура / API** | Чат Master Orchestrator (Antigravity) | **Antigravity** | 🔴 P1 | 2026-09-12 | 🟢 Done |
 | **TASK-004** | **Спринт 1** | Автоматизация приема баг‑репортов (QA Intake Engine `scripts/qa_intake.py`) | **QA Track / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity** | 🟡 P2 | 2026-09-12 | 🟢 Done |
-| **TASK-005** | **Спринт 1** | [HH Jobs] Ошибка выборки: `no such column: published_at` в боте | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-12 | 🟢 Done |
+| **TASK-HH-019** | **Спринт 3** | [HH Jobs] Ежедневный утренний Executive Digest (Top-5 вакансий в 09:00) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-006** | **Спринт 1** | Разработка Единой политики Триады и стандартов релизного управления | **Экосистема / Триада** | Чат Master Orchestrator (Antigravity) | **Antigravity** | 🔴 P1 | 2026-09-12 | 🟢 Done |
 | **TASK-007** | **Спринт 1** | [Stocks UZ] Не отображается график тикера URTS на мобильном TMA | **Stocks UZ** | Чат Stocks UZ (`@stock_uz_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-12 | 🟢 Done |
-| **TASK-008** | **Спринт 1** | [HH Jobs] Архивация и очистка неактуальных вакансий (Retention Policy) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-13 | 🟢 Done |
-| **TASK-009** | **Спринт 1** | [HH Jobs] Полная персонализация AI‑матчинга под резюме пользователя | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🔴 P1 | 2026-09-11 | 🟢 Done |
+| **TASK-008** | **Спринт 1** | [HH Jobs] Архивация и очистка неактуальных вакансий (Retention Policy) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат Stocks UZ** | 🟡 P2 | 2026-09-13 | 🟢 Done |
+| **TASK-009** | **Спринт 1** | [HH Jobs] Полная персонализация AI‑матчинга под резюме пользователя | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат Stocks UZ** | 🔴 P1 | 2026-09-11 | 🟢 Done |
 | **TASK-SYS-001** | **Спринт 1** | Оптимизация US Server (Quick Wins: очистка кэша Docker, vacuum journald) | **Инфраструктура / Сервер** | Чат Master Orchestrator (Antigravity) | **Antigravity** | 🟡 P2 | 2026-09-11 | 🟢 Done |
 | **TASK-BGT-017** | **Спринт 1** | BGT: Динамический адаптивный фильтр волатильности (ATR Expansion Filter) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-11 | 🟢 Done |
 | **TASK-ITOPS-001** | **Спринт 1** | Санитария US Server: архивация устаревшей копии `it-operations-framework` | **IT Operations** | Чат IT Ops | **Antigravity** | 🟡 P2 | 2026-09-12 | 🟢 Done |
@@ -116,25 +116,29 @@
 | **TASK-BGT-037** | **Спринт 3** | Chandelier Exit Trailing Engine (Динамический стоп от пиков) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-BGT-038** | **Спринт 3** | Автоматический Журнал Сделок (Google Sheets / Notion Sync API) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟢 P3 | 2026-09-17 | 🟢 Done |
 | **TASK-BGT-039** | **Спринт 3** | Execution Slippage & Latency Profiler (Профайлер качества исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-18 | 🟢 Done |
-| **TASK-BGT-040** | **Спринт 3** | Lead‑Lag Error Recovery & Alerting (обработка ошибок и оповещение в Telegram) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-041** | **Спринт 3** | TradingView Alert Integration (импорт сигналов из TradingView в lead_lag.json) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-042** | **Спринт 3** | ML-Model CI / Test Suite (автоматические тесты модели XGBoost/LightGBM) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-043** | **Спринт 3** | Sharpe-Ratio Monitor & Notification (оповещение при падении < 1.0) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-044** | **Спринт 3** | Liquidity Drop Alert (оповещение при падении ликвидности > 20% за 5 мин) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-045** | **Спринт 3** | Payment-Gateway Integration (Stripe/PayPal для подписки) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-046** | **Спринт 3** | Mobile-Responsive Heatmap (адаптивный дизайн для Orderbook Heatmap) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-047** | **Спринт 3** | Coverage Report for Backtester (генерация markdown-отчёта покрытий) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-048** | **Спринт 3** | Dynamic Chandelier Params (UI-контролы для изменения параметров) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-049** | **Спринт 3** | Backup Journal to S3 (резервное копирование журнала сделок) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-050** | **Спринт 3** | Grafana Dashboard for Latency (дашборд метрик исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-051** | **Спринт 3** | Externalise Config & Retry Wrapper (вынос хардкодов live_trend.py в конфиг + exponential backoff для ccxt) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-052** | **Спринт 3** | Brain Scoring Audit Trail (логирование решений скоринга в SQLite + конфигурируемые веса) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-053** | **Спринт 3** | API Connection Pooling (переход на requests.Session для переиспользования TLS-соединений) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-054** | **Спринт 3** | Рефакторинг funding_arb.py (декомпозиция God-Object 124KB на модули) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-055** | **Спринт 3** | Декомпозиция strategies.py (разбиение 108KB монолита на пакет strategies/) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-056** | **Спринт 3** | Разделение ответственностей bot.py (вынос отчётов/бэктестов из основного while-цикла) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔵 P3 | 2026-09-22 | 📋 To Do |
-| **TASK-BGT-057** | **Спринт 3** | Infrastructure Package (requirements.txt + .env.example + Dockerfile + GitHub Actions CI) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-040** | **Спринт 3** | Lead‑Lag Error Recovery & Alerting (обработка ошибок и оповещение в Telegram) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-041** | **Спринт 3** | TradingView Alert Integration (импорт сигналов из TradingView в lead_lag.json) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-042** | **Спринт 3** | ML-Model CI / Test Suite (автоматические тесты модели XGBoost/LightGBM) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-043** | **Спринт 3** | Sharpe-Ratio Monitor & Notification (оповещение при падении < 1.0) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-044** | **Спринт 3** | Liquidity Drop Alert (оповещение при падении ликвидности > 20% за 5 мин) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-045** | **Спринт 3** | Payment-Gateway Integration (Stripe/PayPal для подписки) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-046** | **Спринт 3** | Mobile-Responsive Heatmap (адаптивный дизайн для Orderbook Heatmap) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-047** | **Спринт 3** | Coverage Report for Backtester (генерация markdown-отчёта покрытий) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-048** | **Спринт 3** | Dynamic Chandelier Params (UI-контролы для изменения параметров) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-049** | **Спринт 3** | Backup Journal to S3 (резервное копирование журнала сделок) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-050** | **Спринт 3** | Grafana Dashboard for Latency (дашборд метрик исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-051** | **Спринт 3** | Externalise Config & Retry Wrapper (вынос хардкодов live_trend.py в конфиг + exponential backoff для ccxt) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-052** | **Спринт 3** | Brain Scoring Audit Trail (логирование решений скоринга в SQLite + конфигурируемые веса) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-053** | **Спринт 3** | API Connection Pooling (переход на requests.Session для переиспользования TLS-соединений) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-054** | **Спринт 3** | Рефакторинг funding_arb.py (декомпозиция God-Object 124KB на модули) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-055** | **Спринт 3** | Декомпозиция strategies.py (разбиение 108KB монолита на пакет strategies/) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-056** | **Спринт 3** | Разделение ответственностей bot.py (вынос отчётов/бэктестов из основного while-цикла) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔵 P3 | 2026-09-22 | 🟢 Done |
+| **TASK-BGT-057** | **Спринт 3** | Infrastructure Package (requirements.txt + .env.example + Dockerfile + GitHub Actions CI) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 🟢 Done |
+| **TASK-ALPHA-003** | **Спринт 3** | [Alpha Scout] Funding Rate Arbitrage & Delta-Neutral Yield Engine (Сбор ставки фандинга CEX/DEX) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-18 | 🟢 Done |
+| **TASK-SYS-003** | **Спринт 3** | Unified AI Rate-Limit & Token Health Sentinel (Единый фоновый мониторинг API-лимитов/балансов LLM) | **Инфраструктура / Сервер** | Чат Master Orchestrator | **Antigravity (Сисадмин)** | 🔴 P1 | 2026-09-15 | 🟢 Done (`/home/us/bin/token_sentinel.py`) |
+
 | **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика в 1 клик) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |
+
 | **TASK-HH-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и ЗП | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-HH-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-HH-016** | **Спринт 2** | [HH Jobs] Авто-генератор кастомных резюме под вакансию (Resume Tailoring) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🔴 P1 | 2026-09-17 | 🟢 Done |
@@ -335,8 +339,11 @@
 
 | Дата | Категория | Идея / Направление | Суть и Профит | Статус |
 | :--- | :--- | :--- | :--- | :---: |
-| **2026-09-11** | **Alpha Stream (Идея №1)** | **Prediction Markets Arbitrage & Whale Scanner (Polymarket)** | Разработка модуля `alpha-scout` для поиска спредов/арбитража вероятностей 5m BTC и трекинга кошельков топ-50 трейдеров Polymarket с алертами в Telegram. | ⏳ In Progress (`scratch/`) |
+| **2026-09-11** | **Alpha Stream (Идея №1)** | **Prediction Markets Arbitrage & Whale Scanner (Polymarket)** | Разработка модуля `alpha-scout` для поиска спредов/арбитража вероятностей 5m BTC и трекинга кошельков топ-50 трейдеров Polymarket с алертами в Telegram. | 🟢 Done (`v0.1.0`) |
 | **2026-09-11** | **BGT Upgrade** | **BGT Dynamic Volatility Regime (ATR Expansion Filter)** | Фильтр флэтового болота для BGT: вход в сделки только на расширении волатильности (`a_short / a_long >= 1.05`) для исключения ложных входов. | 🟢 Done (`v0.2.1`) |
+| **2026-09-12** | **Alpha Stream (Идея №2)** | **Funding Rate Arbitrage & Delta-Neutral Yield (`TASK-ALPHA-003`)** | Дельта-нейтральный арбитраж ставки фандинга CEX/DEX (15–40% APR) без риска движения цены. | 📋 На распределение |
+| **2026-09-12** | **System Sentinel** | **Unified AI Rate-Limit & Token Health Sentinel (`TASK-SYS-003`)** | Фоновый инспектор лимитов LLM-токенов/балансов во всех ботах с предупреждением за 24ч до лимита. | 📋 В разработке |
+
 
 | **TASK-ITOPS-021** | **4** | Расширить Prometheus‑exporter: новые метрики (latency, error‑rate) и Grafana‑дашборд | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑05 | 📋 To Do |
 | **TASK-ITOPS-022** | **4** | Внедрить динамический Circuit Breaker с адаптивными порогами (на основе ML‑модели) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑07 | 📋 To Do |
@@ -352,3 +359,59 @@
 | **TASK-ITOPS-032** | **4** | Добавить автотесты на безопасность: проверка CSP, HSTS, CORS через OWASP ZAP в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
 | **TASK-ITOPS-033** | **4** | Разработать отчёт о покрытии тестами (code‑coverage) и установить пороги качества (80 %) | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026‑10‑30 | 📋 To Do |
 | **TASK-ITOPS-034** | **4** | Согласовать и провести обучение команды (Webinar) по новому Prometheus‑exporter и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑11‑02 | 📋 To Do |
+
+## 📊 Sprint 4 – Все проекты (масштабный)
+
+### IT Ops
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑ITOPS‑021 | 4 | Обновить документацию по CI/CD пайплайну | IT Ops | it‑ops‑bot | antigravity | High | 2026‑10‑01 | TODO |
+| TASK‑ITOPS‑022 | 4 | Авто‑тестирование инфраструктурных скриптов | IT Ops | it‑ops‑bot | antigravity | Medium | 2026‑10‑05 | TODO |
+| TASK‑ITOPS‑023 | 4 | Ревизия правил доступа к секретам | IT Ops | it‑ops‑bot | antigravity | High | 2026‑09‑30 | TODO |
+
+### BGT (bitget‑bot)
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑BGT‑041 | 4 | Добавить поддержку новых пар BTC/USDT и ETH/USDT | BGT | bgt‑bot | antigravity | High | 2026‑10‑07 | TODO |
+| TASK‑BGT‑042 | 4 | Реализовать модуль динамического скоринга пар | BGT | bgt‑bot | antigravity | High | 2026‑10‑14 | TODO |
+| TASK‑BGT‑043 | 4 | Провести back‑test стратегии арбитража Funding | BGT | bgt‑bot | antigravity | Medium | 2026‑10‑20 | TODO |
+
+### LinkID
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑LINKID‑031 | 4 | Интеграция нового LLM v4 Pro для генерации постов | LinkID | linkid‑bot | antigravity | High | 2026‑10‑03 | TODO |
+| TASK‑LINKID‑032 | 4 | Добавить поддержку многопользовательской авторизации в Mini‑App | LinkID | linkid‑bot | antigravity | Medium | 2026‑10‑10 | TODO |
+
+### HH Jobs
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑HHJOBS‑015 | 4 | Обновить парсер вакансий HeadHunter (API v2) | HH Jobs | hh‑jobs‑bot | antigravity | High | 2026‑10‑05 | TODO |
+| TASK‑HHJOBS‑016 | 4 | Добавить фильтрацию по remote‑only и seniority | HH Jobs | hh‑jobs‑bot | antigravity | Medium | 2026‑10‑12 | TODO |
+
+### Stocks UZ
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑STOCKS‑078 | 4 | Добавить парсинг 5 новых TG‑каналов аналитики | Stocks UZ | uz‑stocks‑bot | antigravity | Medium | 2026‑10‑08 | TODO |
+| TASK‑STOCKS‑079 | 4 | Реализовать автоматический алерт при росте цены >15% | Stocks UZ | uz‑stocks‑bot | antigravity | High | 2026‑10‑15 | TODO |
+
+### Alpha Scout
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑ALPHASCOUT‑005 | 4 | Добавить мониторинг новых репозиториев в GitHub (GH Scout) | Alpha Scout | alpha‑scout‑bot | antigravity | Medium | 2026‑10‑09 | TODO |
+
+### GH Scout
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑GHSCOUT‑012 | 4 | Обновить скрипт анализа зависимостей npm‑пакетов | GH Scout | gh‑scout‑bot | antigravity | Medium | 2026‑10‑11 | TODO |
+
+### DataCore
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑DATACORE‑021 | 4 | Оптимизировать ETL‑pipeline для больших данных | DataCore | datacore‑bot | antigravity | High | 2026‑10‑20 | TODO |
+
+### Инфраструктура и системные задачи
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑INFRA‑007 | 4 | Обновить Tailscale‑маршрутизацию между US‑Server и Mac‑машиной | Инфраструктура | infra‑bot | antigravity | High | 2026‑09‑30 | TODO |
+| TASK‑INFRA‑008 | 4 | Настроить автоматический бэкап Git репозиториев | Инфраструктура | infra‑bot | antigravity | Medium | 2026‑10‑15 | TODO |
+

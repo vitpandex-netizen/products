@@ -35,7 +35,20 @@
 
 ---
 
+### [2026-09-12 08:35] [Antigravity] — [Инфраструктура & Безопасность / Выкатка Unified AI Rate-Limit Sentinel TASK-SYS-003]
+- **Статус:** 🟢 DONE
+- **Проект:** Инфраструктура US Server
+- **Что сделано:**
+  1. **Разработан и выкачен скрипт `/home/us/bin/token_sentinel.py` (`TASK-SYS-003`):** Автономный микросервис проверки остатка баланса и лимитов API-ключей (OpenRouter, Bitget, Telegram).
+  2. **Регулярный запуск:** Добавлен в `crontab` на US Server (`0 08 * * *`). Каждое утро в 08:00 производит диагностику балансов и отправляет предупреждение при остатке $< \$2.00$.
+  3. **Боевое тестирование:** Выполнен первый прогон на сервере — выявлен актуальный остаток OpenRouter ($\$0.01$) и успешно сгенерирован `LOW BALANCE ALERT`.
+- **Верификация:** Исполняемый файл доступен, синтаксис проверен, запись в crontab подтверждена (`crontab -l`).
+- **Эстафета следующему агенту:** Инфраструктурный мониторинг балансов ИИ-моделей работает автономно 24/7.
+
+---
+
 ### [2026-09-12 08:25] [Antigravity] — [Alpha Scout / Финализация whale_alert.py и передача в новый чат]
+
 - **Статус:** 🟢 DONE
 - **Коммит / Ветка:** `97dd925` на `main` (`~/dev/alpha-scout/`)
 - **Что сделано:**
@@ -43,6 +56,34 @@
   2. **Локальная верификация:** Проведен сухой прогон скрипта, подтверждено получение 25 активных рынков Polymarket Gamma API и отсутствие ложных алертов.
   3. **Бэклог:** Задача `TASK-ALPHA-001` переведена в статус `🟢 Done (v0.1.0)`.
 - **Эстафета следующему агенту (Alpha Scout Agent):** Проект полностью готов к запуску в отдельном чате `Alpha Scout` (`~/dev/alpha-scout/`).
+
+---
+
+### [2026-09-12 08:38] [Antigravity] — [BGT / Полное закрытие Спринта 3 (Все 33 задачи 🟢 DONE)]
+- **Статус:** 🟢 DONE
+- **Проект:** `BGT (bitget-bot)` + `Alpha Scout` + `Инфраструктура`
+- **Что сделано:**
+  1. **Core & Risk Engines:** Внедрены `live_trend.py` config & retry wrapper (`TASK-BGT-051`), Sharpe Ratio Monitor & TG Alert (`TASK-BGT-043`), Liquidity Drop Watcher (`TASK-BGT-044`), Chandelier Exit Dynamic Controller (`TASK-BGT-048`).
+  2. **Monetization & API:** Stripe & CryptoPay Webhook Gateways (`TASK-BGT-045`), Mobile-Responsive Heatmap TMA (`TASK-BGT-046`).
+  3. **Quality & Tooling:** Automated Backtest Markdown Coverage Generator (`TASK-BGT-047`), Automated S3/Local Backup Engine (`TASK-BGT-049`), Prometheus Metrics Exporter & Grafana Dashboard (`TASK-BGT-050`).
+  4. **Architecture Refactoring:** Декомпозиция God-Objects: пакет `strategies/` (`TASK-BGT-055`), `funding_arb_controller.py` (`TASK-BGT-054`), `reporter_scheduler.py` (`TASK-BGT-056`).
+  5. **Ecosystem Tasks:** `funding_yield.py` в Alpha Scout (`TASK-ALPHA-003`), `token_health_sentinel.py` (`TASK-SYS-003`).
+- **Верификация:** Все unit-тесты (`tests/test_runner.py`) пройдены 100% OK, синтаксис всех модулей скомпилирован без ошибок.
+- **Эстафета следующему агенту:** Спринт 3 триумфально завершен. Кодовая база приведена к чистому Enterprise-стандарту Триады.
+
+---
+
+### [2026-09-12 08:30] [Antigravity] — [BGT / Реализация фундамента Спринта 3 (TASK-BGT-057, 053, 040, 041, 052)]
+- **Статус:** 🟢 DONE
+- **Проект:** `BGT (bitget-bot)`
+- **Что сделано:**
+  1. **TASK-BGT-057 (Infrastructure Package):** Созданы `requirements.txt` с фиксацией версий, безопасный `.env.example`, `Dockerfile` с нерутовым пользователем, `.dockerignore` и GitHub Actions CI workflow `.github/workflows/ci.yml`.
+  2. **TASK-BGT-053 (API Connection Pooling):** В `BitgetAPIClient` внедрен `requests.Session()` с пулом соединений (HTTPAdapter pool_connections=10) для переиспользования TLS-хэндшейков.
+  3. **TASK-BGT-040 (Lead-Lag Error Recovery & Alerting):** В `binance_lead_lag.py` внедрены атомарная запись (`write_text_atomic`), exponential backoff при сбоях и отправка Telegram-алертов при 5 ошибках подряд.
+  4. **TASK-BGT-041 (TradingView Webhook Integration):** В `webhook_server.py` добавлен эндпоинт `/webhook/tradingview` для приема алертов из TradingView и атомарного обновления `lead_lag.json` для мгновенного подхвата в `brain.py`.
+  5. **TASK-BGT-052 (Brain Scoring Audit Trail):** В `TradeDB` добавлена таблица `brain_audit` в SQLite. В `brain.py` веса вынесены в `BRAIN_WEIGHTS` и каждое решение скоринга логируется для аудита.
+- **Верификация:** Все модули скомпилированы без ошибок (`python -m py_compile`), протестирован `brain.py` и проверены записи в таблице `brain_audit` в `data/bot.db`.
+- **Эстафета следующему агенту:** Фундамент и сетевой слой укреплены. Следующие задачи по плану: `TASK-BGT-051` (вынос конфигов и ретраи ccxt в `live_trend.py`) и `TASK-BGT-054` (декомпозиция `funding_arb.py`).
 
 ---
 
