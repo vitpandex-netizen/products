@@ -18,8 +18,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from auth import verify_authorized_user
 
+import sys
 _BASE_DIR = Path(__file__).resolve().parent
 _PROJECT_DIR = _BASE_DIR.parent
+if str(_PROJECT_DIR / "src") not in sys.path:
+    sys.path.insert(0, str(_PROJECT_DIR / "src"))
+
 DB_PATH_ENV = os.getenv("DB_PATH", str(_PROJECT_DIR / "data" / "hh.db"))
 if not os.path.isabs(DB_PATH_ENV):
     DB_PATH = str(_PROJECT_DIR / DB_PATH_ENV)
@@ -271,7 +275,7 @@ def generate_cover_letter(req: CoverLetterRequest):
     return {"cover_letter": text}
 
 
-from src.osint_xray import generate_psychological_brief
+from osint_xray import generate_psychological_brief
 
 @api_router.get("/scout/{vac_id}")
 def get_executive_scout(vac_id: int):
@@ -346,8 +350,8 @@ def get_available_personas():
     }
 
 
-from src.live_teleprompter import generate_live_hint
-from src.warm_networker import WarmNetworkerBot
+from live_teleprompter import generate_live_hint
+from warm_networker import WarmNetworkerBot
 
 @api_router.post("/teleprompter")
 def process_teleprompter_audio(payload: dict):
