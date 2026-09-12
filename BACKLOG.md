@@ -9,7 +9,7 @@
 
 - **🏁 Спринт 1 (11 сентября 2026 г.):** Базовая инфраструктура BGT, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed, Smart Scaling Out, Whale CVD Filter. *(Завершён)*
 - **🏆 Спринт 2 (11 сентября 2026 г.):** HFT Binance Lead-Lag, Short Breakouts, Dynamic Leverage Engine, Paper Auto-Promoter, Executive Morning Digest, TMA Signals API. *(Завершён)*
-- **🚀 Спринт 3 (12–20 сентября 2026 г.):** Масштабирование BGT к цели $1000/мес: визуальный TMA "BGT Signals" UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита $107 → $120 → $200 → $1000, Black Swan Circuit Breaker. *(Текущий активный спринт)*
+- **🚀 Спринт 3 (12–22 сентября 2026 г.):** Масштабирование BGT к цели $1000/мес: визуальный TMA «BGT Signals» UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита, Black Swan Circuit Breaker, TradingView Integration, рефакторинг God-Objects (funding_arb, strategies, bot), Infrastructure Package (CI/CD, Docker), Brain Audit Trail. *(Текущий активный спринт — 31 задача)*
 
 ---
 
@@ -51,6 +51,17 @@
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-ITOPS-009** | **Спринт 2** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 🟢 Done |
+| **TASK-ITOPS-010** | **Спринт 3** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-20 | 📋 To Do |
+| **TASK-ITOPS-011** | **Спринт 3** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-ITOPS-012** | **Спринт 3** | Интегрировать health‑check микросервис для внешних зависимостей (SMTP, AD, 1С) в виде отдельного FastAPI‑сервиса | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-24 | 📋 To Do |
+| **TASK-ITOPS-013** | **Спринт 3** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 📋 To Do |
+| **TASK-ITOPS-014** | **Спринт 3** | Реализовать UI‑конфигурацию Feature Flags в Mini‑App (просмотр/переключение без redeploy) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-27 | 📋 To Do |
+| **TASK-ITOPS-015** | **Спринт 3** | Добавить CI‑step для статического анализа секретов (gitleaks + secret‑guard) в GitHub Actions | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026-09-28 | 📋 To Do |
+| **TASK-ITOPS-016** | **Спринт 3** | Написать набор e2e‑тестов (Playwright) для статуса сервиса и доступа к Mini‑App | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026-09-30 | 📋 To Do |
+| **TASK-ITOPS-017** | **Спринт 3** | Обновить документацию: добавить диаграммы архитектуры (Mermaid) и инструкции по развёртыванию в Docker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-30 | 📋 To Do |
+| **TASK-ITOPS-018** | **Спринт 3** | Внедрить автоматический ротацию токенов доступа к внешним API (Graph API, Whisper) через Vault | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-10-02 | 📋 To Do |
+| **TASK-ITOPS-019** | **Спринт 3** | Добавить оповещения в Telegram о превышении лимитов Rate Limiting для критических сервисов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-02 | 📋 To Do |
+| **TASK-ITOPS-020** | **Спринт 3** | Провести обзор и оптимизацию Docker‑образов (мульти‑stage, уменьшить размер) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-04 | 📋 To Do |
 | **TASK-IMP-001** | **Спринт 2** | Добавить preview‑mode для автогенерации постов в LinkID | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-002** | **Спринт 2** | Сохранять историю последних 5 выбранных LLM и предлагать автодополнение | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-003** | **Спринт 2** | Реализовать retry‑логику с экспоненциальной задержкой для неуспешных вебхуков | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
@@ -115,6 +126,13 @@
 | **TASK-BGT-048** | **Спринт 3** | Dynamic Chandelier Params (UI-контролы для изменения параметров) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
 | **TASK-BGT-049** | **Спринт 3** | Backup Journal to S3 (резервное копирование журнала сделок) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
 | **TASK-BGT-050** | **Спринт 3** | Grafana Dashboard for Latency (дашборд метрик исполнения) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-051** | **Спринт 3** | Externalise Config & Retry Wrapper (вынос хардкодов live_trend.py в конфиг + exponential backoff для ccxt) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-052** | **Спринт 3** | Brain Scoring Audit Trail (логирование решений скоринга в SQLite + конфигурируемые веса) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-053** | **Спринт 3** | API Connection Pooling (переход на requests.Session для переиспользования TLS-соединений) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-054** | **Спринт 3** | Рефакторинг funding_arb.py (декомпозиция God-Object 124KB на модули) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-055** | **Спринт 3** | Декомпозиция strategies.py (разбиение 108KB монолита на пакет strategies/) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🟡 P2 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-056** | **Спринт 3** | Разделение ответственностей bot.py (вынос отчётов/бэктестов из основного while-цикла) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔵 P3 | 2026-09-22 | 📋 To Do |
+| **TASK-BGT-057** | **Спринт 3** | Infrastructure Package (requirements.txt + .env.example + Dockerfile + GitHub Actions CI) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-22 | 📋 To Do |
 | **TASK-HH-010** | **Спринт 2** | [HH Jobs] Auto-Draft Cover Letter Generator (Генерация отклика в 1 клик) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-HH-014** | **Спринт 2** | [HH Jobs] Умный парсинг требований (LLM): извлечение неявных навыков и ЗП | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-HH-015** | **Спринт 2** | [HH Jobs] Трекинг статусов откликов в TMA (через интеграцию с почтой/API) | **HH Jobs** | Чат HH Jobs (`@hhjob_ai_bot`) | **Чат HH Jobs** | 🟡 P2 | 2026-09-16 | 🟢 Done |

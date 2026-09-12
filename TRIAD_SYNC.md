@@ -35,7 +35,35 @@
 
 ---
 
+### [2026-09-12 00:18] [Antigravity] — [BGT / Формирование и расширение Спринта 3 по итогам аудита]
+- **Статус:** 🟢 DONE
+- **Проект:** `BGT (bitget-bot)`
+- **Что сделано:**
+  1. Проведен глубокий аудит кодовой базы BGT (анализ `live_trend.py`, `brain.py`, `api_client.py`, `funding_arb.py`, `strategies.py`, `bot.py`, инфраструктуры).
+  2. Выявлены ключевые технические долги (God-Objects монолиты 124KB/108KB/91KB, отсутствие `requirements.txt`/`.env.example`/`Dockerfile`/CI, отсутствие ретраев в `ccxt` и connection pooling в API, отсутствие аудита скоринга в `brain.py`).
+  3. В [`BACKLOG.md`](file:///Users/vitaliyr/dev/BACKLOG.md) сформирован и дополнен **Спринт 3** (всего 31 задача, включая задачи `TASK-BGT-027` ... `TASK-BGT-057`).
+- **Верификация:** Бэклог структурирован, проверен синтаксис таблиц и связей с кодом.
+- **Эстафета следующему агенту:** Спринт 3 готов к планомерной разработке. Приоритетные задачи для старта: `TASK-BGT-057` (инфраструктурный фундамент, requirements, docker, ci), `TASK-BGT-053` (connection pooling), `TASK-BGT-051` (вынос конфига и ретраи), `TASK-BGT-041` (TradingView integration).
+
+---
+
+### [2026-09-12 00:16] [Antigravity] — [Alpha Scout / Создание и подготовка фундамента проекта к передаче]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** `2279b4e` на локальном `main` (`~/dev/alpha-scout/`)
+- **Что сделано:**
+  1. **Создан фундамент нового проекта:** Сформирована директория `~/dev/alpha-scout/` с инициализацией Git.
+  2. **Доменный манифест ([`CLAUDE.md`](file:///Users/vitaliyr/dev/alpha-scout/CLAUDE.md)):** Прописана миссия, правила безопасности, архитектура и инфраструктура US Server.
+  3. **Базовый функционал:**
+     - `whale_alert.py`: Парсер и алерт-модуль активности китов на Polymarket.
+     - `spread_scanner.py`: Модуль поиска арбитражных спредов между CEX (Bitget) и DEX.
+     - `.env.example`: Шаблон конфигурации окружения без секретов.
+- **Верификация:** Код скомпилирован, синтаксис валиден, первый коммит сделан.
+- **Эстафета следующему агенту (Alpha Scout Agent):** Проект готов к полноценной разработке в выделенном доменном чате **Alpha Scout** (`~/dev/alpha-scout/`).
+
+---
+
 ### [2026-09-12 00:06] [Antigravity] — [LinkID Pro Post / Завершение всех P0-P2 задач Спринта 2]
+
 - **Статус:** 🟢 DONE
 - **Коммит / Ветка:** `fb21db7` на `vitpandex-netizen/linkid-pro-post` (ветка `main`)
 - **Что сделано:**
@@ -505,3 +533,8 @@
   5. **TASK-IMP-014 (Circuit Breaker Pattern):** Реализован класс-декоратор `CircuitBreaker` в `core-service/app/circuitbreaker.py` для защиты от сбоев внешних API (Graph API / STT Whisper).
   6. **TASK-IMP-015 (Dynamic Feature Flags Manager):** Создан модуль `core-service/app/featureflags.py` для динамического переключения функций через Redis/TMA без пересборки сервиса.
 - **Верификация:** Все модули синхронизированы и запушены в основной репозиторий `vitpandex-netizen/it-operations-framework`.
+### [2026-09-12 07:45] [Antigravity] — [IT Ops / Планирование Sprint 3]
+- **Статус:** 🟢 DONE
+- **Что сделано:** Добавлены задачи Sprint 3 (TASK‑ITOPS‑010…020) в `BACKLOG.md`, запись о планировании в `TRIAD_SYNC.md`.
+- **Верификация:** Файлы проверены локально, готово к коммиту.
+- **Эстафета следующему агенту:** Выполнить `git add BACKLOG.md TRIAD_SYNC.md && git commit -m "docs(itops): add Sprint 3 backlog items" && git push origin main`.
