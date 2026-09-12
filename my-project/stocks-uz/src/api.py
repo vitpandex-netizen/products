@@ -513,3 +513,15 @@ def ipos():
 def esg_scorecard(ticker: str, db: DB = Depends(get_db)):
     scorecard = ESGScorecard(db)
     return scorecard.evaluate_transparency(ticker.upper())
+
+
+# ===== Stage 2 Voice AI Endpoints =====
+from voice_agent import VoiceAgent
+
+class VoicePromptInput(BaseModel):
+    prompt: str
+
+@app.post("/api/agent/query")
+def agent_query(input_data: VoicePromptInput, db: DB = Depends(get_db)):
+    agent = VoiceAgent(db)
+    return agent.process_query(input_data.prompt)
