@@ -550,3 +550,12 @@ def trading_trailing_stop(input_data: TrailingStopInput):
         highest_price=input_data.highest_price,
         trail_pct=input_data.trail_pct
     )
+
+
+# ===== Stage 4 Macro & CBU Rate Correlation Endpoints =====
+from macro_analyzer import MacroAnalyzer
+
+@app.get("/api/macro/comparison")
+def macro_comparison(db: DB = Depends(get_db)):
+    analyzer = MacroAnalyzer(db)
+    return analyzer.evaluate_macro_yields()
