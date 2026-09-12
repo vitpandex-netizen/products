@@ -346,6 +346,29 @@ def get_available_personas():
     }
 
 
+from src.live_teleprompter import generate_live_hint
+from src.warm_networker import WarmNetworkerBot
+
+@api_router.post("/teleprompter")
+def process_teleprompter_audio(payload: dict):
+    """TASK-HH-041: Real-Time Interview Teleprompter (Живой ИИ-суфлер)."""
+    question = payload.get("question", "")
+    return generate_live_hint(question)
+
+
+@api_router.post("/warm-networker")
+def trigger_warm_networking(payload: dict):
+    """TASK-HH-042: Autonomous Warm-Networking Agent."""
+    company = payload.get("company", "Target Company")
+    name = payload.get("lpr_name", "Hiring Manager")
+    bot = WarmNetworkerBot(company, name)
+    return {
+        "status": "success",
+        "smart_comment": bot.generate_smart_comment("цифровой трансформации"),
+        "connection_request": bot.generate_connection_request()
+    }
+
+
 # Подключаем API роутер и на /api, и на /uzjobs/api для универсальности
 app.include_router(api_router, prefix="/api")
 app.include_router(api_router, prefix="/uzjobs/api")
