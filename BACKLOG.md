@@ -54,9 +54,9 @@
 | **TASK-LINKID-019** | **Спринт 3** | [LinkID] Prometheus-метрики использования LLM, токенов и латенси | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-24 | 🟢 Done |
 | **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Done |
 | **TASK-LINKID-021** | **Спринт 4** | [LinkID] Systemd Watchdog & Auto-restart при сбоях cron-скриптов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Done |
-| **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 🟢 Closed |
-| **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 🟢 Closed |
-| **TASK-LINKID-024** | **Спринт 3** | [LinkID] OpenAPI / Swagger документация v2 эндпоинтов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-28 | 🟢 Closed |
+| **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 🟢 Done |
+| **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 🟢 Done |
+| **TASK-LINKID-024** | **Спринт 3** | [LinkID] OpenAPI / Swagger документация v2 эндпоинтов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-28 | 🟢 Done |
 | **TASK-ITOPS-005** | **Спринт 2** | Core API Hardening: Graph Token Cache & Rate Limiting | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |

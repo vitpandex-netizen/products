@@ -5,17 +5,16 @@
 - **Проект:** BGT (bitget-bot)
 - **Агент:** Antigravity
 
-## Статус: 🟢 СПРИНТ 4 — P0 ИНФРАСТРУКТУРА ЗАВЕРШЕНА
-Проект **BGT** переведен на полностью модульную архитектуру и защищен механизмами авто-восстановления.
-- **Архитектура:** Monolith-файлы `bot.py` и `strategies.py` разбиты на пакеты `core/` и `strategies/`. Тесты успешно проходят, линтер чист.
-- **Надежность:** Внедрена система `heartbeat` для `live_trend.py`. Скрипт `watchdog.py` теперь умеет сам делать `systemctl restart` зависшего торгового движка и принимать вебхуки от Prometheus Alertmanager для пересылки в Telegram.
-- **Деплой:** Созданы systemd unit файлы (`bgt-live-trend.service`, `bgt-watchdog.service`, `bgt-exporter.service`) и установочный скрипт `deploy/install_services.sh`.
+## Статус: 🟢 СПРИНТ 4 — P1 (RISK MANAGEMENT) ЗАВЕРШЕН
+Проект **BGT** получил полное обновление модуля риск-менеджмента и принятия решений.
+- **Dynamic Leverage:** Внедрен расчет адаптивного плеча с учетом волатильности (ATR), силы тренда (ER) и макро-индекса (Greed/Fear).
+- **Whale Sonar:** Ловушки китов (Bull & Bear Traps) теперь фильтруются через CVD-метрику, блокируя входы.
+- **Safe Pyramiding:** Пирамидинг (увеличение позы) разрешен только если тренд идет монолитно (ER > 0.4).
+- **Market Regime TP:** Дистанция Тейк-Профита (Scale Out) теперь сжимается на жадности (Greed) и расширяется на панике (Fear).
+- **Scoring Versioning:** Веса принятия решений вынесены из `brain.py` в отдельную конфигурацию `models/v1.0.json` для удобного бэктестинга.
 
 ## Инструкции для следующего агента (BGT):
-P0-задачи закрыты. Бот готов к накатыванию на боевой US-сервер (через `deploy/install_services.sh`). Можно приступать к задачам **P1 — Торговая логика и Risk Management** (Whale Sonar Filter, Dynamic Leverage & ATR-фильтры).
-
-- **Проект:** BGT (bitget-bot)
-- **Агент:** Antigravity
+P1 полностью закрыт. На очереди **P2 — Автоматизация и DevOps** (Docker-Compose, Grafana Dashboard JSON, Auto-updater).
 
 ## Статус: 🟢 ЗАВЕРШЕНИЕ СПРИНТА 3 (Quality Gates & CI/CD)
 Проект **BGT** успешно прошел фазу стабилизации инфраструктуры и тестирования.
@@ -154,3 +153,12 @@ P0-задачи закрыты. Бот готов к накатыванию на
   - В `LinkedInPublisher` добавлены методы `get_comments` и `reply_to_comment`.
   - Добавлены эндпоинты API `/posts/{post_id}/comments/generate-reply` и схемы запросов/ответов.
   - Написаны тесты в `backend/tests/test_comment_replier.py`.
+### 2026-09-12 15:30 - Antigravity (LinkID Chat)
+- **Проект**: LinkID Pro Post
+- **Статус**: 🟢 DONE (Спринт 4)
+- **Что сделано**: 
+  - Выполнена цепочка задач Спринта 4 по проекту LinkID:
+    1. **TASK-LINKID-022:** Экспорт контент-плана постов в формате iCal (`.ics` feed на `/calendar/feed.ics` и `/posts/export/ical`).
+    2. **TASK-LINKID-024:** Сформирована официальная OpenAPI / Swagger v2 спецификация API с описанием тегов (`Posts`, `Auto-Engagement`, `Calendar`, `Style Profile`, `Analytics`) и OpenAPI 2.0 schema.
+    3. **TASK-LINKID-023:** UI-редизайн разделов «Style» и «Covers» в админ-панели и Mini App (с интерактивными карточками DALL-E 3, Flux/SDXL Infographic и IT Memes).
+  - Код полностью проверен (`compileall`), автотесты в `backend/tests/` пройдены, изменения запушены в production-ветку.
