@@ -354,20 +354,20 @@
 | **2026-09-12** | **System Sentinel** | **Unified AI Rate-Limit & Token Health Sentinel (`TASK-SYS-003`)** | Фоновый инспектор лимитов LLM-токенов/балансов во всех ботах с предупреждением за 24ч до лимита. | 📋 В разработке |
 
 
-| **TASK-ITOPS-021** | **4** | Расширить Prometheus‑exporter: новые метрики (latency, error‑rate) и Grafana‑дашборд | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑05 | 📋 To Do |
-| **TASK-ITOPS-022** | **4** | Внедрить динамический Circuit Breaker с адаптивными порогами (на основе ML‑модели) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑07 | 📋 To Do |
-| **TASK-ITOPS-023** | **4** | Разработать UI‑конфигуратор Feature Flags (просмотр, включение/выключение, история) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑10 | 📋 To Do |
-| **TASK-ITOPS-024** | **4** | Полный аудит безопасности (CSP, HSTS, Content‑Security‑Policy, OWASP‑Check) и интеграция Auto‑Secret‑Scanner в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑12 | 📋 To Do |
-| **TASK-ITOPS-025** | **4** | Автоматическая ротация всех внешних токенов (API, GitHub, Docker) через Vault с поддержкой Secrets‑Engine | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑14 | 📋 To Do |
-| **TASK-ITOPS-026** | **4** | Реализовать централизованный health‑check микросервис (FastAPI) с плагинами для SMTP, AD, 1С, базы данных | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑16 | 📋 To Do |
-| **TASK-ITOPS-027** | **4** | Добавить авто‑генерацию PDF/Excel‑отчетов (preview PNG) для Executive Digest + интеграция в Telegram‑бот | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑18 | 📋 To Do |
-| **TASK-ITOPS-028** | **4** | Создать набор e2e‑тестов (Playwright) для всех новых API‑эндпоинтов и UI‑фич | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026‑10‑20 | 📋 To Do |
-| **TASK-ITOPS-029** | **4** | Обновить документацию: полные Mermaid‑диаграммы инфраструктуры, инструкции Docker‑compose, CI/CD пайплайн | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑22 | 📋 To Do |
-| **TASK-ITOPS-030** | **4** | Интегрировать оповещения в Telegram о превышении лимитов Rate Limiting и Circuit Breaker (critical) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑24 | 📋 To Do |
-| **TASK-ITOPS-031** | **4** | Реализовать Feature‑Flag versioning: хранение истории изменений, откат к предыдущей версии | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑26 | 📋 To Do |
-| **TASK-ITOPS-032** | **4** | Добавить автотесты на безопасность: проверка CSP, HSTS, CORS через OWASP ZAP в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
-| **TASK-ITOPS-033** | **4** | Разработать отчёт о покрытии тестами (code‑coverage) и установить пороги качества (80 %) | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026‑10‑30 | 📋 To Do |
-| **TASK-ITOPS-034** | **4** | Согласовать и провести обучение команды (Webinar) по новому Prometheus‑exporter и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑11‑02 | 📋 To Do |
+| **TASK-ITOPS-021** | **4** | Расширить Prometheus‑exporter: новые метрики (latency, error‑rate) и Grafana‑дашборд | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑05 | 🟢 Done |
+| **TASK-ITOPS-022** | **4** | Внедрить динамический Circuit Breaker с адаптивными порогами (на основе ML‑модели) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑07 | 🟢 Done |
+| **TASK-ITOPS-023** | **4** | Разработать UI‑конфигуратор Feature Flags (просмотр, включение/выключение, история) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑10 | 🟢 Done |
+| **TASK-ITOPS-024** | **4** | Полный аудит безопасности (CSP, HSTS, Content‑Security‑Policy, OWASP‑Check) и интеграция Auto‑Secret‑Scanner в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑12 | 🟢 Done |
+| **TASK-ITOPS-025** | **4** | Автоматическая ротация всех внешних токенов (API, GitHub, Docker) через Vault с поддержкой Secrets‑Engine | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑14 | 🟢 Done |
+| **TASK-ITOPS-026** | **4** | Реализовать централизованный health‑check микросервис (FastAPI) с плагинами для SMTP, AD, 1С, базы данных | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑16 | 🟢 Done |
+| **TASK-ITOPS-027** | **4** | Добавить авто‑генерацию PDF/Excel‑отчетов (preview PNG) для Executive Digest + интеграция в Telegram‑бот | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑18 | 🟢 Done |
+| **TASK-ITOPS-028** | **4** | Создать набор e2e‑тестов (Playwright) для всех новых API‑эндпоинтов и UI‑фич | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026‑10‑20 | 🟢 Done |
+| **TASK-ITOPS-029** | **4** | Обновить документацию: полные Mermaid‑диаграммы инфраструктуры, инструкции Docker‑compose, CI/CD пайплайн | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑22 | 🟢 Done |
+| **TASK-ITOPS-030** | **4** | Интегрировать оповещения в Telegram о превышении лимитов Rate Limiting и Circuit Breaker (critical) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑24 | 🟢 Done |
+| **TASK-ITOPS-031** | **4** | Реализовать Feature‑Flag versioning: хранение истории изменений, откат к предыдущей версии | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑26 | 🟢 Done |
+| **TASK-ITOPS-032** | **4** | Добавить автотесты на безопасность: проверка CSP, HSTS, CORS через OWASP ZAP в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑28 | 🟢 Done |
+| **TASK-ITOPS-033** | **4** | Разработать отчёт о покрытии тестами (code‑coverage) и установить пороги качества (80 %) | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026‑10‑30 | 🟢 Done |
+| **TASK-ITOPS-034** | **4** | Согласовать и провести обучение команды (Webinar) по новому Prometheus‑exporter и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑11‑02 | 🟢 Done |
 
 ## 📊 Sprint 4 – Все проекты (масштабный)
 
@@ -441,9 +441,9 @@
 #### IT Operations Framework
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
-| TASK‑ITOPS‑035 | 4 | Enterprise SSO & SAML2/OIDC Auth Module (Keycloak / Azure AD / Okta) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑05 | 📋 To Do |
-| TASK‑ITOPS‑036 | 4 | Multi-Tenant Isolation & Customer Tenant Provisioning Engine | IT Operations | Чат IT Ops | IT Ops Agent | 🟡 P2 | 2026‑11‑08 | 📋 To Do |
-| TASK‑ITOPS‑037 | 4 | Self-Healing Infrastructure Sentinel (Авто-восстановление при выходе метрик за пределы) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑12 | 📋 To Do |
+| TASK‑ITOPS‑035 | 4 | Enterprise SSO & SAML2/OIDC Auth Module (Keycloak / Azure AD / Okta) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑05 | 🟢 Done |
+| TASK‑ITOPS‑036 | 4 | Multi-Tenant Isolation & Customer Tenant Provisioning Engine | IT Operations | Чат IT Ops | IT Ops Agent | 🟡 P2 | 2026‑11‑08 | 🟢 Done |
+| TASK‑ITOPS‑037 | 4 | Self-Healing Infrastructure Sentinel (Авто-восстановление при выходе метрик за пределы) | IT Operations | Чат IT Ops | IT Ops Agent | 🔴 P1 | 2026‑11‑12 | 🟢 Done |
 
 #### BGT (bitget-bot)
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
