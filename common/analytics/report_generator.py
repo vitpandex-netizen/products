@@ -47,6 +47,37 @@ class SynergyReportGenerator:
         """
         return report
 
+def send_telegram_alert(message: str):
+    import os
+    import urllib.request
+    import urllib.parse
+    
+    # Читаем токен и ID чата из окружения (или Vault)
+    # Master PM / Owner chat ID
+    token = os.getenv("MASTER_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_USER_ID")
+    
+    if not token or not chat_id:
+        logger.warning("Telegram токен или Chat ID не настроены. Отправка пропущена.")
+        return
+        
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = urllib.parse.urlencode({
+        "chat_id": chat_id,
+        "text": message,
+        "parse_mode": "HTML"
+    }).encode("utf-8")
+    
+    try:
+        req = urllib.request.Request(url, data=payload)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            logger.info("Отчёт успешно отправлен в Telegram.")
+    except Exception as e:
+        logger.error(f"Ошибка отправки в Telegram: {e}")
+
 if __name__ == "__main__":
     generator = SynergyReportGenerator()
-    print(generator.generate_report())
+    report = generator.generate_report()
+    print(report)
+    # Пытаемся отправить в Telegram (если настроены ключи)
+    send_telegram_alert(f"<pre>{report}</pre>")

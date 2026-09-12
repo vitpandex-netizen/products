@@ -197,18 +197,32 @@ def handle_message(msg: dict, allowed_ids: set):
         send_message(chat_id, welcome_text, reply_markup=get_app_keyboard())
 
     elif text.startswith("/set_profile"):
-        skills = text.replace("/set_profile", "").strip()
-        if not skills:
-            send_message(chat_id, "⚠️ Укажите навыки через запятую.\nПример: /set_profile Python, SQL, Docker")
+        raw = text.replace("/set_profile", "").strip()
+        if not raw:
+            send_message(chat_id, "⚠️ Укажите настройки через |. Пример: /set_profile Python, SQL | Tashkent | remote")
         else:
+            parts = [p.strip() for p in raw.split("|")]
+            skills = parts[0] if len(parts) > 0 else ""
+            location = parts[1] if len(parts) > 1 else "Tashkent"
+            is_remote = 1 if len(parts) > 2 and "remote" in parts[2].lower() else 0
+            
             try:
                 with sqlite3.connect(DB_PATH) as conn:
                     cur = conn.execute("SELECT user_id FROM user_profiles WHERE user_id = ?", (user_id,))
                     if cur.fetchone():
-                        conn.execute("UPDATE user_profiles SET skills = ? WHERE user_id = ?", (skills, user_id))
+                        conn.execute(
+                            "UPDATE user_profiles SET skills = ?, location = ?, is_remote = ? WHERE user_id = ?", 
+                            (skills, location, is_remote, user_id)
+                        )
                     else:
-                        conn.execute("INSERT INTO user_profiles (user_id, skills) VALUES (?, ?)", (user_id, skills))
-                send_message(chat_id, f"✅ Профиль сохранён!\nНавыки: {skills}\n\nСмотреть подборку: /my_digest")
+                        conn.execute(
+                            "INSERT INTO user_profiles (user_id, skills, location, is_remote) VALUES (?, ?, ?, ?)", 
+                            (user_id, skills, location, is_remote)
+                        )
+                
+                remote_str = "Да" if is_remote else "Нет (или неважно)"
+                msg = f"✅ Профиль сохранён!\nНавыки: {skills}\nЛокация: {location}\nТолько удалёнка: {remote_str}\n\nСмотреть подборку: /my_digest"
+                send_message(chat_id, msg)
             except Exception as e:
                 send_message(chat_id, f"⚠️ Ошибка: {e}")
 

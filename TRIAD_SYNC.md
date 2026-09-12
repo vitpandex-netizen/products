@@ -134,3 +134,14 @@ P0-задачи закрыты. Бот готов к накатыванию на
   - В `celery_app.py` добавлена привязка генерации нужных типов изображений по типу поста (`listicle`, `tutorial`, `funny`, `meme`).
   - Telegram-бот переведён на асинхронный вызов генерации через API Celery (`/api/v1/posts/generate`), полностью убран legacy `subprocess`.
   - В клавиатуру бота добавлены быстрые кнопки: «🤡 Мем/Шутка» и «📊 Инфографика».
+
+### 2026-09-12 14:40 - Antigravity
+- **Проект**: Cross-Triad R&D (UZ Stock, HH Jobs, BGT, LinkID, Data Lake)
+- **Статус**: 🟢 СТРАТЕГИЧЕСКИЙ R&D-СПРИНТ ЗАВЕРШЁН
+- **Что сделано**:
+  - **BGT**: Разработан DSL-фреймворк для быстрой валидации стратегий (YAML-based) и безопасный AST-парсер (simpleeval). Добавлен Walk-Forward тестер `walkforward_test.py`.
+  - **HH Jobs**: Реализован генератор персональных дайджестов (`digest_generator.py`) с учетом навыков, удаленки (`is_remote`) и гео-локации. Добавлен интерфейс бота (`/set_profile`, `/my_digest`).
+  - **UZ Stock**: Внедрен кэш исторических данных (OHLCV) на InfluxDB (`docker-compose.yml`, `etl_historical.py`), API отдачи.
+  - **LinkID**: Создан пакет провайдеров (`base_provider.py`, `rss_provider.py`). Написан специализированный парсер Habr (`habr_provider.py`), который интегрирован в `trend_analyzer.py`.
+  - **Data Lake (Кросс-проект)**: Развернут MinIO (`common/data_lake`). Написан Airflow DAG `etl_cross_project.py` и Telegram-алертер `report_generator.py` для кросс-проектной аналитики.
+- **Следующий шаг**: Деплой новых сервисов (InfluxDB, MinIO) на US Server.

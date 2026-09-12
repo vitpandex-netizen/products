@@ -18,20 +18,24 @@ def get_personal_digest(user_id: int, limit: int = 5) -> str:
                 return "⚠️ Ваш профиль не настроен. Используйте команду /set_profile <навыки через запятую>"
             
             skills_list = [s.strip() for s in profile_row["skills"].split(",")]
+            loc = profile_row.get("location") or "Tashkent"
+            is_remote = profile_row.get("is_remote") or 0
+            
             profile_dict = {
                 "skills": skills_list,
                 "min_salary": profile_row["min_salary"] or 0,
                 "experience_years": profile_row["experience_years"] or 0,
-                "locations": ["Tashkent"],
+                "locations": [loc],
                 "signal_keywords": []
             }
             
             matcher = VacancyMatcher(profile_dict)
             
-            # Fetch recent active vacancies (last 14 days)
-            vacancies_data = conn.execute(
-                "SELECT * FROM vacancies WHERE is_archived = 0 AND datetime(created_at) >= datetime('now', '-14 days')"
-            ).fetchall()
+            # Если юзер указал remote, ищем и удалёнку в базе, иначе обычные
+            remote_filter = "AND (description LIKE '%удален%' OR description LIKE '%remote%')" if is_remote else ""
+            
+            query = f"SELECT * FROM vacancies WHERE is_archived = 0 AND datetime(created_at) >= datetime('now', '-14 days') {remote_filter}"
+            vacancies_data = conn.execute(query).fetchall()
             
             if not vacancies_data:
                 return "Нет свежих вакансий для анализа."
