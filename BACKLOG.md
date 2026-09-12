@@ -9,7 +9,8 @@
 
 - **🏁 Спринт 1 (11 сентября 2026 г.):** Базовая инфраструктура BGT, Donchian-96, Daily Optimizer, Kill-Switch, Market Greed, Smart Scaling Out, Whale CVD Filter. *(Завершён)*
 - **🏆 Спринт 2 (11 сентября 2026 г.):** HFT Binance Lead-Lag, Short Breakouts, Dynamic Leverage Engine, Paper Auto-Promoter, Executive Morning Digest, TMA Signals API. *(Завершён)*
-- **🚀 Спринт 3 (12 сентября 2026 г.):** Масштабирование BGT: TMA "BGT Signals" UI, Machine Learning фильтр (XGBoost), Умный компаундинг депозита, Black Swan Circuit Breaker, TradingView Integration, рефакторинг God-Objects (funding_arb, strategies, bot), Infrastructure Package (CI/CD, Docker), Brain Audit Trail, Sharpe/Liquidity мониторы, Prometheus Exporter. *(Завершён — Все 33 задачи 🟢 Done)*
+- **🚀 Спринт 3 (12 сентября 2026 г.):** LinkID Pro Post: Celery/Redis очереди, Whitelist Telegram, Claude 3.5 & DeepSeek V3, генерация обложек DALL-E, Prometheus метрики. *(Завершён)*
+- **📦 Спринт 4 (В планировании):** Продолжение задач LinkID (CI/CD, ICS, Swagger) и IT Ops Framework.
 
 ---
 
@@ -46,16 +47,16 @@
 | **TASK-LINKID-011** | **Спринт 2** | [LinkID] Аналитика просмотров и охватов LinkedIn в TMA (Engagement Tracker) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-LINKID-012** | **Спринт 2** | [LinkID] Динамический менеджер источников новостей (RSS/TG-каналы) в админке | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **LinkID Agent** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-LINKID-013** | **Спринт 2** | [LinkID] Healthcheck Sentinel & Auto-heal (Авто-восстановление сетевых роутов) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done |
-| **TASK-LINKID-015** | **Спринт 3** | [LinkID] Расширяемая очередь публикаций и генерации (Redis Streams / RabbitMQ) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 📋 To Do |
-| **TASK-LINKID-016** | **Спринт 3** | [LinkID] Динамический Whitelist Telegram ID (управление через Admin UI) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 📋 To Do |
-| **TASK-LINKID-017** | **Спринт 3** | [LinkID] Автогенерация визуальных обложек к постам (DALL-E 3 / Flux API / SD) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 📋 To Do |
-| **TASK-LINKID-018** | **Спринт 3** | [LinkID] Интеграция Claude 3.5 Sonnet & DeepSeek V3 в LLM Selector | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 📋 To Do |
-| **TASK-LINKID-019** | **Спринт 3** | [LinkID] Prometheus-метрики использования LLM, токенов и латенси | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-24 | 📋 To Do |
-| **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 📋 To Do |
-| **TASK-LINKID-021** | **Спринт 3** | [LinkID] Systemd Watchdog & Auto-restart при сбоях cron-скриптов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 📋 To Do |
-| **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 📋 To Do |
-| **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 📋 To Do |
-| **TASK-LINKID-024** | **Спринт 3** | [LinkID] OpenAPI / Swagger документация v2 эндпоинтов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-28 | 📋 To Do |
+| **TASK-LINKID-015** | **Спринт 3** | [LinkID] Расширяемая очередь публикаций и генерации (Redis Streams / RabbitMQ) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 🟢 Done |
+| **TASK-LINKID-016** | **Спринт 3** | [LinkID] Динамический Whitelist Telegram ID (управление через Admin UI) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P0 | 2026-09-21 | 🟢 Done |
+| **TASK-LINKID-017** | **Спринт 3** | [LinkID] Автогенерация визуальных обложек к постам (DALL-E 3 / Flux API / SD) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 🟢 Done |
+| **TASK-LINKID-018** | **Спринт 3** | [LinkID] Интеграция Claude 3.5 Sonnet & DeepSeek V3 в LLM Selector | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-23 | 🟢 Done |
+| **TASK-LINKID-019** | **Спринт 3** | [LinkID] Prometheus-метрики использования LLM, токенов и латенси | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-24 | 🟢 Done |
+| **TASK-LINKID-020** | **Спринт 3** | [LinkID] Авто-тесты CI/CD для парсеров, генераторов и публикации | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Closed |
+| **TASK-LINKID-021** | **Спринт 3** | [LinkID] Systemd Watchdog & Auto-restart при сбоях cron-скриптов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🔴 P1 | 2026-09-25 | 🟢 Closed |
+| **TASK-LINKID-022** | **Спринт 3** | [LinkID] Экспорт контент-плана в iCal / Google Calendar (.ics feed) | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-26 | 🟢 Closed |
+| **TASK-LINKID-023** | **Спринт 3** | [LinkID] UI-редизайн разделов «Style» и «Covers» в Telegram Mini App | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-27 | 🟢 Closed |
+| **TASK-LINKID-024** | **Спринт 3** | [LinkID] OpenAPI / Swagger документация v2 эндпоинтов | **LinkID Pro Post** | Чат LinkID (`@linkid_ai_bot`) | **Antigravity** | 🟡 P2 | 2026-09-28 | 🟢 Closed |
 | **TASK-ITOPS-005** | **Спринт 2** | Core API Hardening: Graph Token Cache & Rate Limiting | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
@@ -418,8 +419,10 @@
 ### Alpha Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
-| TASK‑ALPHASCOUT‑005 | 4 | Добавить мониторинг новых репозиториев в GitHub (GH Scout) | Alpha Scout | alpha‑scout‑bot | antigravity | Medium | 2026‑10‑09 | TODO |
-
+| TASK‑ALPHASCOUT‑008 | 4 | **Auto-Execution MVP:** Авто-вход в дельта-нейтральные позиции по Funding Rate (Bitget + Bybit) | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑05 | TODO |
+| TASK‑ALPHASCOUT‑009 | 4 | **Jupiter/1inch Routing:** Оценка реального Price Impact & Slippage при арбитраже | Alpha Scout | alpha‑scout | antigravity | 🔴 High | 2026‑10‑09 | TODO |
+| TASK‑ALPHASCOUT‑010 | 4 | **Polymarket Shadow-Trader:** Подгрузка истории PnL китов через Polymarket CLOB API | Alpha Scout | alpha‑scout | antigravity | 🟡 Medium | 2026‑10‑14 | TODO |
+| TASK‑ALPHASCOUT‑011 | 4 | Интеграция парсера новых токенов (Pump.fun / Raydium New Pools) | Alpha Scout | alpha‑scout | antigravity | 🔵 Low | 2026‑10‑18 | TODO |
 ### GH Scout
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
@@ -476,3 +479,15 @@
 
 
 
+
+### 🧠 Спринт 5 (AIOps, Zero Trust & Chaos Engineering)
+
+#### IT Operations Framework
+| ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
+|---|---|---|---|---|---|---|---|---|
+| TASK‑ITOPS‑038 | 5 | LLM-Driven Auto-Triage & RCA (Генерация отчетов об инцидентах через LLM) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-20 | 📋 To Do |
+| TASK‑ITOPS‑039 | 5 | Just-In-Time (JIT) DB Access Engine (Временные креды PostgreSQL на базе ролей) | IT Operations | Чат IT Ops | Antigravity | 🔴 P1 | 2026-11-22 | 📋 To Do |
+| TASK‑ITOPS‑040 | 5 | Distributed Tracing Middleware (Интеграция OpenTelemetry для трейсинга) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-25 | 📋 To Do |
+| TASK‑ITOPS‑041 | 5 | Chaos Monkey API & Fault Injection (Внедрение отказов для теста resilience) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-11-27 | 📋 To Do |
+| TASK‑ITOPS‑042 | 5 | Zombie Resource Hunter (Поиск брошенных тестовых окружений / mock) | IT Operations | Чат IT Ops | Antigravity | 🔵 P3 | 2026-11-29 | 📋 To Do |
+| TASK‑ITOPS‑043 | 5 | Behavioral Rate Limiter (Блокировка IP на базе паттернов поведения) | IT Operations | Чат IT Ops | Antigravity | 🟡 P2 | 2026-12-01 | 📋 To Do |
