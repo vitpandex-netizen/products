@@ -100,7 +100,8 @@
 | **TASK-BGT-024** | **Спринт 2** | BGT: Пирамидинг на супер-трендах (Safe Pyramiding) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-15 | 🟢 Done |
 | **TASK-BGT-025** | **Спринт 2** | BGT: Утренний Executive Дайджест в Telegram (08:00 UTC+5) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟢 P3 | 2026-09-13 | 🟢 Done |
 | **TASK-BGT-026** | **Спринт 2** | BGT: Детектор сжатия волатильности (TTM Squeeze Detector) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent** | 🟡 P2 | 2026-09-16 | 🟢 Done |
-| **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг сделок ТОП-20 кошельков в Telegram) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | ⏳ In Progress (API Исследовано) |
+| **TASK-ALPHA-001** | **Спринт 2** | [Alpha Scout] Polymarket On-Chain Whale Alert Bot (Авто-трекинг сделок ТОП-20 кошельков в Telegram) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-14 | 🟢 Done (`v0.1.0`) |
+
 | **TASK-ALPHA-002** | **Спринт 2** | [Alpha Scout] DEX/CEX Spread Scanner (Сопоставление Raydium с Bitget) | **Alpha Scout / Trading** | Чат Master Orchestrator | **Antigravity** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-BGT-027** | **Спринт 3** | BGT Signals Telegram Mini App (Витрина сигналов под модель $35/мес) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-15 | 🟢 Done |
 | **TASK-BGT-028** | **Спринт 3** | Machine Learning Signal Filter (XGBoost/LightGBM фильтр ложных входов) | **BGT (Bitget Bot)** | Чат BGT | **BGT Agent / Antigravity** | 🔴 P1 | 2026-09-16 | 🟢 Done |
@@ -336,3 +337,18 @@
 | :--- | :--- | :--- | :--- | :---: |
 | **2026-09-11** | **Alpha Stream (Идея №1)** | **Prediction Markets Arbitrage & Whale Scanner (Polymarket)** | Разработка модуля `alpha-scout` для поиска спредов/арбитража вероятностей 5m BTC и трекинга кошельков топ-50 трейдеров Polymarket с алертами в Telegram. | ⏳ In Progress (`scratch/`) |
 | **2026-09-11** | **BGT Upgrade** | **BGT Dynamic Volatility Regime (ATR Expansion Filter)** | Фильтр флэтового болота для BGT: вход в сделки только на расширении волатильности (`a_short / a_long >= 1.05`) для исключения ложных входов. | 🟢 Done (`v0.2.1`) |
+
+| **TASK-ITOPS-021** | **4** | Расширить Prometheus‑exporter: новые метрики (latency, error‑rate) и Grafana‑дашборд | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑05 | 📋 To Do |
+| **TASK-ITOPS-022** | **4** | Внедрить динамический Circuit Breaker с адаптивными порогами (на основе ML‑модели) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑07 | 📋 To Do |
+| **TASK-ITOPS-023** | **4** | Разработать UI‑конфигуратор Feature Flags (просмотр, включение/выключение, история) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑10 | 📋 To Do |
+| **TASK-ITOPS-024** | **4** | Полный аудит безопасности (CSP, HSTS, Content‑Security‑Policy, OWASP‑Check) и интеграция Auto‑Secret‑Scanner в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑12 | 📋 To Do |
+| **TASK-ITOPS-025** | **4** | Автоматическая ротация всех внешних токенов (API, GitHub, Docker) через Vault с поддержкой Secrets‑Engine | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026‑10‑14 | 📋 To Do |
+| **TASK-ITOPS-026** | **4** | Реализовать централизованный health‑check микросервис (FastAPI) с плагинами для SMTP, AD, 1С, базы данных | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑16 | 📋 To Do |
+| **TASK-ITOPS-027** | **4** | Добавить авто‑генерацию PDF/Excel‑отчетов (preview PNG) для Executive Digest + интеграция в Telegram‑бот | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑18 | 📋 To Do |
+| **TASK-ITOPS-028** | **4** | Создать набор e2e‑тестов (Playwright) для всех новых API‑эндпоинтов и UI‑фич | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026‑10‑20 | 📋 To Do |
+| **TASK-ITOPS-029** | **4** | Обновить документацию: полные Mermaid‑диаграммы инфраструктуры, инструкции Docker‑compose, CI/CD пайплайн | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑22 | 📋 To Do |
+| **TASK-ITOPS-030** | **4** | Интегрировать оповещения в Telegram о превышении лимитов Rate Limiting и Circuit Breaker (critical) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑24 | 📋 To Do |
+| **TASK-ITOPS-031** | **4** | Реализовать Feature‑Flag versioning: хранение истории изменений, откат к предыдущей версии | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑10‑26 | 📋 To Do |
+| **TASK-ITOPS-032** | **4** | Добавить автотесты на безопасность: проверка CSP, HSTS, CORS через OWASP ZAP в CI | **IT Operations** | Чат IT Ops | **CI/CD** | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
+| **TASK-ITOPS-033** | **4** | Разработать отчёт о покрытии тестами (code‑coverage) и установить пороги качества (80 %) | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026‑10‑30 | 📋 To Do |
+| **TASK-ITOPS-034** | **4** | Согласовать и провести обучение команды (Webinar) по новому Prometheus‑exporter и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026‑11‑02 | 📋 To Do |

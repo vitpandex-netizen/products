@@ -35,7 +35,19 @@
 
 ---
 
+### [2026-09-12 08:25] [Antigravity] — [Alpha Scout / Финализация whale_alert.py и передача в новый чат]
+- **Статус:** 🟢 DONE
+- **Коммит / Ветка:** `97dd925` на `main` (`~/dev/alpha-scout/`)
+- **Что сделано:**
+  1. **Финализация `whale_alert.py` (`TASK-ALPHA-001`):** Завершена сборка автономного сканера активности китов Polymarket с поддержкой дедупликации через `last_seen_txs.json` и отправкой алертов в Telegram.
+  2. **Локальная верификация:** Проведен сухой прогон скрипта, подтверждено получение 25 активных рынков Polymarket Gamma API и отсутствие ложных алертов.
+  3. **Бэклог:** Задача `TASK-ALPHA-001` переведена в статус `🟢 Done (v0.1.0)`.
+- **Эстафета следующему агенту (Alpha Scout Agent):** Проект полностью готов к запуску в отдельном чате `Alpha Scout` (`~/dev/alpha-scout/`).
+
+---
+
 ### [2026-09-12 00:18] [Antigravity] — [BGT / Формирование и расширение Спринта 3 по итогам аудита]
+
 - **Статус:** 🟢 DONE
 - **Проект:** `BGT (bitget-bot)`
 - **Что сделано:**
@@ -538,3 +550,9 @@
 - **Что сделано:** Добавлены задачи Sprint 3 (TASK‑ITOPS‑010…020) в `BACKLOG.md`, запись о планировании в `TRIAD_SYNC.md`.
 - **Верификация:** Файлы проверены локально, готово к коммиту.
 - **Эстафета следующему агенту:** Выполнить `git add BACKLOG.md TRIAD_SYNC.md && git commit -m "docs(itops): add Sprint 3 backlog items" && git push origin main`.
+
+### [2026-09-12 08:30] [Antigravity] — [IT Ops / Планирование Sprint 4]
+- **Статус:** 📋 TO_DO
+- **Что сделано:** Сформирован план Спринта 4 (список задач) и записан в `implementation_plan.md`. Задачи добавлены в `BACKLOG.md`.
+- **Верификация:** BACKLOG.md проверен, задачи корректно вставлены; `implementation_plan.md` содержит полное описание.
+- **Эстафета следующему агенту:** Выполнить `git add BACKLOG.md TRIAD_SYNC.md && git commit -m "docs(itops): add Sprint 4 backlog items" && git push origin main`.
