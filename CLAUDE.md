@@ -377,12 +377,73 @@ No shortcuts. No "we'll fix later". Every gate or no push.
 
 ---
 
+## ⏰ SCHEDULE: Automated Daily Rhythm (Standup + Retro)
+
+### 🌅 **Утренний брифинг (09:00 UTC+5)**
+- **Автоматический запуск:** каждый день в 09:00
+- **Что проверяем:**
+  1. Read `/dev/PROJECTS.md` (статус всех проектов)
+  2. Read `/dev/BACKLOG.md` (TOP-3 для моего домена)
+  3. Read `/dev/TRIAD_SYNC.md` (блокеры, consilium)
+  4. Check budget: tokens, сроки, ограничения
+- **Вывод:** TOP-3 задач на день в консоль/логи
+- **Домен-специфичный брифинг:**
+  - **BGT:** скоринг за ночь, топ-пары, P&L, риск-метрики
+  - **IT Ops:** мультитенант-готовность, инциденты, SLA
+  - **Stocks UZ:** волатильность рынка, новости UZSE, дивиденды
+  - **GH Scout:** 50+ конкурентов, что обновилось за ночь
+
+### 🌙 **Вечерняя ретроспектива (20:00 UTC+5)**
+- **Автоматический запуск:** каждый день в 20:00
+- **Что логируем:**
+  1. `git log --oneline -10` → коммиты за день
+  2. Строки кода (added/removed), тесты (written/passed)
+  3. Задачи (closed, переведены в DONE)
+  4. Incident count, security issues found
+- **Что пишем в TRIAD_SYNC.md:**
+  - Задачи закрытые в день
+  - Lesson learned (1-2 предложения)
+  - Blockers для next agent (если есть)
+  - Time spent (минут)
+- **Обновляем `/dev/PROJECTS.md`:**
+  - % completion, velocity (story points/week)
+  - Следующий milestone дата
+
+### 📋 **Cron config (`.github/workflows/daily-standup.yml`):**
+```yaml
+name: Daily Standup & Retro
+on:
+  schedule:
+    - cron: '0 4 * * *'  # 09:00 UTC+5 = 04:00 UTC
+    - cron: '0 15 * * *' # 20:00 UTC+5 = 15:00 UTC
+
+jobs:
+  standup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Morning Standup
+        run: |
+          echo "=== MORNING STANDUP $(date) ==="
+          head -50 ~/dev/PROJECTS.md
+          head -50 ~/dev/BACKLOG.md
+          grep "TOP-3" ~/dev/TRIAD_SYNC.md | tail -5
+      
+      - name: Evening Retro
+        run: |
+          echo "=== EVENING RETRO $(date) ==="
+          git log --oneline -10
+          echo "Lessons learned → append to TRIAD_SYNC.md"
+```
+
+---
+
 ## 🔄 Continuous Improvement
 
 - **Quarterly arch review:** Is our stack still optimal?
 - **Monthly metrics:** Velocity, incident rate, security grade
 - **Weekly sync:** CONSILIUM on blockers, decisions
-- **Daily:** Morning standup (priorities, blockers) + evening retro (lessons, metrics)
+- **Daily:** 🌅 Morning standup (09:00) + 🌙 Evening retro (20:00)
 
 Update this file when new patterns emerge. Это живой документ.
 
