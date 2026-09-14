@@ -12,3 +12,5 @@ services:
     environment:
       - PORT=8004
       - ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - ENV=production
