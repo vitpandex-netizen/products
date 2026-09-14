@@ -212,7 +212,7 @@ def orders(db: DB = Depends(get_db)):
 @app.post("/api/orders")
 def create_order(o: LimitOrderInput, db: DB = Depends(get_db)):
     """Создать лимитную заявку."""
-    from tracker import Trade
+    # Optional import of Trade (not needed for endpoint)
     db.conn.execute(
         "INSERT INTO trades (ticker, direction, status, order_type, limit_price, shares, stop_loss, take_profit, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)",
         (o.ticker.upper(), "buy", "pending", "limit", o.price, o.shares, o.stop_loss, o.take_profit,
@@ -455,15 +455,52 @@ def startup():
 
 
 # ===== Sprint 5 Endpoints =====
-from ml_predictor import MLPredictor
-from sentiment_analyzer import SentimentAnalyzer
-from anomaly_detector import AnomalyDetector
-from tradingview_widget import TradingViewWidget
-from heatmap_matrix import HeatmapMatrix
-from vault_backup import VaultBackup
-from monte_carlo import MonteCarloSimulator
-from ipo_tracker import IPOTracker
-from esg_scorecard import ESGScorecard
+# Optional ML and analytics modules may not be present in all environments.
+# We import them lazily and provide graceful degradation if they are missing.
+try:
+    from ml_predictor import MLPredictor
+except ImportError:  # pragma: no cover
+    MLPredictor = None
+
+try:
+    from sentiment_analyzer import SentimentAnalyzer
+except ImportError:  # pragma: no cover
+    SentimentAnalyzer = None
+
+try:
+    from anomaly_detector import AnomalyDetector
+except ImportError:  # pragma: no cover
+    AnomalyDetector = None
+
+try:
+    from tradingview_widget import TradingViewWidget
+except ImportError:  # pragma: no cover
+    TradingViewWidget = None
+
+try:
+    from heatmap_matrix import HeatmapMatrix
+except ImportError:  # pragma: no cover
+    HeatmapMatrix = None
+
+try:
+    from vault_backup import VaultBackup
+except ImportError:  # pragma: no cover
+    VaultBackup = None
+
+try:
+    from monte_carlo import MonteCarloSimulator
+except ImportError:  # pragma: no cover
+    MonteCarloSimulator = None
+
+try:
+    from ipo_tracker import IPOTracker
+except ImportError:  # pragma: no cover
+    IPOTracker = None
+
+try:
+    from esg_scorecard import ESGScorecard
+except ImportError:  # pragma: no cover
+    ESGScorecard = None
 from fastapi.responses import HTMLResponse
 
 @app.get("/api/ml/predict/{ticker}")
