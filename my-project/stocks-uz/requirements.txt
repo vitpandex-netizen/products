@@ -7,7 +7,7 @@ openpyxl==3.1.2
 
 fastapi==0.110.0
 uvicorn[standard]==0.27.0
-selfcheck==0.1.0
+
 
 pytest==7.4.0
 pytest-cov==4.1.0
