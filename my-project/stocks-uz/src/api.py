@@ -16,7 +16,7 @@ from datetime import datetime, timezone, timedelta
 from db import DB
 from engine import (consolidate_positions, barbell_balance, concentration,
                     run_signal_engine, bonds_summary, ytm)
-from tracker import init_trades, add_limit_order, add_watch, check_pending_orders, get_portfolio_summary
+from .tracker import init_trades, add_limit_order, add_watch, check_pending_orders, get_portfolio_summary
 
 TASHKENT = timezone(timedelta(hours=5))
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,7 +139,10 @@ class LimitOrderInput(BaseModel):
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "0.2.0", "project": "stocks-uz"}
-
+@app.get("/health")
+def root_health():
+    """Health‑check без префикса, использует уже существующий health()."""
+    return health()
 @app.get("/api/portfolio")
 def portfolio(db: DB = Depends(get_db)):
     """Текущий портфель из БД + сигналы.
