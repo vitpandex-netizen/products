@@ -28,14 +28,9 @@ class ATR_Breakout(IStrategy):
     Таймфрейм: 5m (ловим быстрые взрывы)
     """
 
-    minimal_roi = {
-        "0":  0.04,   # 4% — взрывное движение, берём сразу
-        "10": 0.025,  # 2.5% через 10 мин
-        "30": 0.012,  # 1.2% через 30 мин
-        "60": 0.005   # 0.5% страховка
-    }
+    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
 
-    stoploss = -0.02   # -2% жёсткий стоп: ложные пробои режем быстро
+    stoploss = -0.01   # -2% жёсткий стоп: ложные пробои режем быстро
     trailing_stop = True
     trailing_stop_positive = 0.008          # трейлим 0.8%
     trailing_stop_positive_offset = 0.015   # активация с +1.5%
@@ -43,6 +38,10 @@ class ATR_Breakout(IStrategy):
 
     timeframe = "5m"
     startup_candle_count = 50
+
+
+    def leverage(self, step: int, config: dict, pair: str, **kwargs) -> float:
+        return 2.0
 
     def populate_indicators(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         # ── ATR (Average True Range) ──────────────────────────

@@ -26,14 +26,9 @@ class VWAP_RSI(IStrategy):
     возвращается выше VWAP — это сигнал возобновления восходящего тренда.
     """
 
-    minimal_roi = {
-        "0":  0.025,  # 2.5% быстрый выход (на 3m достаточно)
-        "15": 0.015,  # 1.5% через 15 мин
-        "40": 0.008,  # 0.8% через 40 мин
-        "90": 0.003   # 0.3% — минимальный
-    }
+    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
 
-    stoploss = -0.02   # -2% стоп (чуть жёстче для 3m)
+    stoploss = -0.01   # -2% стоп (чуть жёстче для 3m)
     trailing_stop = True
     trailing_stop_positive = 0.006
     trailing_stop_positive_offset = 0.012
@@ -41,6 +36,10 @@ class VWAP_RSI(IStrategy):
 
     timeframe = "3m"   # 5m → 3m: утраиваем кол-во сигналов
     startup_candle_count = 40
+
+
+    def leverage(self, step: int, config: dict, pair: str, **kwargs) -> float:
+        return 2.0
 
     def populate_indicators(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         # ── VWAP ─────────────────────────────────────────────

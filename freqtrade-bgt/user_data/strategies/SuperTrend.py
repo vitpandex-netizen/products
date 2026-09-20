@@ -20,14 +20,9 @@ class SuperTrend(IStrategy):
     * Timeframe: 15m (меньше ложных сигналов vs 5m)
     """
 
-    minimal_roi = {
-        "0":   0.05,   # 5% — быстрый выход
-        "30":  0.03,   # 3% через 30 мин
-        "90":  0.015,  # 1.5% через 1.5ч
-        "180": 0.005   # 0.5% через 3ч
-    }
+    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
 
-    stoploss = -0.03
+    stoploss = -0.01
     trailing_stop = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
@@ -89,6 +84,10 @@ class SuperTrend(IStrategy):
         return dx.ewm(span=period, adjust=False).mean()
 
     # ─── Indicators ────────────────────────────────────────────
+
+    def leverage(self, step: int, config: dict, pair: str, **kwargs) -> float:
+        return 2.0
+
     def populate_indicators(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         upper, lower, direction = self.supertrend(dataframe, atr_period=14, multiplier=2.5)
         dataframe["st_upper"]     = upper

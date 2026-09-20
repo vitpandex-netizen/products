@@ -19,14 +19,9 @@ class EMA_Cross(IStrategy):
     * ROI: быстрый выход для фиксации прибыли
     """
 
-    minimal_roi = {
-        "0":   0.03,   # 3% — быстрый захват (был 5%, слишком высоко)
-        "20":  0.02,
-        "60":  0.01,
-        "120": 0.004
-    }
+    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
 
-    stoploss = -0.05
+    stoploss = -0.01
     trailing_stop = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.015
@@ -61,6 +56,10 @@ class EMA_Cross(IStrategy):
         return dx.ewm(span=period, adjust=False).mean()
 
     # ─── Indicators ────────────────────────────────────────────
+
+    def leverage(self, step: int, config: dict, pair: str, **kwargs) -> float:
+        return 2.0
+
     def populate_indicators(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         dataframe["short_ema"]  = dataframe["close"].ewm(span=self.short_ema.value, adjust=False).mean()
         dataframe["long_ema"]   = dataframe["close"].ewm(span=self.long_ema.value, adjust=False).mean()
@@ -76,7 +75,7 @@ class EMA_Cross(IStrategy):
             (dataframe["short_ema"] > dataframe["long_ema"]) &
             (dataframe["short_ema"].shift(1) <= dataframe["long_ema"].shift(1)) &
             # ADX: есть тренд (не боковик)
-            (dataframe["adx"] > 20) &
+            (dataframe["adx"] > 15) &
             # Цена выше долгосрочного тренда
             (dataframe["close"] > dataframe["trend_ema"]) &
             # Объём не нулевой
