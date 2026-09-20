@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: ghscout
       POSTGRES_USER: ghscout
-      POSTGRES_PASSWORD: ghscout_pass
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-ghscout_pass}
     volumes:
       - ghscout_pgdata:/var/lib/postgresql/data
       - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql

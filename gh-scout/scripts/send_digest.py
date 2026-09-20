@@ -4,13 +4,14 @@
 """
 
 import json
+import os
 import urllib.request
 from datetime import datetime, timezone
 
 API_BASE = "http://localhost:8005/api/v1"
-TG_TOKEN = "8836439317:AAGxNogYtL024gRkhw2YV5wbjPwRYv9ABkY"
-TG_CHAT = "-1004297012607"
-TG_TOPIC = 203
+TG_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+TG_CHAT = os.getenv("TELEGRAM_CHAT_ID", "-1004297012607")
+TG_TOPIC = int(os.getenv("GH_SCOUT_TG_TOPIC", "203"))
 
 
 def api_get(path):
