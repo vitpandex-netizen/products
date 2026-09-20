@@ -529,6 +529,6 @@
 - [x] Деплой Freqtrade кластера (6 стратегий) на US Server.
 - [x] Обнуление балансов строго на $100.00 (Paper Trading).
 - [x] Закрытие портов Freqtrade (P0 Security Fix: bind to Tailscale IP).
-- [ ] Закрыть порты Hummingbot и Jesse за Tailscale (P0 Security).
+- [x] Закрыть порты Hummingbot и Jesse (и EMQX) за Tailscale (P0 Security).
 - [ ] Ожидание первых стабильных +5% профита у лидера Freqtrade для перехода в Live.
 - [ ] Настройка и деплой стратегии в Jesse.
