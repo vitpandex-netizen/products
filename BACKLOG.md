@@ -62,9 +62,10 @@
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-ITOPS-009** | **Спринт 2** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 🟢 Done |
 | **TASK-ITOPS-010** | **Спринт 4** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-20 | 📋 To Do |
-| **TASK-ITOPS-011** | **Спринт 4** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | 📋 To Do |
+| **TASK‑ITOPS‑011** | **Спринт 4** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | ✅ Done |
 | **TASK-ITOPS-012** | **Спринт 4** | Интегрировать health‑check микросервис для внешних зависимостей (SMTP, AD, 1С) в виде отдельного FastAPI‑сервиса | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-24 | 📋 To Do |
-| **TASK-ITOPS-013** | **Спринт 4** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 📋 To Do |
+| **TASK-ITOPS-013** | **Спринт 4** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 🟢 Done |
+| **TASK-ITOPS-014** | **Спринт 4** | Интеграция Prometheus метрик + Grafana dashboard для Core Service | **IT Operations** | Чат IT Ops | **Hermes** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-ITOPS-014** | **Спринт 4** | Реализовать UI‑конфигурацию Feature Flags в Mini‑App (просмотр/переключение без redeploy) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-27 | 📋 To Do |
 | **TASK-ITOPS-015** | **Спринт 4** | Добавить CI‑step для статического анализа секретов (gitleaks + secret‑guard) в GitHub Actions | **IT Operations** | Чат IT Ops | **CI/CD** | 🟡 P2 | 2026-09-28 | 📋 To Do |
 | **TASK-ITOPS-016** | **Спринт 4** | Написать набор e2e‑тестов (Playwright) для статуса сервиса и доступа к Mini‑App | **IT Operations** | Чат IT Ops | **QA Team** | 🟡 P2 | 2026-09-30 | 📋 To Do |
@@ -72,6 +73,7 @@
 | **TASK-ITOPS-018** | **Спринт 4** | Внедрить автоматический ротацию токенов доступа к внешним API (Graph API, Whisper) через Vault | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-10-02 | 📋 To Do |
 | **TASK-ITOPS-019** | **Спринт 4** | Добавить оповещения в Telegram о превышении лимитов Rate Limiting для критических сервисов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-02 | 📋 To Do |
 | **TASK-ITOPS-020** | **Спринт 4** | Провести обзор и оптимизацию Docker‑образов (мульти‑stage, уменьшить размер) | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-10-04 | 📋 To Do |
+| **TASK-SYS-002** | **Спринт 4** | Внедрение Git Pre-commit хука (TDD-Lock) для запрета коммитов без тестов (защита от вайб-кодинга) | **Инфраструктура** | Master Orchestrator | **Antigravity** | 🔴 P1 | 2026-09-21 | 📋 To Do |
 | **TASK-IMP-001** | **Спринт 2** | Добавить preview‑mode для автогенерации постов в LinkID | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-002** | **Спринт 2** | Сохранять историю последних 5 выбранных LLM и предлагать автодополнение | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK-IMP-003** | **Спринт 2** | Реализовать retry‑логику с экспоненциальной задержкой для неуспешных вебхуков | **LinkID** | Чат LinkID | **LinkID Agent** | 🟡 P2 | 2026-09-20 | 🟢 Done |
