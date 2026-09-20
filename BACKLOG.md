@@ -61,7 +61,7 @@
 | **TASK-ITOPS-007** | **Спринт 2** | Распределённый Rate Limiting через Redis (Sliding Window / IncrBy) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-16 | 🟢 Done |
 | **TASK-ITOPS-008** | **Спринт 2** | Executive PDF/Excel Digest Engine для CIO (SLA & Инциденты) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-17 | 🟢 Done |
 | **TASK-ITOPS-009** | **Спринт 2** | Telegram Mini App Status Page & Service Health (Мониторинг сервисов) | **IT Operations** | Чат IT Ops | **Чат IT Ops** | 🟡 P2 | 2026-09-18 | 🟢 Done |
-| **TASK-ITOPS-010** | **Спринт 4** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-20 | 📋 To Do |
+| **TASK-ITOPS-010** | **Спринт 4** | Добавить Prometheus‑exporter для мониторинга счётчиков Rate Limiting и Circuit Breaker | **IT Operations** | Чат IT Ops | **Hermes** | 🟡 P2 | 2026-09-20 | 🟢 Done |
 | **TASK‑ITOPS‑011** | **Спринт 4** | Расширить Audit Trail: логировать действия администраторов и изменения фичер‑флагов | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🔴 P1 | 2026-09-22 | ✅ Done |
 | **TASK-ITOPS-012** | **Спринт 4** | Интегрировать health‑check микросервис для внешних зависимостей (SMTP, AD, 1С) в виде отдельного FastAPI‑сервиса | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-24 | 📋 To Do |
 | **TASK-ITOPS-013** | **Спринт 4** | Добавить автогенерацию PDF‑preview (png) для Executive Digest, чтобы быстро проверять внешний вид | **IT Operations** | Чат IT Ops | **IT Ops Agent** | 🟡 P2 | 2026-09-25 | 🟢 Done |
