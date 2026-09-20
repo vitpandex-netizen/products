@@ -47,16 +47,17 @@
 #### 1. Bitget-bot — Трейдинг
 | Поле | Значение |
 |------|----------|
-| **Статус** | 🟢 Active 24/7 на **US Server** (`live-trend.service`) |
-| **Суть** | Трендовый импульсный трейдинг (Momentum Breakout + ATR Trailing) |
-| **Баланс** | **$107.97 USDT** чистый кэш (цели: **$120 до 13.09** → **$200** → **$1000 к концу сентября**) |
-| **Стратегия** | Dynamic Compounding (до 85% депо в позиции, плечо 2x, риск 5% = ~$5.40 по ATR-стопу, трейлинг 3.5×ATR) |
-| **Пул пар** | Топ-6 по бэктесту: ENA, SOL, ETH, XRP, UNI, BTC |
-| **API** | Bitget Futures API v3 (ccxt + BitgetAPIClient), Telegram алерты |
-| **Сервер** | US Server (`/home/us/bitget-bot/`), systemd (`live-trend.service`) |
-| **Связи** | Trading Dashboard (:3002), Telegram Mini App (:8090) |
-| **Изоляция** | 🟢 Изолирован — только API наружу |
-| **Следующий шаг** | Взять цель $120 на первом же пробое (ETH/BTC/SOL) |
+| **Статус** | 🟢 Active 24/7 на **US Server**, все сервисы под systemd (Restart=always) |
+| **Суть** | Барбелл: основной продукт (Claude Code) + два изолированных участка на $20 в 2-дневном соревновании (до 18.09 21:00 UTC), решение по итогам — 20.09 |
+| **Баланс** | **$107.00** equity (капитал = единый источник правды через `portfolio.py`, а не отдельные скрипты) |
+| **Основной продукт** (~$67, Claude Code) | `bgt-live-trend` (тренд-фолловинг) + funding-арбитраж GRAM (хедж сбалансирован, uPnL стабильно +) + calendar-arb screener |
+| **Участок Claude Code** ($20) | Spot-сетка FIL, 15 уровней, шаг 3.33%, перецентрована 16.09 |
+| **Участок Antigravity** ($20) | `bgt-test-3-days.service` — Short Squeeze Catcher на IOST, 10x, cross-margin |
+| **API** | Bitget UTA (ccxt), Telegram admin-бот |
+| **Сервер** | US Server (`/home/us/bitget-bot/`), 4 systemd-юнита |
+| **Изоляция** | 🟢 Изолирован — только API наружу, `/audit --history` Grade A |
+| **Метрика соревнования** | equity участка на 18.09 (не realized P&L — короткий горизонт легко исказить) |
+| **Следующий шаг** | Ждать первый цикл сетки (0 за 16 часов, бэктест даёт 0.6–2.7/день) и первый сигнал squeeze-catcher |
 
 #### 2. Trading Dashboard
 | Поле | Значение |

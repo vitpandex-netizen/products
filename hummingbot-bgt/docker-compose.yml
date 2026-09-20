@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  emqx:
+    image: emqx/emqx:5.3.0
+    container_name: hummingbot-emqx-bgt
+    restart: always
+    ports:
+      - "1883:1883"
+      - "18083:18083"
+
+  hummingbot-backend-api:
+    image: hummingbot/backend-api:latest
+    container_name: hummingbot-backend-api-bgt
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - MQTT_HOST=emqx
+      - MQTT_PORT=1883
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    depends_on:
+      - emqx
+
+  hummingbot-dashboard:
+    image: hummingbot/dashboard:latest
+    container_name: hummingbot-dashboard-bgt
+    restart: always
+    ports:
+      - "8097:8501"
+    environment:
+      - PORT=8501
+      - BACKEND_API_HOST=hummingbot-backend-api-bgt
+      - BACKEND_API_PORT=8000
+    depends_on:
+      - hummingbot-backend-api
+
+  hummingbot:
+    image: hummingbot/hummingbot:latest
+    container_name: hummingbot-bgt
+    restart: always
+    volumes:
+      - "./conf:/conf"
+      - "./logs:/logs"
+      - "./data:/data"
+      - "./scripts:/scripts"
+    tty: true
+    stdin_open: true

@@ -1,0 +1,4 @@
+autostart_script: aggressive_pmm_bitget.py
+instance_id: bgt_bot_1
+log_level: INFO
+fetch_pairs_from_all_exchanges: false

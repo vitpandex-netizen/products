@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: jesse-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: jesse_db
+      POSTGRES_USER: jesse_user
+      POSTGRES_PASSWORD: jesse_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6-alpine
+    container_name: jesse-redis
+    restart: always
+
+  jesse:
+    build: .
+    container_name: jesse-bgt
+    restart: always
+    ports:
+      - "8098:9000"
+    environment:
+      - HTTP_HOST=0.0.0.0
+      - HTTP_PORT=9000
+      - PASSWORD=jesse_password123
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=jesse_db
+      - DB_USER=jesse_user
+      - DB_PASSWORD=jesse_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - "./:/app"
+    depends_on:
+      - postgres
+      - redis
+    command: jesse run
+
+volumes:
+  postgres_data:
