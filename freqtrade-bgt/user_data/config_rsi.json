@@ -65,7 +65,7 @@
         "jwt_secret_key": "bgt_freqtrade_secret_key_change_me_12345",
         "CORS_origins": [],
         "username": "admin",
-        "password": "bgt_password123"
+        "password": "bgt_secure_ag_2026"
     },
     "bot_name": "freqtrade-rsi-bollinger",
     "initial_state": "running",
