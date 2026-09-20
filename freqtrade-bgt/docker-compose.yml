@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # === Стратегия 1: UltraScalper (основная, уже запущена) ===
+  freqtrade:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-bgt-ag
+    ports:
+      - "8096:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config.json
+      --strategy UltraScalper
+
+  # === Стратегия 2: EMA_Cross ===
+  freqtrade-ema:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-ema-bgt-ag
+    ports:
+      - "8091:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config_ema.json
+      --strategy EMA_Cross
+
+  # === Стратегия 3: RSI_Bollinger ===
+  freqtrade-rsi:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-rsi-bgt-ag
+    ports:
+      - "8092:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config_rsi.json
+      --strategy RSI_Bollinger
+
+  # === Стратегия 4: SuperTrend (новая, агрессивная) ===
+  freqtrade-supertrend:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-supertrend-bgt-ag
+    ports:
+      - "8093:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config_supertrend.json
+      --strategy SuperTrend
+
+  # === Стратегия 5: VWAP_RSI (новая, институциональная) ===
+  freqtrade-vwap:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-vwap-bgt-ag
+    ports:
+      - "8094:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config_vwap.json
+      --strategy VWAP_RSI
+
+  # === Стратегия 6: ATR_Breakout (агрессивная, волатильность) ===
+  freqtrade-atr:
+    image: freqtradeorg/freqtrade:stable
+    restart: always
+    container_name: freqtrade-atr-bgt-ag
+    ports:
+      - "8095:8080"
+    volumes:
+      - "./user_data:/freqtrade/user_data"
+    command: >
+      trade
+      --config /freqtrade/user_data/config_atr.json
+      --strategy ATR_Breakout
