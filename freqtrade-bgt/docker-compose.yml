@@ -7,7 +7,7 @@ services:
     restart: always
     container_name: freqtrade-bgt-ag
     ports:
-      - "8096:8080"
+      - "18096:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
@@ -21,7 +21,7 @@ services:
     restart: always
     container_name: freqtrade-ema-bgt-ag
     ports:
-      - "8091:8080"
+      - "18091:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
@@ -35,7 +35,7 @@ services:
     restart: always
     container_name: freqtrade-rsi-bgt-ag
     ports:
-      - "8092:8080"
+      - "18092:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
@@ -49,7 +49,7 @@ services:
     restart: always
     container_name: freqtrade-supertrend-bgt-ag
     ports:
-      - "8093:8080"
+      - "18093:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
@@ -63,7 +63,7 @@ services:
     restart: always
     container_name: freqtrade-vwap-bgt-ag
     ports:
-      - "8094:8080"
+      - "18094:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
@@ -77,7 +77,7 @@ services:
     restart: always
     container_name: freqtrade-atr-bgt-ag
     ports:
-      - "8095:8080"
+      - "18095:8080"
     volumes:
       - "./user_data:/freqtrade/user_data"
     command: >
