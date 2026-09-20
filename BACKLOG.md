@@ -524,3 +524,11 @@
 | TASK‑STOCKS‑102 | 5 | ESG и Корпоративный рейтинг прозрачности эмитентов (Transparency Scorecard) | Stocks UZ | uz-stocks-bot | Antigravity | 🔵 P3 | 2026-12-10 | 🟢 Done |
 
 
+
+### План работ BGT (Antigravity)
+- [x] Деплой Freqtrade кластера (6 стратегий) на US Server.
+- [x] Обнуление балансов строго на $100.00 (Paper Trading).
+- [x] Закрытие портов Freqtrade (P0 Security Fix: bind to Tailscale IP).
+- [ ] Закрыть порты Hummingbot и Jesse за Tailscale (P0 Security).
+- [ ] Ожидание первых стабильных +5% профита у лидера Freqtrade для перехода в Live.
+- [ ] Настройка и деплой стратегии в Jesse.
