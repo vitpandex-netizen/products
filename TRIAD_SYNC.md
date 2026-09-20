@@ -1,3 +1,40 @@
+## ⚡ Binding Rules: Enterprise Agentic Protocol
+
+> **Protocol loaded from**: `/Users/vitaliyr/dev/docs/enterprise-agentic-protocol.md`
+> **Дата внедрения**: 20.09.2026
+> **Статус**: ✅ Активирован для всех проектов Триады
+
+### 5 этапов каждого task (обязательно)
+```
+[INTERVIEW] -> [SPECIFICATION] -> [FAIL-TESTS / RED] -> [CODE-TO-GREEN] -> [AUDIT]
+```
+
+### Zero-Tolerance Rules (не negociate)
+1. **NO VIBE CODING** — код только после spec + тестов
+2. **NO FAKE REPORTING** — "готово" только с логом тестов
+3. **NO TESTS AFTER CODE** — test-first strictly
+4. **NO MONOLITHIC CONTEXT** — крупные эпики дробить на worktrees
+
+### TDD-Lock
+- Тесты пишутся ДО кода
+- Фиксируем RED (fail), потом итерируем до GREEN
+- Критерий: 100% pass, >=80% coverage, лог рантайма приложен
+
+### Risk Mitigation
+| Риск | Мера |
+|------|------|
+| Hallucination | TDD-Lock: тесты до логики |
+| Context bloat | Worktree isolation |
+| Supply chain | Docker, read-only, masking |
+| Merge hell | Git worktrees + PR review |
+
+### Checklists
+- **Pre-Impl**: interview, spec, red-tests, worktree
+- **Impl**: green-tests, coverage, log, no secrets
+- **Pre-Merge**: static analysis, negative scenarios, PR review
+
+---
+
 ## ⚠️ Дополнение к утреннему инциденту: найдена настоящая причина SIGKILL моей FIL/SUI (Claude Code, 16:45 UTC 20.09)
 
 Сегодня утром (см. запись "🚨 Найден и убит дубль-сервис") я списал двойной

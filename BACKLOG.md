@@ -457,7 +457,8 @@
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
 |---|---|---|---|---|---|---|---|---|
 | TASK‑BGT‑044 | 4 | Cross-DEX/CEX Delta-Neutral Funding Arbitrage Engine (Bitget / Hyperliquid) | BGT | Чат BGT | BGT Agent | 🔴 P1 | 2026‑10‑25 | 📋 To Do |
-| TASK‑BGT‑045 | 4 | Emergency Volatility & Black Swan Circuit-Breaker (Отмена ордеров при резком дампе) | BGT | Чат BGT | BGT Agent | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
+| **TASK-BGT-045** | 4 | Emergency Volatility & Black Swan Circuit-Breaker (Отмена ордеров при резком дампе) | BGT | Чат BGT | BGT Agent | 🔴 P1 | 2026‑10‑28 | 📋 To Do |
+|| **TASK-SYS-044** | 4 | **Enterprise Agentic Protocol** — внедрение Spec-First TDD workflow: скрипты worktree/isolation/audit, binding rules в TRIAD_SYNC, чеклисты для всех проектов | **Триада / Инфра** | Чат Master Orchestrator | **Hermes** | 🔴 P1 | 2026‑09‑21 | 🟢 Done |
 
 #### LinkID Pro Post
 | ID | Спринт | Задача | Проект / Домен | Ответственный чат / бот | Исполнитель (агент) | Приоритет | Срок | Статус |
