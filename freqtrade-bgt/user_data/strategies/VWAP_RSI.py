@@ -80,6 +80,9 @@ class VWAP_RSI(IStrategy):
 
     def populate_entry_trend(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         dataframe.loc[
+            # Time filter: 06:00 - 22:00 UTC (Eu/US session only)
+            (dataframe['date'].dt.hour >= 6) &
+            (dataframe['date'].dt.hour < 22) &
             # Цена пересекла VWAP снизу вверх — разворот
             (dataframe["close"] > dataframe["vwap"]) &
             (dataframe["close"].shift(1) <= dataframe["vwap"].shift(1)) &
@@ -90,6 +93,7 @@ class VWAP_RSI(IStrategy):
             (dataframe["bb_lower"].shift(3) >= dataframe["close"].shift(3)) |
             # ИЛИ: цена у VWAP + RSI отскок + объём
             (
+                (dataframe['date'].dt.hour >= 6) & (dataframe['date'].dt.hour < 22) &
                 (dataframe["vwap_dist"].abs() < 0.3) &      # цена близко к VWAP
                 (dataframe["rsi"] < 50) &                    # RSI ниже нейтрали
                 (dataframe["volume_spike"] == True)          # объёмный всплеск
