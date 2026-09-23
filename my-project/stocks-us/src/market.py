@@ -58,7 +58,7 @@ def fetch_quotes(tickers: list = None) -> dict:
         return {}
     result = {}
     try:
-        data = yf.download(tickers, period='2d', progress=False, auto_adjust=True, group_by='ticker')
+        data = yf.download(tickers, period='5d', progress=False, auto_adjust=True, group_by='ticker')
         for ticker in tickers:
             try:
                 if len(tickers) == 1:
@@ -70,8 +70,12 @@ def fetch_quotes(tickers: list = None) -> dict:
                 price = info['price']
                 if math.isnan(price):
                     continue
-                day_change_pct = ((price - info['prev_close']) / info['prev_close']) * 100 if info['prev_close'] else None
-                result[ticker] = {'price': price, 'prev_close': info['prev_close'], 'day_change_pct': day_change_pct, 'volume': info['volume']}
+                prev_close = info['prev_close']
+                if not prev_close or (not math.isnan(prev_close) and prev_close > 0):
+                    day_change_pct = ((price - prev_close) / prev_close) * 100 if prev_close else None
+                else:
+                    day_change_pct = None
+                result[ticker] = {'price': price, 'prev_close': prev_close, 'day_change_pct': day_change_pct, 'volume': info['volume']}
             except Exception:
                 continue
     except Exception as e:
