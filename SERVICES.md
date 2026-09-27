@@ -23,8 +23,9 @@
 | Юнит | Скрипт | Что делает | С какой даты | Статус |
 |---|---|---|---|---|
 | `bgt-live-trend` | `live_trend.py` | Live trend-follow + funding-арбитраж GRAM | 13.09 | ✅ активен |
-| `bgt-spot-grid` | `spot_grid.py --pair FIL` | Сетка FIL (Claude) | — | ✅ активен |
-| `bgt-spot-grid-sui` | `spot_grid.py --pair SUI` | Сетка SUI (Claude) | — | ✅ активен |
+| `bgt-spot-grid` | `spot_grid.py --pair FIL` | Сетка FIL (Claude) | — | ❌ **свёрнут 27.09** — 0 циклов/$0 за 9 дней, мёртвый груз, капитал в funding-арб |
+| `bgt-spot-grid-sui` | `spot_grid.py --pair SUI` | Сетка SUI (Claude) | — | ❌ **свёрнут 27.09** — та же причина |
+| `bgt-strategy-optimizer` | `strategy_optimizer.py` | Автономный оптимизатор: мониторит тренды/funding, эскалирует рекомендации (v1 read-only капитал) | 27.09 | ✅ активен, 24/7 |
 | — (без systemd, вручную) | `spot_grid.py --pair AIN` | Сетка AIN (Гермес) | — | ✅ процесс жив, **не под systemd** — нет автоперезапуска при краше |
 | — (без systemd, вручную) | `spot_grid.py --pair PONS` | Сетка PONS (Гермес) | — | ✅ процесс жив, **не под systemd** |
 | `bgt-tg-admin` | Telegram kill-switch | Админ-бот, аварийный стоп | — | ✅ активен |
