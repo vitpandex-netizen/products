@@ -26,9 +26,9 @@ class VWAP_RSI(IStrategy):
     возвращается выше VWAP — это сигнал возобновления восходящего тренда.
     """
 
-    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
+    minimal_roi = {"0": 0.06, "60": 0.03, "120": 0.01}
 
-    stoploss = -0.01   # -2% стоп (чуть жёстче для 3m)
+    stoploss = -0.03   # -2% стоп (чуть жёстче для 3m)
     trailing_stop = True
     trailing_stop_positive = 0.006
     trailing_stop_positive_offset = 0.012

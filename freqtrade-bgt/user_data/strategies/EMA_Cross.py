@@ -19,9 +19,9 @@ class EMA_Cross(IStrategy):
     * ROI: быстрый выход для фиксации прибыли
     """
 
-    minimal_roi = {"0": 0.02, "15": 0.01, "45": 0.001}
+    minimal_roi = {"0": 0.06, "60": 0.03, "120": 0.01}
 
-    stoploss = -0.01
+    stoploss = -0.03
     trailing_stop = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.015
